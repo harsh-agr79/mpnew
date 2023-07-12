@@ -11,9 +11,9 @@
         </label>
         <div class="row">
             <div class="col m6 s12">
-                <div class="mp-card">
+                <div class="mp-card"  style="overflow-x: scroll">
                     <h6 class="center">Direct Orders</h6>
-                    <table  style="overflow-x: scroll">
+                    <table >
                         <thead>
                             <tr>
                                 <th></th>
