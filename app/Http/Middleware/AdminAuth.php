@@ -19,6 +19,7 @@ class AdminAuth
         if($request->session()->has('ADMIN_LOGIN') && in_array(session()->get('ADMIN_TYPE'), ['admin', 'staff'])){
             
             view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+            view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->get());
         }
         else{
             $request->session()->flash('error','Access Denied');

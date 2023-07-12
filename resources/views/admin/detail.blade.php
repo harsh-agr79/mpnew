@@ -1,18 +1,18 @@
 @extends('admin/layout')
 
 @section('main')
-                    @php
-                        $total = 0;
-                    @endphp
+    @php
+        $total = 0;
+        $cus = DB::table('customers')->where('name', $data[0]->name)->first();
+    @endphp
     <div>
         <div>
             <h6>Customer: {{$data[0]->name}}</h6>
+            <h6>Shop Name: {{$cus->shopname}}</h6>
             <h6>orderid: {{$data[0]->orderid}}</h6>
             <h6>Date: {{date('Y-m-d', strtotime($data[0]->created_at))}}</h6>
             <h6>Miti: {{getNepaliDate($data[0]->created_at)}}</h6>
-            @php
-                $cus = DB::table('customers')->where('name', $data[0]->name)->first();
-            @endphp
+          
             @if($cus->refname != NULL)
             <h6>Referer: {{$cus->refname}}</h6>
             @endif

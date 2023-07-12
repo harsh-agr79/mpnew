@@ -33,10 +33,16 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //PAGES
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 
+    //DETAIL PAGES
     Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
     Route::get('/appdetail/{id}', [OrderAdminController::class, 'appdetails']);
     Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
     Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
+
+    //STAFF PAGES AND CRUD
+    Route::get('/staff', [AdminController::class, 'staff']);
+    Route::get('/addstaff', [AdminController::class, 'addstaff']);
+
 
 
     //ADMIN SETTINGS
