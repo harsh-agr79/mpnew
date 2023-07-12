@@ -24,7 +24,7 @@
                         <th class="center">Ordered Quantity</th>
                         <th class="center">Approved Quantity</th>
                         <th class="center">Price</th>
-                        <th>
+                        <th style="width: 100px;">
                             <label>Status</label><select id="select1" class="browser-default selectinp black-text">
                               <option value="" selected disabled>for all</option>
                               <option value="pending">Pending</option>
@@ -40,11 +40,11 @@
                             <td>{{$item->name}}</td>
                             <td class="center">{{$item->quantity}}</td>
                             <td class="center">
-                                <span class="amber lighten-2 black-text" style="padding: 15px;" onclick="this.remove(); $('#{{$item->id}}ap').css('display', 'block');">{{$item->approvedquantity}}</span>
+                                <span class="amber lighten-2 black-text" style="padding: 10px;" onclick="this.remove(); $('#{{$item->id}}ap').css('display', 'block');">{{$item->approvedquantity}}</span>
                                 <input id="{{$item->id}}ap" type="text" class="inp browser-default black-text" style="display: none;" name="apquantity[]" value="{{$item->approvedquantity}}"></td>
                             </td>
                             <td class="center">
-                                <span class="amber lighten-2 black-text center" style="padding: 15px;" onclick="this.remove(); $('#{{$item->id}}').css('display', 'block');">{{$item->price}}</span>
+                                <span class="amber lighten-2 black-text center" style="padding: 10px;" onclick="this.remove(); $('#{{$item->id}}').css('display', 'block');">{{$item->price}}</span>
                                 <input id="{{$item->id}}" type="text" class="inp browser-default black-text" style="display: none;" name="price[]" value="{{$item->price}}"></td>
                             <td>
                                 <select name="status[]" class="select2 browser-default selectinp black-text" form="update" required>
