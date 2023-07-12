@@ -37,7 +37,7 @@
                 <tbody>
                     @foreach ($data as $item)
                         <tr>
-                            <td>{{$item->name}}</td>
+                            <td>{{$item->item}}</td>
                             <td class="center">{{$item->quantity}}</td>
                             <td class="center">
                                 <span class="amber lighten-2 black-text" style="padding: 10px;" onclick="this.remove(); $('#{{$item->id}}ap').css('display', 'block');">{{$item->approvedquantity}}</span>
