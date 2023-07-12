@@ -16,7 +16,7 @@
         </div>
 
 
-        <div class="mp-card">
+        <div class="mp-card" style="overflow-x: scroll">
             <table>
                 <thead>
                     <tr>
