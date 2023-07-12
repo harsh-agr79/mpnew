@@ -148,5 +148,9 @@ input:focus {
 .rmenu li:hover{
     background: var(--td-hover);
 }
+.selectinp{
+    padding: 10px;
+    border-radius: 10px;
+}
 
 </style>

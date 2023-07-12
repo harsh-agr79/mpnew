@@ -13,7 +13,7 @@
             <div class="col m6 s12">
                 <div class="mp-card">
                     <h6 class="center">Direct Orders</h6>
-                    <table>
+                    <table  style="overflow-x: scroll">
                         <thead>
                             <tr>
                                 <th></th>

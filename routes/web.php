@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FixController;
 use App\Http\Controllers\ChalanController;
+use App\Http\Controllers\OrderAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::get('/logout', function(){
 Route::group(['middleware'=>'AdminAuth'], function(){
     //PAGES
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
+
+    Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
 
 
     //ADMIN SETTINGS
