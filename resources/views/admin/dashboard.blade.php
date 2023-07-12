@@ -43,11 +43,7 @@
                                 <td>{{ $item->orderid }}</td>
                                 <td>{{ $item->seenby }}</td>
                                 <td class="tamt" style="display: none;">
-                                    @if ($stat == 'blue')
-                                        {{ $item->sl - $item->dis }}
-                                    @else
-                                        {{ $item->sla - $item->disa }}
-                                    @endif
+                                   {{getTotalAmount($item->orderid)}}
                                 </td>
                                 <td class="center">
                                     <form id="{{ $item->orderid }}">
@@ -105,11 +101,7 @@
                                 <td>{{ $item->orderid }}</td>
                                 <td>{{ $item->seenby }}</td>
                                 <td class="tamt" style="display: none;">
-                                    @if ($stat == 'blue')
-                                        {{ $item->sl - $item->dis }}
-                                    @else
-                                        {{ $item->sla - $item->disa }}
-                                    @endif
+                                    {{getTotalAmount($item->orderid)}}
                                 </td>
                                 <td class="center">
                                     <form id="{{ $item->orderid }}">
@@ -165,7 +157,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->orderid }}</td>
                                 <td>{{ $item->seenby }}</td>
-                                <td class="tamt" style="display: none;">{{ $item->samt - $item->damt }}</td>
+                                <td class="tamt" style="display: none;"> {{getTotalAmount($item->orderid)}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

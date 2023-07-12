@@ -33,3 +33,18 @@ function getpstat($orderid){
     }
     return $result;
 }
+
+function getTotalAmount($orderid){
+    $orders = DB::table('orders')->where('orderid', $orderid)->get();
+    $ts = 0;
+    foreach($orders as $item){
+        if($item->status == 'pending'){
+            $ts = $ts + ($item->quantity * $item->price);
+        }
+        else{
+            $ts = $ts + ($item->approvedquantity * $item->price);
+        }
+    }
+    $tsd = $ts - ($ts * 0.01 * $orders[0]->discount);
+    return $tsd;
+}
