@@ -70,8 +70,8 @@
                 </div>
             </div>
             <div class="row col m6 s12">
-                <div class="col s12">
-                    <div class="mp-card">
+                <div class="col s12" style="margin-top: 30px;">
+                    <div class="mp-card" style="overflow-x: scroll">
                         <h6 class="center">Marketer Orders</h6>
                         <table>
                             <thead>
@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <div class="col s12" style="margin-top: 30px;">
-                    <div class="mp-card">
+                    <div class="mp-card" style="overflow-x: scroll">
                         <h6 class="center">Pending Orders</h6>
                         <table>
                             <thead>
