@@ -1,0 +1,17 @@
+{
+    "name": "Mypower Order",
+    "short_name": "Mypower",
+    "start_url": "/",
+    "background_color": "#ffb300",
+    "description": "Tutorial of Laravel Package",
+    "display": "standalone",
+    "theme_color": "#ffb300",
+    "icons": [
+        {
+            "src": "app1.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
