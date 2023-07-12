@@ -1,11 +1,12 @@
 @extends('admin/layout')
 
 @section('main')
+<form action="">
     <div class="mp-card" style="margin-top: 5vh;">
         <div>
             <h5 class="center">Add Staff</h5>
         </div>
-        <form action="">
+        
             <div class="row">
                 <div class="col s12 row">
                     <div class="col s6">
@@ -55,8 +56,12 @@
                     </div>
                 </div>
             </div>
-        </form>
     </div>
+    <div class="mp-card" style="margin-top: 5vh;">
+
+    </div>
+
+</form>
     <script>
         var clicked = 0;
 
