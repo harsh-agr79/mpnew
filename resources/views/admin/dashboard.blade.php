@@ -3,7 +3,7 @@
 @section('main')
     <div>
         <div>
-            <h5 class="center">Dashboard changed</h5>
+            <h5 class="center">Dashboard</h5>
         </div>
         <label>
             <input type="checkbox" onclick="toggleamt()" />
