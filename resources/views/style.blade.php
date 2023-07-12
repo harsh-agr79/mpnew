@@ -12,7 +12,7 @@
 *{
     color: white;
 }
-main{
+body{
     background: #0e0e0e;
 }
 .topnv{
@@ -68,7 +68,7 @@ tr{
     background: var(--bg-content) !important;
 }
 .mp-card{
-    padding: 10px;
+    padding: 20px;
     background: var(--bg-content);
     border-radius: 10px;
 }
