@@ -20,4 +20,14 @@ class AdminController extends Controller
         ]);
         return redirect(url()->previous());
     }
+
+    public function staff(){
+        $result['data'] = DB::table('admins')->where('type', '!=', 'admin')->get();
+
+        return view('admin/staff', $result);
+    }
+
+    public function addstaff(Request $request,$id=''){
+        return view('admin/addstaff');
+    }
 }

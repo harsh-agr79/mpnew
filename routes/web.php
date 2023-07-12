@@ -42,6 +42,10 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //STAFF PAGES AND CRUD
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);
+    Route::get('/addstaff/{id}', [AdminController::class, 'addstaff']);
+    Route::post('/addstaffprocess', [AdminController::class, 'addstaff_process'])->name('addstaffprocess');
+    Route::get('/deletestaff', [AdminController::class, 'deletestaff']);
+
 
 
 

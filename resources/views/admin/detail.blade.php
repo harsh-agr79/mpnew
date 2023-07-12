@@ -37,10 +37,10 @@
                         <th class="center">Price</th>
                         <th>
                             <label>Status</label><select id="select1" class="browser-default selectinp black-text" style="width: 100px;">
-                              <option value="" selected disabled>for all</option>
-                              <option value="pending">Pending</option>
-                              <option value="approved">approved</option>
-                              <option value="rejected">rejected</option>
+                              <option class="black-text" value="" selected disabled>for all</option>
+                              <option class="black-text" value="pending">Pending</option>
+                              <option class="black-text" value="approved">approved</option>
+                              <option class="black-text" value="rejected">rejected</option>
                           </select></th>
                         <th>total</th>
                     </tr>
@@ -62,13 +62,13 @@
                             <td>
                                 <select name="status[]" class="select2 browser-default selectinp black-text" style="width: 100px;" required>
                                     @if ($item->status == 'pending')
-                                      <option value="pending" class="" selected>{{$item->status}}</option>
+                                      <option class="black-text" value="pending" class="" selected>{{$item->status}}</option>
                                       @else
-                                      <option value="{{$item->status}}" class="" selected>{{$item->status}}</option>
-                                      <option value="pending">Pending</option>
+                                      <option class="black-text" value="{{$item->status}}" class="" selected>{{$item->status}}</option>
+                                      <option class="black-text" value="pending">Pending</option>
                                     @endif
-                                    <option value="approved">approved</option>
-                                    <option value="rejected">rejected</option>
+                                    <option class="black-text" value="approved">approved</option>
+                                    <option class="black-text" value="rejected">rejected</option>
                                   </select>
                             </td>
                             <td>
