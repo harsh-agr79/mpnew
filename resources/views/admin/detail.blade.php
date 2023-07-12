@@ -1,6 +1,9 @@
 @extends('admin/layout')
 
 @section('main')
+                    @php
+                        $total = 0;
+                    @endphp
     <div>
         <div>
             <h6>Customer: {{$data[0]->name}}</h6>
@@ -43,6 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     @foreach ($data as $item)
                     <input type="hidden" value="{{$item->id}}" name="id[]">
                         <tr>
@@ -69,16 +73,41 @@
                             </td>
                             <td>
                                 @if ($item->status == 'approved')
-                                    {{$item->approvedquantity * $item->price}}
+                                    {{$a = $item->approvedquantity * $item->price}}
+                                    <span class="hide">{{$total = $total + $a}}</span>
                                 @elseif($item->status == 'pending')
-                                    {{$item->quantity*item->price}}
+                                    {{$a = $a + $item->quantity*$item->price}}
+                                    <span class="hide">{{$total = $total + $a}}</span>
                                 @else
                                     0
                                 @endif
-
                             </td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: 700">Total</td>
+                        <td style="font-weight: 700">{{$total}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: 700">Discount</td>
+                        <td><input type="text" class="inp browser-default" name="discount" value="{{$data[0]->discount}}"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: 700">Net Total</td>
+                        <td style="font-weight: 700">{{$total - $total * 0.01 * $data[0]->discount}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

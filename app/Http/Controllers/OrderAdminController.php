@@ -26,6 +26,7 @@ class OrderAdminController extends Controller
         $apquantity = $request->post('apquantity', []);
         $price = $request->post('price', []);
         $status = $request->post('status', []);
+        $discount = $request->post('discount');
         for ($i=0; $i < count($id); $i++) { 
             DB::table('orders')->where('id', $id[$i])->update([
                 'approvedquantity'=>$apquantity[$i],
@@ -34,6 +35,7 @@ class OrderAdminController extends Controller
                 'remarks'=>$request->post('remarks'),
                 'cartoons'=>$request->post('cartoons'),
                 'transport'=>$request->post('transport'),
+                'discount'=>$discount,
             ]);
         }
         return redirect($request->post('previous'));
