@@ -73,6 +73,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="mp-card">
+            <h6>User Remarks: {{$data['0']->userremarks}}</h6>
+        </div>
         <div class="bg-content mp-card" style="margin-top:30px;">
             <div class="input-field col s12">
               <textarea id="textarea1" name="remarks" placeholder="Remarks" class="materialize-textarea">{{$data['0']->remarks}}</textarea>
