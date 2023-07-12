@@ -73,7 +73,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="mp-card">
+        <div class="mp-card" style="margin-top: 30px;">
             <h6>User Remarks: {{$data['0']->userremarks}}</h6>
         </div>
         <div class="bg-content mp-card" style="margin-top:30px;">
