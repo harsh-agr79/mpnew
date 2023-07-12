@@ -34,6 +34,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 
     Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
+    Route::get('/appdetail/{id}', [OrderAdminController::class, 'appdetails']);
+    Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
+    Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
 
 
     //ADMIN SETTINGS

@@ -66,7 +66,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="#!">
+                            <a href="{{url()->previous()}}">
                                 <i class="material-icons textcol">arrow_back</i>
                             </a>
                         </li>

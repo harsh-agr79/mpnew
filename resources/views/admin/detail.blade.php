@@ -14,8 +14,16 @@
             <h6>Referer: {{$cus->refname}}</h6>
             @endif
         </div>
+        <div class="hide">
+            <form id="seenupdate">
+                <input type="hidden" value="{{$data[0]->orderid}}" name="orderid">
+                <input type="hidden" value="{{$admin->email}}" name="admin">
+            </form>
+        </div>
 
 
+<form action="{{route('detailupdate')}}" method="POST">
+    @csrf
         <div class="mp-card" style="overflow-x: scroll">
             <table>
                 <thead>
@@ -36,6 +44,7 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
+                    <input type="hidden" value="{{$item->id}}" name="id[]">
                         <tr>
                             <td>{{$item->item}}</td>
                             <td class="center">{{$item->quantity}}</td>
@@ -47,7 +56,7 @@
                                 <span class="amber lighten-2 black-text center" style="padding: 10px;" onclick="this.remove(); $('#{{$item->id}}').css('display', 'block');">{{$item->price}}</span>
                                 <input id="{{$item->id}}" type="text" class="inp browser-default black-text" style="display: none;" name="price[]" value="{{$item->price}}"></td>
                             <td>
-                                <select name="status[]" class="select2 browser-default selectinp black-text" style="width: 100px;" form="update" required>
+                                <select name="status[]" class="select2 browser-default selectinp black-text" style="width: 100px;" required>
                                     @if ($item->status == 'pending')
                                       <option value="pending" class="" selected>{{$item->status}}</option>
                                       @else
@@ -87,17 +96,35 @@
               <textarea id="textarea2" name="transport" placeholder="Transportation Details" class="materialize-textarea">{{$data['0']->transport}}</textarea>
             </div>
           </div>
+          <input type="hidden" value="{{url()->previous()}}" name="previous">
           <div class="fixed-action-btn">
-            <button class="btn btn-large red" onclick="M.toast({html: 'Order being Placed, Please wait...'})">
+            <button class="btn btn-large red" onclick="M.toast({html: 'Order being Updated, Please wait...'})">
                 update order
               <i class="left material-icons">send</i>
             </button>
         </div>
     </div>
-
+</form>
     <script>
         $("#select1").change(function() { //this occurs when select 1 changes
-    $(".select2").val($(this).val());   
-  });
+            $(".select2").val($(this).val());   
+        });
     </script>
+    @if($data[0]->seen == NULL)
+    <script>
+    $(function() {
+        $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/seenupdate",
+                data: $('#seenupdate').serialize(),
+                type: 'post',
+                success: function(response) {
+                console.log(response)
+                }
+            })
+        })
+    </script>
+    @endif
 @endsection
