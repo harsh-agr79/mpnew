@@ -62,7 +62,7 @@ class LoginController extends Controller
         ->orderBy('orders.created_at', 'DESC')
         ->join('customers', 'customers.cusuni_id', '=', 'orders.cusuni_id')
         ->where('customers.refid', '!=' , NULL)
-        ->selectRaw('orders.name,orders.created_at, orderid, seen, seenby, delivered, clnstatus,SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
+        ->selectRaw('orders.name,orders.created_at, orderid, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
         ->groupBy('orders.orderid')
         ->get();
 
@@ -72,7 +72,7 @@ class LoginController extends Controller
         ->orderBy('orders.created_at', 'DESC')
         ->join('customers', 'customers.cusuni_id', '=', 'orders.cusuni_id')
         ->where('customers.refid', NULL)
-        ->selectRaw('orders.name,orders.created_at, orderid, seen, seenby, delivered, clnstatus,SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
+        ->selectRaw('orders.name,orders.created_at, orderid, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
         ->groupBy('orders.orderid')
         ->get();
 

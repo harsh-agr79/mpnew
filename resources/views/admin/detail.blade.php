@@ -76,7 +76,7 @@
                                     {{$a = $item->approvedquantity * $item->price}}
                                     <span class="hide">{{$total = $total + $a}}</span>
                                 @elseif($item->status == 'pending')
-                                    {{$a = $a + $item->quantity*$item->price}}
+                                    {{$a = $item->quantity*$item->price}}
                                     <span class="hide">{{$total = $total + $a}}</span>
                                 @else
                                     0
