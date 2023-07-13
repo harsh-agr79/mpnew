@@ -49,6 +49,12 @@
             </div>
         </div>
     </div>
+    <script>
+         function preload() {
+            var preloader = document.getElementById('loading')
+            preloader.style.display = 'none';
+        }
+    </script>
     <header>
         <div class="navbar-fixed">
             <nav class="navbar topnv">
@@ -210,12 +216,7 @@
             });
         });
 
-       
-
-        function preload() {
-            var preloader = document.getElementById('loading')
-            preloader.style.display = 'none';
-        }
+      
     </script>
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
