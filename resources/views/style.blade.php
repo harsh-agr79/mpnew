@@ -40,10 +40,13 @@ body{
 body {
     font-family: 'Exo', 'sans-serif';
 }
-td, th{
+td{
             font-size: 10px;
             padding: 2px;
         }
+th{
+    font-size: 10px;
+}
 
 tr:hover {
     background: var(--td-hover);
