@@ -41,7 +41,7 @@
                                             class="{{ $stat = $item->mainstatus }}"
                                             style="height: 35px; width:10px;"></div>
                                     </td>
-                                    <td>{{ getNepaliDate($item->created_at) }}</td>
+                                    <td>{{ getNepaliDay($item->created_at) }}-{{getNepaliMonth($item->created_at)}} {{date('H:i', strtotime($item->created_at))}}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->orderid }}</td>
                                     <td>{{ $item->seenby }}</td>
@@ -104,7 +104,7 @@
                                             style="height: 35px; width:10px;">
                                         </div>
                                     </td>
-                                    <td>{{ getNepaliDate($item->created_at) }}</td>
+                                    <td>{{ getNepaliDay($item->created_at) }}-{{getNepaliMonth($item->created_at)}} {{date('H:i', strtotime($item->created_at))}}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->orderid }}</td>
                                     <td>{{ $item->seenby }}</td>
@@ -162,7 +162,7 @@
                                         <div id="{{ $item->orderid . 'order' }}" class="{{ $item->mainstatus }}"
                                             style="height: 35px; width:10px;"></div>
                                     </td>
-                                    <td>{{ getNepaliDate($item->created_at) }}</td>
+                                    <td>{{ getNepaliDate($item->created_at) }} {{date('H:i', strtotime($item->created_at))}}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->orderid }}</td>
                                     <td>{{ $item->seenby }}</td>
