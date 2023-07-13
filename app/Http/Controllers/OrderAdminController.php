@@ -24,12 +24,24 @@ class OrderAdminController extends Controller
     public function detailupdate(Request $request){
         $id = $request->post('id',[]);
         $apquantity = $request->post('apquantity', []);
+        $quantity = $request->post('quantity', []);
         $price = $request->post('price', []);
         $status = $request->post('status', []);
         $discount = $request->post('discount');
         for ($i=0; $i < count($id); $i++) { 
+            if($status[$i] == 'approved'){
+                if($apquantity[$i] > 0){
+                    $qty = $apquantity[$i];
+                }
+                else{
+                    $qty = $quantity[$i];
+                }
+            }
+            else{
+                $qty = 0;
+            }
             DB::table('orders')->where('id', $id[$i])->update([
-                'approvedquantity'=>$apquantity[$i],
+                'approvedquantity'=>$qty,
                 'price'=>$price[$i],
                 'status'=>$status[$i],
                 'remarks'=>$request->post('remarks'),

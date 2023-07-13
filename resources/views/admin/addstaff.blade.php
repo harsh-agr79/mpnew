@@ -1,10 +1,12 @@
 @extends('admin/layout')
 
 @section('main')
-<form action="">
+<form action="{{route('addstaffprocess')}}" method="post">
+    @csrf
+    <input type="hidden" value="{{$id}}" name="id">
     <div class="mp-card" style="margin-top: 5vh;">
         <div>
-            <h5 class="center">Add Staff</h5>
+            <h6 class="center">Add Staff</h6>
         </div>
         
             <div class="row">
@@ -13,7 +15,7 @@
                         Name:
                     </div>
                     <div class="col s6">
-                        <input type="text" name="name" class="inp black-text browser-default" placeholder="Name">
+                        <input type="text" value="{{$name}}" name="name" class="inp black-text browser-default" placeholder="Name">
                     </div>
                 </div>
                 <div class="col s12 row">
@@ -21,7 +23,7 @@
                         User ID:
                     </div>
                     <div class="col s6">
-                        <input type="text" name="userid" class="inp black-text browser-default" placeholder="User Id">
+                        <input type="text" value="{{$userid}}" name="userid" class="inp black-text browser-default" placeholder="User Id">
                     </div>
                 </div>
                 <div class="col s12 row">
@@ -29,7 +31,7 @@
                         Contact:
                     </div>
                     <div class="col s6">
-                        <input type="text" name="contact" class="inp black-text browser-default" placeholder="contact">
+                        <input type="text" value="{{$contact}}" name="contact" class="inp black-text browser-default" placeholder="contact">
                     </div>
                 </div>
                 <div class="col s12 row">
@@ -37,7 +39,7 @@
                         Password:
                     </div>
                     <div class='input-field col s6'>
-                        <input class='validate browser-default inp black-text' placeholder="password" type='password' name='password'
+                        <input class='validate browser-default inp black-text' value="{{$password}}" placeholder="password" type='password' name='password'
                             id='password' required />
                         <span toggle="#password" class="field-icon toggle-password"><span
                                 class="material-icons black-text">visibility</span></span>
@@ -48,8 +50,13 @@
                         Type:
                     </div>
                     <div class="col s6">
-                        <select id="select1" class="browser-default selectinp black-text">
-                            <option class="black-text" value="" selected disabled>Staff Type</option>
+                        <select id="select1" name="type" class="browser-default selectinp black-text">
+                            @if ($type != NULL)
+                                <option selected value="{{$type}}">{{$type}}</option>
+                                <option class="black-text" value="">Staff Type</option>    
+                            @else
+                                <option class="black-text" value="" selected disabled>Staff Type</option>    
+                            @endif
                             <option class="black-text" value="staff">Staff</option>
                             <option class="black-text" value="marketer">Marketer</option>
                         </select>
@@ -57,10 +64,287 @@
                 </div>
             </div>
     </div>
-    <div class="mp-card" style="margin-top: 5vh;">
-
+    @if ($type == 'staff')
+    <div>
+        <div class="mp-card" style="margin-top: 5vh;">
+            <div>
+                <h6 class="center">DashBoard Settings</h6>
+            </div>
+            <div class="row">
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" name="perm[]" value="totalamount" @if(in_array('totalamount', $permission)) checked @endif/>
+                        <span>View Total Amount</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" name="perm[]" value="firstorderview|seenupdate" @if(in_array('firstorderview', $permission)) checked @endif/>
+                        <span>First Order View</span>
+                      </label>
+                </div>
+            </div>
+        </div>
+        <div class="mp-card" style="margin-top: 5vh;">
+            <div>
+                <h6 class="center">View Orders Settings</h6>
+            </div>
+            <div class="row">
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View All Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Pending Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Approved Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Rejected Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Delivered Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Chalans</span>
+                      </label>
+                </div>
+            </div>
+        </div>
+        <div class="mp-card" style="margin-top: 5vh;">
+            <div>
+                <h6 class="center">Order Interaction Settings</h6>
+            </div>
+            <div class="row">
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" name="perm[]" value="detail/{id}|appdetail/{id}" @if (in_array('detail/{id}', $permission))
+                            checked
+                        @endif/>
+                        <span>View Invoice</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Chalan</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" name="perm[]" value="updatecln" @if (in_array('updatecln', $permission))
+                            checked
+                        @endif/>
+                        <span>Pack Order</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Create Order</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Edit Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" name="perm[]" value="detailupdate" @if (in_array('detailupdate', $permission))
+                            checked
+                        @endif/>
+                        <span>Change Order Status/Approved Quantity/ Price/ Remarks</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Print Orders</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Bulk Print Orders</span>
+                      </label>
+                </div>
+                
+            </div>
+        </div>
+        <div class="mp-card" style="margin-top: 5vh;">
+            <div>
+                <h6 class="center">Analytics Settings</h6>
+            </div>
+            <div class="row">
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Main Analytics</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Sort Analytics</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Detailed Report</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Statements</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Referer Statements</span>
+                      </label>
+                </div>
+            </div>
+        </div>
+        <div class="mp-card" style="margin-top: 5vh;">
+            <div>
+                <h6 class="center">General Settings</h6>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Payments</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Add/Edit Payments</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Sales returns</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Add/Edit Sales returns</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Expenses</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Add/Edit Expenses</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Customers</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Add/Edit Customers</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Products</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Add/Edit Products</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>View Subcategory</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Add/Edit Subcategory</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox" />
+                        <span>Front Settings</span>
+                      </label>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+            </div>
+        </div>
     </div>
-
+    @endif
+    
+    <div class="fixed-action-btn">
+        <button class="btn btn-large red" onclick="M.toast({html: 'Staff Being Updated, Please wait...'})" style="border-radius: 10px;">
+            update Staff
+          <i class="left material-icons">send</i>
+        </button>
+    </div>
 </form>
     <script>
         var clicked = 0;

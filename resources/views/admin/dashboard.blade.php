@@ -5,10 +5,12 @@
         <div>
             <h5 class="center">Dashboard</h5>
         </div>
-        <label>
-            <input type="checkbox" onclick="toggleamt()" />
-            <span>View Total Amount</span>
-        </label>
+        @if ($admin->type == 'admin' || in_array('totalamount', $perms))
+            <label>
+                <input type="checkbox" onclick="toggleamt()" />
+                <span>View Total Amount</span>
+            </label>
+        @endif
         <div class="row">
             <div class="col l6 m6 s12">
                 <div class="mp-card" style="overflow-x: scroll">
@@ -21,46 +23,51 @@
                                 <th>Name</th>
                                 <th>order Id</th>
                                 <th>Seen By</th>
-                                <th class="tamt" style="display: none;">Amount</th>
+                                @if ($admin->type == 'admin' || in_array('totalamount', $perms))
+                                    <th class="tamt" style="display: none;">Amount</th>
+                                @endif
+                                @if ($admin->type == 'admin' || in_array('updatecln', $perms))
                                 <th>Pack Order</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($mpe as $item)
-                                @if ($item->seen == '')
-                                    <tr class="z-depth-2" oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                        ondblclick="opendetail({{ $item->orderid }})">
-                                    @else
-                                    <tr oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                        ondblclick="opendetail({{ $item->orderid }})">
-                                @endif
-                                <td>
-                                    <div id="{{ $item->orderid . 'order' }}" class="{{ $stat = getpstat($item->orderid) }}"
-                                        style="height: 35px; width:10px;"></div>
-                                </td>
-                                <td>{{ getNepaliDate($item->created_at) }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->orderid }}</td>
-                                <td>{{ $item->seenby }}</td>
-                                <td class="tamt" style="display: none;">
-                                   {{getTotalAmount($item->orderid)}}
-                                </td>
-                                <td class="center">
-                                    <form id="{{ $item->orderid }}">
-                                        <input type="hidden" name="orderid" value="{{ $item->orderid }}">
-                                        <label>
-                                            <input type="checkbox" value="packorder" name="packorder"
-                                                @if ($stat == 'blue' || $stat == 'red') disabled
+                                <tr class=" @if ($item->seen == '') z-depth-2 @endif"
+                                    oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
+                                    ondblclick="opendetail({{ $item->orderid }}, '{{$item->seen}}')">
+                                    <td>
+                                        <div id="{{ $item->orderid . 'order' }}"
+                                            class="{{ $stat = getpstat($item->orderid) }}"
+                                            style="height: 35px; width:10px;"></div>
+                                    </td>
+                                    <td>{{ getNepaliDate($item->created_at) }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->orderid }}</td>
+                                    <td>{{ $item->seenby }}</td>
+                                    @if ($admin->type == 'admin' || in_array('totalamount', $perms))
+                                        <td class="tamt" style="display: none;">
+                                            {{ getTotalAmount($item->orderid) }}
+                                        </td>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('updatecln', $perms))
+                                    <td class="center">
+                                        <form id="{{ $item->orderid }}">
+                                            <input type="hidden" name="orderid" value="{{ $item->orderid }}">
+                                            <label>
+                                                <input type="checkbox" value="packorder" name="packorder"
+                                                    @if ($stat == 'blue' || $stat == 'red') disabled
                                                 @elseif($stat == 'amber darken-1')
                                                 @elseif($stat == 'green')
                                                 checked disabled
                                                 @elseif($stat == 'deep-purple')
                                                 checked @endif
-                                                onclick="updatecln({{ $item->orderid }})" />
-                                            <span></span>
-                                        </label>
-                                    </form>
-                                </td>
+                                                    onclick="updatecln({{ $item->orderid }})" />
+                                                <span></span>
+                                            </label>
+                                        </form>
+                                    </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -78,47 +85,52 @@
                                 <th>Name</th>
                                 <th>order Id</th>
                                 <th>Seen By</th>
-                                <th class="tamt" style="display: none;">Amount</th>
+                                @if ($admin->type == 'admin' || in_array('totalamount', $perms))
+                                    <th class="tamt" style="display: none;">Amount</th>
+                                @endif
+                                @if ($admin->type == 'admin' || in_array('updatecln', $perms))
                                 <th>Pack Order</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($dealer as $item)
-                                @if ($item->seen == '')
-                                    <tr class="z-depth-2" oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                        ondblclick="opendetail({{ $item->orderid }})">
-                                    @else
-                                    <tr oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                        ondblclick="opendetail({{ $item->orderid }})">
-                                @endif
-                                <td>
-                                    <div id="{{ $item->orderid . 'order' }}"
-                                        class="{{ $stat = getpstat($item->orderid) }}" style="height: 35px; width:10px;">
-                                    </div>
-                                </td>
-                                <td>{{ getNepaliDate($item->created_at) }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->orderid }}</td>
-                                <td>{{ $item->seenby }}</td>
-                                <td class="tamt" style="display: none;">
-                                    {{getTotalAmount($item->orderid)}}
-                                </td>
-                                <td class="center">
-                                    <form id="{{ $item->orderid }}">
-                                        <input type="hidden" name="orderid" value="{{ $item->orderid }}">
-                                        <label>
-                                            <input type="checkbox" value="packorder" name="packorder"
-                                                @if ($stat == 'blue' || $stat == 'red') disabled
+                                <tr class=" @if ($item->seen == '') z-depth-2 @endif"
+                                    oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
+                                    ondblclick="opendetail({{ $item->orderid }},'{{$item->seen}}')">
+                                    <td>
+                                        <div id="{{ $item->orderid . 'order' }}"
+                                            class="{{ $stat = getpstat($item->orderid) }}"
+                                            style="height: 35px; width:10px;">
+                                        </div>
+                                    </td>
+                                    <td>{{ getNepaliDate($item->created_at) }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->orderid }}</td>
+                                    <td>{{ $item->seenby }}</td>
+                                    @if ($admin->type == 'admin' || in_array('totalamount', $perms))
+                                        <td class="tamt" style="display: none;">
+                                            {{ getTotalAmount($item->orderid) }}
+                                        </td>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('updatecln', $perms))
+                                    <td class="center">
+                                        <form id="{{ $item->orderid }}">
+                                            <input type="hidden" name="orderid" value="{{ $item->orderid }}">
+                                            <label>
+                                                <input type="checkbox" value="packorder" name="packorder"
+                                                    @if ($stat == 'blue' || $stat == 'red') disabled
                                                     @elseif($stat == 'amber darken-1')
                                                     @elseif($stat == 'green')
                                                     checked disabled
                                                     @elseif($stat == 'deep-purple')
                                                     checked @endif
-                                                onclick="updatecln({{ $item->orderid }})" />
-                                            <span></span>
-                                        </label>
-                                    </form>
-                                </td>
+                                                    onclick="updatecln({{ $item->orderid }})" />
+                                                <span></span>
+                                            </label>
+                                        </form>
+                                    </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -136,28 +148,25 @@
                                 <th>Name</th>
                                 <th>order Id</th>
                                 <th>Seen By</th>
-                                <th class="tamt" style="display: none;">Amount</th>
+                                @if ($admin->type == 'admin' || in_array('totalamount', $perms))
+                                    <th class="tamt" style="display: none;">Amount</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pending as $item)
-                                @if ($item->seen == '')
-                                    <tr class="z-depth-2"
-                                        oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                        ondblclick="opendetail({{ $item->orderid }})">
-                                    @else
-                                    <tr oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                        ondblclick="opendetail({{ $item->orderid }})">
-                                @endif
-                                <td>
-                                    <div id="{{ $item->orderid . 'order' }}" class="{{ getpstat($item->orderid) }}"
-                                        style="height: 35px; width:10px;"></div>
-                                </td>
-                                <td>{{ getNepaliDate($item->created_at) }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->orderid }}</td>
-                                <td>{{ $item->seenby }}</td>
-                                <td class="tamt" style="display: none;"> {{getTotalAmount($item->orderid)}}</td>
+                                <tr class=" @if ($item->seen == '') z-depth-2 @endif"
+                                    oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
+                                    ondblclick="opendetail({{ $item->orderid }}, '{{$item->seen}}')">
+                                    <td>
+                                        <div id="{{ $item->orderid . 'order' }}" class="{{ getpstat($item->orderid) }}"
+                                            style="height: 35px; width:10px;"></div>
+                                    </td>
+                                    <td>{{ getNepaliDate($item->created_at) }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->orderid }}</td>
+                                    <td>{{ $item->seenby }}</td>
+                                    <td class="tamt" style="display: none;"> {{ getTotalAmount($item->orderid) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -186,11 +195,15 @@
         function rightmenu(orderid) {
             // console.log(orderid)
             var rmenu = document.getElementById("rightmenu");
-            rmenu.style.display = 'block';
-            rmenu.style.top = mouseY(event) + 'px';
-            rmenu.style.left = mouseX(event) + 'px';
-            $('#rmeditlink').attr('href', '/editorder/' + orderid);
-            $('#rmdeletelink').attr('href', '/deleteorder/' + orderid);
+            var perms = @json($perms);
+            var admintype = `{{ $admin->type }}`;
+            if (admintype == "admin") {
+                rmenu.style.display = 'block';
+                rmenu.style.top = mouseY(event) + 'px';
+                rmenu.style.left = mouseX(event) + 'px';
+                $('#rmeditlink').attr('href', '/editorder/' + orderid);
+                $('#rmdeletelink').attr('href', '/deleteorder/' + orderid);
+            }
         }
 
         $(document).bind("click", function(event) {
@@ -223,30 +236,41 @@
             }
         }
 
-        function opendetail(orderid) {
-            window.open('/detail/' + orderid, "_self");
+        function opendetail(orderid, seen) {
+            var perms = @json($perms);
+            var admintype = `{{ $admin->type }}`;
+            // console.log(seen);
+            if (admintype == "admin" || jQuery.inArray("detail/{id}", perms) > -1) {
+                if(admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1){
+                    window.open('/detail/' + orderid, "_self");
+                }
+            }
         }
     </script>
     <script>
         function updatecln(orderid) {
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "/updatecln",
-                data: $(`#${orderid}`).serialize(),
-                type: 'post',
-                success: function(response) {
-                    if (response.hasOwnProperty('packorder')) {
-                        $(`#${response.orderid}order`).removeAttr('class');
-                        $(`#${response.orderid}order`).addClass("deep-purple");
-                    } else {
-                        $(`#${response.orderid}order`).removeAttr('class');
-                        $(`#${response.orderid}order`).addClass("amber darken-1");
-                    }
+            var perms = @json($perms);
+            var admintype = `{{ $admin->type }}`;
+            if (admintype == "admin" || jQuery.inArray("updatecln", perms) > -1) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/updatecln",
+                    data: $(`#${orderid}`).serialize(),
+                    type: 'post',
+                    success: function(response) {
+                        if (response.hasOwnProperty('packorder')) {
+                            $(`#${response.orderid}order`).removeAttr('class');
+                            $(`#${response.orderid}order`).addClass("deep-purple");
+                        } else {
+                            $(`#${response.orderid}order`).removeAttr('class');
+                            $(`#${response.orderid}order`).addClass("amber darken-1");
+                        }
 
-                }
-            })
+                    }
+                })
+            }
         }
     </script>
 @endsection

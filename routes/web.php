@@ -33,13 +33,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //PAGES
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 
-    //DETAIL PAGES
+    //DETAIL PAGES permission for staff required
     Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
     Route::get('/appdetail/{id}', [OrderAdminController::class, 'appdetails']);
     Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
     Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
 
-    //STAFF PAGES AND CRUD
+    //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);
     Route::get('/addstaff/{id}', [AdminController::class, 'addstaff']);
@@ -58,7 +58,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
 
     //FOR AJAX UPDATES AND GETS
-    Route::post('/updatecln', [ChalanController::class, 'updatechalan']);
+    Route::post('updatecln', [ChalanController::class, 'updatechalan']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function() {

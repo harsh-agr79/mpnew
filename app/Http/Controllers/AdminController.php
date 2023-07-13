@@ -28,6 +28,74 @@ class AdminController extends Controller
     }
 
     public function addstaff(Request $request,$id=''){
-        return view('admin/addstaff');
+
+        if($id > 0){
+            $data = DB::table('admins')->where('id', $id)->first();
+           $result['id'] = $data->id;
+           $result['name'] = $data->name;
+           $result['userid'] = $data->email;
+           $result['contact'] = $data->contact;
+           $result['password'] = $data->password;
+           $result['type'] = $data->type;
+
+           $result['permission'] = DB::table('permission')->where('userid', $data->id)->pluck('perm')->toArray();
+        }
+        else{
+            $result['id'] = '';
+           $result['name'] = '';
+           $result['userid'] = '';
+           $result['contact'] = '';
+           $result['password'] = '';
+           $result['type'] = '';
+
+           $result['permission'] = [];
+        }
+        return view('admin/addstaff', $result);
+    }
+
+    public function addstaff_process(Request $request){
+
+        // dd($request->post());
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $userid = $request->get('userid');
+        $contact = $request->get('contact');
+        $password = $request->get('password');
+        $type = $request->get('type');
+
+        if($id>0){
+            DB::table('admins')->where('id', $id)->update([
+                'name'=>$name,
+                'email'=>$userid,
+                'contact'=>$contact,
+                'password'=>$password,
+                'type'=>$type
+            ]);
+
+            DB::table('permission')->where('userid', $id)->delete();
+
+            $perms = $request->post('perm', []);
+            for ($i=0; $i < count($perms); $i++) { 
+                $perm = explode('|', $perms[$i]);
+                foreach($perm as $item){
+                    DB::table('permission')->insert([
+                        'userid'=>$id,
+                        'perm'=>$item,
+                        'value'=>"1",
+                    ]);
+                }
+            }
+        }
+        else{
+            DB::table('admins')->insert([
+                'name'=>$name,
+                'email'=>$userid,
+                'contact'=>$contact,
+                'password'=>$password,
+                'type'=>$type
+            ]);
+        }
+
+        return redirect(url()->previous());
     }
 }

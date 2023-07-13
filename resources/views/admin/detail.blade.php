@@ -4,6 +4,12 @@
     @php
         $total = 0;
         $cus = DB::table('customers')->where('name', $data[0]->name)->first();
+        if(in_array('detailupdate', $perms) || $admin->type == 'admin'){
+            $dis = '';
+        }
+        else{
+            $dis = 'disabled';
+        }
     @endphp
     <div>
         <div>
@@ -36,7 +42,7 @@
                         <th class="center">Approved Quantity</th>
                         <th class="center">Price</th>
                         <th>
-                            <label>Status</label><select id="select1" class="browser-default selectinp black-text" style="width: 100px;">
+                            <label>Status</label><select id="select1" class="browser-default selectinp black-text" {{$dis}} style="width: 100px;">
                               <option class="black-text" value="" selected disabled>for all</option>
                               <option class="black-text" value="pending">Pending</option>
                               <option class="black-text" value="approved">approved</option>
@@ -49,18 +55,20 @@
                     
                     @foreach ($data as $item)
                     <input type="hidden" value="{{$item->id}}" name="id[]">
+                    <input type="hidden" value="{{$item->quantity}}" name="quantity[]">
                         <tr>
                             <td>{{$item->item}}</td>
                             <td class="center">{{$item->quantity}}</td>
                             <td class="center">
-                                <span class="amber lighten-2 black-text" style="padding: 10px;" onclick="this.remove(); $('#{{$item->id}}ap').css('display', 'block');">{{$item->approvedquantity}}</span>
+                                <span class="amber lighten-2 black-text" style="padding: 10px;"  @if ($dis == '')
+                                onclick="this.remove(); $('#{{$item->id}}ap').css('display', 'block');" @endif>{{$item->approvedquantity}}</span>
                                 <input id="{{$item->id}}ap" type="text" class="inp browser-default black-text" style="display: none;" name="apquantity[]" value="{{$item->approvedquantity}}"></td>
                             </td>
                             <td class="center">
-                                <span class="amber lighten-2 black-text center" style="padding: 10px;" onclick="this.remove(); $('#{{$item->id}}').css('display', 'block');">{{$item->price}}</span>
+                                <span class="amber lighten-2 black-text center" style="padding: 10px;" @if ($dis == '') onclick="this.remove(); $('#{{$item->id}}').css('display', 'block');" @endif>{{$item->price}}</span>
                                 <input id="{{$item->id}}" type="text" class="inp browser-default black-text" style="display: none;" name="price[]" value="{{$item->price}}"></td>
                             <td>
-                                <select name="status[]" class="select2 browser-default selectinp black-text" style="width: 100px;" required>
+                                <select name="status[]" class="select2 browser-default selectinp black-text" {{$dis}} style="width: 100px;" required>
                                     @if ($item->status == 'pending')
                                       <option class="black-text" value="pending" class="" selected>{{$item->status}}</option>
                                       @else
@@ -98,7 +106,7 @@
                         <td></td>
                         <td></td>
                         <td style="font-weight: 700">Discount</td>
-                        <td><input type="text" class="inp browser-default black-text" name="discount" value="{{$data[0]->discount}}"></td>
+                        <td><input type="text" class="inp browser-default black-text" {{$dis}} name="discount" value="{{$data[0]->discount}}"></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -116,18 +124,18 @@
         </div>
         <div class="bg-content mp-card" style="margin-top:30px;">
             <div class="input-field col s12">
-              <textarea id="textarea1" name="remarks" placeholder="Remarks" class="materialize-textarea">{{$data['0']->remarks}}</textarea>
+              <textarea id="textarea1" name="remarks" {{$dis}} placeholder="Remarks" class="materialize-textarea">{{$data['0']->remarks}}</textarea>
             </div>
             <div class="input-field col s12">
-              <input type="number" pattern="[0-9]*" value="{{$data['0']->cartoons}}" inputmode="numeric" name="cartoons" placeholder="Number of Cartoons" class="validate">
+              <input type="number" pattern="[0-9]*" {{$dis}} value="{{$data['0']->cartoons}}" inputmode="numeric" name="cartoons" placeholder="Number of Cartoons" class="validate">
             </div>
             <div class="input-field col s12">
-              <textarea id="textarea2" name="transport" placeholder="Transportation Details" class="materialize-textarea">{{$data['0']->transport}}</textarea>
+              <textarea id="textarea2" name="transport" {{$dis}} placeholder="Transportation Details" class="materialize-textarea">{{$data['0']->transport}}</textarea>
             </div>
           </div>
           <input type="hidden" value="{{url()->previous()}}" name="previous">
           <div class="fixed-action-btn">
-            <button class="btn btn-large red" onclick="M.toast({html: 'Order being Updated, Please wait...'})">
+            <button class="btn btn-large red {{$dis}}" onclick="M.toast({html: 'Order being Updated, Please wait...'})">
                 update order
               <i class="left material-icons">send</i>
             </button>

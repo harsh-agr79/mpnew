@@ -37,14 +37,16 @@
     <header>
         <div class="navbar-fixed">
             <nav class="navbar topnv">
-                <div class="nav-wrapper"><a href="#!" class="brand-logo grey-text text-darken-4"><img src="{{asset('assets/'.$admin->mode.".png")}}" height="60" alt=""></a>
+                <div class="nav-wrapper"><a href="#!" class="brand-logo grey-text text-darken-4"><img
+                            src="{{ asset('assets/' . $admin->mode . '.png') }}" height="60" alt=""></a>
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger"><i class="material-icons textcol">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications bgunder" tabindex="0">
                                 <div class="notifications-title textcol" tabindex="0">notifications</div>
                                 <div class="card bg-content" tabindex="0">
-                                    <div class="card-content"><span class="card-title textcol">Joe Smith made a purchase</span>
+                                    <div class="card-content"><span class="card-title textcol">Joe Smith made a
+                                            purchase</span>
                                         <p>Content</p>
                                     </div>
                                     <div class="card-action"><a href="#!">view</a><a href="#!">dismiss</a>
@@ -57,16 +59,20 @@
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
                                 <div id="settings" class="col s12">
                                     <div class="settings-group">
-                                        <a href="{{url('/admin/changemode')}}" class="bg-content textcol"><div>Change Mode
-                                        </div></a>
-                                        <a href="{{url('/logout')}}" class="bg-content textcol"><div>Logout
-                                        </div></a>
+                                        <a href="{{ url('/admin/changemode') }}" class="bg-content textcol">
+                                            <div>Change Mode
+                                            </div>
+                                        </a>
+                                        <a href="{{ url('/logout') }}" class="bg-content textcol">
+                                            <div>Logout
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="{{url()->previous()}}">
+                            <a href="{{ url()->previous() }}">
                                 <i class="material-icons textcol">arrow_back</i>
                             </a>
                         </li>
@@ -76,31 +82,25 @@
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed bg" style="transform: translateX(-105%);">
-            <li><a href="{{url('/')}}" class="logo-container textcol">{{$admin->email}}<i
+            <li><a href="{{ url('/') }}" class="logo-container textcol">{{ $admin->email }}<i
                         class="material-icons left textcol">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li class="bold"><a href="{{url('/dashboard')}}" class="textcol">Dashboard<i
-                        class="material-icons textcol">web</i></a></li>
-                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Charts<i
-                                class="material-icons chevron textcol">chevron_left</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="/pages/admin-line-charts" class="textcol">Line Charts<i
-                                            class="material-icons textcol">show_chart</i></a></li>
-                                <li><a href="/pages/admin-bar-charts" class="textcol">Bar Charts<i
-                                            class="material-icons textcol">equalizer</i></a></li>
-                                <li><a href="/pages/admin-area-charts" class="textcol">Area Charts<i
-                                            class="material-icons textcol">multiline_chart</i></a></li>
-                                <li><a href="/pages/admin-doughnut-charts" class="textcol">Doughnut Charts<i
-                                            class="material-icons textcol">pie_chart</i></a></li>
-                                <li><a href="/pages/admin-financial-charts" class="textcol">Financial Charts<i
-                                            class="material-icons textcol">euro_symbol</i></a></li>
-                                <li><a href="/pages/admin-interactive-charts" class="textcol">Interactive
-                                        Charts<i class="material-icons textcol">touch_app</i></a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    <li class="bold"><a href="{{ url('/dashboard') }}" class="textcol">Dashboard<i
+                                class="material-icons textcol">web</i></a></li>
+                    @if ($admin->type == 'admin')
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="{{url('/staff')}}" class="textcol">View Staff<i
+                                                class="material-icons textcol">visibility</i></a></li>
+                                    <li><a href="{{url('/addstaff')}}" class="textcol">Add Staff<i
+                                                class="material-icons textcol">add</i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                 </ul>
             </li>
         </ul>
@@ -108,7 +108,7 @@
 
 
     </header>
-    <main >
+    <main>
         <div class="mp-container">
             @yield('main')
         </div>
