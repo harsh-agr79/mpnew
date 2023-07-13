@@ -26,7 +26,7 @@
             <div class="center">
                 {{ $data->appends(\Request::except('page'))->links('vendor.pagination.materializecss') }}
             </div>
-            <div class="mp-card">
+            <div class="mp-card" style="overflow-x: scroll;">
                 <table>
                     <thead>
                         <tr>

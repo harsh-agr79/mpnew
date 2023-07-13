@@ -2,7 +2,7 @@
 
 @section('main')
     <div>
-        <div class="mp-card" style="margin-top: 30px;">
+        <div class="mp-card" style="overflow-x: scroll; margin-top: 30px;">
             <div>
                 <h5 class="center">Rejected Orders</h5>
             </div>
