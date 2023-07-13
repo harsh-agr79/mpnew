@@ -42,7 +42,7 @@
                         <th class="center">Approved Quantity</th>
                         <th class="center">Price</th>
                         <th>
-                            <label>Status</label><select id="select1" class="browser-default selectinp black-text" {{$dis}} style="width: 100px;">
+                            <label>Status</label><select id="select1" class="browser-default selectinp black-text" {{$dis}} style="width: 60px;">
                               <option class="black-text" value="" selected disabled>for all</option>
                               <option class="black-text" value="pending">Pending</option>
                               <option class="black-text" value="approved">approved</option>
@@ -68,7 +68,7 @@
                                 <span class="amber lighten-2 black-text center" style="padding: 10px;" @if ($dis == '') onclick="this.remove(); $('#{{$item->id}}').css('display', 'block');" @endif>{{$item->price}}</span>
                                 <input id="{{$item->id}}" type="text" class="inp browser-default black-text" style="display: none;" name="price[]" value="{{$item->price}}"></td>
                             <td>
-                                <select name="status[]" class="select2 browser-default selectinp black-text" {{$dis}} style="width: 100px;" required>
+                                <select name="status[]" class="select2 browser-default selectinp black-text" {{$dis}} style="width: 60px;" required>
                                     @if ($item->status == 'pending')
                                       <option class="black-text" value="pending" class="" selected>{{$item->status}}</option>
                                       @else
