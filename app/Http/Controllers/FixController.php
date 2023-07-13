@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\DB;
 class FixController extends Controller
 {
     public function update(){
-        // DB::table('orders')->where('orderid', '221688986543')->update([
-        //     'clnstatus'=>'delivered',
-        // ]);
+        // $orders = DB::table('orders')->groupBy('orderid')->orderBy('id', 'DESC')->where('mainstatus', NULL)->get();
+        // foreach($orders as $item){
+        //     DB::table('orders')->where('orderid', $item->orderid)->update([
+        //         'mainstatus'=>getpstat($item->orderid)
+        //     ]);
+        // }
     }
 }

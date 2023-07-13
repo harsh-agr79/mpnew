@@ -15,6 +15,7 @@ class ChalanController extends Controller
         DB::table('orders')->where('orderid', $orderid)->update([
             'clnstatus'=>$packorder,
         ]);
+        updateMainStatus($orderid);
         return response()->json($request->all());
     }
 }

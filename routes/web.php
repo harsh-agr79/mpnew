@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FixController;
 use App\Http\Controllers\ChalanController;
 use App\Http\Controllers\OrderAdminController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
     Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
 
+    //ORDER VIEW PAGES
+    Route::get('orders', [OrderAdminController::class, 'orders']);
+    Route::get('approvedorders', [OrderAdminController::class, 'approvedorders']);
+    Route::get('pendingorders', [OrderAdminController::class, 'pendingorders']);
+    Route::get('rejectedorders', [OrderAdminController::class, 'rejectedorders']);
+    Route::get('deliveredorders', [OrderAdminController::class, 'deliveredorders']);
+
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);
@@ -59,6 +67,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //FOR AJAX UPDATES AND GETS
     Route::post('updatecln', [ChalanController::class, 'updatechalan']);
+    Route::post('updatedeliver', [OrderAdminController::class, 'updatedeliver']);
+    Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function() {

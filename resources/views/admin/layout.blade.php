@@ -89,13 +89,32 @@
                     <li class="bold"><a href="{{ url('/dashboard') }}" class="textcol">Dashboard<i
                                 class="material-icons textcol">web</i></a></li>
                     @if ($admin->type == 'admin')
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
+                                                class="material-icons textcol">visibility</i></a></li>
+                                    <li class="amber darken-1"><a href="{{ url('/approvedorders') }}" class="textcol">Approved Orders<i
+                                                class="material-icons textcol">check</i></a></li>
+                                    <li class="blue"><a href="{{ url('/pendingorders') }}" class="textcol">Pending Orders<i
+                                                class="material-icons textcol">warning</i></a></li>
+                                    <li class="red"><a href="{{ url('/rejectedorders') }}" class="textcol">Rejected Orders<i
+                                                class="material-icons textcol">clear</i></a></li>
+                                    <li class="green"><a href="{{ url('/deliveredorders') }}" class="textcol">Delivered Orders<i
+                                                class="material-icons textcol">local_shipping</i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+                    @if ($admin->type == 'admin')
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
                                     class="material-icons chevron textcol">chevron_left</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{url('/staff')}}" class="textcol">View Staff<i
+                                    <li><a href="{{ url('/staff') }}" class="textcol">View Staff<i
                                                 class="material-icons textcol">visibility</i></a></li>
-                                    <li><a href="{{url('/addstaff')}}" class="textcol">Add Staff<i
+                                    <li><a href="{{ url('/addstaff') }}" class="textcol">Add Staff<i
                                                 class="material-icons textcol">add</i></a></li>
                                 </ul>
                             </div>

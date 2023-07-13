@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class OrderAdminController extends Controller
 {
+
+    //INVOICE VIEW FUNCTION
     public function details(Request $request, $orderid){
         $result['data'] = DB::table('orders')->where('orderid', $orderid)   
         ->get();
@@ -21,6 +23,9 @@ class OrderAdminController extends Controller
 
         return view('admin/detail', $result);
     }
+
+
+    //ORDER UPDATE FUNCTIONS
     public function detailupdate(Request $request){
         $id = $request->post('id',[]);
         $apquantity = $request->post('apquantity', []);
@@ -50,6 +55,8 @@ class OrderAdminController extends Controller
                 'discount'=>$discount,
             ]);
         }
+        updateMainStatus($request->post('orderid'));
+
         return redirect($request->post('previous'));
     }
 
@@ -63,5 +70,88 @@ class OrderAdminController extends Controller
         ]);
 
         return response()->json('200');
+    }
+    public function updatedeliver(Request $request){
+        $orderid = $request->post('orderid');
+        $delivered = $request->post('delivered');
+        if($delivered == 'on'){
+            $packorder = 'delivered';
+        }
+        else{
+            $packorder = 'packorder';
+        }
+        DB::table('orders')->where('orderid',$orderid)->update([
+            'delivered'=>$delivered,
+            'clnstatus'=>$packorder
+        ]);
+        updateMainStatus($orderid);
+        return response()->json($request->all());
+    }
+
+    //ALL ORDERS VIEWS
+
+    public function orders(Request $request){
+        $query = DB::table('orders');
+        $query = $query->where(['deleted'=>NULL, 'save'=>NULL])->orderBy('created_at', 'DESC')->groupBy('orderid');
+        if($request->get('name')){
+           $query = $query->where('name', $request->get('name'));
+           $result['name']= $request->get('name');
+        }
+        else{
+            $result['name'] ='';
+        }
+        if($request->get('date')){
+           $query = $query->whereDate('created_at', $request->get('date'));
+           $result['date']= $request->get('date');
+        }
+        else{
+            $result['date']= '';
+        }
+        $query = $query->paginate(50);
+        $result['data']=$query;
+    
+
+        return view('admin/orders', $result);
+    }
+
+    public function approvedorders(Request $request){
+        $result['data'] = DB::table('orders')
+        ->where(['deleted'=>NULL, 'save'=>NULL])
+        ->whereIn('mainstatus', ['amber darken-1', 'deep-purple'])
+        ->groupBy('orderid')
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        return view('admin/approvedorders', $result);
+    }
+    public function pendingorders(Request $request){
+        $result['data'] = DB::table('orders')
+        ->where(['deleted'=>NULL, 'save'=>NULL])
+        ->where('mainstatus', 'blue')
+        ->groupBy('orderid')
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        return view('admin/pendingorders', $result);
+    }
+    public function rejectedorders(Request $request){
+        $result['data'] = DB::table('orders')
+        ->where(['deleted'=>NULL, 'save'=>NULL])
+        ->where('mainstatus', 'red')
+        ->groupBy('orderid')
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        return view('admin/rejectedorders', $result);
+    }
+    public function deliveredorders(Request $request){
+        $result['data'] = DB::table('orders')
+        ->where(['deleted'=>NULL, 'save'=>NULL])
+        ->where('mainstatus', 'green')
+        ->groupBy('orderid')
+        ->orderBy('created_at', 'DESC')
+        ->paginate(50);
+
+        return view('admin/deliveredorders', $result);
     }
 }

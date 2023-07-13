@@ -120,12 +120,6 @@
                         <span>View Delivered Orders</span>
                       </label>
                 </div>
-                <div class="col m6 s12">
-                    <label>
-                        <input type="checkbox" />
-                        <span>View Chalans</span>
-                      </label>
-                </div>
             </div>
         </div>
         <div class="mp-card" style="margin-top: 5vh;">

@@ -134,6 +134,7 @@
             </div>
           </div>
           <input type="hidden" value="{{url()->previous()}}" name="previous">
+          <input type="hidden" value="{{$data[0]->orderid}}" name="orderid">
           <div class="fixed-action-btn">
             <button class="btn btn-large red {{$dis}}" onclick="M.toast({html: 'Order being Updated, Please wait...'})">
                 update order

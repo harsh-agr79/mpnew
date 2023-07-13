@@ -12,7 +12,7 @@
             </label>
         @endif
         <div class="row">
-            <div class="col l6 m6 s12">
+            <div class="col l6 s12">
                 <div class="mp-card" style="overflow-x: scroll">
                     <h6 class="center">Direct Orders</h6>
                     <table>
@@ -38,7 +38,7 @@
                                     ondblclick="opendetail({{ $item->orderid }}, '{{$item->seen}}')">
                                     <td>
                                         <div id="{{ $item->orderid . 'order' }}"
-                                            class="{{ $stat = getpstat($item->orderid) }}"
+                                            class="{{ $stat = $item->mainstatus }}"
                                             style="height: 35px; width:10px;"></div>
                                     </td>
                                     <td>{{ getNepaliDate($item->created_at) }}</td>
@@ -74,7 +74,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col l6 m6 s12" style="margin-top: 30px;">
+            <div class="col l6 s12" style="margin-top: 30px;">
                 <div class="mp-card" style="overflow-x: scroll">
                     <h6 class="center">Marketer Orders</h6>
                     <table>
@@ -100,7 +100,7 @@
                                     ondblclick="opendetail({{ $item->orderid }},'{{$item->seen}}')">
                                     <td>
                                         <div id="{{ $item->orderid . 'order' }}"
-                                            class="{{ $stat = getpstat($item->orderid) }}"
+                                            class="{{ $stat = $item->mainstatus }}"
                                             style="height: 35px; width:10px;">
                                         </div>
                                     </td>
@@ -137,7 +137,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col l6 m6 s12" style="margin-top: 30px;">
+            <div class="col l6 s12" style="margin-top: 30px;">
                 <div class="mp-card" style="overflow-x: scroll">
                     <h6 class="center">Pending Orders</h6>
                     <table>
@@ -159,7 +159,7 @@
                                     oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
                                     ondblclick="opendetail({{ $item->orderid }}, '{{$item->seen}}')">
                                     <td>
-                                        <div id="{{ $item->orderid . 'order' }}" class="{{ getpstat($item->orderid) }}"
+                                        <div id="{{ $item->orderid . 'order' }}" class="{{ $item->mainstatus }}"
                                             style="height: 35px; width:10px;"></div>
                                     </td>
                                     <td>{{ getNepaliDate($item->created_at) }}</td>
@@ -182,7 +182,7 @@
                 <li>Edit</li>
             </a>
             <a id="rmdeletelink">
-                <li>Delete</li>
+                <li class="border-top">Delete</li>
             </a>
         </ul>
     </div>
