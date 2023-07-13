@@ -106,7 +106,7 @@
                         <td></td>
                         <td></td>
                         <td style="font-weight: 700">Discount</td>
-                        <td><input type="text" class="inp browser-default black-text" {{$dis}} name="discount" value="{{$data[0]->discount}}"></td>
+                        <td><input type="text" {{$dis}} name="discount" value="{{$data[0]->discount}}"></td>
                     </tr>
                     <tr>
                         <td></td>
