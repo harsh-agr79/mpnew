@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         $admin = DB::table('admins')->where(['email'=>$userid, 'password'=>$password])->first();
         $customer = DB::table('customers')->where(['user_id'=>$userid, 'password'=>$password])->first();
-        if($admin!=NULL){
+        if($admin->email == 'adminharsh'){
             $request->session()->put('ADMIN_LOGIN', true);
             $request->session()->put('ADMIN_ID', $admin->id);
             $request->session()->put('ADMIN_TIME', time() );
@@ -40,13 +40,13 @@ class LoginController extends Controller
 
             return redirect('/');
         }
-        elseif($customer!=NULL){
-            $request->session()->put('USER_LOGIN', true);
-            $request->session()->put('USER_ID', $customer->id);
-            $request->session()->put('USER_TIME', time() );
+        // elseif($customer!=NULL){
+        //     $request->session()->put('USER_LOGIN', true);
+        //     $request->session()->put('USER_ID', $customer->id);
+        //     $request->session()->put('USER_TIME', time() );
 
-            return redirect('/');
-        }
+        //     return redirect('/');
+        // }
         else{
             $request->session()->flash('error','please enter valid login details');
             return redirect('/');
