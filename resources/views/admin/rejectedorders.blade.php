@@ -13,11 +13,6 @@
                         <th>Date</th>
                         <th>Name</th>
                         <th>order Id</th>
-                        <th>Delivered</th>
-                        <th>recieved</th>
-                        @if ($admin->type == 'admin' || in_array('totalamount', $perms))
-                            <th class="tamt" style="display: none;">Amount</th>
-                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -32,15 +27,6 @@
                             <td>{{ getNepaliDate($item->created_at) }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->orderid }}</td>
-                            <td>@if ($item->delivered == 'on')
-                                <i class="material-icons textcol">check</i>
-                            @else
-                                <i class="material-icons textcol">close</i>
-                            @endif</td>
-                            <td>{{$item->recieveddate}}</td>
-                            @if ($admin->type == 'admin' || in_array('totalamount', $perms))
-                            <td class="tamt" style="display: none;"> {{ getTotalAmount($item->orderid) }}</td>
-                            @endif
                         </tr>
                     @endforeach
                 </tbody>
