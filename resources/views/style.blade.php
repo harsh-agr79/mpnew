@@ -41,7 +41,7 @@ body {
     font-family: 'Exo', 'sans-serif';
 }
 td {
-            font-size: 12px;
+            font-size: 10px;
             padding: 2px;
         }
 
