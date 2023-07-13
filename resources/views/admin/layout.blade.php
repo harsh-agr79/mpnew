@@ -33,7 +33,22 @@
     @extends('style')
 </head>
 
-<body class="has-fixed-sidenav">
+<body class="has-fixed-sidenav" onload="preload()">
+    <div id="loading">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-yellow-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="navbar-fixed">
             <nav class="navbar topnv">
@@ -95,13 +110,16 @@
                                 <ul>
                                     <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
                                                 class="material-icons textcol">visibility</i></a></li>
-                                    <li class="amber darken-1"><a href="{{ url('/approvedorders') }}" class="textcol">Approved Orders<i
+                                    <li class="amber darken-1"><a href="{{ url('/approvedorders') }}"
+                                            class="textcol">Approved Orders<i
                                                 class="material-icons textcol">check</i></a></li>
-                                    <li class="blue"><a href="{{ url('/pendingorders') }}" class="textcol">Pending Orders<i
-                                                class="material-icons textcol">warning</i></a></li>
-                                    <li class="red"><a href="{{ url('/rejectedorders') }}" class="textcol">Rejected Orders<i
+                                    <li class="blue"><a href="{{ url('/pendingorders') }}" class="textcol">Pending
+                                            Orders<i class="material-icons textcol">warning</i></a></li>
+                                    <li class="red"><a href="{{ url('/rejectedorders') }}"
+                                            class="textcol">Rejected Orders<i
                                                 class="material-icons textcol">clear</i></a></li>
-                                    <li class="green"><a href="{{ url('/deliveredorders') }}" class="textcol">Delivered Orders<i
+                                    <li class="green"><a href="{{ url('/deliveredorders') }}"
+                                            class="textcol">Delivered Orders<i
                                                 class="material-icons textcol">local_shipping</i></a></li>
                                 </ul>
                             </div>
@@ -191,6 +209,13 @@
                 });
             });
         });
+
+       
+
+        function preload() {
+            var preloader = document.getElementById('loading')
+            preloader.style.display = 'none';
+        }
     </script>
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}

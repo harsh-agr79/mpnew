@@ -40,6 +40,22 @@ body{
 body {
     font-family: 'Exo', 'sans-serif';
 }
+#loading {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: white;
+  z-index: 1000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
 td{
             font-size: 10px;
             padding: 2px;
