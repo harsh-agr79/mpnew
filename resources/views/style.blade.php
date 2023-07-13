@@ -40,7 +40,7 @@ body{
 body {
     font-family: 'Exo', 'sans-serif';
 }
-td {
+td, th{
             font-size: 10px;
             padding: 2px;
         }
