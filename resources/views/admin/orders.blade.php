@@ -32,8 +32,7 @@
                         <tr>
                             <th></th>
                             <th>Date</th>
-                            <th>Name</th>
-                            <th>order Id</th>
+                            <th>Detail</th>
                             <th>Delivered</th>
                             <th>recieved</th>
                             @if ($admin->type == 'admin' || in_array('totalamount', $perms))
@@ -51,8 +50,12 @@
                                         style="height: 35px; width:10px;"></div>
                                 </td>
                                 <td>{{ getNepaliDate($item->created_at) }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->orderid }}</td>
+                                <td>
+                                    <div class="row" style="padding: 0; margin: 0;">
+                                        <div class="col s12" style="font-size: 12px;">{{ $item->name }}</div>
+                                        <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                    </div>
+                                </td>
                                 <td>@if ($item->delivered == 'on')
                                     <i class="material-icons textcol">check</i>
                                 @else

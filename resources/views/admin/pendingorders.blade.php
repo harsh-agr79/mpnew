@@ -11,10 +11,8 @@
                     <tr>
                         <th></th>
                         <th>Date</th>
-                        <th>Name</th>
-                        <th>order Id</th>
-                        <th>Delivered</th>
-                        <th>recieved</th>
+                        <th>Detail</th>
+                        <th>Seen By</th>
                         @if ($admin->type == 'admin' || in_array('totalamount', $perms))
                             <th class="tamt" style="display: none;">Amount</th>
                         @endif
@@ -30,14 +28,13 @@
                                     style="height: 35px; width:10px;"></div>
                             </td>
                             <td>{{ getNepaliDate($item->created_at) }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->orderid }}</td>
-                            <td>@if ($item->delivered == 'on')
-                                <i class="material-icons textcol">check</i>
-                            @else
-                                <i class="material-icons textcol">close</i>
-                            @endif</td>
-                            <td>{{$item->recieveddate}}</td>
+                            <td>
+                                <div class="row" style="padding: 0; margin: 0;">
+                                    <div class="col s12" style="font-size: 12px;">{{ $item->name }}</div>
+                                    <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                </div>
+                            </td>
+                            <td>{{$item->seenby}}</td>
                             @if ($admin->type == 'admin' || in_array('totalamount', $perms))
                             <td class="tamt" style="display: none;"> {{ getTotalAmount($item->orderid) }}</td>
                             @endif

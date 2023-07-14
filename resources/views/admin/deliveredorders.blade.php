@@ -11,8 +11,7 @@
                 <tr>
                     <th></th>
                     <th>Date</th>
-                    <th>Name</th>
-                    <th>order Id</th>
+                    <th>Detail</th>
                     @if ($admin->type == 'admin' || in_array('totalamount', $perms))
                         <th class="tamt" style="display: none;">Amount</th>
                     @endif
@@ -29,8 +28,12 @@
                                 style="height: 35px; width:10px;"></div>
                         </td>
                         <td>{{ getNepaliDate($item->created_at) }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->orderid }}</td>
+                        <td>
+                            <div class="row" style="padding: 0; margin: 0;">
+                                <div class="col s12" style="font-size: 12px;">{{ $item->name }}</div>
+                                <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
+                            </div>
+                        </td>
                         @if ($admin->type == 'admin' || in_array('totalamount', $perms))
                             <td class="tamt" style="display: none;">
                                 {{ getTotalAmount($item->orderid) }}
