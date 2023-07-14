@@ -111,7 +111,7 @@
                                                 class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
                                                 <td>{{ $item2->item }}</td>
                                                 <td>{{ $item2->sum }}</td>
-                                                <td>{{ $item2->samt - $item2->damt }}</td>
+                                                <td>{{ money($item2->samt - $item2->damt) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
