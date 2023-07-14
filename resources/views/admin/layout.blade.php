@@ -38,7 +38,7 @@
     <header>
         <div class="navbar-fixed">
             <nav class="navbar topnv">
-                <div class="nav-wrapper"><a href="#!" class="brand-logo grey-text text-darken-4"><img
+                <div class="nav-wrapper"><a href="{{url('/')}}" class="brand-logo grey-text text-darken-4"><img
                             src="{{ asset('assets/' . $admin->mode . '.png') }}" height="60" alt=""></a>
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
@@ -78,7 +78,7 @@
                             </a>
                         </li>
                     </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
-                            class="material-icons black-text">menu</i></a>
+                            class="material-icons textcol">menu</i></a>
                 </div>
             </nav>
         </div>
