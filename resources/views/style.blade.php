@@ -57,7 +57,7 @@ body {
           justify-content: center;
 }
 td{
-            font-size: 10px;
+            font-size: 12px;
             padding: 2px;
         }
 th{
