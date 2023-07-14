@@ -9,22 +9,22 @@
         <div class="mp-card" style="margin-top: 30px;">
             <form>
                 <div class="row">
-                    <div class="col m6 s6">
+                    <div class="input-field col l4 m4 s6">
                         <label>From:</label>
                         <input type="date" name="date" value="{{$date}}" class="inp browser-default black-text">
                     </div>
-                    <div class="col m6 s6">
-                        <label>to:</label>
+                    <div class="input-field col l4 m4 s6">
+                        <label>To:</label>
                         <input type="date" name="date2" value="{{$date2}}" class="inp browser-default black-text">
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4 l4">
                         <input type="text" name="name" id="customer" value="{{$name}}" placeholder="Customer"
                             class="autocomplete browser-default inp black-text" autocomplete="off">
                     </div>
-                    <div class="input-field col s6 m2 l1">
+                    <div class="col s6 m2 l2">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
-                    <div class="input-field col s6 m2 l1">
+                    <div class="col s6 m2 l2">
                         <a class="btn amber darken-1" href="{{url('/mainanalytics')}}">Clear</a>
                     </div>
                 </div>
