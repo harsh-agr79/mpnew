@@ -11,8 +11,8 @@
                 <span>View Total Amount</span>
             </label>
         @endif
-        <div class="row">
-            <div class="col l6 s12">
+        <div class="row" >
+            <div class="col l6 s12" style="padding: 1px;">
                 <div class="mp-card" style="overflow-x: scroll">
                     <h6 class="center">Direct Orders</h6>
                     <table>
@@ -77,7 +77,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col l6 s12" style="margin-top: 30px;">
+            <div class="col l6 s12" style="margin-top: 30px; padding: 1px;">
                 <div class="mp-card" style="overflow-x: scroll">
                     <h6 class="center">Marketer Orders</h6>
                     <table>
@@ -143,7 +143,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col l6 s12" style="margin-top: 30px;">
+            <div class="col l6 s12" style="margin-top: 30px; padding: 1px;">
                 <div class="mp-card" style="overflow-x: scroll">
                     <h6 class="center">Pending Orders</h6>
                     <table>
