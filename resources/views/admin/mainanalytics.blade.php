@@ -1,60 +1,204 @@
 @extends('admin/layout')
 
 @section('main')
+    @php
+        $quantchart = [];
+        $amtchart = [];
+    @endphp
     <div>
         <div class="mp-card" style="margin-top: 30px;">
+            <form>
+                <div class="row">
+                    <div class="col m6 s6">
+                        <label>From:</label>
+                        <input type="date" name="date" class="inp browser-default black-text">
+                    </div>
+                    <div class="col m6 s6">
+                        <label>to:</label>
+                        <input type="date" name="date2" class="inp browser-default black-text">
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input type="text" name="name" id="customer" value="" placeholder="Customer"
+                            class="autocomplete browser-default inp black-text" autocomplete="off">
+                    </div>
+                    <div class="input-field col s6 m1">
+                        <button class="btn amber darken-1">Apply</button>
+                    </div>
+                    <div class="input-field col s6 m1">
+                        <a class="btn amber darken-1" href="{{url('/mainanalytics')}}">Clear</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="amber center" style="padding: 5px; margin-top: 10px; border-radius: 10px;">
+            <h5 class="black-text" style="font-weight: 600;">Total Sales: {{money($totalsales[0]->samt-$totalsales[0]->damt)}}</h5>
+        </div>
+        <div class="mp-card" style="margin-top: 10px;">
             <ul class="collapsible">
                 @foreach ($catsales as $item)
-                <li>
-                    <div class="collapsible-header row">
-                        <div class="col s4">{{$item->category}}</div>
-                        <div class="col s4">{{$item->sum}}</div>
-                        <div class="col s4">{{money($item->samt - $item->damt)}}</div>
-                    </div>
-                    <div class="collapsible-body"><span>
-                        @php
-                            if ($item->category == 'powerbank') {
-                                $prod = $pb;
-                            }
-                            if ($item->category == 'charger') {
-                                $prod = $ch;
-                            }
-                            if ($item->category == 'cable') {
-                                $prod = $ca;
-                            }
-                            if ($item->category == 'btitem') {
-                                $prod = $bt;
-                            }
-                            if ($item->category == 'earphone') {
-                                $prod = $ep;
-                            }
-                            if ($item->category == 'others') {
-                                $prod = $oth;
-                            }
-
-                        @endphp
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
-                                    <th>Amount</th>    
-                                </tr>    
-                            </thead>
-                            <tbody>
-                                @foreach ($prod as $item2)
-                                    <tr>
-                                        <td>{{$item2->item}}</td>
-                                        <td>{{$item2->sum}}</td>
-                                        <td>{{$item2->samt-$item2->damt}}</td>
-                                    </tr>
-                                @endforeach    
-                            </tbody>    
-                        </table>    
-                    </span></div>
-                  </li>
+                    @php
+                        $amtchart[] = ['Category' => $item->category, 'Amount' => $item->samt - $item->damt];
+                        $quantchart[] = ['Category' => $item->category, 'Quantity' => $item->sum + 0];
+                    @endphp
+                    <li>
+                        <div class="collapsible-header row">
+                            <div class="col s4">{{ $item->category }}</div>
+                            <div class="col s4">{{ $item->sum }}</div>
+                            <div class="col s4">{{ money($item->samt - $item->damt) }}</div>
+                        </div>
+                        <div class="collapsible-body"><span>
+                                @php
+                                    if ($item->category == 'powerbank') {
+                                        $prod = $pb;
+                                    }
+                                    if ($item->category == 'charger') {
+                                        $prod = $ch;
+                                    }
+                                    if ($item->category == 'cable') {
+                                        $prod = $ca;
+                                    }
+                                    if ($item->category == 'btitem') {
+                                        $prod = $bt;
+                                    }
+                                    if ($item->category == 'earphone') {
+                                        $prod = $ep;
+                                    }
+                                    if ($item->category == 'others') {
+                                        $prod = $oth;
+                                    }
+                                    
+                                @endphp
+                                <div>
+                                    @php
+                                        $subcates = DB::table('subcategory')
+                                            ->where('parent', $item->category)
+                                            ->pluck('subcategory')
+                                            ->toArray();
+                                    @endphp
+                                    <form id="{{ $item->category }}form">
+                                        @foreach ($subcates as $item3)
+                                            <label style="margin-right: 15px;">
+                                                <input type="checkbox" name="{{ $item3 }}"
+                                                    value="{{ $item3 }}" onclick="Filter('{{ $item->category }}')" />
+                                                <span>{{ $item3 }}</span>
+                                            </label>
+                                        @endforeach
+                                        <label style="margin-right: 15px;">
+                                            <input type="checkbox" name="incall" value="incall"
+                                                onclick="Filter('{{ $item->category }}')" />
+                                            <span>Must Include All Selected Tags</span>
+                                        </label>
+                                    </form>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Quantity</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($prod as $item2)
+                                            @php
+                                                $sbc = '';
+                                                $sc = '';
+                                                if ($item2->subcat != null) {
+                                                    $sbc = explode('|', $item2->subcat);
+                                                }
+                                            @endphp
+                                            <tr
+                                                class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
+                                                <td>{{ $item2->item }}</td>
+                                                <td>{{ $item2->sum }}</td>
+                                                <td>{{ $item2->samt - $item2->damt }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </span></div>
+                    </li>
                 @endforeach
-              </ul>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div id="piechart_3d" style="width: auto; height: 500px;"></div>
+        </div>
+        <div class="container">
+            <div id="piechart_3d2" style="width: auto; height: 500px;"></div>
         </div>
     </div>
+    <script>
+        function Filter(cat) {
+            $(`.${cat}`).hide();
+            var formData = $(`#${cat}form`).serializeArray()
+            if (formData.length == 0) {
+                $(`.${cat}`).show();
+            } else if (formData[formData.length - 1].name === 'incall') {
+                var clsnames = '';
+                for (let i = 0; i < formData.length - 1; i++) {
+                    clsnames += "." + formData[i].name
+                }
+                $(`${clsnames}`).show();
+            } else {
+                if (formData.length > 0) {
+                    for (let i = 0; i < formData.length; i++) {
+                        $(`.${formData[i].name}`).show();
+                    }
+                } else {
+                    $(`.${cat}`).show();
+                }
+            }
+
+        }
+    </script>
+
+    <script>
+        google.charts.load("current", {
+            packages: ["corechart"]
+        });
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart2);
+
+        function drawChart() {
+
+            var chartdata = @json($amtchart);
+            console.log(chartdata)
+            const mta = chartdata.map(d => Array.from(Object.values(d)))
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '');
+            data.addColumn('number', '');
+
+            data.addRows(mta);
+
+            var options = {
+                title: 'Sales By Amount',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+        }
+
+        function drawChart2() {
+
+            var chartdata = @json($quantchart);
+            console.log(chartdata)
+            const mta = chartdata.map(d => Array.from(Object.values(d)))
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '');
+            data.addColumn('number', '');
+
+            data.addRows(mta);
+
+            var options = {
+                title: 'Sales By Quantity',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+            chart.draw(data, options);
+        }
+    </script>
 @endsection

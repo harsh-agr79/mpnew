@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\DB;
 class AnalyticsController extends Controller
 {
     public function mainanalytics(Request $request){
+        $result['totalsales'] = DB::table('orders')
+        ->where(['deleted'=>NULL, 'save'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+        // ->where('orders.created_at', '>=', $date)
+        // ->where('orders.created_at', '<=', $date2)
+        // ->where('orders.name', $cusname)
+        ->selectRaw('*,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
+        ->groupBy('deleted')
+        ->get();
         $result['catsales'] = DB::table('orders')
         ->where(['deleted'=>NULL, 'save'=>NULL])
         ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])

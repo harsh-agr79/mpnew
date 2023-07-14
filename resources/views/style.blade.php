@@ -88,7 +88,7 @@ tr{
     background: var(--bg-content) !important;
 }
 .mp-card{
-    padding: 20px;
+    padding: 5px;
     background: var(--bg-content);
     border-radius: 10px;
 }
@@ -145,8 +145,8 @@ input:focus {
     color: var(--textcol) !important;
 }
 .mp-container{
-    margin-right: 3vw;
-    margin-left: 3vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
 }
 .rmenu{
     /* background: var(--bg-content); */
@@ -187,6 +187,13 @@ input:focus {
 .collapsible-header{
     padding: 10px;
     margin: 0;
+    font-size: 13px;
+    background: var(--bg-content);
+    color: var(--textcol);
+}
+.collapsible, .collapsible li{
+    border: none;
+    box-shadow: none;
 }
 
 </style>
