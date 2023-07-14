@@ -8,6 +8,7 @@ use App\Http\Controllers\FixController;
 use App\Http\Controllers\ChalanController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //CHALAN PAGES
     Route::get('chalan', [ChalanController::class, 'chalan']);
     Route::get('chalandetail/{id}', [ChalanController::class, 'chalandetail']);
+
+    //Analytics Pages
+    Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);

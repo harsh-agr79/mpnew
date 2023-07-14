@@ -62,6 +62,7 @@ td{
         }
 th{
     font-size: 10px;
+    padding: 4px;
 }
 
 tr:hover {
@@ -182,6 +183,10 @@ input:focus {
 .selectinp{
     padding: 10px;
     border-radius: 10px;
+}
+.collapsible-header{
+    padding: 10px;
+    margin: 0;
 }
 
 </style>
