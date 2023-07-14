@@ -122,7 +122,7 @@
             </ul>
         </div>
 
-        <div class="row">
+        <div class="row mp-card" style="margin-top: 20px;">
             <div class="col m6 s12">
                 <div id="piechart_3d" style="width: auto; height: 500px;"></div>
             </div>
@@ -178,6 +178,8 @@
             var options = {
                 title: 'Sales By Amount',
                 is3D: true,
+                backgroundColor: { fill:'transparent' },
+                color: '#FFF'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -198,6 +200,8 @@
             var options = {
                 title: 'Sales By Quantity',
                 is3D: true,
+                backgroundColor: { fill:'transparent' },
+                textStyle: {color: '#FFF'}
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));

@@ -195,5 +195,8 @@ input:focus {
     border: none;
     box-shadow: none;
 }
+#piechart_3d text, #piechart_3d2 text {
+    fill: var(--textcol) !important;
+}
 
 </style>
