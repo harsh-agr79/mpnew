@@ -92,31 +92,41 @@
             <div class="row">
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="orders" @if (in_array('orders', $permission))
+                        checked
+                    @endif/>
                         <span>View All Orders</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="pendingorders" @if (in_array('pendingorders', $permission))
+                        checked
+                    @endif/>
                         <span>View Pending Orders</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="approvedorders" @if (in_array('approvedorders', $permission))
+                        checked
+                    @endif/>
                         <span>View Approved Orders</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="rejectedorders" @if (in_array('rejectedorders', $permission))
+                        checked
+                    @endif/>
                         <span>View Rejected Orders</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="deliveredorders" @if (in_array('deliveredorders', $permission))
+                        checked
+                    @endif/>
                         <span>View Delivered Orders</span>
                       </label>
                 </div>
@@ -167,6 +177,14 @@
                             checked
                         @endif/>
                         <span>Change Order Status/Approved Quantity/ Price/ Remarks</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                         <input type="checkbox" name="perm[]" value="updatedeliver" @if (in_array('updatedeliver', $permission))
+                        checked
+                    @endif/>
+                        <span>Deliver / Undeliver</span>
                       </label>
                 </div>
                 <div class="col m6 s12">

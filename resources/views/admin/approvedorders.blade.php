@@ -1,6 +1,14 @@
 @extends('admin/layout')
 
 @section('main')
+@php
+    if(in_array('updatedeliver', $perms) || $admin->type == 'admin'){
+        $dis = '';
+    }
+    else{
+        $dis = 'disabled';
+    }
+@endphp
     <div class="mp-card" style="overflow-x: scroll; margin-top: 30px;">
         <h6 class="center">Approved Orders</h6>
         <table>
@@ -61,7 +69,7 @@
                             <form id="{{$item->orderid}}deliverform">
                             <label>
                                 <input type="hidden" name="orderid" value="{{ $item->orderid }}">
-                                <input id="{{ $item->orderid.'deliver' }}" type="checkbox" name="delivered"
+                                <input id="{{ $item->orderid.'deliver' }}" {{$dis}} type="checkbox" name="delivered"
                                    @if ($stat != 'deep-purple')
                                     disabled
                                    @endif onchange="updatedeliver({{$item->orderid}})" />

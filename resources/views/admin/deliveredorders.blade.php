@@ -1,6 +1,14 @@
 @extends('admin/layout')
 
 @section('main')
+@php
+    if(in_array('updatedeliver', $perms) || $admin->type == 'admin'){
+        $dis = '';
+    }
+    else{
+        $dis = 'disabled';
+    }
+@endphp
 <div class="center">
     {{ $data->appends(\Request::except('page'))->links('vendor.pagination.materializecss') }}
 </div>
@@ -43,7 +51,7 @@
                             <form id="{{$item->orderid}}deliverform">
                             <label>
                                 <input type="hidden" name="orderid" value="{{ $item->orderid }}">
-                                <input id="{{ $item->orderid.'deliver' }}" type="checkbox" name="delivered"
+                                <input id="{{ $item->orderid.'deliver' }}" {{$dis}} type="checkbox" name="delivered"
                                    @if ($stat == 'green')
                                     checked
                                    @endif onchange="updatedeliver({{$item->orderid}})" />

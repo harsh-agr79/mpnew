@@ -88,21 +88,41 @@
                 <ul class="collapsible collapsible-accordion">
                     <li class="bold"><a href="{{ url('/dashboard') }}" class="textcol">Dashboard<i
                                 class="material-icons textcol">web</i></a></li>
-                    @if ($admin->type == 'admin')
+                    @if (
+                        $admin->type == 'admin' ||
+                            in_array('orders', $perms) ||
+                            in_array('pendingorders', $perms) ||
+                            in_array('deliveredorders', $perms) ||
+                            in_array('rejectedorders', $perms) ||
+                            in_array('approvedorders', $perms))
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
                                     class="material-icons chevron textcol">chevron_left</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
-                                                class="material-icons textcol">visibility</i></a></li>
-                                    <li class="amber darken-1"><a href="{{ url('/approvedorders') }}" class="textcol">Approved Orders<i
-                                                class="material-icons textcol">check</i></a></li>
-                                    <li class="blue"><a href="{{ url('/pendingorders') }}" class="textcol">Pending Orders<i
-                                                class="material-icons textcol">warning</i></a></li>
-                                    <li class="red"><a href="{{ url('/rejectedorders') }}" class="textcol">Rejected Orders<i
-                                                class="material-icons textcol">clear</i></a></li>
-                                    <li class="green"><a href="{{ url('/deliveredorders') }}" class="textcol">Delivered Orders<i
-                                                class="material-icons textcol">local_shipping</i></a></li>
+                                    @if ($admin->type == 'admin' || in_array('orders', $perms))
+                                        <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('approvedorders', $perms))
+                                        <li class="amber darken-1"><a href="{{ url('/approvedorders') }}"
+                                                class="textcol">Approved Orders<i
+                                                    class="material-icons textcol">check</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('pendingorders', $perms))
+                                        <li class="blue"><a href="{{ url('/pendingorders') }}"
+                                                class="textcol">Pending
+                                                Orders<i class="material-icons textcol">warning</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('rejectedorders', $perms))
+                                        <li class="red"><a href="{{ url('/rejectedorders') }}"
+                                                class="textcol">Rejected Orders<i
+                                                    class="material-icons textcol">clear</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('deliveredorders', $perms))
+                                        <li class="green"><a href="{{ url('/deliveredorders') }}"
+                                                class="textcol">Delivered Orders<i
+                                                    class="material-icons textcol">local_shipping</i></a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </li>
