@@ -147,7 +147,9 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="chalan|chalandetail/{id}" @if (in_array('chalan', $permission))
+                            checked
+                        @endif/>
                         <span>View Chalan</span>
                       </label>
                 </div>

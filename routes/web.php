@@ -47,6 +47,10 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('rejectedorders', [OrderAdminController::class, 'rejectedorders']);
     Route::get('deliveredorders', [OrderAdminController::class, 'deliveredorders']);
 
+    //CHALAN PAGES
+    Route::get('chalan', [ChalanController::class, 'chalan']);
+    Route::get('chalandetail/{id}', [ChalanController::class, 'chalandetail']);
+
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);

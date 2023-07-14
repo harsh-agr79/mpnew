@@ -10,7 +10,7 @@
     }
 @endphp
     <div class="mp-card" style="overflow-x: scroll; margin-top: 30px;">
-        <h6 class="center">Approved Orders</h6>
+        <h6 class="center">Chalans</h6>
         <table>
             <thead>
                 <tr>
@@ -20,9 +20,6 @@
                     @if ($admin->type == 'admin' || in_array('totalamount', $perms))
                         <th class="tamt" style="display: none;">Amount</th>
                     @endif
-                    @if ($admin->type == 'admin' || in_array('updatecln', $perms))
-                        <th class="center">Pack Order</th>
-                    @endif
                     <th>Deliver</th>
                 </tr>
             </thead>
@@ -30,7 +27,7 @@
                 @foreach ($data as $item)
                     <tr id="{{$item->orderid}}tr" class=" @if ($item->seen == '') z-depth-2 @endif"
                         oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                        ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
+                        ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}')">
                         <td>
                             <div id="{{ $item->orderid . 'order' }}" class="{{$stat = $item->mainstatus}}"
                                 style="height: 35px; width:10px;"></div>
@@ -45,24 +42,6 @@
                         @if ($admin->type == 'admin' || in_array('totalamount', $perms))
                             <td class="tamt" style="display: none;">
                                 {{ getTotalAmount($item->orderid) }}
-                            </td>
-                        @endif
-                        @if ($admin->type == 'admin' || in_array('updatecln', $perms))
-                            <td class="center">
-                                <form id="{{ $item->orderid }}">
-                                    <input type="hidden" name="orderid" value="{{ $item->orderid }}">
-                                    <label>
-                                        <input type="checkbox" value="packorder" name="packorder"
-                                            @if ($stat == 'blue' || $stat == 'red') disabled
-                                @elseif($stat == 'amber darken-1')
-                                @elseif($stat == 'green')
-                                checked disabled
-                                @elseif($stat == 'deep-purple')
-                                checked @endif
-                                            onclick="updatecln({{ $item->orderid }})" />
-                                        <span></span>
-                                    </label>
-                                </form>
                             </td>
                         @endif
                         <td>
@@ -141,48 +120,16 @@
             }
         }
 
-        function opendetail(orderid, seen ,ms) {
+        function opendetail(orderid, seen) {
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;
-            if (admintype == "admin" || jQuery.inArray("detail/{id}", perms) > -1) {
-                if (admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1) {
-                    window.open('/detail/' + orderid, "_self");
-                }
-            }
-            else if(admintype == 'staff' && jQuery.inArray("chalan", perms) > -1 && ms == 'deep-purple'){
-                window.open('/chalandetail/' + orderid, "_self");
+            // console.log(seen);
+            if (admintype == "admin" || jQuery.inArray("chalandetail/{id}", perms) > -1) {
+                    window.open('/chalandetail/' + orderid, "_self");
             }
         }
     </script>
     <script>
-        function updatecln(orderid) {
-            var perms = @json($perms);
-            var admintype = `{{ $admin->type }}`;
-            if (admintype == "admin" || jQuery.inArray("updatecln", perms) > -1) {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "/updatecln",
-                    data: $(`#${orderid}`).serialize(),
-                    type: 'post',
-                    success: function(response) {
-                        if (response.hasOwnProperty('packorder')) {
-                        $(`#${response.orderid}order`).removeAttr('class');
-                        $(`#${response.orderid}order`).addClass("deep-purple");
-                        $(`#${response.orderid}deliver`).removeAttr('disabled');
-                        $(`#${response.orderid}deliverspan`).text('Deliver');
-                    } else {
-                        $(`#${response.orderid}order`).removeAttr('class');
-                        $(`#${response.orderid}order`).addClass("amber darken-1");
-                        $(`#${response.orderid}deliver`).attr('disabled', 'true');
-                        $(`#${response.orderid}deliverspan`).text('Cant deliver yet');
-                    }
-
-                    }
-                })
-            }
-        }
         function updatedeliver(orderid) {
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;

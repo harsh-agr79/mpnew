@@ -44,7 +44,7 @@
                         @foreach ($data as $item)
                             <tr class=" @if ($item->seen == '') z-depth-2 @endif"
                                 oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                ondblclick="opendetail({{ $item->orderid }}, '{{$item->seen}}')">
+                                ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
                                 <td>
                                     <div id="{{ $item->orderid . 'order' }}" class="{{$item->mainstatus}}"
                                         style="height: 35px; width:10px;"></div>
@@ -131,14 +131,16 @@
             }
         }
 
-        function opendetail(orderid, seen) {
+        function opendetail(orderid, seen ,ms) {
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;
-            // console.log(seen);
             if (admintype == "admin" || jQuery.inArray("detail/{id}", perms) > -1) {
-                if(admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1){
+                if (admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1) {
                     window.open('/detail/' + orderid, "_self");
                 }
+            }
+            else if(admintype == 'staff' && jQuery.inArray("chalan", perms) > -1 && ms == 'deep-purple'){
+                window.open('/chalandetail/' + orderid, "_self");
             }
         }
     </script>
