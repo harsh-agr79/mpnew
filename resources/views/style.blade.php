@@ -58,7 +58,7 @@ body {
 }
 td{
             font-size: 12px;
-            padding: 2px;
+            padding: 1px;
         }
 th{
     font-size: 10px;
