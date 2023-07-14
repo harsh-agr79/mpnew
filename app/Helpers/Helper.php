@@ -97,8 +97,8 @@ function money($money){
     $result = strrev($m);
     $decimal = preg_replace("/0\./i", ".", $decimal);
     $decimal = substr($decimal, 0, 3);
-    if( $decimal != '0'){
-    $result = $result.$decimal;
-    }
+    // if( $decimal != '0'){
+    // $result = $result.$decimal;
+    // }
     return $result;
 }
