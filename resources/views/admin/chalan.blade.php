@@ -35,7 +35,7 @@
                         <td>{{ getNepaliDate($item->created_at) }}</td>
                         <td>
                             <div class="row" style="padding: 0; margin: 0;">
-                                <div class="col s12" style="font-size: 12px;">{{ $item->name }}</div>
+                                <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
                                 <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
                             </div>
                         </td>
