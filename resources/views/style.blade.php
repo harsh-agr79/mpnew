@@ -145,8 +145,8 @@ input:focus {
     color: var(--textcol) !important;
 }
 .mp-container{
-    margin-right: 1vw;
-    margin-left: 1vw;
+    margin-right: 2vw;
+    margin-left: 2vw;
 }
 .rmenu{
     /* background: var(--bg-content); */
