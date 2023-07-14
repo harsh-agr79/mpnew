@@ -11,20 +11,20 @@
                 <div class="row">
                     <div class="col m6 s6">
                         <label>From:</label>
-                        <input type="date" name="date" class="inp browser-default black-text">
+                        <input type="date" name="date" value="{{$date}}" class="inp browser-default black-text">
                     </div>
                     <div class="col m6 s6">
                         <label>to:</label>
-                        <input type="date" name="date2" class="inp browser-default black-text">
+                        <input type="date" name="date2" value="{{$date2}}" class="inp browser-default black-text">
                     </div>
                     <div class="input-field col s12 m6">
-                        <input type="text" name="name" id="customer" value="" placeholder="Customer"
+                        <input type="text" name="name" id="customer" value="{{$name}}" placeholder="Customer"
                             class="autocomplete browser-default inp black-text" autocomplete="off">
                     </div>
-                    <div class="input-field col s6 m1">
+                    <div class="input-field col s6 m2 l1">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
-                    <div class="input-field col s6 m1">
+                    <div class="input-field col s6 m2 l1">
                         <a class="btn amber darken-1" href="{{url('/mainanalytics')}}">Clear</a>
                     </div>
                 </div>
@@ -122,12 +122,15 @@
             </ul>
         </div>
 
-        <div class="container">
-            <div id="piechart_3d" style="width: auto; height: 500px;"></div>
+        <div class="row">
+            <div class="col m6 s12">
+                <div id="piechart_3d" style="width: auto; height: 500px;"></div>
+            </div>
+            <div class="col m6 s12">
+                <div id="piechart_3d2" style="width: auto; height: 500px;"></div>
+            </div>
         </div>
-        <div class="container">
-            <div id="piechart_3d2" style="width: auto; height: 500px;"></div>
-        </div>
+       
     </div>
     <script>
         function Filter(cat) {
@@ -200,5 +203,26 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
             chart.draw(data, options);
         }
+    </script>
+     <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('findcustomer') !!}',
+                success: function(response2) {
+
+                    var custarray2 = response2;
+                    var datacust2 = {};
+                    for (var i = 0; i < custarray2.length; i++) {
+
+                        datacust2[custarray2[i].name] = null;
+                    }
+                    // console.log(datacust2)
+                    $('input#customer').autocomplete({
+                        data: datacust2,
+                    });
+                }
+            })
+        })
     </script>
 @endsection

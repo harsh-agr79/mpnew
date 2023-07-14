@@ -134,6 +134,19 @@
                             </div>
                         </li>
                     @endif
+                    @if ($admin->type == 'admin' || in_array('mainanalytics', $perms))
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Analytics<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type == 'admin' || in_array('mainanalytics', $perms))
+                                    <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
+                                                class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                     @if ($admin->type == 'admin')
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
                                     class="material-icons chevron textcol">chevron_left</i></a>
