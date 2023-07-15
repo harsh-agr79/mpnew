@@ -51,22 +51,28 @@
                         <div class="collapsible-body"><span>
                                 @php
                                     if ($item->category == 'powerbank') {
-                                        $prod = $pb;
+                                        $prod = $datapowerbank;
+                                        $prod2 = $data2powerbank;
                                     }
                                     if ($item->category == 'charger') {
-                                        $prod = $ch;
+                                        $prod = $datacharger;
+                                        $prod2 = $data2charger;
                                     }
                                     if ($item->category == 'cable') {
-                                        $prod = $ca;
+                                        $prod = $datacable;
+                                        $prod2 = $data2cable;
                                     }
                                     if ($item->category == 'btitem') {
-                                        $prod = $bt;
+                                        $prod = $databtitem;
+                                        $prod2 = $data2btitem;
                                     }
                                     if ($item->category == 'earphone') {
-                                        $prod = $ep;
+                                        $prod = $dataearphone;
+                                        $prod2 = $data2earphone;
                                     }
                                     if ($item->category == 'others') {
-                                        $prod = $oth;
+                                        $prod = $dataothers;
+                                        $prod2 = $data2others;
                                     }
                                     
                                 @endphp
@@ -117,6 +123,21 @@
                                                 <td>{{ money($item2->samt - $item2->damt) }}</td>
                                             </tr>
                                         @endforeach
+                                        @foreach ($prod2 as $item2)
+                                        @php
+                                            $sbc = '';
+                                            $sc = '';
+                                            if ($item2->subcat != null) {
+                                                $sbc = explode('|', $item2->subcat);
+                                            }
+                                        @endphp
+                                        <tr
+                                            class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
+                                            <td>{{ $item2->name }}</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </span></div>

@@ -75,79 +75,34 @@ class AnalyticsController extends Controller
         ->orderBy('samt','DESC')
         ->get();
 
-        $result['pb'] = DB::table('products')
-        ->where(['orders.category'=>'powerbank','status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
-        ->get();
-
-        $result['ch'] = DB::table('products')
-        ->where(['orders.category'=>'charger','status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
-        ->get();
-        $result['ca'] = DB::table('products')
-        ->where(['orders.category'=>'cable','status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
-        ->get();
-        $result['bt'] = DB::table('products')
-        ->where(['orders.category'=>'btitem','status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
-        ->get();
-        $result['ep'] = DB::table('products')
-        ->where(['orders.category'=>'earphone','status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
-        ->get();
-        $result['oth'] = DB::table('products')
-        ->where(['orders.category'=>'others','status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
-        ->get();
+        foreach($result['catsales'] as $item){
+            $result['data'.$item->category] = DB::table('products')
+            ->where(['orders.category'=>$item->category,'status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
+            ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
+            ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
+            ->get();
+            $result['data2'.$item->category] = DB::table('products')
+            ->where(['category'=>$item->category])
+            ->whereNotIn('produni_id', DB::table('orders')
+            ->where(['category'=>$item->category,'status'=>'approved','deleted'=>NULL, 'save'=>NULL])
+            ->where('created_at', '>=', $date)
+            ->where('created_at', '<=', $date2)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
+            ->pluck('produni_id')
+            ->toArray())
+            ->get();
+        }
 
         if($request->get('name')){
             $result['name'] = $request->get('name');
