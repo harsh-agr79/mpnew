@@ -11,27 +11,29 @@
                 <div class="row">
                     <div class="input-field col l4 m4 s6">
                         <label>From:</label>
-                        <input type="date" name="date" value="{{$date}}" class="inp browser-default black-text">
+                        <input type="date" name="date" value="{{ $date }}" class="inp browser-default black-text">
                     </div>
                     <div class="input-field col l4 m4 s6">
                         <label>To:</label>
-                        <input type="date" name="date2" value="{{$date2}}" class="inp browser-default black-text">
+                        <input type="date" name="date2" value="{{ $date2 }}"
+                            class="inp browser-default black-text">
                     </div>
                     <div class="input-field col s12 m4 l4">
-                        <input type="text" name="name" id="customer" value="{{$name}}" placeholder="Customer"
-                            class="autocomplete browser-default inp black-text" autocomplete="off">
+                        <input type="text" name="name" id="customer" value="{{ $name }}"
+                            placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off">
                     </div>
                     <div class="col s6 m2 l2">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
                     <div class="col s6 m2 l2">
-                        <a class="btn amber darken-1" href="{{url('/mainanalytics')}}">Clear</a>
+                        <a class="btn amber darken-1" href="{{ url('/mainanalytics') }}">Clear</a>
                     </div>
                 </div>
             </form>
         </div>
         <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
-            <h5 class="black-text" style="font-weight: 600;">Total Sales: {{money($totalsales[0]->samt-$totalsales[0]->damt)}}</h5>
+            <h5 class="black-text" style="font-weight: 600;">Total Sales:
+                {{ money($totalsales[0]->samt - $totalsales[0]->damt) }}</h5>
         </div>
         <div class="mp-card" style="margin-top: 10px;">
             <ul class="collapsible">
@@ -79,7 +81,8 @@
                                         @foreach ($subcates as $item3)
                                             <label style="margin-right: 15px;">
                                                 <input type="checkbox" name="{{ $item3 }}"
-                                                    value="{{ $item3 }}" onclick="Filter('{{ $item->category }}')" />
+                                                    value="{{ $item3 }}"
+                                                    onclick="Filter('{{ $item->category }}')" />
                                                 <span>{{ $item3 }}</span>
                                             </label>
                                         @endforeach
@@ -130,7 +133,7 @@
                 <div id="piechart_3d2" style="width: auto; height: 500px;"></div>
             </div>
         </div>
-       
+
     </div>
     <script>
         function Filter(cat) {
@@ -178,8 +181,9 @@
             var options = {
                 title: 'Sales By Amount',
                 is3D: true,
-                backgroundColor: { fill:'transparent' },
-                color: '#FFF'
+                backgroundColor: {
+                    fill: 'transparent'
+                }
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -200,15 +204,19 @@
             var options = {
                 title: 'Sales By Quantity',
                 is3D: true,
-                backgroundColor: { fill:'transparent' },
-                textStyle: {color: '#FFF'}
+                backgroundColor: {
+                    fill: 'transparent'
+                },
+                textStyle: {
+                    color: '#FFF'
+                }
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
             chart.draw(data, options);
         }
     </script>
-     <script>
+    <script>
         $(document).ready(function() {
             $.ajax({
                 type: 'get',

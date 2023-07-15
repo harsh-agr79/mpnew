@@ -195,8 +195,12 @@ input:focus {
     border: none;
     box-shadow: none;
 }
+#piechart_3d .google-visualization-tooltip text, #piechart_3d2 .google-visualization-tooltip text{
+    fill: #000000 !important;
+}
 #piechart_3d text, #piechart_3d2 text {
     fill: var(--textcol) !important;
 }
+
 
 </style>
