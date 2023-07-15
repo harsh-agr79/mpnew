@@ -60,6 +60,7 @@ class AnalyticsController extends Controller
         ->selectRaw('*,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
         ->groupBy('deleted')
         ->get();
+        
         $result['catsales'] = DB::table('orders')
         ->where(['deleted'=>NULL, 'save'=>NULL])
         ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
