@@ -127,10 +127,10 @@
 
         <div class="row mp-card" style="margin-top: 20px;">
             <div class="col m6 s12">
-                <div id="piechart_3d" style="width: auto; height: 500px;"></div>
+                <div class="mp-chart" id="piechart_3d" style="width: auto; height: 500px;"></div>
             </div>
             <div class="col m6 s12">
-                <div id="piechart_3d2" style="width: auto; height: 500px;"></div>
+                <div class="mp-chart" id="piechart_3d2" style="width: auto; height: 500px;"></div>
             </div>
         </div>
 
