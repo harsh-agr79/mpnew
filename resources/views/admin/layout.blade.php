@@ -134,7 +134,7 @@
                             </div>
                         </li>
                     @endif
-                    @if ($admin->type == 'admin' || in_array('mainanalytics', $perms))
+                    @if ($admin->type == 'admin' || in_array('mainanalytics', $perms) || in_array('detailedreport', $perms))
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Analytics<i
                                     class="material-icons chevron textcol">chevron_left</i></a>
                             <div class="collapsible-body">
@@ -144,6 +144,10 @@
                                                     class="material-icons textcol">visibility</i></a></li>
                                         <li><a href="{{ url('/sortanalytics') }}" class="textcol">Sort Analytics<i
                                                     class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if($admin->type == 'admin' ||  in_array('detailedreport', $perms))
+                                    <li><a href="{{ url('/detailedreport') }}" class="textcol">Detailed Report<i
+                                        class="material-icons textcol">visibility</i></a></li>
                                     @endif
                                 </ul>
                             </div>

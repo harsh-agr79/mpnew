@@ -219,7 +219,9 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="detailerreport" @if(in_array('detailedreport', $permission))
+                            checked
+                        @endif/>
                         <span>View Detailed Report</span>
                       </label>
                 </div>

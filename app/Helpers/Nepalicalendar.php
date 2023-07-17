@@ -946,7 +946,13 @@ function getNepaliYear($date)
     // $year = date('Y',strtotime($date));
     // $month = date('m',strtotime($date));
     // $day = date('d',strtotime($date));
+    // $edate = NepaliCalender::getInstance()->nep_to_eng($year,$month,$day);
     $edate = NepaliCalender::getInstance()->nep_to_eng($year,$month,$day);
-    $date = $edate['year'].'-'.$edate['month'].'-'.$edate['date'];
+    if($edate['month'] > 9){
+        $date = $edate['year'].'-'.$edate['month'].'-'.$edate['date'];
+    }
+    else{
+        $date = $edate['year'].'-0'.$edate['month'].'-'.$edate['date'];
+    }
     return $date;
   }

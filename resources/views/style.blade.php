@@ -183,6 +183,10 @@ input:focus {
 .selectinp{
     padding: 10px;
     border-radius: 10px;
+    color: black;
+}
+.selectinp option{
+    color: black;
 }
 .collapsible-header{
     padding: 10px;
@@ -201,6 +205,13 @@ input:focus {
 .mp-chart text {
     fill: var(--textcol) !important;
 }
+.bar rect{
+    fill: var(--bg-content);
+}
+.bar text{
+    fill: var(--textcol);
+}
+
 
 
 </style>
