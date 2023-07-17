@@ -155,7 +155,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($sls as $item2)
-                                                <tr>
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
                                                     <td>
                                                         {{ $item2->name }}
                                                     </td>
@@ -223,7 +223,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($sls as $item2)
-                                                    <tr>
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
+
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
@@ -291,7 +292,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($sls as $item2)
-                                                    <tr>
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
+
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
@@ -359,7 +361,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($sls as $item2)
-                                                    <tr>
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
+
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
