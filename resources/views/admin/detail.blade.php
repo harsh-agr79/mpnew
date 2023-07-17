@@ -57,7 +57,7 @@
                     <input type="hidden" value="{{$item->id}}" name="id[]">
                     <input type="hidden" value="{{$item->quantity}}" name="quantity[]">
                         <tr>
-                            <td>{{$item->item}}</td>
+                            <td @if($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>{{$item->item}}</td>
                             <td class="center">{{$item->quantity}}</td>
                             <td class="center">
                                 <span class="amber lighten-2 black-text" style="padding: 10px;"  @if ($dis == '')

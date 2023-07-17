@@ -11,7 +11,9 @@ class OrderAdminController extends Controller
 
     //INVOICE VIEW FUNCTION
     public function details(Request $request, $orderid){
-        $result['data'] = DB::table('orders')->where('orderid', $orderid)   
+        $result['data'] = DB::table('orders')->where('orderid', $orderid) 
+        ->join('products', 'orders.produni_id', '=', 'products.produni_id')
+        ->selectRaw('orders.*, products.stock')
         ->get();
 
         return view('admin/detail', $result);
@@ -19,6 +21,8 @@ class OrderAdminController extends Controller
     public function appdetails(Request $request, $orderid){
         $result['data'] = DB::table('orders')->where('orderid', $orderid)
         -where('status', 'approved')   
+        ->join('products', 'orders.produni_id', '=', 'products.produni_id')
+        ->selectRaw('orders.*, products.stock')
         ->get();
 
         return view('admin/detail', $result);
