@@ -123,7 +123,7 @@
                             <div class="collapsible-header row" @if ($name != NULL)
                             ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
                             @endif><span
-                                    class="left col s6">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
+                                    class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                         @if ($name == null)
                             @php
@@ -191,7 +191,7 @@
                             <div class="collapsible-header row" @if ($name != NULL)
                             ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
                             @endif><span
-                                    class="left col s6">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
+                                    class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                             @if ($name == null)
                                 @php
@@ -260,7 +260,7 @@
                             <div class="collapsible-header row" @if ($name != NULL)
                             ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
                             @endif><span
-                                    class="left col s6">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
+                                    class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                             @if ($name == null)
                                 @php
@@ -329,7 +329,7 @@
                             <div class="collapsible-header row" @if ($name != NULL)
                             ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
                             @endif><span
-                                    class="left col s6">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
+                                    class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                             @if ($name == null)
                                 @php

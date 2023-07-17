@@ -193,7 +193,6 @@ input:focus {
     margin: 0;
     font-size: 13px;
     background: var(--bg-content);
-    color: var(--textcol);
 }
 .collapsible, .collapsible li{
     border: none;

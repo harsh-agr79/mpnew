@@ -95,7 +95,7 @@
                                 @endphp
                                 <li>
                                     <div class="collapsible-header row">
-                                        <div class="col s4">{{ $item->category }}</div>
+                                        <div class="col s4 blue-text">{{ $item->category }}</div>
                                         <div class="col s4">{{ $item->sum }}</div>
                                         <div class="col s4">{{ money($item->samt - $item->damt) }}</div>
                                     </div>
