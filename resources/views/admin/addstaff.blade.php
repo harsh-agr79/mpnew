@@ -211,16 +211,10 @@
             <div class="row">
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" name="perm[]" value="mainanalytics" @if (in_array('mainanalytics', $permission))
+                        <input type="checkbox" name="perm[]" value="mainanalytics|sortanalytics" @if (in_array('mainanalytics', $permission))
                         checked
                     @endif/>
-                        <span>View Main Analytics</span>
-                      </label>
-                </div>
-                <div class="col m6 s12">
-                    <label>
-                        <input type="checkbox" />
-                        <span>View Sort Analytics</span>
+                        <span>View Analytics</span>
                       </label>
                 </div>
                 <div class="col m6 s12">

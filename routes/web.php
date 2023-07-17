@@ -9,6 +9,7 @@ use App\Http\Controllers\ChalanController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //Analytics Pages
     Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
+    Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
@@ -74,9 +76,14 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
 
     //FOR AJAX UPDATES AND GETS
+
+        //update
     Route::post('updatecln', [ChalanController::class, 'updatechalan']);
     Route::post('updatedeliver', [OrderAdminController::class, 'updatedeliver']);
+
+        //get
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
+    Route::get('finditem', [ProductController::class, 'getproduct']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function() {

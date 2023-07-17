@@ -117,7 +117,7 @@
                                                 }
                                             @endphp
                                             <tr
-                                                class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
+                                                class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif" ondblclick="openanadetail('{{$date}}', '{{$date2}}','{{$name}}', '{{$item->item}}')">
                                                 <td>{{ $item2->item }}</td>
                                                 <td>{{ $item2->sum }}</td>
                                                 <td>{{ money($item2->samt - $item2->damt) }}</td>
@@ -157,6 +157,9 @@
 
     </div>
     <script>
+        function openanadetail(date,date2,name,product) {
+                    window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name='+name+'&product='+product, "_self");
+        }
         function Filter(cat) {
             $(`.${cat}`).hide();
             var formData = $(`#${cat}form`).serializeArray()
