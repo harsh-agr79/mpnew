@@ -44,7 +44,7 @@ class AnalyticsController extends Controller
             
         }
         $result['date'] = $date;
-        $result['date2'] = date('Y-m-d', strtotime($date2. ' +1 day'));
+        $result['date2'] = $date2;
         $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
 
         $result['totalsales'] = DB::table('orders')
@@ -154,7 +154,7 @@ class AnalyticsController extends Controller
             
         }
         $result['date'] = $date;
-        $result['date2'] = date('Y-m-d', strtotime($date2. ' +1 day'));
+        $result['date2'] = $date2;
         $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
 
         if ($request->get('name') && $request->get('product')) {
