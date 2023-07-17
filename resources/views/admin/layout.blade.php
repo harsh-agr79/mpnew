@@ -38,7 +38,7 @@
     <header>
         <div class="navbar-fixed">
             <nav class="navbar topnv">
-                <div class="nav-wrapper"><a href="{{url('/')}}" class="brand-logo grey-text text-darken-4"><img
+                <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
                             src="{{ asset('assets/' . $admin->mode . '.png') }}" height="60" alt=""></a>
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
@@ -126,10 +126,10 @@
                                                     class="material-icons textcol">local_shipping</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('chalan', $perms))
-                                    <li class="deep-purple"><a href="{{ url('/chalan') }}"
-                                            class="textcol">Chalan<i
-                                                class="material-icons textcol">check</i></a></li>
-                                @endif
+                                        <li class="deep-purple"><a href="{{ url('/chalan') }}"
+                                                class="textcol">Chalan<i class="material-icons textcol">check</i></a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </li>
@@ -140,8 +140,10 @@
                             <div class="collapsible-body">
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('mainanalytics', $perms))
-                                    <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
-                                                class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/sortanalytics') }}" class="textcol">Sort Analytics<i
+                                                    class="material-icons textcol">visibility</i></a></li>
                                     @endif
                                 </ul>
                             </div>

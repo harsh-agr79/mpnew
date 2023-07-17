@@ -34,14 +34,16 @@
 
         <div>
             @if ($datatype == 'nodata')
-                <div class="center" style="margin-top: 200px;"><h5>Select Details to View Analytics</h5></div>
+                <div class="center" style="margin-top: 200px;">
+                    <h5>Select Details to View Analytics</h5>
+                </div>
             @elseif($datatype == 'np')
-            <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
-                <h5 class="black-text" style="font-weight: 600;">Total Sales:
-                    {{ money($nptotal[0]->samt - $nptotal[0]->damt) }}</h5>
+                <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
+                    <h5 class="black-text" style="font-weight: 600;">Total Sales:
+                        {{ money($nptotal[0]->samt - $nptotal[0]->damt) }}</h5>
                     <h5 class="black-text" style="font-weight: 600;">Total Quantity:
                         {{ $nptotal[0]->sum }}</h5>
-            </div>
+                </div>
                 <div class="mp-card" style="margin-top: 20px;">
                     <table>
                         <thead>
@@ -286,44 +288,43 @@
                     }
                 </script>
             @elseif($datatype == 'p')
-            <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
-                <h5 class="black-text" style="font-weight: 600;">Total Sales:
-                    {{ money($ptotal[0]->samt - $ptotal[0]->damt) }}</h5>
+                <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
+                    <h5 class="black-text" style="font-weight: 600;">Total Sales:
+                        {{ money($ptotal[0]->samt - $ptotal[0]->damt) }}</h5>
                     <h5 class="black-text" style="font-weight: 600;">Total Quantity:
                         {{ $ptotal[0]->sum }}</h5>
-            </div>
-            <div class="mp-card" style="margin-top: 20px">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pdata as $item)
-                            <tr 
-                            ondblclick="openanadetail('{{$date}}', '{{$date2}}', '{{$item->name}}', '{{$item->item}}')">
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->item}}</td>
-                                <td>{{$item->sum}}</td>
-                                <td>{{money($item->samt - $item->damt)}}</td>
-                            </tr>
-                        @endforeach
-                        @foreach ($pnodata as $item)
+                </div>
+                <div class="mp-card" style="margin-top: 20px">
+                    <table>
+                        <thead>
                             <tr>
-                                <td>{{$item->name}}</td>
-                                <td>{{$product}}</td>
-                                <td>0</td>
-                                <td>0</td>
+                                <th>Name</th>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-               
+                        </thead>
+                        <tbody>
+                            @foreach ($pdata as $item)
+                                <tr
+                                    ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->name }}', '{{ $item->item }}')">
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->item }}</td>
+                                    <td>{{ $item->sum }}</td>
+                                    <td>{{ money($item->samt - $item->damt) }}</td>
+                                </tr>
+                            @endforeach
+                            @foreach ($pnodata as $item)
+                                <tr>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $product }}</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @endif
         </div>
     </div>
@@ -340,8 +341,10 @@
                 window.open('/chalandetail/' + orderid, "_self");
             }
         }
-        function openanadetail(date,date2,name,product) {
-                    window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name='+name+'&product='+product, "_self");
+
+        function openanadetail(date, date2, name, product) {
+            window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                "_self");
         }
         $(document).ready(function() {
             $.ajax({

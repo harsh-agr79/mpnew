@@ -116,28 +116,28 @@
                                                     $sbc = explode('|', $item2->subcat);
                                                 }
                                             @endphp
-                                            <tr
-                                                class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif" ondblclick="openanadetail('{{$date}}', '{{$date2}}','{{$name}}', '{{$item->item}}')">
+                                            <tr class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
+                                                ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item->item }}')">
                                                 <td>{{ $item2->item }}</td>
                                                 <td>{{ $item2->sum }}</td>
                                                 <td>{{ money($item2->samt - $item2->damt) }}</td>
                                             </tr>
                                         @endforeach
                                         @foreach ($prod2 as $item2)
-                                        @php
-                                            $sbc = '';
-                                            $sc = '';
-                                            if ($item2->subcat != null) {
-                                                $sbc = explode('|', $item2->subcat);
-                                            }
-                                        @endphp
-                                        <tr
-                                            class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
-                                            <td>{{ $item2->name }}</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                        </tr>
-                                    @endforeach
+                                            @php
+                                                $sbc = '';
+                                                $sc = '';
+                                                if ($item2->subcat != null) {
+                                                    $sbc = explode('|', $item2->subcat);
+                                                }
+                                            @endphp
+                                            <tr
+                                                class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
+                                                <td>{{ $item2->name }}</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </span></div>
@@ -157,9 +157,11 @@
 
     </div>
     <script>
-        function openanadetail(date,date2,name,product) {
-                    window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name='+name+'&product='+product, "_self");
+        function openanadetail(date, date2, name, product) {
+            window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                "_self");
         }
+
         function Filter(cat) {
             $(`.${cat}`).hide();
             var formData = $(`#${cat}form`).serializeArray()
