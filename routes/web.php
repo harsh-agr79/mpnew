@@ -68,7 +68,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('addcustomer', [CustomerController::class, 'addcustomer']);
     Route::get('editcustomer/{id}', [CustomerController::class, 'addcustomer']);
     // Route::get('deletecustomer/{id}', [CustomerController::class, 'deletecustomer']);
-    Route::post('addcus', [CustomerController::class, 'addcustomer_process'])->name('addcustomer');
+    // Route::post('addcus', [CustomerController::class, 'addcustomer_process'])->name('addcustomer');
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
