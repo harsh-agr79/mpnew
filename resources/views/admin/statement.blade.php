@@ -41,7 +41,7 @@
                     </label>
             </div>
         </div>
-        <div class="mp-card"  style="overflow-x: scroll;">
+        <div class="mp-card" style="overflow-x: scroll;">
             <table class="sortable">
                 <thead>
                     <tr>
@@ -64,7 +64,7 @@
                         @php
                             $bal = explode('|', $item->balance);
                         @endphp
-                        <tr ondblclick="openbs('{{$item->name}}')">
+                        <tr ondblclick="openbs('{{ $item->name }}')">
                             <td>{{ $a = $a + 1 }}</td>
                             <td class="name">{{ $item->name }}</td>
                             <td class="shop" style="display: none;">{{ $item->shopname }}</td>
@@ -87,12 +87,13 @@
         </div>
     </div>
     <script>
-          function tog() {
+        function tog() {
             var name = document.getElementsByClassName('name');
             var shop = document.getElementsByClassName('shop');
             $(name).toggle();
             $(shop).toggle();
         }
+
         function bal() {
             $('.bal').toggle();
         }
@@ -136,19 +137,23 @@
             }
 
             for (var i = 0; i < tr.length; i++) {
-                let td = tr[i].getElementsByTagName('td')[1];
-                if (td) {
-                    let textvalue = td.textContent || td.innerHTML;
-
-                    if (textvalue.toLowerCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none"
+                let td = tr[i].getElementsByTagName('td');
+                // console.log(td);
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        let textvalue = td[j].textContent || td[j].innerHTML;
+                        if (textvalue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none"
+                        }
                     }
                 }
             }
         }
-        function openbs(name){
+
+        function openbs(name) {
             window.open('/balancesheet/' + name, "_self");
         }
     </script>
