@@ -12,7 +12,7 @@
                 </div>
                 <div class="input-field col s12 m6 l6">
                     <select multiple onchange="fieldsfilter()" id="fields">
-                      <option value="" disabled selected>Select Fields</option>
+                      <option value="" disabled>Select Fields</option>
                       <option value="contact">Contact</option>
                       <option value="userid">User Id</option>
                       <option value="referer">Referer</option>
