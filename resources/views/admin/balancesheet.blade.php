@@ -90,12 +90,11 @@
                             Naration</span></label>
                 </div>
                 <div class="col s4">
-                    <label><input type="checkbox" id="photo" onchange="tog()" /><span class="textcol">Show
-                            Naration</span></label>
+                    <label><input type="checkbox" id="photo" onchange="vou()" /><span class="textcol">Show
+                           Voucher</span></label>
                 </div>
                 <div class="col s4">
-                    <label><input type="checkbox" id="photo" onchange="tog()" /><span class="textcol">Show
-                            Naration</span></label>
+                    <label><input type="checkbox" id="photo" onchange="ned()" /><span class="textcol">English Date</span></label>
                 </div>
                 <form>
                     <div class="col s6">
@@ -320,4 +319,22 @@
             </table>
         </div>
     </div>
+    <script>
+         function tog() {
+            var narcol = document.getElementsByClassName('narcol');
+            $(narcol).toggle()
+        }
+
+        function vou() {
+            var voucol = document.getElementsByClassName('voucol');
+            $(voucol).toggle()
+        }
+
+        function ned() {
+            var engd = document.getElementsByClassName('englishdate');
+            var nepd = document.getElementsByClassName('nepalidate');
+            $(engd).toggle()
+            $(nepd).toggle()
+        }
+    </script>
 @endsection
