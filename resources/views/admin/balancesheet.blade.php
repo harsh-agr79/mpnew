@@ -68,10 +68,10 @@
     </div>
     <div>
         <div class="mp-card" style="margin-top: 20px;">
-            <div class="center">
+            <div class="">
                 <h6>Statement of : {{ $cus->name }}</h6>
             </div>
-            <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
+            <div class="amber " style="padding: 5px; margin-top: 20px; border-radius: 10px;">
                 <h6 class="black-text" style="font-weight: 600;">
                     @php
                         $bal = explode('|', $cus->balance);
@@ -84,7 +84,7 @@
                     @endif
                 </h6>
             </div>
-            <div class="row center" style="margin-top: 10px;">
+            <div class="row " style="margin-top: 10px;">
                 <div class="col s4">
                     <label><input type="checkbox" id="photo" onchange="tog()" /><span class="textcol">Show
                             Naration</span></label>
@@ -355,7 +355,7 @@
                         $net3 = 0;
                     }
                 @endphp
-                <h4 class="center">Target Details</h4>
+                <h4 class="">Target Details</h4>
                 <h6 class="left-align">Starting Date: {{ $target[0]->startdate }} <br> Ending Date:
                     {{ $target[0]->enddate }}</h6>
                 <div class="row" style="margin-top: 50px;">
@@ -365,7 +365,7 @@
                         <span style="font-size: 20px; font-weight:600;">Achieved : <span class="red-text">
                                 {{money($net3)}}</span></span>
                     </div>
-                    <div class="col s12 m6 center">
+                    <div class="col s12 m6 ">
                         <svg viewbox="0 0 100 100">
                             <circle cx="50" cy="50" r="45" fill="#FDB900" />
                             <path fill="none" stroke-linecap="round" stroke-width="5" stroke="#fff"

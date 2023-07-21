@@ -18,4 +18,10 @@ class CustomerController extends Controller
         }
         return response()->json($c);
     }
+
+    public function index(Request $request){
+        $result['data'] = DB::table('customers')->where('deleted', NULL)->get();
+
+        return view('admin/customers', $result);
+    }
 }

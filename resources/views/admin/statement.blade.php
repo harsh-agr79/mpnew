@@ -2,10 +2,10 @@
 
 @section('main')
     <div>
-        <div class="center">
+        <div class="">
             <h5>Statements</h5>
         </div>
-        <div class="switch center row" style="margin: 20px;">
+        <div class="switch  row" style="margin: 20px;">
             <div class='input-field col s12 m4'>
                 <input class='validate browser-default inp search black-text' onkeyup="searchFun()" autocomplete="off"
                     type='search' name='search' id='search' />
@@ -48,12 +48,12 @@
                         <th>SN</th>
                         <th class="name">Name</th>
                         <th class="shop" style="display: none;">Shop</th>
-                        <th class="center">type</th>
-                        <th class="bal center">Balance</th>
-                        <th class="tdy center" style="display: none;">30 days</th>
-                        <th class="fdy center" style="display: none;">45 days</th>
-                        <th class="sdy center" style="display: none;">60 days</th>
-                        <th class="ndy center" style="display: none;">90 days</th>
+                        <th class="">type</th>
+                        <th class="bal ">Balance</th>
+                        <th class="tdy " style="display: none;">30 days</th>
+                        <th class="fdy " style="display: none;">45 days</th>
+                        <th class="sdy " style="display: none;">60 days</th>
+                        <th class="ndy " style="display: none;">90 days</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,16 +69,16 @@
                             <td class="name">{{ $item->name }}</td>
                             <td class="shop" style="display: none;">{{ $item->shopname }}</td>
                             <td
-                                class="black-text center @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
+                                class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
                                 {{ $item->type }}</td>
-                            <td class="{{ $bal[0] }} lighten-5 bal black-text center">{{ $bal[1] }}</td>
-                            <td class="@if ($item->thirdays > 0) red lighten-5 @else green lighten-5 @endif tdy black-text center"
+                            <td class="{{ $bal[0] }} lighten-5 bal black-text ">{{ $bal[1] }}</td>
+                            <td class="@if ($item->thirdays > 0) red lighten-5 @else green lighten-5 @endif tdy black-text "
                                 style="display: none;">{{ $item->thirdays }}</td>
-                            <td class="@if ($item->fourdays > 0) red lighten-5 @else green lighten-5 @endif fdy black-text center"
+                            <td class="@if ($item->fourdays > 0) red lighten-5 @else green lighten-5 @endif fdy black-text "
                                 style="display: none;">{{ $item->fourdays }}</td>
-                            <td class="@if ($item->sixdays > 0) red lighten-5 @else green lighten-5 @endif sdy black-text center"
+                            <td class="@if ($item->sixdays > 0) red lighten-5 @else green lighten-5 @endif sdy black-text "
                                 style="display: none;">{{ $item->sixdays }}</td>
-                            <td class="@if ($item->nindays > 0) red lighten-5 @else green lighten-5 @endif ndy black-text center"
+                            <td class="@if ($item->nindays > 0) red lighten-5 @else green lighten-5 @endif ndy black-text "
                                 style="display: none;">{{ $item->nindays }}</td>
                         </tr>
                     @endforeach

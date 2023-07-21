@@ -63,6 +63,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('refererstatement', [AnalyticsController::class, 'refstatement']);
     Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
 
+    //Customers CRUD
+    Route::get('customers', [CustomerController::class, 'index']);
+
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);
