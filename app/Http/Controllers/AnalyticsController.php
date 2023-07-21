@@ -429,4 +429,11 @@ class AnalyticsController extends Controller
         }      
         return view ('admin/detailedreport', $result);
     }
+
+
+    public function statement(Request $request){
+        $result['data'] = DB::table('customers')->where('deleted', NULL)->orderBy('name', 'ASC')->get();
+
+        return view('admin/statement', $result);
+    }
 }

@@ -211,6 +211,13 @@ input:focus {
     fill: var(--textcol);
 }
 
-
-
+.search{
+    outline: none;
+    border: none;
+    background: rgb(255, 195, 66);
+}
+.search:focus{
+    border:none; 
+    background: white;
+}
 </style>

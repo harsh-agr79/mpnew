@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use Illuminate\Http\Request;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class FixController extends Controller
+class osamt extends Command
 {
-    public function update(){
-        // $orders = DB::table('orders')->groupBy('orderid')->orderBy('id', 'DESC')->where('mainstatus', NULL)->get();
-        // foreach($orders as $item){
-        //     DB::table('orders')->where('orderid', $item->orderid)->update([
-        //         'mainstatus'=>getpstat($item->orderid)
-        //     ]);
-        // }
-        // $customers = DB::table('customers')->get();
-        // foreach($customers as $item){
-        //     $bal = getbalance($item->name);
-        //     DB::table('customers')->where('id', $item->id)->update([
-        //         'balance'=>implode("|",$bal)
-        //     ]);
-        // }
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'cron:osamt';
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
         foreach( DB::table('customers')->orderBy('id', 'ASC')->lazy() as $item){
-            $balance = explode("|",$item->balance);
-            // $balance = explode("|", DB::table('customers')->where('name', $item->name)->first()->balance);
+
+            $balance = getbalance($item->name);
             $thirdays = DB::table('orders')
                                     ->where(['deleted' => null, 'save' => null])
                                     ->where('name', $item->name)
@@ -118,6 +122,7 @@ class FixController extends Controller
                 $r4clr = 'green lighten-5';
             }
             DB::table('customers')->where('id', $item->id)->update([
+                'balance'=>implode("|", $balance),
                 'thirdays'=>$result1,
                 'fourdays'=>$result2,
                 'sixdays'=>$result3,
