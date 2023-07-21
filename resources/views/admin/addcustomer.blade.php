@@ -43,6 +43,17 @@
                         </div>
                     </div>
                     <div class="col s12 row">
+                        <div class="col s6" style="margin-top:20px;">
+                            Password:
+                        </div>
+                        <div class='input-field col s6'>
+                            <input class='validate browser-default inp black-text' value="{{ $password }}"
+                                placeholder="password" type='password' name='password' id='password' required />
+                            <span toggle="#password" class="field-icon toggle-password"><span
+                                    class="material-icons black-text">visibility</span></span>
+                        </div>
+                    </div>
+                    <div class="col s12 row">
                         @error('contact')
                             <div class="red-text">{{ $message }}</div>
                         @enderror
@@ -85,17 +96,7 @@
                                 class="inp black-text browser-default" placeholder="referer">
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6" style="margin-top:20px;">
-                            Password:
-                        </div>
-                        <div class='input-field col s6'>
-                            <input class='validate browser-default inp black-text' value="{{ $password }}"
-                                placeholder="password" type='password' name='password' id='password' required />
-                            <span toggle="#password" class="field-icon toggle-password"><span
-                                    class="material-icons black-text">visibility</span></span>
-                        </div>
-                    </div>
+                   
                     <div class="col s12 row">
                         <div class="col s6">
                             Open Balance:
