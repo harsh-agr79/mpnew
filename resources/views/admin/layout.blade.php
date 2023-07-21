@@ -170,6 +170,19 @@
                         </div>
                     </li>
                 @endif
+                @if ($admin->type == 'admin' || in_array('customers', $perms))
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Customers<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                @if ($admin->type == 'admin' || in_array('customers', $perms))
+                                    <li><a href="{{ url('/customers') }}" class="textcol">View List<i
+                                                class="material-icons textcol">visibility</i></a></li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                     @if ($admin->type == 'admin')
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
                                     class="material-icons chevron textcol">chevron_left</i></a>

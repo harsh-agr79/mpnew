@@ -298,7 +298,9 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="customers" @if(in_array('customers', $permission))
+                        checked
+                    @endif/>
                         <span>View Customers</span>
                       </label>
                 </div>
