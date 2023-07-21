@@ -2,7 +2,7 @@
 
 @section('main')
     <div>
-        <div class="">
+        <div class="center">
             <h5>Statements</h5>
         </div>
         <div class="switch  row" style="margin: 20px;">

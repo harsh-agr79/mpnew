@@ -9,18 +9,18 @@
                     <input type="text" name="name" id="customer"
                         placeholder="Customer" class="autocomplete browser-default inp black-text" value="{{$name}}" autocomplete="off">
                 </div>
-                <div class="col s6 m4 l4 " style="margin-top: 15px;">
+                <div class="col s6 m4 l4 center" style="margin-top: 15px;">
                     <button class="btn amber black-text">Apply</button>
                 </div>
             </form>
-                <div class="col s6 m4 l4 " style="margin-top: 15px;">
+                <div class="col s6 m4 l4 center" style="margin-top: 15px;">
                     <a href="{{url('/refererstatement')}}" class="btn amber black-text">Clear</a>
                 </div>
             </div>
         </div>
         <div class="mp-card" style="margin-top: 20px;">
             @if ($data == 'no data')
-                <div class="">
+                <div class="center">
                     <h5>Select Referer</h5></div>
             @else
             <div>
