@@ -25,7 +25,7 @@
             @else
             <div>
                 <div class="switch center row" style="margin: 20px;">
-                    <div class='input-field col s6 m4'>
+                    <div class='input-field col s12 m4'>
                         <input class='validate browser-default inp search black-text' onkeyup="searchFun()" autocomplete="off"
                             type='search' name='search' id='search' />
                         <span class="field-icon" id="close-search"><span class="material-icons" id="cs-icon">search</span></span>
