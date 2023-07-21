@@ -153,7 +153,7 @@
                             </div>
                         </li>
                     @endif
-                    @if ($admin->type == 'admin' || in_array('statement', $perms))
+                    @if ($admin->type == 'admin' || in_array('statement', $perms) || in_array('refererstatement', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Statements<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
@@ -162,6 +162,10 @@
                                     <li><a href="{{ url('/statement') }}" class="textcol">Statement<i
                                                 class="material-icons textcol">visibility</i></a></li>
                                 @endif
+                                @if ($admin->type == 'admin' || in_array('refererstatement', $perms))
+                                <li><a href="{{ url('/refererstatement') }}" class="textcol">Referer Statement<i
+                                            class="material-icons textcol">visibility</i></a></li>
+                            @endif
                             </ul>
                         </div>
                     </li>
