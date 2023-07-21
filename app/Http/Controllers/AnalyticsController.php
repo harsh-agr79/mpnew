@@ -673,4 +673,25 @@ class AnalyticsController extends Controller
         $result['data'] = collect($data);
         return view('admin/balancesheet', $result);
     }
+
+    public function getref(){
+        $c = DB::table('customers')->get();
+        $m = DB::table('admins')->where('type', 'marketer')->get();
+        
+        $result = $c->merge($m);
+        return response()->json($result);
+    }
+
+    public function refstatement(Request $request){
+        if($request->get('name')){
+            $result['data'] = DB::table('customers')->where('refname', $request->get('name'))->get();
+            $result['name'] = $request->get('name');
+        }
+        else{
+            $result['name'] = '';
+            $result['data'] = 'no data';
+        }
+
+        return view('admin/refererstatement', $result);
+    }
 }

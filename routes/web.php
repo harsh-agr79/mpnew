@@ -57,7 +57,10 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
     Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
     Route::get('detailedreport', [AnalyticsController::class, 'detailedreport']);
+
+    //Statement Pages
     Route::get('statement', [AnalyticsController::class, 'statement']);
+    Route::get('refererstatement', [AnalyticsController::class, 'refstatement']);
     Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
@@ -87,6 +90,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
         //get
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
     Route::get('finditem', [ProductController::class, 'getproduct']);
+    Route::get('/getref', [AnalyticsController::class, 'getref']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function() {
