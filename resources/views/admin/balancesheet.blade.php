@@ -62,8 +62,8 @@
             {{ $runb = 0 }}
         @endif
         @php
-                $credit = $toc;
-                $debit = $tod;
+            $credit = $toc;
+            $debit = $tod;
         @endphp
     </div>
     <div>
@@ -98,24 +98,24 @@
                             Naration</span></label>
                 </div>
                 <form>
-                <div class="col s6">
-                    <label>From:</label>
-                    <input type="date" name="date" value="{{ $date }}"
-                        class="inp browser-default black-text">
-                </div>
-                <div class="col s6">
-                    <label>To:</label>
-                    <input type="date" name="date2" value="{{ $date2 }}"
-                        class="inp browser-default black-text">
-                </div>
+                    <div class="col s6">
+                        <label>From:</label>
+                        <input type="date" name="date" value="{{ $date }}"
+                            class="inp browser-default black-text">
+                    </div>
+                    <div class="col s6">
+                        <label>To:</label>
+                        <input type="date" name="date2" value="{{ $date2 }}"
+                            class="inp browser-default black-text">
+                    </div>
+                    <div class="col s4" style="margin-top: 10px;">
+                        <button class="btn amber black-text">
+                            Apply<i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
                 <div class="col s4" style="margin-top: 10px;">
-                    <button class="btn amber black-text">
-                        Apply<i class="material-icons right">send</i>
-                    </button>
-                </div>
-            </form>
-                <div class="col s4" style="margin-top: 10px;">
-                    <a class="btn amber black-text" href="{{ url('/balancesheet/'.$cus->name) }}">
+                    <a class="btn amber black-text" href="{{ url('/balancesheet/' . $cus->name) }}">
                         Clear
                     </a>
                 </div>
@@ -145,8 +145,8 @@
                         <th>From Before: </th>
                         <th></th>
                         <th>Opening Balance</th>
-                        <th>{{$tod}}</th>
-                        <th>{{$toc}}</th>
+                        <th>{{ $tod }}</th>
+                        <th>{{ $toc }}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -199,80 +199,97 @@
                             </tr>
                         @endfor
                     @endif
-                    <tfoot style="font-weight: 700;">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Total Sales</td>
-                            <td>
-                                @if (!$cuorsum->isEmpty())
-                                {{$cuorsum[0]->sum - $cuorsum[0]->dis}}
+                <tfoot style="font-weight: 700;">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Sales</td>
+                        <td>
+                            @if (!$cuorsum->isEmpty())
+                                {{ $cuorsum[0]->sum - $cuorsum[0]->dis }}
                                 @php
-                                    $debit = $debit + $cuorsum[0]->sum - $cuorsum[0]->dis
+                                    $debit = $debit + $cuorsum[0]->sum - $cuorsum[0]->dis;
                                 @endphp
-                                @else
+                            @else
                                 0
-                            @endif</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Total Expense</td>
-                            <td>@if (!$cuexsum->isEmpty())
-                                {{$cuexsum[0]->sum}}
-                                    @php
-                                        $debit = $debit + $cuexsum[0]->sum
-                                    @endphp
-                                @else
+                            @endif
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Expense</td>
+                        <td>
+                            @if (!$cuexsum->isEmpty())
+                                {{ $cuexsum[0]->sum }}
+                                @php
+                                    $debit = $debit + $cuexsum[0]->sum;
+                                @endphp
+                            @else
                                 0
-                            @endif</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Total Payment</td>
-                            <td></td>
-                            <td>@if (!$cupysum->isEmpty())
-                                {{$cupysum[0]->sum}}
+                            @endif
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Payment</td>
+                        <td></td>
+                        <td>
+                            @if (!$cupysum->isEmpty())
+                                {{ $cupysum[0]->sum }}
                                 @php
                                     $credit = $credit + $cupysum[0]->sum;
                                 @endphp
-                                @else
-                                0
-                            @endif</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Total Salesreturn</td>
-                            <td></td>
-                            <td>
-                                @if (!$cuslrsum->isEmpty())
-                                {{$cuslrsum[0]->sum - $cuslrsum[0]->dis}}
-                                @php
-                                $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
-                                @endphp
-                                @else
+                            @else
                                 0
                             @endif
-                            </td>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Salesreturn</td>
+                        <td></td>
+                        <td>
+                            @if (!$cuslrsum->isEmpty())
+                                {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis }}
+                                @php
+                                    $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
+                                @endphp
+                            @else
+                                0
+                            @endif
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>{{ $debit }}</td>
+                        <td>{{ $credit }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Balance</td>
+                        @if ($bal[0] == 'red')
+                            <td> {{ $bal[1] }}</td>
                             <td></td>
-                        </tr>
-                        <tr>
+                        @else
                             <td></td>
-                            <td></td>
-                            <td>Total</td>
-                            <td>{{$debit}}</td>
-                            <td>{{$credit}}</td>
-                            <td></td>
-                        </tr>
-                        <tr>Balance</tr>
-                    </tfoot>
+                            <td> {{ $bal[1] }}</td>
+                        @endif
+                        <td></td>
+                    </tr>
+                </tfoot>
                 </tbody>
             </table>
         </div>
@@ -285,19 +302,19 @@
                 <tbody>
                     <tr>
                         <td>Above 30 days</td>
-                        <td>{{$cus->thirdays}}</td>
+                        <td>{{ $cus->thirdays }}</td>
                     </tr>
                     <tr>
                         <td>Above 45 days</td>
-                        <td>{{$cus->fourdays}}</td>
+                        <td>{{ $cus->fourdays }}</td>
                     </tr>
                     <tr>
                         <td>Above 60 days</td>
-                        <td>{{$cus->sixdays}}</td>
+                        <td>{{ $cus->sixdays }}</td>
                     </tr>
                     <tr>
                         <td>Above 90 days</td>
-                        <td>{{$cus->nindays}}</td>
+                        <td>{{ $cus->nindays }}</td>
                     </tr>
                 </tbody>
             </table>
