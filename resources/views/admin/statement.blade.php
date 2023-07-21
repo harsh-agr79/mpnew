@@ -64,7 +64,7 @@
                         @php
                             $bal = explode('|', $item->balance);
                         @endphp
-                        <tr>
+                        <tr ondblclick="openbs('{{$item->name}}')">
                             <td>{{ $a = $a + 1 }}</td>
                             <td class="name">{{ $item->name }}</td>
                             <td class="shop" style="display: none;">{{ $item->shopname }}</td>
@@ -147,6 +147,9 @@
                     }
                 }
             }
+        }
+        function openbs(name){
+            window.open('/balancesheet/' + name, "_self");
         }
     </script>
 @endsection

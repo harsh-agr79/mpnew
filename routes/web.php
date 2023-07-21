@@ -58,6 +58,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
     Route::get('detailedreport', [AnalyticsController::class, 'detailedreport']);
     Route::get('statement', [AnalyticsController::class, 'statement']);
+    Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
