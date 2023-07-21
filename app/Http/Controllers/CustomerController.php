@@ -67,6 +67,25 @@ class CustomerController extends Controller
             'userid'=>'required|unique:customers,user_id,'.$request->post('id'),
             'uniqueid'=>'required|unique:customers,cusuni_id,'.$request->post('id')
         ]);
+        $refname = $request->post('refname');
+        if($refname == NULL)
+           {
+               $refid = NULL;
+               $reftype = NULL;
+           }
+           else{
+               $ref = DB::table('customers')->where('name', $refname)->first();
+               if($ref == NULL)
+               {
+                   $refid = DB::table('admins')->where('name', $refname)->first()->id;
+                   $reftype = DB::table('admins')->where('name', $refname)->first()->type;
+               }
+               else
+               {
+                   $refid = DB::table('customers')->where('name', $refname)->first()->id;
+                   $reftype = DB::table('customers')->where('name', $refname)->first()->type;
+               }
+           }
         if($id > 0){
             
             DB::table('customers')->where('id', $id)->update([
@@ -77,6 +96,8 @@ class CustomerController extends Controller
                 'address'=>$request->post('address'),
                 'cusuni_id'=>$request->post('uniqueid'),
                 'refname'=>$request->post('refname'),
+                'refid'=>$refid,
+                'reftype'=>$reftype,
                 'password'=>$request->post('password'),
                 'openbalance'=>$request->post('openbalance'),
                 'obtype'=>$request->post('obtype'),
@@ -123,6 +144,8 @@ class CustomerController extends Controller
                 'address'=>$request->post('address'),
                 'cusuni_id'=>$request->post('uniqueid'),
                 'refname'=>$request->post('refname'),
+                'refid'=>$refid,
+                'reftype'=>$reftype,
                 'password'=>$request->post('password'),
                 'openbalance'=>$request->post('openbalance'),
                 'obtype'=>$request->post('obtype'),
