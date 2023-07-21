@@ -2,10 +2,10 @@
 
 @section('main')
     <style>
-        /* th,
+        th,
         td {
             border: 1px solid;
-        } */
+        }
     </style>
     <div class="hide">
         @if ($cus->openbalance == null || $cus->openbalance == '0')
