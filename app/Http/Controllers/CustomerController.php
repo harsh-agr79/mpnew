@@ -68,6 +68,7 @@ class CustomerController extends Controller
             'uniqueid'=>'required|unique:customers,cusuni_id,'.$request->post('id')
         ]);
         if($id > 0){
+            
             DB::table('customers')->where('id', $id)->update([
                 'name'=>$request->post('name'),
                 'shopname'=>$request->post('shopname'),
@@ -82,6 +83,36 @@ class CustomerController extends Controller
                 'type'=>$request->post('type'),
                 'cus_from'=>$request->post('from'),
             ]);
+
+            $initial = $request->post('name1');
+            $changed = $request->post('name');
+            $idinitial = $request->post('uniold');
+            $idchanged = $request->post('uniqueid');
+            if($request->post('id')>0){
+                $model=Customer::find($request->post('id'));
+                DB::table('orders')->where('name',$initial)->update([
+                    'name'=>$changed
+                ]);
+                DB::table('payments')->where('name',$initial)->update([
+                    'name'=>$changed
+                ]);
+                DB::table('salesreturns')->where('name',$initial)->update([
+                    'name'=>$changed
+                ]);
+                DB::table('expenses')->where('name',$initial)->update([
+                    'name'=>$changed
+                ]);
+                DB::table('orders')->where('cusuni_id',$idinitial)->update([
+                    'cusuni_id'=>$idchanged
+                ]);
+                DB::table('payments')->where('cusuni_id',$idinitial)->update([
+                    'cusuni_id'=>$idchanged
+                ]);
+                DB::table('salesreturns')->where('cusuni_id',$idinitial)->update([
+                    'cusuni_id'=>$idchanged
+                ]);
+                $msg="Customer updated";
+            }
         }
         else{
             DB::table('customers')->insert([

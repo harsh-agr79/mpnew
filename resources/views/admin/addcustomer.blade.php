@@ -19,6 +19,7 @@
                             <input type="text" name="name" value="{{ $name }}"
                                 class="inp black-text browser-default" placeholder="Name" required>
                         </div>
+                        <input type="hidden" name="name1" value="{{$name}}">
                     </div>
                     <div class="col s12 row">
                         <div class="col s6">
@@ -73,6 +74,7 @@
                             <input type="text" name="uniqueid" value="{{ $uniqueid }}"
                                 class="inp black-text browser-default" placeholder="Unique Id" required>
                         </div>
+                        <input type="hidden" name="uniold" value="{{$uniqueid}}">
                     </div>
                     <div class="col s12 row">
                         <div class="col s6">
