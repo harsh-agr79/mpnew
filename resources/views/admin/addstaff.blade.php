@@ -227,7 +227,7 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox"  name="perm[]" value="statement" @if(in_array('statement', $permission))
+                        <input type="checkbox"  name="perm[]" value="statement|balancesheet/{id}" @if(in_array('statement', $permission))
                         checked
                     @endif/>
                         <span>View Statements</span>
@@ -235,7 +235,7 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox"  name="perm[]" value="refererstatement" @if(in_array('refererstatement', $permission))
+                        <input type="checkbox"  name="perm[]" value="refererstatement|balancesheet/{id}" @if(in_array('refererstatement', $permission))
                         checked
                     @endif/>
                         <span>View Referer Statements</span>
