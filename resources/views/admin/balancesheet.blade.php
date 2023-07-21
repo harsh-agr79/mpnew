@@ -143,12 +143,12 @@
                 </thead>
                 <tbody>
                     <tr style="font-weight: 700">
-                        <th>From Before: {{$date}}</th>
-                        <th></th>
-                        <th>Opening Balance</th>
-                        <th>{{ $tod }}</th>
-                        <th>{{ $toc }}</th>
-                        <th></th>
+                        <td>From Before: {{$date}}</td>
+                        <td></td>
+                        <td>Opening Balance</td>
+                        <td>{{ $tod }}</td>
+                        <td>{{ $toc }}</td>
+                        <td></td>
                     </tr>
                     @if ($data == null)
                     @else
