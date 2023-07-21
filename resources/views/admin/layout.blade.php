@@ -170,7 +170,7 @@
                         </div>
                     </li>
                 @endif
-                @if ($admin->type == 'admin' || in_array('customers', $perms))
+                @if ($admin->type == 'admin' || in_array('customers', $perms) || in_array('addcustomer', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Customers<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
@@ -179,6 +179,10 @@
                                     <li><a href="{{ url('/customers') }}" class="textcol">View List<i
                                                 class="material-icons textcol">visibility</i></a></li>
                                 @endif
+                                @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
+                                <li><a href="{{ url('/addcustomer') }}" class="textcol">Add Customer<i
+                                            class="material-icons textcol">add</i></a></li>
+                            @endif
                             </ul>
                         </div>
                     </li>
