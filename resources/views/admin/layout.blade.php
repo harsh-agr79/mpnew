@@ -158,7 +158,7 @@
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                @if ($admin->type == 'admin' || in_array('mainanalytics', $perms))
+                                @if ($admin->type == 'admin' || in_array('statement', $perms))
                                     <li><a href="{{ url('/statement') }}" class="textcol">Statement<i
                                                 class="material-icons textcol">visibility</i></a></li>
                                 @endif
