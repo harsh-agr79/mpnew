@@ -440,41 +440,75 @@ class AnalyticsController extends Controller
 
         $cust = DB::table('customers')->where('name', $name)->first();
         $result['cus'] = $cust;
-        if($request->get('date') && $request->get('date2'))
-        {
-            $date = $request->get('date');
-            $date2 = $request->get('date2');
-        }
-        elseif($request->get('date')){
-            $date = $request->get('date');
-            $date3 = date('Y-10-18');
-            $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
-        }
-        elseif($request->get('date2')){
-            $date2 = $request->get('date2');
-            $date = date('Y-10-18');
-        }
-        elseif($request->get('clear')){
-             if(date('Y-m-d') < date('Y-10-18') ){
-             $date2 = date('Y-10-17');  
-             $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+        $today = date('Y-m-d');
+         $target = DB::table('target')->where('userid',$cust->user_id)
+         ->where('startdate', '<=', $today)
+         ->where('enddate', '>=', $today)
+         ->get();
+
+         if(count($target) > 0){
+            $rdate = $target['0']->startdate;
+            $rdate2 = $target['0']->enddate;
+
+            if($request->get('date') && $request->get('date2'))
+                {
+                    $date = $request->get('date');
+                    $date2 = $request->get('date2');
+                }
+                elseif($request->get('date')){
+                    $date = $request->get('date');
+                    $date2 = $rdate2;
+                }
+                elseif($request->get('date2')){
+                    $date2 = $request->get('date2');
+                    $date = $rdate2;
+                }
+                elseif($request->get('clear')){
+                    $date = $rdate;
+                    $date2 = $rdate2;
+                 }
+                else{
+                    $date = $rdate;
+                    $date2 = $rdate2;
+                }
+
+         }
+         else{
+            if($request->get('date') && $request->get('date2'))
+            {
+                $date = $request->get('date');
+                $date2 = $request->get('date2');
+            }
+            elseif($request->get('date')){
+                $date = $request->get('date');
+                $date3 = date('Y-10-18');
+                $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
+            }
+            elseif($request->get('date2')){
+                $date2 = $request->get('date2');
+                $date = date('Y-10-18');
+            }
+            elseif($request->get('clear')){
+               if(date('Y-m-d') < date('Y-10-18') ){
+                $date2 = date('Y-10-17');  
+                $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+               }
+               else{
+                   $date = date('Y-10-18');
+                   $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+               }
             }
             else{
-                $date = date('Y-10-18');
-                $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+                if(date('Y-m-d') < date('Y-10-18') ){
+                $date2 = date('Y-10-17');  
+                $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+               }
+               else{
+                   $date = date('Y-10-18');
+                   $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+               }
             }
-        }
-        else{
-            if(date('Y-m-d') < date('Y-10-18') ){
-             $date2 = date('Y-10-17');  
-             $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
-            }
-            else{
-                $date = date('Y-10-18');
-                $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
-            }
-            
-        }
+         }
         $result['date'] = $date;
         $result['date2'] = $date2;
         $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
