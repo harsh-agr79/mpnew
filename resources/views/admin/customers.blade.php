@@ -24,6 +24,7 @@
         <div class="mp-card"  style="overflow-x: scroll;">
             <table class="sortable">
                 <thead>
+                    <th>SN</th>
                     <th>Name</th>
                     <th>shop</th>
                     <th>Address</th>
@@ -34,8 +35,12 @@
                     <th class="uniqueid" style="display: none;">Unique Id</th>
                 </thead>
                 <tbody>
+                    @php
+                        $a = 0;
+                    @endphp
                     @foreach ($data as $item)
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                            <td>{{$a = $a + 1}}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->shopname }}</td>
                             <td>{{ $item->address }}</td>
