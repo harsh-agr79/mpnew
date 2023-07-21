@@ -60,8 +60,8 @@
                             </label>
                     </div>
                 </div>
-                <div class="mp-card">
-                    <table class="sortable" style="overflow-x: scroll;">
+                <div class="mp-card" style="overflow-x: scroll;">
+                    <table class="sortable" >
                         <thead>
                             <tr>
                                 <th>SN</th>

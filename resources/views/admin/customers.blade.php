@@ -21,7 +21,7 @@
                   </div>
             </div>
         </div>
-        <div class="mp-card">
+        <div class="mp-card"  style="overflow-x: scroll;">
             <table class="sortable">
                 <thead>
                     <th>Name</th>

@@ -125,8 +125,8 @@
                 </div>
             </div>
         </div>
-        <div class="mp-card" style="margin-top: 10px;">
-            <table class="sortable" style="overflow-x: scroll;">
+        <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
+            <table class="sortable">
                 <thead>
                     <tr>
                         <th class="date">Date</th>
