@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="mp-card">
-            <table>
+            <table class="sortable">
                 <thead>
                     <tr>
                         <th>SN</th>

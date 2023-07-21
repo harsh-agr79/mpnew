@@ -2,10 +2,10 @@
 
 @section('main')
     <style>
-        th,
+        /* th,
         td {
             border: 1px solid;
-        }
+        } */
     </style>
     <div class="hide">
         @if ($cus->openbalance == null || $cus->openbalance == '0')
@@ -126,10 +126,9 @@
             </div>
         </div>
         <div class="mp-card" style="margin-top: 10px;">
-            <table>
+            <table class="sortable">
                 <thead>
                     <tr>
-                        <th class="hide"></th>
                         <th class="date">Date</th>
                         <th>Type</th>
                         <th>id</th>
@@ -140,16 +139,17 @@
                         <th class="voucol" style="display: none;">Voucher</th>
                         {{-- <th>Running balance</th> --}}
                     </tr>
-                    <tr>
-                        <th>From Before: </th>
+                   
+                </thead>
+                <tbody>
+                    <tr style="font-weight: 700">
+                        <th>From Before: {{$date}}</th>
                         <th></th>
                         <th>Opening Balance</th>
                         <th>{{ $tod }}</th>
                         <th>{{ $toc }}</th>
                         <th></th>
                     </tr>
-                </thead>
-                <tbody>
                     @if ($data == null)
                     @else
                         @for ($i = 0; $i < count($data); $i++)
