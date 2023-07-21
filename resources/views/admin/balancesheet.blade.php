@@ -143,7 +143,7 @@
                 </thead>
                 <tbody>
                     <tr style="font-weight: 700">
-                        <td>From Before: {{$date}}</td>
+                        <td sorttable_customkey= "-10000">From Before: {{$date}}</td>
                         <td></td>
                         <td>Opening Balance</td>
                         <td>{{ $tod }}</td>
