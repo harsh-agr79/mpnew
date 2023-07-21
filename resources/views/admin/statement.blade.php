@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="mp-card">
-            <table class="sortable">
+            <table class="sortable" style="overflow-x: scroll;">
                 <thead>
                     <tr>
                         <th>SN</th>
