@@ -253,13 +253,17 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="payments"  @if(in_array('payments', $permission))
+                        checked
+                    @endif/>
                         <span>View Payments</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="addpayment|editpayment/{id}|addpay|deletepayment/{id}"  @if(in_array('addpayment', $permission))
+                        checked
+                    @endif/>
                         <span>Add/Edit Payments</span>
                       </label>
                 </div>
@@ -347,7 +351,9 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="frontsettings|frontimg|delete/frontimg/{id}/{id2}" @if(in_array('frontsettings', $permission))
+                        checked
+                    @endif/>
                         <span>Front Settings</span>
                       </label>
                 </div>

@@ -10,6 +10,8 @@ use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     // Route::get('deletecustomer/{id}', [CustomerController::class, 'deletecustomer']);
     Route::post('addcus', [CustomerController::class, 'addcustomer_process'])->name('addcustomer');
 
+    //Payments CRUD
+    Route::get('payments', [PaymentController::class, 'index']);
+    Route::get('addpayment', [PaymentController::class, 'addpay']);
+    Route::get('editpayment/{id}', [PaymentController::class, 'addpay']);
+    Route::post('addpay', [PaymentController::class, 'addpay_process'])->name('addpay');
+    // Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
+
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);
@@ -78,6 +87,10 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/deletestaff', [AdminController::class, 'deletestaff']);
 
 
+    //FRONT SETTINGS
+    Route::get('frontsettings', [FrontController::class, 'index']);
+    Route::post('frontimg', [FrontController::class, 'addimg'])->name('addimg');
+    Route::get('delete/frontimg/{id}/{id2}', [FrontController::class, 'deleteimg']);
 
 
     //ADMIN SETTINGS
