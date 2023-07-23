@@ -325,8 +325,18 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="products" @if(in_array('products', $permission))
+                        checked
+                    @endif/>
                         <span>View Products</span>
+                      </label>
+                </div>
+                <div class="col m6 s12">
+                    <label>
+                        <input type="checkbox"  name="perm[]" value="arrangeprod" @if(in_array('arrangeprod', $permission))
+                        checked
+                    @endif/>
+                        <span>Arrange Products</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
@@ -334,6 +344,9 @@
                         <input type="checkbox" />
                         <span>Add/Edit Products</span>
                       </label>
+                </div>
+                <div class="col m6 s12">
+
                 </div>
                 <div class="col s12">
                     <hr>

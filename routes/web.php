@@ -95,6 +95,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/deletesubcategory/{id}', [SubcategoryController::class, 'delsubcat']);
     Route::post('/addsubcategory', [SubcategoryController::class, 'addsubcat_process'])->name('addsub');
 
+    //PRODUCTS CRUD
+    Route::get('products', [ProductController::class, 'index']);
+    Route::get('addproduct', [ProductController::class, 'addproduct']);
+    Route::get('editproduct/{id}', [ProductController::class, 'addproduct']);
+    Route::post('addprod', [ProductController::class, 'addprod_process']);
+    Route::get('deleteprod/{id}', [ProductController::class, 'deleteprod']);
+    Route::post('arrangeprod', [ProductController::class, 'arrangeprod'])->name('arrange.prod');
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);

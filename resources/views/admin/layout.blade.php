@@ -188,56 +188,73 @@
                         </li>
                     @endif
                     @if ($admin->type == 'admin' || in_array('expenses', $perms) || in_array('addexpense', $perms))
-                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Expenses<i
-                                class="material-icons chevron textcol">chevron_left</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                @if ($admin->type == 'admin' || in_array('expenses', $perms))
-                                    <li><a href="{{ url('/expenses') }}" class="textcol">View List<i
-                                                class="material-icons textcol">visibility</i></a></li>
-                                @endif
-                                @if ($admin->type == 'admin' || in_array('addexpense', $perms))
-                                    <li><a href="{{ url('/addexpense') }}" class="textcol">Add Expense<i
-                                                class="material-icons textcol">add</i></a></li>
-                                @endif
-                            </ul>
-                        </div>
-                    </li>
-                @endif
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Expenses<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type == 'admin' || in_array('expenses', $perms))
+                                        <li><a href="{{ url('/expenses') }}" class="textcol">View List<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('addexpense', $perms))
+                                        <li><a href="{{ url('/addexpense') }}" class="textcol">Add Expense<i
+                                                    class="material-icons textcol">add</i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                     @if ($admin->type == 'admin' || in_array('customers', $perms) || in_array('addcustomer', $perms))
-                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Customers<i
-                                class="material-icons chevron textcol">chevron_left</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                @if ($admin->type == 'admin' || in_array('customers', $perms))
-                                    <li><a href="{{ url('/customers') }}" class="textcol">View List<i
-                                                class="material-icons textcol">visibility</i></a></li>
-                                @endif
-                                @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
-                                    <li><a href="{{ url('/addcustomer') }}" class="textcol">Add Customer<i
-                                                class="material-icons textcol">add</i></a></li>
-                                @endif
-                            </ul>
-                        </div>
-                    </li>
-                @endif
-                @if ($admin->type == 'admin' || in_array('subcategory', $perms) || in_array('addsubcategory', $perms))
-                <li class="bold"><a class="collapsible-header textcol" tabindex="0">Subcategory<i
-                            class="material-icons chevron textcol">chevron_left</i></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            @if ($admin->type == 'admin' || in_array('subcategory', $perms))
-                                <li><a href="{{ url('/subcategory') }}" class="textcol">View List<i
-                                            class="material-icons textcol">visibility</i></a></li>
-                            @endif
-                            @if ($admin->type == 'admin' || in_array('addsubcategory', $perms))
-                                <li><a href="{{ url('/addsubcategory') }}" class="textcol">Add Subcategory<i
-                                            class="material-icons textcol">add</i></a></li>
-                            @endif
-                        </ul>
-                    </div>
-                </li>
-            @endif
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Customers<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type == 'admin' || in_array('customers', $perms))
+                                        <li><a href="{{ url('/customers') }}" class="textcol">View List<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
+                                        <li><a href="{{ url('/addcustomer') }}" class="textcol">Add Customer<i
+                                                    class="material-icons textcol">add</i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+                    @if ($admin->type == 'admin' || in_array('products', $perms) || in_array('addproduct', $perms))
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Products<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type == 'admin' || in_array('products', $perms))
+                                        <li><a href="{{ url('/products') }}" class="textcol">View List<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
+                                        <li><a href="{{ url('/addproduct') }}" class="textcol">Add Product<i
+                                                    class="material-icons textcol">add</i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+                    @if ($admin->type == 'admin' || in_array('subcategory', $perms) || in_array('addsubcategory', $perms))
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Subcategory<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type == 'admin' || in_array('subcategory', $perms))
+                                        <li><a href="{{ url('/subcategory') }}" class="textcol">View List<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('addsubcategory', $perms))
+                                        <li><a href="{{ url('/addsubcategory') }}" class="textcol">Add Subcategory<i
+                                                    class="material-icons textcol">add</i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                     @if ($admin->type == 'admin')
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
                                     class="material-icons chevron textcol">chevron_left</i></a>

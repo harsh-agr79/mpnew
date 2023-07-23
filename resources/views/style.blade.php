@@ -220,4 +220,7 @@ input:focus {
     border:none; 
     background: white;
 }
+.multiple-select-dropdown span{
+    color: black !important;
+}
 </style>
