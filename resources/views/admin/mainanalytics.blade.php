@@ -117,7 +117,7 @@
                                                 }
                                             @endphp
                                             <tr class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
-                                                ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item->item }}')">
+                                                ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item2->item }}')">
                                                 <td>{{ $item2->item }}</td>
                                                 <td>{{ $item2->sum }}</td>
                                                 <td>{{ money($item2->samt - $item2->damt) }}</td>
