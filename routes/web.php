@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::post('addexp', [ExpenseController::class, 'addexp_process'])->name('addexp');
     //  Route::get('deleteexpense/{id}',[ExpenseController::class, 'deleteexp']);
 
+    //SUBCATEGORY CRUD
+    Route::get('/subcategory', [SubcategoryController::class, 'subcat']);
+    Route::get('/addsubcategory', [SubcategoryController::class, 'addsubcat']);
+    Route::get('/addsubcategory/{id}', [SubcategoryController::class, 'addsubcat']);
+    Route::get('/deletesubcategory/{id}', [SubcategoryController::class, 'delsubcat']);
+    Route::post('/addsubcategory', [SubcategoryController::class, 'addsubcat_process'])->name('addsub');
+
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);
@@ -119,6 +127,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
     Route::get('finditem', [ProductController::class, 'getproduct']);
     Route::get('/getref', [AnalyticsController::class, 'getref']);
+    Route::get('/getsubcat/{id}', [SubcategoryController::class, 'getsubcat']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function() {

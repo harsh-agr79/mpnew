@@ -221,6 +221,23 @@
                         </div>
                     </li>
                 @endif
+                @if ($admin->type == 'admin' || in_array('subcategory', $perms) || in_array('addsubcategory', $perms))
+                <li class="bold"><a class="collapsible-header textcol" tabindex="0">Subcategory<i
+                            class="material-icons chevron textcol">chevron_left</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            @if ($admin->type == 'admin' || in_array('subcategory', $perms))
+                                <li><a href="{{ url('/subcategory') }}" class="textcol">View List<i
+                                            class="material-icons textcol">visibility</i></a></li>
+                            @endif
+                            @if ($admin->type == 'admin' || in_array('addsubcategory', $perms))
+                                <li><a href="{{ url('/addsubcategory') }}" class="textcol">Add Subcategory<i
+                                            class="material-icons textcol">add</i></a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </li>
+            @endif
                     @if ($admin->type == 'admin')
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
                                     class="material-icons chevron textcol">chevron_left</i></a>

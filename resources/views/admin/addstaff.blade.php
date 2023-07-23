@@ -340,13 +340,17 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="subcategory" @if(in_array('subcategory', $permission))
+                        checked
+                    @endif/>
                         <span>View Subcategory</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="addsubcategory|addsubcategory/{id}|deletesubcategory/{id}|addsubcategory" @if(in_array('addsubcategory', $permission))
+                        checked
+                    @endif/>
                         <span>Add/Edit Subcategory</span>
                       </label>
                 </div>
