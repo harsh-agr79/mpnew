@@ -287,13 +287,17 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="expenses"  @if(in_array('expenses', $permission))
+                        checked
+                    @endif/>
                         <span>View Expenses</span>
                       </label>
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="addexpense|editexpense/{id}|addexp|deleteexpense/{id}"  @if(in_array('addexpense', $permission))
+                        checked
+                    @endif/>
                         <span>Add/Edit Expenses</span>
                       </label>
                 </div>

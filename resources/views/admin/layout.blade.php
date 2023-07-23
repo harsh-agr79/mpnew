@@ -187,6 +187,23 @@
                             </div>
                         </li>
                     @endif
+                    @if ($admin->type == 'admin' || in_array('expenses', $perms) || in_array('addexpense', $perms))
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Expenses<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                @if ($admin->type == 'admin' || in_array('expenses', $perms))
+                                    <li><a href="{{ url('/expenses') }}" class="textcol">View List<i
+                                                class="material-icons textcol">visibility</i></a></li>
+                                @endif
+                                @if ($admin->type == 'admin' || in_array('addexpense', $perms))
+                                    <li><a href="{{ url('/addexpense') }}" class="textcol">Add Expense<i
+                                                class="material-icons textcol">add</i></a></li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                     @if ($admin->type == 'admin' || in_array('customers', $perms) || in_array('addcustomer', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Customers<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
