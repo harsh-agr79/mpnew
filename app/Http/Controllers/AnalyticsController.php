@@ -232,11 +232,14 @@ class AnalyticsController extends Controller
         elseif ($request->get('product')){
             $result['pdata'] = DB::table('orders')
             ->where('status', 'approved')
-            ->where(['deleted'=>NULL, 'save'=>NULL])
+            ->where(['orders.deleted'=>NULL, 'save'=>NULL])
             ->where('orders.created_at', '>=', $date)
             ->where('orders.created_at', '<=', $date2)
             ->where('orders.item', $request->get('product'))
-            ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->orderBy('sum','desc')
+            ->selectRaw('orders.*, customers.type, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
+            ->orderBy('sum','desc')
+            ->join('customers',  'orders.cusuni_id', '=', 'customers.cusuni_id')
+            // ->select('orders.*', 'customers.type')
             ->groupBy('orders.name')
             ->get();
             $result['ptotal'] =  DB::table('orders')

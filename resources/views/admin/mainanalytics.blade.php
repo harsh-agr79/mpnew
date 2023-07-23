@@ -99,7 +99,7 @@
                                         </label>
                                     </form>
                                 </div>
-                                <table>
+                                <table class="sortable">
                                     <thead>
                                         <tr>
                                             <th>Item</th>

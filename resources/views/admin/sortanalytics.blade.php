@@ -51,7 +51,7 @@
                         {{ $nptotal[0]->sum }}</h5>
                 </div>
                 <div class="mp-card" style="margin-top: 20px;">
-                    <table>
+                    <table class="sortable">
                         <thead>
                             <tr>
                                 <th>Date</th>
@@ -156,7 +156,7 @@
                                                     </label>
                                                 </form>
                                             </div>
-                                            <table>
+                                            <table class="sortable">
                                                 <thead>
                                                     <tr>
                                                         <th>Item</th>
@@ -301,10 +301,11 @@
                         {{ $ptotal[0]->sum }}</h5>
                 </div>
                 <div class="mp-card" style="margin-top: 20px">
-                    <table>
+                    <table class="sortable">
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Type</th>
                                 <th>Item</th>
                                 <th>Quantity</th>
                                 <th>Amount</th>
@@ -315,6 +316,7 @@
                                 <tr
                                     ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->name }}', '{{ $item->item }}')">
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->type }}</td>
                                     <td>{{ $item->item }}</td>
                                     <td>{{ $item->sum }}</td>
                                     <td>{{ money($item->samt - $item->damt) }}</td>
@@ -323,6 +325,7 @@
                             @foreach ($pnodata as $item)
                                 <tr>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->type }}</td>
                                     <td>{{ $product }}</td>
                                     <td>0</td>
                                     <td>0</td>
