@@ -112,7 +112,6 @@ class CustomerController extends Controller
             $idinitial = $request->post('uniold');
             $idchanged = $request->post('uniqueid');
             if($request->post('id')>0){
-                $model=Customer::find($request->post('id'));
                 DB::table('orders')->where('name',$initial)->update([
                     'name'=>$changed
                 ]);
@@ -134,7 +133,7 @@ class CustomerController extends Controller
                 DB::table('salesreturns')->where('cusuni_id',$idinitial)->update([
                     'cusuni_id'=>$idchanged
                 ]);
-                DB::table('orders')->where('cusuni_id',$$request->post('uniqueid'))->update([
+                DB::table('orders')->where('cusuni_id',$request->post('uniqueid'))->update([
                     'refname'=>$request->post('refname'),
                     'refid'=>$refid,
                     'reftype'=>$reftype
