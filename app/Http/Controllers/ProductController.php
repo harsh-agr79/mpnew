@@ -38,4 +38,7 @@ class ProductController extends Controller
         $request->session()->flash('category', $category);
         return redirect('products');
     }
+    public function addproduct(Request $request, $id=''){
+        return view('admin/addproduct');
+    }
 }
