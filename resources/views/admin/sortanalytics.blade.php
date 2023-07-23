@@ -24,7 +24,7 @@
                     </div>
                     <div class='input-field col l4 m4 s12'>
                         <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
-                            type='search' name='search' id='search' />
+                            type='search' id='search' />
                         <span class="field-icon" id="close-search"><span class="material-icons"
                                 id="cs-icon">search</span></span>
                     </div>
