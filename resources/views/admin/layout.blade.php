@@ -283,7 +283,7 @@
         <div class="mp-container">
             @yield('main')
         </div>
-        <div style="margin-top: 100px;">
+        <div style="margin-top: 50px;">
 
         </div>
     </main>
