@@ -12,6 +12,7 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('editpayment/{id}', [PaymentController::class, 'addpay']);
     Route::post('addpay', [PaymentController::class, 'addpay_process'])->name('addpay');
     // Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
+
+     //Payments CRUD
+     Route::get('expenses', [ExpenseController::class, 'index']);
+     Route::get('addexpense', [ExpenseController::class, 'addexp']);
+     Route::get('editexpense/{id}', [ExpenseController::class, 'addexp']);
+     Route::post('addexp', [ExpenseController::class, 'addexp_process'])->name('addexp');
+    //  Route::get('deleteexpense/{id}',[ExpenseController::class, 'deleteexp']);
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);

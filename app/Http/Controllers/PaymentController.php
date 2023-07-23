@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 class PaymentController extends Controller
 {
     public function index(Request $request){
-        $result['data'] = DB::table('payments')->orderBy('date', 'DESC')->paginate(100);
         $query = DB::table('payments')->orderBy('date', 'DESC');
         $result['date'] = '';
         $result['date2'] =  '';
