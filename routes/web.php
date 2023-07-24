@@ -99,7 +99,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('products', [ProductController::class, 'index']);
     Route::get('addproduct', [ProductController::class, 'addproduct']);
     Route::get('editproduct/{id}', [ProductController::class, 'addproduct']);
-    Route::post('addprod', [ProductController::class, 'addprod_process']);
+    Route::post('addprod', [ProductController::class, 'addprod_process'])->name('addprod');
     Route::get('deleteprod/{id}', [ProductController::class, 'deleteprod']);
     Route::post('arrangeprod', [ProductController::class, 'arrangeprod'])->name('arrange.prod');
     //STAFF PAGES AND CRUD(Not allowed to staff)

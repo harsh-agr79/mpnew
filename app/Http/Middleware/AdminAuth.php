@@ -17,25 +17,32 @@ class AdminAuth
     public function handle(Request $request, Closure $next): Response
     {
         if($request->session()->has('ADMIN_LOGIN') && in_array(session()->get('ADMIN_TYPE'), ['admin', 'staff'])){
-            if(session()->get('ADMIN_TYPE') == 'admin'){   
-                view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
-                view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
-            }
-            else{
-                $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
-                $perms2 = ['dashboard', 'logout', 'admin/changemode', 'findcustomer', 'finditem', 'getref'];
-                $uri =  $url = request()->route()->uri;
-                if(in_array($uri, $perms) || in_array($uri, $perms2)){
+            $time = session()->get('ADMIN_TIME');
+            $cutime = time();
+
+            if($cutime - $time <= 3600){
+                if(session()->get('ADMIN_TYPE') == 'admin'){   
                     view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
                     view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
-                }  
+                }
                 else{
-                    $request->session()->flash('error','Access Denied');
-                    return redirect('/');
+                    $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
+                    $perms2 = ['dashboard', 'logout', 'admin/changemode', 'findcustomer', 'finditem', 'getref'];
+                    $uri =  $url = request()->route()->uri;
+                    if(in_array($uri, $perms) || in_array($uri, $perms2)){
+                        view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+                        view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
+                    }  
+                    else{
+                        $request->session()->flash('error','Access Denied');
+                        return redirect('/');
+                    }
                 }
             }
+            else{
+                return redirect('/logout');
+            }
             
-           
         }
         else{
             $request->session()->flash('error','Access Denied');
