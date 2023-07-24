@@ -5,7 +5,7 @@
         <div>
             <div class="mp-card" style="margin-top: 5vh;">
                 <div>
-                    <h6 class="center">Add Product</h6>
+                    <h6 class="center">Product</h6>
                 </div>
                 <form action="{{route('addprod')}}" method="POST" enctype="multipart/form-data">
                     @csrf
