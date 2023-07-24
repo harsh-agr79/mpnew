@@ -248,4 +248,7 @@ input:focus {
     border: 1px solid rgb(170, 170, 170);
     width: 15vh; 
 }
+.prod-container::-webkit-scrollbar{
+    display: none;
+  }
 </style>
