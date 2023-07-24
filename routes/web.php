@@ -53,6 +53,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('rejectedorders', [OrderAdminController::class, 'rejectedorders']);
     Route::get('deliveredorders', [OrderAdminController::class, 'deliveredorders']);
 
+    //ORDERS CRUD
+    Route::get('createorder', [OrderAdminController::class, 'createorder']);
+
     //CHALAN PAGES
     Route::get('chalan', [ChalanController::class, 'chalan']);
     Route::get('chalandetail/{id}', [ChalanController::class, 'chalandetail']);
@@ -102,6 +105,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('addprod', [ProductController::class, 'addprod_process'])->name('addprod');
     Route::get('deleteprod/{id}', [ProductController::class, 'deleteprod']);
     Route::post('arrangeprod', [ProductController::class, 'arrangeprod'])->name('arrange.prod');
+
+
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
     Route::get('/addstaff', [AdminController::class, 'addstaff']);

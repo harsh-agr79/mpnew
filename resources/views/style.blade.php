@@ -223,4 +223,29 @@ input:focus {
 .multiple-select-dropdown span{
     color: black !important;
 }
+.prod-img{
+    height: 15vh;
+}
+.prod-title{
+    font-size: 15px;
+    font-weight: 600;
+}
+.prod-det{
+    font-size: 12px;
+    padding: 10px;
+    font-weight: 500;
+}
+.price-line{
+   position: relative;
+   top: 20px;
+}
+.prod-inp{
+    color: white;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgb(170, 170, 170);
+    width: 20vh; 
+}
 </style>
