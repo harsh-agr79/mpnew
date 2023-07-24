@@ -257,4 +257,13 @@ input:focus {
 .prod-container::-webkit-scrollbar{
     display: none;
   }
+.prod-container{
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+@media screen and (max-width: 720px){
+    .prod-container{
+        margin: 0;
+    }
+}
 </style>
