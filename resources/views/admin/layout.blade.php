@@ -133,7 +133,7 @@
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('createorder', $perms))
                                     <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
-                                            class="black-text">Create Order<i class="material-icons textcol">add</i></a>
+                                            class="black-text">Create Order<i class="material-icons black-text">add</i></a>
                                     </li>
                                 @endif
                                 </ul>
