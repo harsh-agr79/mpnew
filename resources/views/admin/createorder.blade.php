@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div style="height: 63vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
+        <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
             @foreach ($data as $item)
                 <div class="mp-card row" style="margin: 3px;">
                     <div class="col s4">
