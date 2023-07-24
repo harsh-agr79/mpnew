@@ -74,12 +74,13 @@
                     <div class="col s12" style=" margin: 0; padding: 0;">
                         <span class="prod-title">{{ $item->name }}</span>
                     </div>
-                    <div class="col s12" style="padding: 0;  margin: 0;">
-                        <span class="prod-det">{{ $item->category }} </span><span class="prod-det">
+                    <div class="col s12 row" style="padding: 0;  margin: 0;">
+                        <span class="prod-det col s6">{{ $item->category }} </span>
+                        <span class="prod-det col s6">
                             @if ($item->stock == 'on')
-                                <span class="red-text">Out of Stock</span>
+                                <span class="red-text right">Out of Stock</span>
                             @else
-                                <span class="green-text">In Stock</span>
+                                <span class="green-text right">In Stock</span>
                             @endif
                         </span>
                     </div>
