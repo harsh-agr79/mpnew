@@ -246,6 +246,6 @@ input:focus {
     border-radius: 5px;
     outline: none;
     border: 1px solid rgb(170, 170, 170);
-    width: 20vh; 
+    width: 15vh; 
 }
 </style>
