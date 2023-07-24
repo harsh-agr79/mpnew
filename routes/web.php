@@ -55,6 +55,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //ORDERS CRUD
     Route::get('createorder', [OrderAdminController::class, 'createorder']);
+    Route::post('admin/addorder', [OrderAdminController::class, 'addorder'])->name('admin.addorder');
+    // Route::get('deleteorder/{id}',[OrderAdminController::class, 'deleteorder']);
 
     //CHALAN PAGES
     Route::get('chalan', [ChalanController::class, 'chalan']);

@@ -96,7 +96,8 @@
                             in_array('deliveredorders', $perms) ||
                             in_array('rejectedorders', $perms) ||
                             in_array('approvedorders', $perms) ||
-                            in_array('chalan', $perms))
+                            in_array('chalan', $perms) ||
+                            in_array('createorder', $perms))
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
                                     class="material-icons chevron textcol">chevron_left</i></a>
                             <div class="collapsible-body">
@@ -130,6 +131,11 @@
                                                 class="textcol">Chalan<i class="material-icons textcol">check</i></a>
                                         </li>
                                     @endif
+                                    @if ($admin->type == 'admin' || in_array('createorder', $perms))
+                                    <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
+                                            class="black-text">Create Order<i class="material-icons textcol">add</i></a>
+                                    </li>
+                                @endif
                                 </ul>
                             </div>
                         </li>

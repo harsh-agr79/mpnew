@@ -224,7 +224,7 @@ input:focus {
     color: black !important;
 }
 .prod-img{
-    height: 15vh;
+    height: 10vh;
 }
 .prod-title{
     font-size: 15px;
@@ -237,10 +237,16 @@ input:focus {
 }
 .price-line{
    position: relative;
-   top: 20px;
+   top: 7px;
+}
+.prod-price{
+    padding: 3px 10px;
+    background: rgb(255, 195, 66);
+    border-radius: 5px;
+    color: black;
 }
 .prod-inp{
-    color: white;
+    color: black;
     outline: none;
     padding: 5px;
     border-radius: 5px;

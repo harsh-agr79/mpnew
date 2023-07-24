@@ -163,7 +163,9 @@
                 </div>
                 <div class="col m6 s12">
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="perm[]" value="createorder|admin/addorder" @if (in_array('createorder', $permission))
+                        checked
+                    @endif/>
                         <span>Create Order</span>
                       </label>
                 </div>
