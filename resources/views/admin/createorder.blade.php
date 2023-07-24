@@ -12,16 +12,18 @@
                     <input type="text" name="name" id="customer" name="customer" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off" required>
                 </div>
-                <div class='input-field col s8'>
-                    <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()"
-                        autocomplete="off" type='search' id='search' />
-                    <span class="field-icon" id="close-search"><span class="material-icons"
-                            id="cs-icon">search</span></span>
-                </div>
-                <div class="col s4 center">
-                    <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;">
-                        Cart <i class="material-icons left">shopping_cart</i>
-                    </a>
+                <div class="row col s12">
+                    <div class="col s4 center">
+                        <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;">
+                            Cart <i class="material-icons left">shopping_cart</i>
+                        </a>
+                    </div>
+                    <div class='input-field col s8'>
+                        <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()"
+                            autocomplete="off" type='search' id='search' />
+                        <span class="field-icon" id="close-search"><span class="material-icons"
+                                id="cs-icon">search</span></span>
+                    </div>
                 </div>
             </div>
         </div>
