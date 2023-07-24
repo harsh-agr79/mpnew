@@ -91,6 +91,14 @@
                                 onkeyup="changequantity({{ $item->id }})"></div>
                     </div>
                 </div>
+                
+                   @php
+                    $subcat = explode('|', $item->subcat)
+                   @endphp
+                   @foreach ($subcat as $item)
+                       <span class="hide">{{$item}}</span>
+                   @endforeach
+               
             </div>
         @endforeach
     </div>
