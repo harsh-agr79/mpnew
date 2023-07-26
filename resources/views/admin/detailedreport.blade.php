@@ -711,13 +711,13 @@
         })
     </script>
      <script type="text/javascript">
-        window.onload = function() {
+        $(document).ready(function(){
             google.charts.load('current', {
                 'packages': ['bar']
             });
             google.charts.setOnLoadCallback(drawStuff);
             google.charts.setOnLoadCallback(drawStufftwo);
-        }
+        })
 
 
         function drawStuff() {
@@ -726,7 +726,6 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', '');
             data.addColumn('number', '');
-
             data.addRows(mta);
 
             var options = {
