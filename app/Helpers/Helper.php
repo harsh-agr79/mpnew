@@ -236,3 +236,7 @@ function getOSamt($name){
     ];
     return $data;
 }
+function marketercuslist($id){
+    $data = DB::table('customers')->where('refid',$id)->pluck('name')->toArray();
+    return $data;
+}

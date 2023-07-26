@@ -15,6 +15,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\SalesReturnController;
+use App\Http\Controllers\MarketerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,5 +163,20 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 });
 
 Route::group(['middleware'=>'MarketerAuth'], function() {
-    Route::get('marketer/home', [LoginController::class, 'marketerhome']);
+    Route::get('marketer/home', [MarketerController::class, 'marketerhome']);
+
+    Route::get('marketer/statement', [MarketerController::class, 'statement']);
+    Route::get('marketer/balancesheet/{id}', [MarketerController::class, 'balancesheet']);
+    Route::get('marketer/mainanalytics', [MarketerController::class, 'mainanalytics']);
+    Route::get('marketer/sortanalytics', [MarketerController::class, 'sortanalytics']);
+    Route::get('marketer/detailedreport', [MarketerController::class, 'detailedreport']);
+
+    Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
+    Route::get('finditem', [ProductController::class, 'getproduct']);
+
+    Route::get('marketer/payments', [MarketerController::class, 'index']);
+    Route::get('marketer/addpayment', [MarketerController::class, 'addpay']);
+    Route::get('marketer/editpayment/{id}', [MarketerController::class, 'addpay']);
+    Route::post('marketer/addpay', [MarketerController::class, 'addpay_process'])->name('addpay');
+    // Route::get('marketer/deletepayment/{id}',[MarketerController::class, 'deletepay']);
 });

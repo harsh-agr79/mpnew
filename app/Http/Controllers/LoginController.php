@@ -91,9 +91,7 @@ class LoginController extends Controller
         return view('customer/home');
     }
 
-    public function marketerhome(){
-        return view('marketer/home');
-    }
+ 
 
     
 }

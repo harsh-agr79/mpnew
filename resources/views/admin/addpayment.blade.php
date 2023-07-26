@@ -1,4 +1,13 @@
-@extends('admin/layout')
+@php
+    if($admin->type == 'marketer'){
+        $type = 'marketer';
+    }
+    else{
+        $type = 'admin';
+   }
+@endphp
+
+@extends($type.'/layout')
 
 @section('main')
     <div>

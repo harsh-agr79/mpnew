@@ -18,7 +18,8 @@ class MarketerAuth
     {
         if($request->session()->has('ADMIN_LOGIN') && in_array(session()->get('ADMIN_TYPE'), ['marketer'])){
             
-            view()->share('marketer', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+            view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+            view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
         }
         else{
             $request->session()->flash('error','Access Denied');
