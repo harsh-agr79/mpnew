@@ -22,7 +22,7 @@ class PaymentController extends Controller
         }
         if($request->get('name')){
             $query = $query->where('name', $request->get('name'));
-            $result['$name'] =  $request->get('name');
+            $result['name'] =  $request->get('name');
         }
         $query = $query->paginate(100);
         $result['data'] = $query;

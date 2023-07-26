@@ -1,12 +1,13 @@
 @extends('admin/layout')
 
 @section('main')
-    <form enctype="multipart/form-data" action="{{route('admin.addorder')}}" method="post">
+    <form enctype="multipart/form-data" action="{{ route('admin.addorder') }}" method="post">
         @csrf
         <div class="mp-card" style="margin-top: 20px;">
             <div class="row">
                 <div class="input-field col s6">
-                    <input type="date" class="inp browser-default black-text" name="date" value="{{ date('Y-m-d') }}" required>
+                    <input type="date" class="inp browser-default black-text" name="date" value="{{ date('Y-m-d') }}"
+                        required>
                 </div>
                 <div class="input-field col s6">
                     <input type="text" name="name" id="customer" name="customer" placeholder="Customer"
@@ -45,12 +46,12 @@
                                 <td>{{ $item->price }}</td>
                                 <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
-                                        class="browser-default prod-inp" onkeyup="changequantity2({{ $item->id }})"
+                                        class="browser-default prod-inp" onchange="changequantity2({{ $item->id }})"
                                         onfocusout="changequantity2({{ $item->id }})"></td>
-                                    <input type="hidden" name="item[]" value="{{$item->name}}">
-                                    <input type="hidden" name="price[]" value="{{$item->price}}">
-                                    <input type="hidden" name="prodid[]" value="{{$item->produni_id}}">
-                                    <input type="hidden" name="category[]" value="{{$item->category}}">
+                                <input type="hidden" name="item[]" value="{{ $item->name }}">
+                                <input type="hidden" name="price[]" value="{{ $item->price }}">
+                                <input type="hidden" name="prodid[]" value="{{ $item->produni_id }}">
+                                <input type="hidden" name="category[]" value="{{ $item->category }}">
                             </tr>
                         @endforeach
                     </tbody>
@@ -90,28 +91,26 @@
                         <div class="col s4"><span class="prod-price">Rs.{{ $item->price }}</span></div>
                         <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
                                 pattern="[0-9]*" placeholder="Quantity" class="browser-default prod-inp right"
-                                onkeyup="changequantity({{ $item->id }})"></div>
+                                onchange="changequantity({{ $item->id }})"></div>
                     </div>
                 </div>
-                
-                   @php
-                    $subcat = explode('|', $item->subcat)
-                   @endphp
-                   @foreach ($subcat as $item)
-                       <span class="hide">{{$item}}</span>
-                   @endforeach
-               
+
+                @php
+                    $subcat = explode('|', $item->subcat);
+                @endphp
+                @foreach ($subcat as $item)
+                    <span class="hide">{{ $item }}</span>
+                @endforeach
+
             </div>
         @endforeach
     </div>
 
     <div class="fixed-action-btn">
-        <a class="btn btn-large red modal-trigger"
-        href="#cart"
-            style="border-radius: 10px;">
+        <a class="btn btn-large red modal-trigger" href="#cart" style="border-radius: 10px;">
             Order
             <i class="left material-icons">send</i>
-    </a>
+        </a>
     </div>
 
 

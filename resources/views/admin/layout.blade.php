@@ -132,10 +132,11 @@
                                         </li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('createorder', $perms))
-                                    <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
-                                            class="black-text">Create Order<i class="material-icons black-text">add</i></a>
-                                    </li>
-                                @endif
+                                        <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
+                                                class="black-text">Create Order<i
+                                                    class="material-icons black-text">add</i></a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </li>
@@ -147,13 +148,13 @@
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('mainanalytics', $perms))
                                         <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                                    class="material-icons textcol">pie_chart</i></a></li>
                                         <li><a href="{{ url('/sortanalytics') }}" class="textcol">Sort Analytics<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                                    class="material-icons textcol">multiline_chart</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('detailedreport', $perms))
                                         <li><a href="{{ url('/detailedreport') }}" class="textcol">Detailed Report<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                                    class="material-icons textcol">show_chart</i></a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -166,11 +167,11 @@
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('statement', $perms))
                                         <li><a href="{{ url('/statement') }}" class="textcol">Statement<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                                    class="material-icons textcol">account_balance</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('refererstatement', $perms))
                                         <li><a href="{{ url('/refererstatement') }}" class="textcol">Referer
-                                                Statement<i class="material-icons textcol">visibility</i></a></li>
+                                                Statement<i class="material-icons textcol">account_box</i></a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -182,11 +183,28 @@
                             <div class="collapsible-body">
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('payments', $perms))
-                                        <li><a href="{{ url('/payments') }}" class="textcol">View List<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/payments') }}" class="textcol">View Payments<i
+                                                    class="material-icons textcol">attach_money</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('addpayment', $perms))
                                         <li><a href="{{ url('/addpayment') }}" class="textcol">Add Payment<i
+                                                    class="material-icons textcol">add</i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+                    @if ($admin->type == 'admin' || in_array('slr', $perms) || in_array('createslr', $perms))
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Sales Return<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type == 'admin' || in_array('slr', $perms))
+                                        <li><a href="{{ url('/slr') }}" class="textcol">View Sales Return<i
+                                                    class="material-icons textcol">autorenew</i></a></li>
+                                    @endif
+                                    @if ($admin->type == 'admin' || in_array('createslr', $perms))
+                                        <li><a href="{{ url('/createslr') }}" class="textcol">Add Sales Return<i
                                                     class="material-icons textcol">add</i></a></li>
                                     @endif
                                 </ul>
@@ -199,8 +217,8 @@
                             <div class="collapsible-body">
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('expenses', $perms))
-                                        <li><a href="{{ url('/expenses') }}" class="textcol">View List<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/expenses') }}" class="textcol">View Expenses<i
+                                                    class="material-icons textcol">credit_card</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('addexpense', $perms))
                                         <li><a href="{{ url('/addexpense') }}" class="textcol">Add Expense<i
@@ -216,12 +234,12 @@
                             <div class="collapsible-body">
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('customers', $perms))
-                                        <li><a href="{{ url('/customers') }}" class="textcol">View List<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/customers') }}" class="textcol">View Customers<i
+                                                    class="material-icons textcol">people</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
                                         <li><a href="{{ url('/addcustomer') }}" class="textcol">Add Customer<i
-                                                    class="material-icons textcol">add</i></a></li>
+                                                    class="material-icons textcol">person_add</i></a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -233,8 +251,8 @@
                             <div class="collapsible-body">
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('products', $perms))
-                                        <li><a href="{{ url('/products') }}" class="textcol">View List<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/products') }}" class="textcol">View Products<i
+                                                    class="material-icons textcol">local_mall</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
                                         <li><a href="{{ url('/addproduct') }}" class="textcol">Add Product<i
@@ -250,8 +268,8 @@
                             <div class="collapsible-body">
                                 <ul>
                                     @if ($admin->type == 'admin' || in_array('subcategory', $perms))
-                                        <li><a href="{{ url('/subcategory') }}" class="textcol">View List<i
-                                                    class="material-icons textcol">visibility</i></a></li>
+                                        <li><a href="{{ url('/subcategory') }}" class="textcol">View Subcategory<i
+                                                    class="material-icons textcol">format_list_bulleted</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('addsubcategory', $perms))
                                         <li><a href="{{ url('/addsubcategory') }}" class="textcol">Add Subcategory<i
@@ -267,9 +285,9 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li><a href="{{ url('/staff') }}" class="textcol">View Staff<i
-                                                class="material-icons textcol">visibility</i></a></li>
+                                                class="material-icons textcol">face</i></a></li>
                                     <li><a href="{{ url('/addstaff') }}" class="textcol">Add Staff<i
-                                                class="material-icons textcol">add</i></a></li>
+                                                class="material-icons textcol">person_add</i></a></li>
                                 </ul>
                             </div>
                         </li>

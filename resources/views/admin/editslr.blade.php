@@ -1,17 +1,17 @@
 @extends('admin/layout')
 
 @section('main')
-    <form enctype="multipart/form-data" action="{{ route('admin.editorder') }}" method="post">
+    <form enctype="multipart/form-data" action="{{ route('admin.editslr') }}" method="post">
         @csrf
-        <input type="hidden" name="orderid" value="{{ $order[0]->orderid }}">
+        <input type="hidden" name="returnid" value="{{ $slr[0]->returnid }}">
         <div class="mp-card" style="margin-top: 20px;">
             <div class="row">
                 <div class="input-field col s6">
                     <input type="date" class="inp browser-default black-text" name="date"
-                        value="{{ date('Y-m-d', strtotime($order[0]->created_at)) }}" required>
+                        value="{{ date('Y-m-d', strtotime($slr[0]->date)) }}" required>
                 </div>
                 <div class="input-field col s6">
-                    <input type="text" name="name" id="customer" name="customer" value="{{ $order[0]->name }}"
+                    <input type="text" name="name" id="customer" name="customer" value="{{ $slr[0]->name }}"
                         placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off"
                         required>
                 </div>
@@ -42,25 +42,18 @@
                         <th class="center">Quantity</th>
                     </thead>
                     <tbody>
-                        @foreach ($order as $item)
+                        @foreach ($slr as $item)
                             <tr id={{ $item->id . 'list' }}>
                                 <td>{{ $item->item }}</td>
                                 <td>{{ $item->price }}</td>
-                                <td class="center"><input type="number"
-                                        @if ($item->status != 'pending') disabled onclick="M.toast({html: 'Order of this product already {{ $item->status }}, Cant edit'})" @endif
-                                        id="{{ $item->id . 'listinp' }}" name="quantity[]" inputmode="numeric"
-                                        pattern="[0-9]*" placeholder="Quantity" value="{{ $item->quantity }}"
-                                        class="browser-default prod-inp" onchange="changequantity2({{ $item->id }})"
+                                <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                                        inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
+                                        value="{{ $item->quantity }}" class="browser-default prod-inp"
+                                        onchange="changequantity2({{ $item->id }})"
                                         onfocusout="changequantity2({{ $item->id }})"></td>
-                                @if ($item->status != 'pending')
-                                    <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
-                                @endif
                                 <input type="hidden" name="id[]" value="{{ $item->id }}">
                                 <input type="hidden" name="item[]" value="{{ $item->item }}">
                                 <input type="hidden" name="price[]" value="{{ $item->price }}">
-                                {{-- <input type="hidden" name="prodid[]" value="{{ $item->produni_id }}"> --}}
-                                {{-- <input type="hidden" name="category[]" value="{{ $item->category }}"> --}}
-                                <input type="hidden" name="status[]" value="{{ $item->status }}">
                             </tr>
                         @endforeach
                         @foreach ($data as $item)
@@ -74,9 +67,6 @@
                                 <input type="hidden" name="id[]" value="">
                                 <input type="hidden" name="item[]" value="{{ $item->name }}">
                                 <input type="hidden" name="price[]" value="{{ $item->price }}">
-                                {{-- <input type="hidden" name="prodid[]" value="{{ $item->produni_id }}"> --}}
-                                {{-- <input type="hidden" name="category[]" value="{{ $item->category }}"> --}}
-                                <input type="hidden" name="status[]" value="pending">
                             </tr>
                         @endforeach
                     </tbody>
@@ -93,7 +83,7 @@
         </div>
     </form>
     <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
-        @foreach ($order as $item)
+        @foreach ($slr as $item)
             <div class="mp-card row prod" style="margin: 3px; padding: 10px;">
                 <div class="col s4" style="padding: 0;  margin: 0;">
                     <img src="{{ asset('storage/media/' . $item->img) }}" class="prod-img materialboxed" alt="">
@@ -114,10 +104,8 @@
                     </div>
                     <div class="row col s12 price-line valign-wrapper" style="padding: 0;  margin: 0;">
                         <div class="col s4"><span class="prod-price">Rs.{{ $item->price }}</span></div>
-                        <div class="col s8"><input type="number"
-                                @if ($item->status != 'pending') disabled onclick="M.toast({html: 'Order of this product already {{ $item->status }}, Cant edit'})" @endif
-                                id="{{ $item->id . 'viewinp' }}" inputmode="numeric" pattern="[0-9]*"
-                                placeholder="Quantity" value="{{ $item->quantity }}"
+                        <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
+                                pattern="[0-9]*" placeholder="Quantity" value="{{ $item->quantity }}"
                                 class="browser-default prod-inp right" onchange="changequantity({{ $item->id }})">
                         </div>
                     </div>
