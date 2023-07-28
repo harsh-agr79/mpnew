@@ -19,7 +19,7 @@
                             <input type="text" name="name" value="{{ $name }}"
                                 class="inp black-text browser-default" placeholder="Name" required>
                         </div>
-                        <input type="hidden" name="name1" value="{{$name}}">
+                        <input type="hidden" name="name1" value="{{ $name }}">
                     </div>
                     <div class="col s12 row">
                         <div class="col s6">
@@ -85,17 +85,18 @@
                             <input type="text" name="uniqueid" value="{{ $uniqueid }}"
                                 class="inp black-text browser-default" placeholder="Unique Id" required>
                         </div>
-                        <input type="hidden" name="uniold" value="{{$uniqueid}}">
+                        <input type="hidden" name="uniold" value="{{ $uniqueid }}">
                     </div>
                     <div class="col s12 row">
                         <div class="col s6">
                             Referer:
                         </div>
                         <div class="input-field col s6">
-                            <input type="text" name="refname" value="{{ $refname }}" id="customer" class="autocomplete inp black-text browser-default" placeholder="referer">
+                            <input type="text" name="refname" value="{{ $refname }}" id="customer"
+                                class="autocomplete inp black-text browser-default" placeholder="referer" autocomplete="off">
                         </div>
                     </div>
-                   
+
                     <div class="col s12 row">
                         <div class="col s6">
                             Open Balance:
@@ -193,24 +194,24 @@
             }
         });
 
-        $(document).ready(function(){
-                  $.ajax({
-                    type:'get',
-                    url:'/getref',
-                    success:function(response2){
-              
-                      var custarray2 = response2;
-                      var datacust2 = {};
-                      for(var i=0; i< custarray2.length; i++){
-              
-                        datacust2[custarray2[i].name] =null;
-                      }
-                      console.log(datacust2)
-                      $('input#customer').autocomplete({
-                        data: datacust2,
-                      });
+        $(document).ready(function() {
+            $.ajax({
+                type: 'get',
+                url: '/getref',
+                success: function(response2) {
+
+                    var custarray2 = response2;
+                    var datacust2 = {};
+                    for (var i = 0; i < custarray2.length; i++) {
+
+                        datacust2[custarray2[i].name] = null;
                     }
-                  })
-                })
+                    console.log(datacust2)
+                    $('input#customer').autocomplete({
+                        data: datacust2,
+                    });
+                }
+            })
+        })
     </script>
 @endsection
