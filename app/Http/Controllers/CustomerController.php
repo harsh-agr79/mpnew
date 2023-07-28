@@ -113,13 +113,16 @@ class CustomerController extends Controller
             $idchanged = $request->post('uniqueid');
             if($request->post('id')>0){
                 DB::table('orders')->where('name',$initial)->update([
-                    'name'=>$changed
+                    'name'=>$changed,
+                    'cusuni_id'=>$idchanged,
                 ]);
                 DB::table('payments')->where('name',$initial)->update([
-                    'name'=>$changed
+                    'name'=>$changed,
+                    'cusuni_id'=>$idchanged,
                 ]);
                 DB::table('salesreturns')->where('name',$initial)->update([
-                    'name'=>$changed
+                    'name'=>$changed,
+                    'cusuni_id'=>$idchanged,
                 ]);
                 DB::table('expenses')->where('name',$initial)->update([
                     'name'=>$changed
