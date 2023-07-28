@@ -91,8 +91,8 @@
                         <div class="col s6">
                             Referer:
                         </div>
-                        <div class="col s6">
-                            <input type="text" name="refname" value="{{ $refname }}"
+                        <div class="input-field col s6">
+                            <input type="text" name="refname" value="{{ $refname }}" id="customer" class="autocomplete"
                                 class="inp black-text browser-default" placeholder="referer">
                         </div>
                     </div>
@@ -193,5 +193,25 @@
                 input.attr("type", "password");
             }
         });
+
+        $(document).ready(function(){
+                  $.ajax({
+                    type:'get',
+                    url:'/getref',
+                    success:function(response2){
+              
+                      var custarray2 = response2;
+                      var datacust2 = {};
+                      for(var i=0; i< custarray2.length; i++){
+              
+                        datacust2[custarray2[i].name] =null;
+                      }
+                      console.log(datacust2)
+                      $('input#customer').autocomplete({
+                        data: datacust2,
+                      });
+                    }
+                  })
+                })
     </script>
 @endsection
