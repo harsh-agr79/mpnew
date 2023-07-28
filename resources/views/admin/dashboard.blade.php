@@ -44,8 +44,8 @@
                                     <td>
                                         <div class="row" style="padding: 0; margin: 0;">
                                             <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
-                                            <div class="col s6" style="font-size: 8px;">{{ $item->orderid }}</div>
-                                            <div class="col s6" style="font-size: 8px;">{{ $item->refname }}</div>
+                                            <div class="col s3 m3 l3" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                            <div class="col s6 m4 l4" style="font-size: 8px;">{{ $item->refname }}</div>
                                         </div>
                                     </td>
                                     <td>{{ $item->seenby }}</td>
@@ -107,8 +107,8 @@
                                     <td>
                                         <div class="row" style="padding: 0; margin: 0;">
                                             <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
-                                            <div class="col s6" style="font-size: 8px;">{{ $item->orderid }}</div>
-                                            <div class="col s6" style="font-size: 8px;">{{ $item->refname }}</div>
+                                            <div class="col s3 m3 l3" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                            <div class="col s6 m4 l4" style="font-size: 8px;">{{ $item->refname }}</div>
                                         </div>
                                     </td>
                                     <td>{{ $item->seenby }}</td>
