@@ -14,7 +14,7 @@
         <div class="row" >
             <div class="col l6 s12" style="margin-top: 15px; padding: 1px;">
                 <div class="mp-card" style="overflow-x: scroll">
-                    <h6 class="center">Direct Orders</h6>
+                    <h6 class="center">All Orders</h6>
                     <table>
                         <thead>
                             <tr>
@@ -44,7 +44,8 @@
                                     <td>
                                         <div class="row" style="padding: 0; margin: 0;">
                                             <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
-                                            <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                            <div class="col s6" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                            <div class="col s6" style="font-size: 8px;">{{ $item->refname }}</div>
                                         </div>
                                     </td>
                                     <td>{{ $item->seenby }}</td>
@@ -65,72 +66,6 @@
                                                 checked disabled
                                                 @elseif($stat == 'deep-purple')
                                                 checked @endif
-                                                        onclick="updatecln({{ $item->orderid }})" />
-                                                    <span></span>
-                                                </label>
-                                            </form>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col l6 s12" style="margin-top: 15px; padding: 1px;">
-                <div class="mp-card" style="overflow-x: scroll">
-                    <h6 class="center">Marketer Orders</h6>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Date</th>
-                                <th>Detail</th>
-                                <th>Seen By</th>
-                                @if ($admin->type == 'admin' || in_array('totalamount', $perms))
-                                    <th class="tamt" style="display: none;">Amount</th>
-                                @endif
-                                @if ($admin->type == 'admin' || in_array('updatecln', $perms))
-                                    <th>Pack Order</th>
-                                @endif
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dealer as $item)
-                                <tr class=" @if ($item->seen == '') z-depth-2 @endif"
-                                    oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                    ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
-                                    <td>
-                                        <div id="{{ $item->orderid . 'order' }}" class="{{ $stat = $item->mainstatus }}"
-                                            style="height: 35px; width:10px;">
-                                        </div>
-                                    </td>
-                                    <td>{{ getNepaliDay($item->created_at) }}-{{ getNepaliMonth($item->created_at) }}
-                                        {{ date('H:i', strtotime($item->created_at)) }}</td>
-                                    <td>
-                                        <div class="row" style="padding: 0; margin: 0;">
-                                            <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
-                                            <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
-                                        </div>
-                                    </td>
-                                    <td>{{ $item->seenby }}</td>
-                                    @if ($admin->type == 'admin' || in_array('totalamount', $perms))
-                                        <td class="tamt" style="display: none;">
-                                            {{ getTotalAmount($item->orderid) }}
-                                        </td>
-                                    @endif
-                                    @if ($admin->type == 'admin' || in_array('updatecln', $perms))
-                                        <td class="center">
-                                            <form id="{{ $item->orderid }}">
-                                                <input type="hidden" name="orderid" value="{{ $item->orderid }}">
-                                                <label>
-                                                    <input type="checkbox" value="packorder" name="packorder"
-                                                        @if ($stat == 'blue' || $stat == 'red') disabled
-                                                    @elseif($stat == 'amber darken-1')
-                                                    @elseif($stat == 'green')
-                                                    checked disabled
-                                                    @elseif($stat == 'deep-purple')
-                                                    checked @endif
                                                         onclick="updatecln({{ $item->orderid }})" />
                                                     <span></span>
                                                 </label>
@@ -172,7 +107,8 @@
                                     <td>
                                         <div class="row" style="padding: 0; margin: 0;">
                                             <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
-                                            <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                            <div class="col s6" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                            <div class="col s6" style="font-size: 8px;">{{ $item->refname }}</div>
                                         </div>
                                     </td>
                                     <td>{{ $item->seenby }}</td>

@@ -56,23 +56,21 @@ class LoginController extends Controller
 
     //DASHBOARD PAGE
     public function dashboard(){
-        $result['dealer'] = DB::table('orders')
-        ->where(['orders.deleted'=>NULL, 'save'=>NULL])
-        ->havingBetween('orders.created_at', [today()->subDays(1), today()->addDays(1)])
-        ->orderBy('orders.created_at', 'DESC')
-        ->join('customers', 'customers.cusuni_id', '=', 'orders.cusuni_id')
-        ->where('customers.refid', '!=' , NULL)
-        ->selectRaw('orders.name,orders.created_at, orderid, mainstatus, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
-        ->groupBy('orders.orderid')
-        ->get();
+        // $result['dealer'] = DB::table('orders')
+        // ->where(['orders.deleted'=>NULL, 'save'=>NULL])
+        // ->havingBetween('orders.created_at', [today()->subDays(1), today()->addDays(1)])
+        // ->orderBy('orders.created_at', 'DESC')
+        // ->join('customers', 'customers.cusuni_id', '=', 'orders.cusuni_id')
+        // ->selectRaw('orders.name,orders.created_at,orders.refname, orderid, mainstatus, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
+        // ->groupBy('orders.orderid')
+        // ->get();
 
         $result['mpe'] = DB::table('orders')
         ->where(['orders.deleted'=>NULL, 'save'=>NULL])
         ->havingBetween('orders.created_at', [today()->subDays(1), today()->addDays(1)])
         ->orderBy('orders.created_at', 'DESC')
         ->join('customers', 'customers.cusuni_id', '=', 'orders.cusuni_id')
-        ->where('customers.refid', NULL)
-        ->selectRaw('orders.name,orders.created_at, orderid, mainstatus, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
+        ->selectRaw('orders.name,orders.created_at,orders.refname, orderid, mainstatus, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
         ->groupBy('orders.orderid')
         ->get();
 
@@ -80,7 +78,7 @@ class LoginController extends Controller
         ->where(['orders.deleted'=>NULL, 'save'=>NULL, 'status'=>'pending'])
         ->orderBy('orders.created_at', 'DESC')
         ->join('customers', 'customers.cusuni_id', '=', 'orders.cusuni_id')
-        ->selectRaw('orders.name,orders.created_at, orderid, mainstatus, seen, seenby, delivered, clnstatus,SUM(quantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
+        ->selectRaw('orders.name,orders.created_at,orders.refname, orderid, mainstatus, seen, seenby, delivered, clnstatus,SUM(quantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
         ->groupBy('orders.orderid')
         ->get();
         return view('admin/dashboard', $result);
