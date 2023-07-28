@@ -92,7 +92,7 @@
                             Referer:
                         </div>
                         <div class="col s6">
-                            <input type="text" name="referer" value="{{ $refname }}"
+                            <input type="text" name="refname" value="{{ $refname }}"
                                 class="inp black-text browser-default" placeholder="referer">
                         </div>
                     </div>
