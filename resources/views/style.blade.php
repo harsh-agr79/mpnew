@@ -120,7 +120,7 @@ input:focus {
 
 
 ::-webkit-scrollbar {
-    width: 15px;
+    width: 8px;
 }
 
 /* Track */
@@ -133,14 +133,14 @@ input:focus {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(255, 145, 0);
+    background: #ffa545;
     border-radius: 10px;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #ff7b00;
-}
+/* ::-webkit-scrollbar-thumb:hover {
+    background: #ffa545;
+} */
 .textcol {
     color: var(--textcol) !important;
 }
