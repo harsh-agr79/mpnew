@@ -39,7 +39,7 @@
         <div class="navbar-fixed">
             <nav class="navbar topnv">
                 <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
-                            src="{{ asset('assets/' . $admin->mode . '.png') }}" height="60" alt=""></a>
+                            src="{{ asset('assets/' . $user->mode . '.png') }}" height="60" alt=""></a>
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger"><i class="material-icons textcol">notifications</i></a>
@@ -60,7 +60,7 @@
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
                                 <div id="settings" class="col s12">
                                     <div class="settings-group">
-                                        <a href="{{ url('/marketer/changemode') }}" class="bg-content textcol">
+                                        <a href="{{ url('/user/changemode') }}" class="bg-content textcol">
                                             <div>Change Mode
                                             </div>
                                         </a>
@@ -83,26 +83,12 @@
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed bg" style="transform: translateX(-105%);">
-            <li><a href="{{ url('/') }}" class="logo-container textcol">{{ $admin->email }}<i
+            <li><a href="{{ url('/') }}" class="logo-container textcol">{{ $user->user_id }}<i
                         class="material-icons left textcol">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li class="bold"><a href="{{ url('/marketer/home') }}" class="textcol">Dashboard<i
-                                class="material-icons textcol">web</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/createorder') }}" class="textcol">Create Order<i
-                                class="material-icons textcol">add</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/statement') }}" class="textcol">Statement<i
-                                class="material-icons textcol">account_balance</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/mainanalytics') }}" class="textcol">Analytics<i
-                                class="material-icons textcol">pie_chart</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/sortanalytics') }}" class="textcol">Sort
-                            Analytics<i class="material-icons textcol">multiline_chart</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/detailedreport') }}" class="textcol">Detailed Report
-                        <i class="material-icons textcol">show_chart</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/payments') }}" class="textcol">Payments<i
-                                class="material-icons textcol">attach_money</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/addpayment') }}" class="textcol">Add payment<i
-                                class="material-icons textcol">add</i></a></li>
+                    <li class="bold"><a href="{{ url('/home') }}" class="textcol">Home<i
+                                class="material-icons textcol">home</i></a></li>
                 </ul>
             </li>
         </ul>

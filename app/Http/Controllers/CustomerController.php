@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    public function changemode(Request $request){
+        $user = DB::table('customers')->where('id',session()->get('USER_ID'))->first();
+        if($user->mode == 'light'){
+            $mode = 'dark';
+        }
+        else{
+            $mode = 'light';
+        }
+        DB::table('customers')->where('id',session()->get('USER_ID'))->update([
+            'mode'=>$mode
+        ]);
+        return redirect(url()->previous());
+    }
     public function getcustomer(){
         if(session()->get('ADMIN_TYPE') == 'marketer')
         {

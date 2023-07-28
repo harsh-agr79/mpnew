@@ -162,12 +162,11 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/getsubcat/{id}', [SubcategoryController::class, 'getsubcat']);
 });
 
-Route::group(['middleware'=>'CustomerAuth'], function() {
-    Route::get('/home', [LoginController::class, 'home']);
-});
 
 Route::group(['middleware'=>'MarketerAuth'], function() {
     Route::get('marketer/home', [MarketerController::class, 'marketerhome']);
+
+    Route::get('/marketer/changemode', [AdminController::class, 'changemode']);
 
     Route::get('marketer/detail/{id}', [MarketerController::class, 'details']);
 
@@ -191,3 +190,10 @@ Route::group(['middleware'=>'MarketerAuth'], function() {
     Route::post('marketer/addpay', [MarketerController::class, 'addpay_process'])->name('/marketer/addpay');
     Route::get('marketer/deletepayment/{id}',[MarketerController::class, 'deletepay']);
 });
+
+
+Route::group(['middleware'=>'CustomerAuth'], function() {
+    Route::get('/home', [LoginController::class, 'home']);
+    Route::get('/user/changemode', [CustomerController::class, 'changemode']);
+});
+

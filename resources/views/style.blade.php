@@ -1,6 +1,14 @@
 
+@php
 
-@if($admin->mode == 'dark')
+if(session()->has('ADMIN_LOGIN')){
+    $u = $admin;
+}
+elseif(session()->has('USER_LOGIN')){
+    $u = $user;
+}
+@endphp
+@if($u->mode == 'dark')
     <style>
         :root{
     --bg: rgb(31, 31, 31);
@@ -265,5 +273,26 @@ input:focus {
     .prod-container{
         margin: 0;
     }
+}
+.home-btn{
+    /* width: 200px !important; */
+    background: rgb(255, 195, 66);
+    color: black;
+    border-radius: 10px; 
+    padding: 15px 20px; 
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home-btn i{
+    margin-left: 3vw; 
+    color: black !important;
+}
+.home-btn:hover{
+    background: rgb(255, 178, 12)
+}
+.spc{
+    transform: scale(1.07);
 }
 </style>
