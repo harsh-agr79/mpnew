@@ -95,8 +95,10 @@
                                 class="material-icons textcol">account_balance</i></a></li>
                     <li class="bold"><a href="{{ url('/marketer/mainanalytics') }}" class="textcol">Analytics<i
                                 class="material-icons textcol">pie_chart</i></a></li>
-                    <li class="bold"><a href="{{ url('/marketer/sortanalytics') }}" class="textcol">Sort Analytics<i
-                                class="material-icons textcol">show_chart</i></a></li>
+                    <li class="bold"><a href="{{ url('/marketer/sortanalytics') }}" class="textcol">Sort
+                            Analytics<i class="material-icons textcol">multiline_chart</i></a></li>
+                    <li class="bold"><a href="{{ url('/marketer/detailedreport') }}" class="textcol">Detailed Report
+                        <i class="material-icons textcol">show_chart</i></a></li>
                     <li class="bold"><a href="{{ url('/marketer/payments') }}" class="textcol">Payments<i
                                 class="material-icons textcol">attach_money</i></a></li>
                     <li class="bold"><a href="{{ url('/marketer/addpayment') }}" class="textcol">Add payment<i
