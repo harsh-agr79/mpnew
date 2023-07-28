@@ -298,7 +298,7 @@
                     @endif
                     @if ($admin->type == 'admin')
                     <li class="bold"><a href="{{ url('/trash') }}" class="textcol">Recycle Bin<i
-                                class="material-icons textcol">trash</i></a></li>
+                                class="material-icons textcol">delete</i></a></li>
                     @endif
                 </ul>
             </li>
