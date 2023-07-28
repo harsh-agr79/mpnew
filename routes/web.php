@@ -16,6 +16,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\SalesReturnController;
 use App\Http\Controllers\MarketerController;
+use App\Http\Controllers\TrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,6 +140,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //ADMIN SETTINGS
     Route::get('/admin/changemode', [AdminController::class, 'changemode']);
+
+    //TRASH CRUD
+    Route::get('trash', [TrashController::class, 'index']);
 
 
     //FOR SERVER SIDE BULK UPDATE

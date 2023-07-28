@@ -296,6 +296,10 @@
                         <li class="bold"><a href="{{ url('/frontsettings') }}" class="textcol">Front Settings<i
                                     class="material-icons textcol">settings</i></a></li>
                     @endif
+                    @if ($admin->type == 'admin')
+                    <li class="bold"><a href="{{ url('/trash') }}" class="textcol">Recycle Bin<i
+                                class="material-icons textcol">trash</i></a></li>
+                    @endif
                 </ul>
             </li>
         </ul>
