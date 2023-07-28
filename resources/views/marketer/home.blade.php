@@ -149,7 +149,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: '/marketer/findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;
