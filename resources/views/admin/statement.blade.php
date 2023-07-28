@@ -1,11 +1,13 @@
 @php
     if($admin->type == 'marketer'){
         $type = 'marketer';
+        $url = '/marketer';
     }
     else{
         $type = 'admin';
+        $url= '';
    }
-@endphp
+@endphp 
 
 @extends($type.'/layout')
 
@@ -164,7 +166,14 @@
         }
 
         function openbs(name) {
-            window.open('/balancesheet/' + name, "_self");
+            var type = `{{ $admin->type }}`;
+            // console.log(type);
+            if (type === 'marketer') {
+            window.open('/marketer/balancesheet/' + name, "_self");
+            }
+            else{
+                window.open('/balancesheet/' + name, "_self");
+            }
         }
     </script>
 @endsection

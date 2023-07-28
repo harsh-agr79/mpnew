@@ -793,7 +793,7 @@ class MarketerController extends Controller
                 'entry_by'=>$admin->email,
             ]);
 
-            return redirect('addpayment');
+            return redirect('marketer/addpayment');
         }
         else{
             DB::table('payments')->where('paymentid', $payid)->update([
@@ -803,7 +803,7 @@ class MarketerController extends Controller
                 'voucher'=>$request->post('voucher'),
                 'remarks'=>$request->post('remarks'),
             ]);
-            return redirect('payments');
+            return redirect('marketer/payments');
         }
     } 
 
@@ -811,5 +811,220 @@ class MarketerController extends Controller
         $cuslist = marketercuslist(session()->get('ADMIN_ID'));
         DB::table('payments')->whereIn('name', $cuslist)->where('paymentid', $id)->delete();
         return redirect('/payments');
+    }
+
+    public function details(Request $request, $orderid){
+        $result['data'] = DB::table('orders')->where('orderid', $orderid) 
+        ->join('products', 'orders.produni_id', '=', 'products.produni_id')
+        ->selectRaw('orders.*, products.stock')
+        ->get();
+
+        return view('marketer/detail', $result);
+    }
+
+
+    public function createorder(Request $request){
+        $result['data'] = DB::table('products')->orderBy('category', 'ASC')->orderBy('ordernum', 'ASC')->get();
+        return view('admin/createorder', $result);
+    }
+    public function addorder(Request $request){
+        $name = $request->post('name');
+        $date = $request->post('date');
+        $customer = DB::table('customers')->where('name', $name)->first();
+        $orderid=$customer->id.time();
+
+        $time = date('H:i:s');
+        $created_at = $date." ".$time;
+        $nepmonth = getNepaliMonth($created_at);
+        $nepyear = getNepaliYear($created_at);
+
+        if($request->session()->get('ADMIN_TYPE') == 'marketer'){
+            $refid = $request->session()->get('ADMIN_ID');
+            $refname = DB::table('admins')->where('id', $refid)->first()->name;
+            $reftype = 'marketer';
+        }
+        elseif($request->session()->get('ADMIN_TYPE') == 'admin'){
+            $refname = $customer->refname;
+            if($refname == NULL)
+            {
+                $refid = NULL;
+                $reftype = NULL;
+            }
+            else{
+                $ref = DB::table('customers')->where('name', $refname)->first();
+                if($ref == NULL)
+                {
+                    $refid = DB::table('admins')->where('name', $refname)->first()->id;
+                    $reftype = DB::table('admins')->where('name', $refname)->first()->type;
+                }
+                else
+                {
+                    $refid = DB::table('customers')->where('name', $refname)->first()->id;
+                    $reftype = DB::table('customers')->where('name', $refname)->first()->type;
+                }
+            }
+        }
+        else
+        {
+            $refid = NULL;
+            $refname = NULL;
+            $reftype = NULL;
+        }
+
+        $item=$request->post('item',[]);
+        $price=$request->post('price',[]);
+        $category=$request->post('category',[]);
+        $quantity=$request->post('quantity',[]);
+        $prodid=$request->post('prodid',[]);
+
+        for ($i=0; $i < count($item); $i++) { 
+            if($quantity[$i] !== NULL && $quantity[$i] !== '0'){
+                DB::table('orders')->insert([
+                    'name'=>$name,
+                    'userid'=>$customer->id,
+                    'orderid'=>$orderid,
+                    'item'=>$item[$i],
+                    'cusuni_id'=>$customer->cusuni_id,
+                    'produni_id'=>$prodid[$i],
+                    'category'=>$category[$i],
+                    'price'=>$price[$i],
+                    'quantity'=>$quantity[$i],
+                    'approvedquantity'=>'0',
+                    'mainstatus'=>'blue',
+                    'status'=>'pending',
+                    'created_at'=>$created_at,
+                    'refname'=>$refname,
+                    'refid'=>$refid,
+                    'reftype'=>$reftype,
+                    'nepmonth'=>$nepmonth,
+                    'nepyear'=>$nepyear,
+                ]);
+            }
+        }
+
+        return redirect('marketer/detail/'.$orderid);
+    }
+
+    public function editorder(Request $request, $orderid){
+        $result['order'] = DB::table('orders')->where('orderid', $orderid)
+        ->join('products', 'products.produni_id', '=', 'orders.produni_id')
+        ->selectRaw('orders.*, products.img, products.hide, products.stock, products.subcat')
+        ->get();
+        $result['data'] = DB::table('products')
+        ->whereNotIn('name', DB::table('orders')->where('orderid', $orderid)->pluck('item')->toArray())
+        ->orderBy('category', 'ASC')
+        ->orderBy('ordernum', 'ASC')->get();
+
+        return view('admin/editorder', $result);
+    }
+
+    public function editorder_process(Request $request)
+    {
+        $name = $request->post('name');
+        $date = $request->post('date');
+        $customer = DB::table('customers')->where('name', $name)->first();
+        $orderid = $request->post('orderid');
+        $time = date('H:i:s');
+        $created_at = $date." ".$time;
+        $nepmonth = getNepaliMonth($created_at);
+        $nepyear = getNepaliYear($created_at);
+        $order = DB::table('orders')->where('orderid', $orderid)->first();
+
+        if($request->session()->get('ADMIN_TYPE') == 'marketer'){
+            $refid = $request->session()->get('ADMIN_ID');
+            $refname = DB::table('admins')->where('id', $refid)->first()->name;
+            $reftype = 'marketer';
+        }
+        elseif($request->session()->get('ADMIN_TYPE') == 'admin'){
+            $refname = $customer->refname;
+            if($refname == NULL)
+            {
+                $refid = NULL;
+                $reftype = NULL;
+            }
+            else{
+                $ref = DB::table('customers')->where('name', $refname)->first();
+                if($ref == NULL)
+                {
+                    $refid = DB::table('admins')->where('name', $refname)->first()->id;
+                    $reftype = DB::table('admins')->where('name', $refname)->first()->type;
+                }
+                else
+                {
+                    $refid = DB::table('customers')->where('name', $refname)->first()->id;
+                    $reftype = DB::table('customers')->where('name', $refname)->first()->type;
+                }
+            }
+        }
+        else
+        {
+            $refid = NULL;
+            $refname = NULL;
+            $reftype = NULL;
+        }
+
+        $item=$request->post('item',[]);
+        $price=$request->post('price',[]);
+        // $category=$request->post('category',[]);
+        $quantity=$request->post('quantity',[]);
+        // $prodid=$request->post('prodid',[]);
+        $id = $request->post('id', []);
+        $status = $request->post('status',[]);
+
+        for ($i=0; $i < count($item); $i++) { 
+            if($quantity[$i] !== NULL && $quantity[$i] !== '0'){
+                if($id[$i]){
+                    DB::table('orders')->where('id', $id[$i])->update([
+                        'name'=>$name,
+                        'userid'=>$customer->id,
+                        'orderid'=>$orderid,
+                        'item'=>$item[$i],
+                        'cusuni_id'=>$customer->cusuni_id,
+                        'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
+                        'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                        'price'=>$price[$i],
+                        'quantity'=>$quantity[$i],
+                        // 'approvedquantity'=>'0',
+                        'mainstatus'=>'blue',
+                        'status'=>$status[$i],
+                        'created_at'=>$created_at,
+                        'refname'=>$refname,
+                        'refid'=>$refid,
+                        'reftype'=>$reftype,
+                        'nepmonth'=>$nepmonth,
+                        'nepyear'=>$nepyear,
+                    ]);
+                }
+                else{
+                    DB::table('orders')->insert([
+                        'name'=>$name,
+                        'userid'=>$customer->id,
+                        'orderid'=>$orderid,
+                        'item'=>$item[$i],
+                        'cusuni_id'=>$customer->cusuni_id,
+                        'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
+                        'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                        'price'=>$price[$i],
+                        'quantity'=>$quantity[$i],
+                        'approvedquantity'=>'0',
+                        'mainstatus'=>'blue',
+                        'status'=>$status[$i],
+                        'created_at'=>$created_at,
+                        'refname'=>$refname,
+                        'refid'=>$refid,
+                        'reftype'=>$reftype,
+                        'nepmonth'=>$nepmonth,
+                        'nepyear'=>$nepyear,
+                        'seen'=>$order->seen,
+                        'seenby'=>$order->seenby,
+                    ]);
+                }
+            }
+            elseif ($quantity[$i] == NULL || $quantity[$i] == '0' && $id[$i] !== NULL) {
+                DB::table('orders')->where('id', $id[$i])->delete();
+            }
+        }
+        updateMainStatus($orderid);
+        return redirect('marketer/detail/'.$orderid);
     }
 }

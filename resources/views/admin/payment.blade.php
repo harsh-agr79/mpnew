@@ -1,9 +1,11 @@
 @php
     if($admin->type == 'marketer'){
         $type = 'marketer';
+        $url = '/marketer';
     }
     else{
         $type = 'admin';
+        $url= '';
    }
 @endphp
 
@@ -55,7 +57,7 @@
                         <tr  oncontextmenu="rightmenu({{ $item->paymentid }}); return false;">
                             <td>{{getNepaliDate($item->date)}}</td>
                             <td>{{$item->name}}</td>
-                            <td><a href="{{url('editpayment/'.$item->paymentid)}}">{{$item->paymentid}}</a></td>
+                            <td><a href="{{url($url.'/editpayment/'.$item->paymentid)}}">{{$item->paymentid}}</a></td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->entry_by}}</td>
                         </tr>
@@ -84,7 +86,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: `{{$url}}`+'/findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;
@@ -107,12 +109,18 @@
          var rmenu = document.getElementById("rightmenu");
          var perms = @json($perms);
          var admintype = `{{ $admin->type }}`;
-         if (admintype == "admin") {
+         if (admintype == "admin" || admintype=="marketer") {
              rmenu.style.display = 'block';
              rmenu.style.top = mouseY(event) + 'px';
              rmenu.style.left = mouseX(event) + 'px';
-             $('#rmeditlink').attr('href', '/editpayment/' + id);
-             $('#rmdeletelink').attr('href', '/deletepayment/' + id);
+             if(admintype == 'marketer'){
+                $('#rmeditlink').attr('href', '/marketer/editpayment/' + id);
+                $('#rmdeletelink').attr('href', '');
+             }
+             else{
+                $('#rmeditlink').attr('href', '/editpayment/' + id);
+                $('#rmdeletelink').attr('href', '/deletepayment/' + id);
+             }
          }
      }
 

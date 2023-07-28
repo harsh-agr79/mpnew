@@ -1,9 +1,11 @@
 @php
     if($admin->type == 'marketer'){
         $type = 'marketer';
+        $url = '/marketer/';
     }
     else{
         $type = 'admin';
+        $url= '';
    }
 @endphp
 
@@ -15,7 +17,7 @@
             <div>
                 <h6 class="center">Payment</h6>
             </div>
-            <form action="{{route('addpay')}}" method="POST">
+            <form action="{{route($url.'addpay')}}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col s12 row">
@@ -79,7 +81,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: `{{$url}}`+'findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;

@@ -1,13 +1,15 @@
 @php
     if($admin->type == 'marketer'){
         $type = 'marketer';
+        $url = '/marketer';
     }
     else{
         $type = 'admin';
+        $url= '';
    }
 @endphp
 
-@extends($type.'/layout')
+@extends($type . '/layout')
 
 @section('main')
     @php
@@ -167,8 +169,16 @@
     </div>
     <script>
         function openanadetail(date, date2, name, product) {
-            window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
-                "_self");
+            var type = `{{ $admin->type }}`;
+            // console.log(type);
+            if (type === 'marketer') {
+                window.open('/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                    "_self");
+            } else {
+                window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                    "_self");
+            }
+
         }
 
         function Filter(cat) {
@@ -255,7 +265,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: `{{$url}}`+'/findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;

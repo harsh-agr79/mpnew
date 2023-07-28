@@ -1,9 +1,11 @@
 @php
     if($admin->type == 'marketer'){
         $type = 'marketer';
+        $url = '/marketer';
     }
     else{
         $type = 'admin';
+        $url= '';
    }
 @endphp
 
@@ -80,12 +82,12 @@
                 <button class="btn amber darken-1">Apply</button>
             </div>
             <div class="input-field col l1">
-                <a class="btn amber darken-1" href="{{ url('/detailedreport') }}">Clear</a>
+                <a class="btn amber darken-1" href="{{ url($url.'/detailedreport') }}">Clear</a>
             </div>
             @if ($name != null)
                 <div class="col s12 l6 row" style="margin-top: 20px;">
                     <div class="col s6 center">
-                        <a href="{{ url('balancesheet/' . $name) }}" class="btn amber darken-2">Statement</a>
+                        <a href="{{ url($url.'/balancesheet/' . $name) }}" class="btn amber darken-2">Statement</a>
                     </div>
                     <div class="col s6 center">
                         @php
@@ -96,7 +98,7 @@
                             }
                             
                         @endphp
-                        <a href="{{ url('/mainanalytics?date=' . getEnglishDate($syear, $smonth, 1) . '&date2=' . getEnglishDate($eyear, $emonth, $eday) . '&name=' . $name) }}"
+                        <a href="{{ url($url.'/mainanalytics?date=' . getEnglishDate($syear, $smonth, 1) . '&date2=' . getEnglishDate($eyear, $emonth, $eday) . '&name=' . $name) }}"
                             class="btn amber darken-2">Product Analytics</a>
                     </div>
                 </div>
@@ -696,13 +698,13 @@
 </div>
     <script>
          function openanadetail(date, date2, name) {
-            window.open('/mainanalytics?date=' + date + '&date2=' + date2 + '&name=' + name,
+            window.open(`{{$url}}`+'/mainanalytics?date=' + date + '&date2=' + date2 + '&name=' + name,
                 "_self");
         }
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: `{{$url}}`+'/findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;

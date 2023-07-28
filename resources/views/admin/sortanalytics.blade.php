@@ -1,9 +1,11 @@
 @php
     if($admin->type == 'marketer'){
         $type = 'marketer';
+        $url = '/marketer';
     }
     else{
         $type = 'admin';
+        $url= '';
    }
 @endphp
 
@@ -363,16 +365,27 @@
             } else if (admintype == 'staff' && jQuery.inArray("chalan", perms) > -1 && ms == 'deep-purple') {
                 window.open('/chalandetail/' + orderid, "_self");
             }
+            else if(admintype == 'marketer'){
+                window.open('/marketer/detail/' + orderid, "_self");
+            }
         }
 
         function openanadetail(date, date2, name, product) {
-            window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
-                "_self");
+            var type = `{{ $admin->type }}`;
+            // console.log(type);
+            if (type === 'marketer') {
+                window.open('/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                    "_self");
+            } else {
+                window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                    "_self");
+            }
+
         }
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: `{{$url}}`+'/findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;

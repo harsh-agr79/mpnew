@@ -43,7 +43,7 @@
                     <tbody>
                         @foreach ($data as $item)
                             <tr class=" @if ($item->seen == '') z-depth-2 @endif"
-                                oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
+                                oncontextmenu="rightmenu({{ $item->orderid }}, '{{$item->mainstatus}}'); return false;"
                                 ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
                                 <td>
                                     <div id="{{ $item->orderid . 'order' }}" class="{{$item->mainstatus}}"
@@ -80,24 +80,22 @@
             <a id="rmeditlink">
                 <li>Edit</li>
             </a>
-            <a id="rmdeletelink">
-                <li class="border-top">Delete</li>
-            </a>
+           
         </ul>
     </div>
 
     <script>
-           function rightmenu(orderid) {
+           function rightmenu(orderid, status) {
             console.log(orderid)
             var rmenu = document.getElementById("rightmenu");
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;
-            if (admintype == "admin") {
+            if (admintype == "marketer" && status == 'blue') {
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
-                $('#rmeditlink').attr('href', '/editorder/' + orderid);
-                $('#rmdeletelink').attr('href', '/deleteorder/' + orderid);
+                $('#rmeditlink').attr('href', '/marketer/editorder/' + orderid);
+                // $('#rmdeletelink').attr('href', 'marketer/deleteorder/' + orderid);
             }
         }
 
@@ -141,6 +139,9 @@
             }
             else if(admintype == 'staff' && jQuery.inArray("chalan", perms) > -1 && ms == 'deep-purple'){
                 window.open('/chalandetail/' + orderid, "_self");
+            }
+            else if(admintype == 'marketer'){
+                window.open('/marketer/detail/' + orderid, "_self");
             }
         }
     </script>

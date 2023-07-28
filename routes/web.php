@@ -165,18 +165,25 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 Route::group(['middleware'=>'MarketerAuth'], function() {
     Route::get('marketer/home', [MarketerController::class, 'marketerhome']);
 
+    Route::get('marketer/detail/{id}', [MarketerController::class, 'details']);
+
+    Route::get('marketer/createorder', [MarketerController::class, 'createorder']);
+    Route::post('marketer/addorder', [MarketerController::class, 'addorder'])->name('marketer.addorder');
+    Route::post('marketer/editorder', [MarketerController::class, 'editorder_process'])->name('marketer.editorder');
+    Route::get('marketer/editorder/{id}', [MarketerController::class, 'editorder']);
+
     Route::get('marketer/statement', [MarketerController::class, 'statement']);
     Route::get('marketer/balancesheet/{id}', [MarketerController::class, 'balancesheet']);
     Route::get('marketer/mainanalytics', [MarketerController::class, 'mainanalytics']);
     Route::get('marketer/sortanalytics', [MarketerController::class, 'sortanalytics']);
     Route::get('marketer/detailedreport', [MarketerController::class, 'detailedreport']);
 
-    Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
-    Route::get('finditem', [ProductController::class, 'getproduct']);
+    Route::get('marketer/findcustomer', [CustomerController::class, 'getcustomer']);
+    Route::get('marketer/finditem', [ProductController::class, 'getproduct']);
 
     Route::get('marketer/payments', [MarketerController::class, 'index']);
     Route::get('marketer/addpayment', [MarketerController::class, 'addpay']);
     Route::get('marketer/editpayment/{id}', [MarketerController::class, 'addpay']);
-    Route::post('marketer/addpay', [MarketerController::class, 'addpay_process'])->name('addpay');
-    // Route::get('marketer/deletepayment/{id}',[MarketerController::class, 'deletepay']);
+    Route::post('marketer/addpay', [MarketerController::class, 'addpay_process'])->name('/marketer/addpay');
+    Route::get('marketer/deletepayment/{id}',[MarketerController::class, 'deletepay']);
 });

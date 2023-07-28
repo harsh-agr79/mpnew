@@ -1,7 +1,18 @@
-@extends('admin/layout')
+@php
+    if($admin->type == 'marketer'){
+        $type = 'marketer';
+        $url = '/marketer/';
+    }
+    else{
+        $type = 'admin';
+        $url= '/';
+   }
+@endphp
+
+@extends($type.'/layout')
 
 @section('main')
-    <form enctype="multipart/form-data" action="{{ route('admin.addorder') }}" method="post">
+    <form enctype="multipart/form-data" action="{{ route($type.'.addorder') }}" method="post">
         @csrf
         <div class="mp-card" style="margin-top: 20px;">
             <div class="row">
@@ -118,7 +129,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('findcustomer') !!}',
+                url: `{{$url}}`+'findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;
