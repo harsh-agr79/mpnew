@@ -1,14 +1,15 @@
 @php
-    if ($admin->type == 'marketer') {
+    if($admin->type == 'marketer'){
         $type = 'marketer';
         $url = '/marketer';
-    } else {
-        $type = 'admin';
-        $url = '';
     }
+    else{
+        $type = 'admin';
+        $url= '';
+   }
 @endphp
 
-@extends($type . '/layout')
+@extends($type.'/layout')
 
 @section('main')
     <div class="mp-card" style="margin-top: 30px;">
@@ -81,12 +82,12 @@
                 <button class="btn amber darken-1">Apply</button>
             </div>
             <div class="input-field col l1">
-                <a class="btn amber darken-1" href="{{ url($url . '/detailedreport') }}">Clear</a>
+                <a class="btn amber darken-1" href="{{ url($url.'/detailedreport') }}">Clear</a>
             </div>
             @if ($name != null)
                 <div class="col s12 l6 row" style="margin-top: 20px;">
                     <div class="col s6 center">
-                        <a href="{{ url($url . '/balancesheet/' . $name) }}" class="btn amber darken-2">Statement</a>
+                        <a href="{{ url($url.'/balancesheet/' . $name) }}" class="btn amber darken-2">Statement</a>
                     </div>
                     <div class="col s6 center">
                         @php
@@ -97,7 +98,7 @@
                             }
                             
                         @endphp
-                        <a href="{{ url($url . '/mainanalytics?date=' . getEnglishDate($syear, $smonth, 1) . '&date2=' . getEnglishDate($eyear, $emonth, $eday) . '&name=' . $name) }}"
+                        <a href="{{ url($url.'/mainanalytics?date=' . getEnglishDate($syear, $smonth, 1) . '&date2=' . getEnglishDate($eyear, $emonth, $eday) . '&name=' . $name) }}"
                             class="btn amber darken-2">Product Analytics</a>
                     </div>
                 </div>
@@ -130,11 +131,11 @@
                         $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
                     @endphp
                     <li>
-                        <div class="collapsible-header row"
-                            @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                            <span
-                                class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                            <div class="collapsible-header row" @if ($name != NULL)
+                            ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
+                            @endif><span
+                                    class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
+                                    class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                         @if ($name == null)
                             @php
                                 $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -149,14 +150,13 @@
                             @endphp
                             <div class="collapsible-body"><span>
                                     @php
-                                        
+                                            
                                         $query = DB::table('orders');
-                                        if ($type == 'marketer') {
-                                            $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-                                            $query = $query->WhereIn('name', $cuslist);
-                                        }
-                                        $query = $query
-                                            ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
+                                        if($type == 'marketer'){
+                                                    $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                $query = $query->WhereIn('name', $cuslist);
+                                            }
+                                        $query = $query->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
                                             ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                                             ->orderBy('sl', 'DESC')
                                             ->groupBy('name')
@@ -172,12 +172,11 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($sls as $item2)
-                                                <tr
-                                                    ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
                                                     <td>
                                                         {{ $item2->name }}
                                                     </td>
-                                                    <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                    <td>{{money($item2->sl - $item2->dis)}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -206,11 +205,11 @@
                             $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
                         @endphp
                         <li>
-                            <div class="collapsible-header row"
-                                @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                                <span
+                            <div class="collapsible-header row" @if ($name != NULL)
+                            ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
+                            @endif><span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                    class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                             @if ($name == null)
                                 @php
                                     $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -225,18 +224,18 @@
                                 @endphp
                                 <div class="collapsible-body"><span>
                                         @php
-                                            $query = DB::table('orders');
-                                            if ($type == 'marketer') {
-                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                  
+                                        $query = DB::table('orders');
+                                        if($type == 'marketer'){
+                                                    $cuslist = marketercuslist(session()->get('ADMIN_ID'));
                                                 $query = $query->WhereIn('name', $cuslist);
                                             }
-                                            $query = $query
-                                                ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
-                                                ->orderBy('sl', 'DESC')
-                                                ->groupBy('name')
-                                                ->get();
-                                            $sls = $query;
+                                        $query = $query->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
+                                            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                                            ->orderBy('sl', 'DESC')
+                                            ->groupBy('name')
+                                            ->get();
+                                        $sls = $query;
                                         @endphp
                                         <table class="sortable">
                                             <thead>
@@ -247,13 +246,12 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($sls as $item2)
-                                                    <tr
-                                                        ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
 
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
-                                                        <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                        <td>{{money($item2->sl - $item2->dis)}}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -282,11 +280,11 @@
                             $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
                         @endphp
                         <li>
-                            <div class="collapsible-header row"
-                                @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                                <span
+                            <div class="collapsible-header row" @if ($name != NULL)
+                            ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
+                            @endif><span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                    class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                             @if ($name == null)
                                 @php
                                     $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -301,18 +299,18 @@
                                 @endphp
                                 <div class="collapsible-body"><span>
                                         @php
-                                            $query = DB::table('orders');
-                                            if ($type == 'marketer') {
-                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                  
+                                        $query = DB::table('orders');
+                                        if($type == 'marketer'){
+                                                    $cuslist = marketercuslist(session()->get('ADMIN_ID'));
                                                 $query = $query->WhereIn('name', $cuslist);
                                             }
-                                            $query = $query
-                                                ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
-                                                ->orderBy('sl', 'DESC')
-                                                ->groupBy('name')
-                                                ->get();
-                                            $sls = $query;
+                                        $query = $query->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
+                                            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                                            ->orderBy('sl', 'DESC')
+                                            ->groupBy('name')
+                                            ->get();
+                                        $sls = $query;
                                         @endphp
                                         <table class="sortable">
                                             <thead>
@@ -323,13 +321,12 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($sls as $item2)
-                                                    <tr
-                                                        ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
 
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
-                                                        <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                        <td>{{money($item2->sl - $item2->dis)}}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -358,11 +355,11 @@
                             $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
                         @endphp
                         <li>
-                            <div class="collapsible-header row"
-                                @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                                <span
+                            <div class="collapsible-header row" @if ($name != NULL)
+                            ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear))))}}', '{{$name}}')"
+                            @endif><span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                    class="right col s6">{{money($item->sl - $item->dis)}}</span></div>
                             @if ($name == null)
                                 @php
                                     $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -377,18 +374,18 @@
                                 @endphp
                                 <div class="collapsible-body"><span>
                                         @php
-                                            $query = DB::table('orders');
-                                            if ($type == 'marketer') {
-                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                   
+                                        $query = DB::table('orders');
+                                        if($type == 'marketer'){
+                                                    $cuslist = marketercuslist(session()->get('ADMIN_ID'));
                                                 $query = $query->WhereIn('name', $cuslist);
                                             }
-                                            $query = $query
-                                                ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
-                                                ->orderBy('sl', 'DESC')
-                                                ->groupBy('name')
-                                                ->get();
-                                            $sls = $query;
+                                        $query = $query->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
+                                            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                                            ->orderBy('sl', 'DESC')
+                                            ->groupBy('name')
+                                            ->get();
+                                        $sls = $query;
                                         @endphp
                                         <table class="sortable">
                                             <thead>
@@ -399,13 +396,12 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($sls as $item2)
-                                                    <tr
-                                                        ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
+                                                <tr  ondblclick="openanadetail('{{getEnglishDate($item->nepyear, $item->nepmonth, 1)}}', '{{getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear))))}}', '{{$item2->name}}')">
 
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
-                                                        <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                        <td>{{money($item2->sl - $item2->dis)}}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -495,13 +491,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="font-weight: 700;">Total Balance @if ($tbd > $tbc)
-                                        | To Recieve |
-                                    @else
-                                        | To Give |
-                                    @endif
-                                </td>
-                                <td style="font-weight: 700;">{{ money($bal) }}</td>
+                                <td style="font-weight: 700;">Total Balance @if($tbd > $tbc) | To Recieve | @else | To Give | @endif</td>
+                                <td style="font-weight: 700;">{{money($bal)}}</td>
                             </tr>
                             @if (count($thirdays) > 0)
                                 <tr>
@@ -509,15 +500,13 @@
                                     <td style="font-weight: 700;">Above 30 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($thirdays[0]->sum - $thirdays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbd - $tbc - ($thirdays[0]->sum - $thirdays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbd - $tbc - ($thirdays[0]->sum - $thirdays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
                                     @elseif($tbd < $tbc)
                                         @if ($tbc - $tbd - ($thirdays[0]->sum - $thirdays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbc - $tbd - ($thirdays[0]->sum - $thirdays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbc - $tbd - ($thirdays[0]->sum - $thirdays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
@@ -528,9 +517,9 @@
                                     <td style="font-weight: 700;">Above 30 days</td>
 
                                     @if ($tbc - $tbd > 0)
-                                        <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbc - $tbd)}}</td>
                                     @else
-                                        <td style="font-weight: 700;">{{ money($tbd - $tbc) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbd - $tbc)}}</td>
                                     @endif
                                 </tr>
                             @endif
@@ -541,15 +530,13 @@
                                     <td style="font-weight: 700;">Above 45 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($fourdays[0]->sum - $fourdays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbd - $tbc - ($fourdays[0]->sum - $fourdays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbd - $tbc - ($fourdays[0]->sum - $fourdays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
                                     @elseif($tbd < $tbc)
                                         @if ($tbc - $tbd - ($fourdays[0]->sum - $fourdays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbc - $tbd - ($fourdays[0]->sum - $fourdays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbc - $tbd - ($fourdays[0]->sum - $fourdays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
@@ -560,9 +547,9 @@
                                     <td style="font-weight: 700;">Above 45 days</td>
 
                                     @if ($tbc - $tbd > 0)
-                                        <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbc - $tbd)}}</td>
                                     @else
-                                        <td style="font-weight: 700;">{{ money($tbd - $tbc) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbd - $tbc)}}</td>
                                     @endif
                                 </tr>
                             @endif
@@ -573,15 +560,13 @@
                                     <td style="font-weight: 700;">Above 60 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($sixdays[0]->sum - $sixdays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbd - $tbc - ($sixdays[0]->sum - $sixdays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbd - $tbc - ($sixdays[0]->sum - $sixdays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
                                     @elseif($tbd < $tbc)
                                         @if ($tbc - $tbd - ($sixdays[0]->sum - $sixdays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbc - $tbd - ($sixdays[0]->sum - $sixdays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbc - $tbd - ($sixdays[0]->sum - $sixdays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
@@ -592,9 +577,9 @@
                                     <td style="font-weight: 700;">Above 60 days</td>
 
                                     @if ($tbc - $tbd > 0)
-                                        <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbc - $tbd)}}</td>
                                     @else
-                                        <td style="font-weight: 700;">{{ money($tbd - $tbc) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbd - $tbc)}}</td>
                                     @endif
                                 </tr>
                             @endif
@@ -604,15 +589,13 @@
                                     <td style="font-weight: 700;">Above 90 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($nindays[0]->sum - $nindays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbd - $tbc - ($nindays[0]->sum - $nindays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbd - $tbc - ($nindays[0]->sum - $nindays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
                                     @elseif($tbd < $tbc)
                                         @if ($tbc - $tbd - ($nindays[0]->sum - $nindays[0]->dis) > 0)
-                                            <td style="font-weight: 700;">
-                                                {{ money($tbc - $tbd - ($nindays[0]->sum - $nindays[0]->dis)) }}</td>
+                                            <td style="font-weight: 700;">{{money($tbc - $tbd - ($nindays[0]->sum - $nindays[0]->dis))}}</td>
                                         @else
                                             <td>0</td>
                                         @endif
@@ -623,9 +606,9 @@
                                     <td style="font-weight: 700;">Above 90 days</td>
 
                                     @if ($tbc - $tbd > 0)
-                                        <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbc - $tbd)}}</td>
                                     @else
-                                        <td style="font-weight: 700;">{{ money($tbd - $tbc) }}</td>
+                                        <td style="font-weight: 700;">{{money($tbd - $tbc)}}</td>
                                     @endif
                                 </tr>
                             @endif
@@ -634,168 +617,136 @@
                 </div>
             </div>
         @endif
-        @if ($numbills > 0)
-            <div class="col s12 m6">
-                <div class="mp-card">
-                    <div>
-                        <h6 class="center">Average Sales Report</h6>
-                    </div>
-                    <div class="container">
-                        <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Particular</th>
-                                <th>Sales</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>Total Sales</td>
-                            <td>{{ money($totalsales) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Sales Per Bill </td>
-                            <td>{{ money($totalsales / $numbills) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Sales Per Month</td>
-                            <td>{{ money($totalsales / $nummonths) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Sales Per Day</td>
-                            <td>{{ money($totalsales / getNepaliDays($smonth, date('y', strtotime($syear)), $emonth, date('y', strtotime($eyear)), getNepaliDay(today()), getNepaliMonth(today()), date('y', strtotime(getNepaliYear(today()))))) }}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        @else
+        @if($numbills > 0)
+    <div class="col s12 m6">
+        <div class="mp-card">
             <div>
-                <h5 class="center">
-                    No Sales Data for Given Date Range
-                </h5>
+                <h6 class="center">Average Sales Report</h6>
             </div>
-        @endif
-        <div class="col s12 m6">
-            <div class="mp-card">
-                <div>
-                    <h6 class="center">Quaterly Sales</h6>
-                </div>
-                <div class="container">
-                    <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Quater</th>
-                            <th>Sales</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $quatdata = [];
-                            
-                            foreach ($fquat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'First Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            foreach ($squat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Second Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            foreach ($tquat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Third Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            foreach ($frquat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Fourth Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            usort($quatdata, function ($a, $b) {
-                                return strtotime($a['id']) - strtotime($b['id']);
-                            });
-                            
-                            $qdata = collect($quatdata);
-                            $forqdata = [];
-                        @endphp
-                        @for ($i = 0; $i < count($qdata); $i++)
-                            @if ($qdata[$i]['year'] >= $syear && $qdata[$i]['year'] <= $eyear)
-                                @php
-                                    $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => $qdata[$i]['amount']];
-                                @endphp
-                                <tr>
-                                    <td>{{ $qdata[$i]['quat'] }}</td>
-                                    <td>{{ money($qdata[$i]['amount']) }}</td>
-                                </tr>
-                            @endif
-                        @endfor
-                    </tbody>
-                </table>
+            <div class="container">
+                <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
             </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Particular</th>
+                        <th>Sales</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Total Sales</td>
+                    <td>{{money($totalsales)}}</td>
+                </tr>
+                <tr>
+                    <td>Average Sales Per Bill </td>
+                    <td>{{money($totalsales / $numbills)}}</td>
+                </tr>
+                <tr>
+                    <td>Average Sales Per Month</td>
+                    <td>{{money($totalsales / $nummonths)}}</td>
+                </tr>
+                <tr>
+                    <td>Average Sales Per Day</td>
+                    <td>{{money($totalsales / getNepaliDays($smonth,date('y', strtotime($syear)),$emonth,date('y', strtotime($eyear)), getNepaliDay(today()), getNepaliMonth(today()), date('y', strtotime(getNepaliYear(today())))))}}</td>
+                </tr>
+            </table>
         </div>
     </div>
+    @else
+    <div>
+        <h5 class="center">
+        No Sales Data for Given Date Range
+        </h5>
+    </div>
+    @endif
+    <div class="col s12 m6">
+        <div class="mp-card">
+            <div>
+                <h6 class="center">Quaterly Sales</h6>
+            </div>
+            <div class="container">
+                <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quater</th>
+                        <th>Sales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $quatdata = [];
+                        
+                        foreach ($fquat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'First Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        foreach ($squat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Second Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        foreach ($tquat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Third Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        foreach ($frquat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Fourth Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        usort($quatdata, function ($a, $b) {
+                            return strtotime($a['id']) - strtotime($b['id']);
+                        });
+                        
+                        $qdata = collect($quatdata);
+                        $forqdata = [];
+                    @endphp
+                    @for ($i = 0; $i < count($qdata); $i++)
+                        @if ($qdata[$i]['year'] >= $syear && $qdata[$i]['year'] <= $eyear)
+                            @php
+                                $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => $qdata[$i]['amount']];
+                            @endphp
+                            <tr>
+                                <td>{{ $qdata[$i]['quat'] }}</td>
+                                <td>{{money($qdata[$i]['amount'])}}</td>
+                            </tr>
+                        @endif
+                    @endfor
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-    <div class="mp-card container" style="margin-top: 20px;">
-        <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
-    </div>
-    <div class="mp-card container" style="margin-top: 20px;">
-        <div class="bar" id="top_x_div2" style="width: auto; height: 500px;"></div>
-    </div>
+<div class="mp-card container" style="margin-top: 20px;">
+    <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
+</div>
+<div class="mp-card container" style="margin-top: 20px;">
+    <div class="bar" id="top_x_div2" style="width: auto; height: 500px;"></div>
+</div>
     <script>
-        function openanadetail(date, date2, name) {
-            window.open(`{{ $url }}` + '/mainanalytics?date=' + date + '&date2=' + date2 + '&name=' + name,
+         function openanadetail(date, date2, name) {
+            window.open(`{{$url}}`+'/mainanalytics?date=' + date + '&date2=' + date2 + '&name=' + name,
                 "_self");
         }
         $(document).ready(function() {
-                    $.ajax({
-                                type: 'get',
-                                url: `{{ $url }}` + '/findcustomer',
-                                <
-                                /table> <
-                                /div> <
-                                /div> <
-                                /div>
+            $.ajax({
+                type: 'get',
+                url: `{{$url}}`+'/findcustomer',
+                success: function(response2) {
 
-                                <
-                                div class = "mp-card container"
-                                style = "margin-top: 20px;" >
-                                <
-                                div class = "bar"
-                                id = "top_x_div"
-                                style = "width: auto; height: 500px;" > < /div> <
-                                /div> <
-                                div class = "mp-card container"
-                                style = "margin-top: 20px;" >
-                                <
-                                div class = "bar"
-                                id = "top_x_div2"
-                                style = "width: auto; height: 500px;" > < /div> <
-                                /div> <
-                                script >
-                                function openanadetail(date, date2, name) {
-                                    window.open(`{{ $url }}` + '/mainanalytics?date=' + date + '&date2=' +
-                                        date2 + '&name=' + name,
-                                        "_self");
-                                }
-                                $(document).ready(function() {
-                                    $.ajax({
-                                        type: 'get',
-                                        url: `{{ $url }}` + '/findcustomer',
-                                        success: function(response2) {
+                    var custarray2 = response2;
+                    var datacust2 = {};
+                    for (var i = 0; i < custarray2.length; i++) {
 
-                                            var custarray2 = response2;
-                                            var datacust2 = {};
-                                            for (var i = 0; i < custarray2.length; i++) {
-
-                                                datacust2[custarray2[i].name] = null;
-                                            }
-                                            // console.log(datacust2)
-                                            $('input#customer').autocomplete({
-                                                data: datacust2,
-                                            });
-                                        }
-                                    })
-                                })
+                        datacust2[custarray2[i].name] = null;
+                    }
+                    // console.log(datacust2)
+                    $('input#customer').autocomplete({
+                        data: datacust2,
+                    });
+                }
+            })
+        })
     </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+     <script type="text/javascript">
+        $(document).ready(function(){
             google.charts.load('current', {
                 'packages': ['bar']
             });
