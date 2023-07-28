@@ -20,7 +20,7 @@ class CustomerController extends Controller
     }
 
     public function index(Request $request){
-        $result['data'] = DB::table('customers')->where('deleted', NULL)->get();
+        $result['data'] = DB::table('customers')->where('deleted','!=','on')->orWhereNull('deleted')->get();
 
         return view('admin/customers', $result);
     }
@@ -164,7 +164,7 @@ class CustomerController extends Controller
 
     public function deletecustomer(Request $request, $id){
         DB::table('customers')->where('id', $id)->update([
-            'delete'=>'on',
+            'deleted'=>'on',
             'deleted_at'=>date('Y-m-d H:i:s'),
         ]);
         return redirect('/customers');

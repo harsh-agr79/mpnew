@@ -180,4 +180,11 @@ class ProductController extends Controller
         $request->session()->flash('category', $request->post('category'));
         return redirect('products');
     }
+    public function deleteprod(Request $request, $id){
+        DB::table('products')->where('id',$id)->update([
+            'deleted'=>'on',
+            'deleted_at'=>date('Y-m-d H:i:s')
+        ]);
+        return redirect('products');
+    }
 }

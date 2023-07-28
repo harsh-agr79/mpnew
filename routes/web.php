@@ -59,7 +59,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('createorder', [OrderAdminController::class, 'createorder']);
     Route::post('admin/addorder', [OrderAdminController::class, 'addorder'])->name('admin.addorder');
     Route::post('admin/editorder', [OrderAdminController::class, 'editorder_process'])->name('admin.editorder');
-    // Route::get('deleteorder/{id}',[OrderAdminController::class, 'deleteorder']);
+    Route::get('deleteorder/{id}',[OrderAdminController::class, 'deleteorder']);
     Route::get('editorder/{id}', [OrderAdminController::class, 'editorder']);
 
     //SALESRETURN CRUD
@@ -69,7 +69,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('admin/addslr', [SalesReturnController::class, 'addslr'])->name('admin.addslr');
     Route::post('admin/editslr', [SalesReturnController::class, 'editslr_process'])->name('admin.editslr');
     Route::post('admin/editslrdet', [SalesReturnController::class, 'editslrdet_process'])->name('admin.editslrdet');
-    // Route::get('deleteslr/{id}',[SalesReturnController::class, 'deleteslr']);
+    Route::get('deleteslr/{id}',[SalesReturnController::class, 'deleteslr']);
     Route::get('editslr/{id}', [SalesReturnController::class, 'editslr']);
 
     //CHALAN PAGES
@@ -90,7 +90,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('customers', [CustomerController::class, 'index']);
     Route::get('addcustomer', [CustomerController::class, 'addcustomer']);
     Route::get('editcustomer/{id}', [CustomerController::class, 'addcustomer']);
-    // Route::get('deletecustomer/{id}', [CustomerController::class, 'deletecustomer']);
+    Route::get('deletecustomer/{id}', [CustomerController::class, 'deletecustomer']);
     Route::post('addcus', [CustomerController::class, 'addcustomer_process'])->name('addcustomer');
 
     //Payments CRUD
@@ -98,14 +98,14 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('addpayment', [PaymentController::class, 'addpay']);
     Route::get('editpayment/{id}', [PaymentController::class, 'addpay']);
     Route::post('addpay', [PaymentController::class, 'addpay_process'])->name('addpay');
-    // Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
+    Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
 
      //expenses CRUD
      Route::get('expenses', [ExpenseController::class, 'index']);
      Route::get('addexpense', [ExpenseController::class, 'addexp']);
      Route::get('editexpense/{id}', [ExpenseController::class, 'addexp']);
      Route::post('addexp', [ExpenseController::class, 'addexp_process'])->name('addexp');
-    //  Route::get('deleteexpense/{id}',[ExpenseController::class, 'deleteexp']);
+     Route::get('deleteexpense/{id}',[ExpenseController::class, 'deleteexp']);
 
     //SUBCATEGORY CRUD
     Route::get('/subcategory', [SubcategoryController::class, 'subcat']);

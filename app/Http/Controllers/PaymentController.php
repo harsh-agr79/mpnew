@@ -78,7 +78,10 @@ class PaymentController extends Controller
     } 
 
     public function deletepay(Request $request, $id){
-        DB::table('payments')->where('paymentid', $id)->delete();
+        DB::table('payments')->where('paymentid', $id)->update([
+            'deleted'=>'on',
+            'deleted_at'=>date('Y-m-d H:i:s')
+        ]);
         return redirect('/payments');
     }
 }

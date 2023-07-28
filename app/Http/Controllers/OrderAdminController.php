@@ -242,7 +242,10 @@ class OrderAdminController extends Controller
 
     public function deleteorder(Request $request, $orderid)
     {
-        DB::table('orders')->where('orderid', $orderid)->delete();
+        DB::table('orders')->where('orderid', $orderid)->update([
+            'deleted'=>'on',
+            'deleted_at'=>date('Y-m-d H:i:s')
+        ]);
         return redirect(url()->previous());
     }
 
