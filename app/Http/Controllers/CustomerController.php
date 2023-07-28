@@ -163,7 +163,10 @@ class CustomerController extends Controller
     }
 
     public function deletecustomer(Request $request, $id){
-        DB::table('customers')->where('id', $id)->delete();
+        DB::table('customers')->where('id', $id)->update([
+            'delete'=>'on',
+            'deleted_at'=>date('Y-m-d H:i:s'),
+        ]);
         return redirect('/customers');
     }
 }
