@@ -92,8 +92,7 @@
                             Referer:
                         </div>
                         <div class="input-field col s6">
-                            <input type="text" name="refname" value="{{ $refname }}" id="customer" class="autocomplete"
-                                class="inp black-text browser-default" placeholder="referer">
+                            <input type="text" name="refname" value="{{ $refname }}" id="customer" class="autocomplete inp black-text browser-default" placeholder="referer">
                         </div>
                     </div>
                    
