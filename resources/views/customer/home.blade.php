@@ -1,8 +1,8 @@
 @extends('customer/layout')
 
 @section('main')
-    <div class="row">
-        <div class="col l6 m12 s12">
+    <div class="row" style="padding: 0; margin: 0;">
+        <div class="col l6 m12 s12 amber" style="height: 35vh; padding: 0; margin: 0;">
             <h4 class="center">Carousel</h4>
         </div>
         <div class="col l6 m12 s12 row center" style="margin-top: 20px;">
