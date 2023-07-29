@@ -3,6 +3,8 @@
 @extends('customer/layout')
 
 @section('main')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <div class="row bg-content textcol">
     <div class="col s2 center" style="padding:5px;">
       <a href="#powerbank" class="browser-default"><div><i class="fa-solid fa-car-battery textcol" style="font-size: 25px;"></i></div>
