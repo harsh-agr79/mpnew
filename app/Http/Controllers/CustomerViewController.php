@@ -437,6 +437,12 @@ class CustomerViewController extends Controller
             ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
             ->groupBy('nepyear')
             ->get();
+
+        $today = date('Y-m-d');
+         $target = DB::table('target')->where('userid',$cust->user_id)
+         ->where('startdate', '<=', $today)
+         ->where('enddate', '>=', $today)
+         ->get();
         return view ('customer/summary', $result);
     }
 }

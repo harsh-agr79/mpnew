@@ -57,7 +57,7 @@ $bal = explode('|', $user->balance);
             <a href="{{url('user/statement')}}" class="home-btn">Click Here To See Full Statement</a>
         </div>
         <div class="col s12" style="margin-top: 5px;">
-            <a class="home-btn">Click Here To See Target Details</a>
+            <a class="home-btn modal-trigger" href="#modal1">Click Here To See Target Details</a>
         </div>
     </div>
        
@@ -367,6 +367,68 @@ $bal = explode('|', $user->balance);
     </div>
     <div class="mp-card container" style="margin-top: 10px;">
         <div class="bar" id="top_x_div2" style="width: auto; height: 500px;"></div>
+    </div>
+
+    <div id="modal1" class="modal black-text">
+        <div class="modal-content">
+            @php
+                $today = date('Y-m-d');
+                $target = DB::table('target')
+                    ->where('customerid', $user->id)
+                    ->where('startdate', '<=', $today)
+                    ->where('enddate', '>=', $today)
+                    ->get();
+                
+            @endphp
+            @if (count($target) > 0)
+                @php
+                    $ach = DB::table('orders')
+                        ->where(['deleted' => null])
+                        ->where('name', $user->name)
+                        ->where('created_at', '>=', $target[0]->startdate)
+                        ->where('created_at', '<=', $target[0]->enddate)
+                        ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')
+                        ->groupBy('name')
+                        ->where('status', 'approved')
+                        ->get();
+                    if (!$ach->isEmpty()) {
+                        $gross = ($ach['0']->sum * 251.2) / $target[0]->gross;
+                        $net = (($ach['0']->sum - $ach['0']->dis) * 251.2) / $target[0]->net;
+                        $net2 = (($ach['0']->sum - $ach['0']->dis) * 100) / $target[0]->net;
+                        $net3 = $ach['0']->sum - $ach['0']->dis;
+                    } else {
+                        $gross = 0;
+                        $net = 0;
+                        $net2 = 0;
+                        $net3 = 0;
+                    }
+                @endphp
+                <h4 class="">Target Details</h4>
+                <h6 class="left-align">Starting Date: {{ $target[0]->startdate }} <br> Ending Date:
+                    {{ $target[0]->enddate }}</h6>
+                <div class="row" style="margin-top: 50px;">
+                    <div class="col s12 m6 left-align">
+                        <span style="font-size: 20px; font-weight:600;">Gross Target: {{money($target[0]->gross)}}</span><br>
+                        <span style="font-size: 20px; font-weight:600;">Net Target: {{money($target[0]->net)}}</span><br>
+                        <span style="font-size: 20px; font-weight:600;">Achieved : <span class="red-text">
+                                {{money($net3)}}</span></span>
+                    </div>
+                    <div class="col s12 m6 ">
+                        <svg viewbox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="#FDB900" />
+                            <path fill="none" stroke-linecap="round" stroke-width="5" stroke="#fff"
+                                stroke-dasharray="{{ $net }},{{ 251.2 - $net }}"
+                                d="M50 10
+                     a 40 40 0 0 1 0 80
+                     a 40 40 0 0 1 0 -80" />
+                            <text x="50" y="50" text-anchor="middle" dy="7"
+                                font-size="20">{{ round($net2) }}%</text>
+                        </svg>
+                    </div>
+                </div>
+            @endif
+
+        </div>
     </div>
     <script>
         function openanadetail(date, date2, name) {
