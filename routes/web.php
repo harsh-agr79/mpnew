@@ -18,6 +18,7 @@ use App\Http\Controllers\SalesReturnController;
 use App\Http\Controllers\MarketerController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CustomerViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -198,5 +199,11 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::get('/user/changemode', [CustomerController::class, 'changemode']);
 
     Route::get('/user/createorder', [OrderController::class, 'createorder']);
+
+    Route::get('/user/analytics', [CustomerViewController::class, 'analytics']);
+    Route::get('/user/summary', [CustomerViewController::class, 'summary']);
+    Route::get('/user/statement', [CustomerViewController::class, 'statement']);
+
+    Route::get('user/finditem', [ProductController::class, 'getproduct']);
 });
 

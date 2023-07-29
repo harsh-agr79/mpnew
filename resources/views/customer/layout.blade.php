@@ -91,6 +91,8 @@
                                 class="material-icons textcol">home</i></a></li>
                     <li class="bold"><a href="{{ url('/user/createorder') }}" class="textcol">Create Order<i
                                     class="material-icons textcol">add</i></a></li>
+                    <li class="bold"><a href="{{ url('/user/statement') }}" class="textcol">Statement<i
+                                        class="material-icons textcol">web</i></a></li>
                 </ul>
             </li>
         </ul>
