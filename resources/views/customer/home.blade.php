@@ -19,7 +19,7 @@
                 <a href="{{url('user/analytics')}}" class="home-btn">Analytics<i class="material-icons">equalizer</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
-                <a href="" class="home-btn">Summary <i class="material-icons">multiline_chart</i></a>
+                <a href="{{url('user/summary')}}" class="home-btn">Summary <i class="material-icons">multiline_chart</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
                 <a href="{{url('user/statement')}}" class="home-btn">Statement <i class="material-icons">web</i></a>
