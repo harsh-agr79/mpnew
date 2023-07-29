@@ -1,4 +1,3 @@
-
 @extends('customer/layout')
 
 
@@ -21,8 +20,8 @@
                             placeholder="Product" class="autocomplete browser-default inp black-text" autocomplete="off">
                     </div>
                     <div class='input-field col l4 m4 s6'>
-                        <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
-                            type='search' id='search' />
+                        <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()"
+                            autocomplete="off" type='search' id='search' />
                         <span class="field-icon" id="close-search"><span class="material-icons"
                                 id="cs-icon">search</span></span>
                     </div>
@@ -37,11 +36,7 @@
         </div>
 
         <div>
-            @if ($datatype == 'nodata')
-                <div class="center" style="margin-top: 200px;">
-                    <h5>Select Details to View Analytics</h5>
-                </div>
-            @elseif($datatype == 'np')
+            @if ($datatype == 'np')
                 <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
                     <h5 class="black-text" style="font-weight: 600;">Total Sales:
                         {{ money($nptotal[0]->samt - $nptotal[0]->damt) }}</h5>
@@ -171,8 +166,8 @@
                                                                 $sbc = explode('|', $item2->subcat);
                                                             }
                                                         @endphp
-                                                        <tr
-                                                            class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"   ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
+                                                        <tr class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
+                                                            ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
                                                             <td>{{ $item2->item }}</td>
                                                             <td>{{ $item2->sum }}</td>
                                                             <td>{{ money($item2->samt - $item2->damt) }}</td>
@@ -291,63 +286,18 @@
                         chart.draw(data, options);
                     }
                 </script>
-            @elseif($datatype == 'p')
-                <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
-                    <h5 class="black-text" style="font-weight: 600;">Total Sales:
-                        {{ money($ptotal[0]->samt - $ptotal[0]->damt) }}</h5>
-                    <h5 class="black-text" style="font-weight: 600;">Total Quantity:
-                        {{ $ptotal[0]->sum }}</h5>
-                </div>
-                <div class="mp-card" style="margin-top: 20px">
-                    <table class="sortable">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pdata as $item)
-                                <tr
-                                    ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->item }}')">
-                                    <td>{{ $item->name }}</td>
-                                    <td
-                                class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
-                                {{ $item->type }}</td>
-                                    <td>{{ $item->item }}</td>
-                                    <td>{{ $item->sum }}</td>
-                                    <td>{{ money($item->samt - $item->damt) }}</td>
-                                </tr>
-                            @endforeach
-                            @foreach ($pnodata as $item)
-                                <tr>
-                                    <td>{{ $item->name }}</td>
-                                    <td
-                                    class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
-                                    {{ $item->type }}</td>
-                                    <td>{{ $product }}</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
             @endif
         </div>
     </div>
 
     <script>
         function opendetail(orderid, seen, ms) {
-                window.open('/user/detail/' + orderid, "_self");
+            window.open('/user/detail/' + orderid, "_self");
         }
 
         function openanadetail(date, date2, product) {
-                window.open('/user/analytics?date=' + date + '&date2=' + date2 + '&product=' + product,
-                    "_self");
+            window.open('/user/analytics?date=' + date + '&date2=' + date2 + '&product=' + product,
+                "_self");
         }
         $(document).ready(function() {
             $.ajax({
