@@ -66,7 +66,7 @@
             $debit = $tod;
         @endphp
     </div>
-    <div>
+    <div class="mp-container">
         <div class="mp-card" style="margin-top: 20px;">
             <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
                 <h6 class="black-text" style="font-weight: 600;">

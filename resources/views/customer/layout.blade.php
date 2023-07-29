@@ -109,7 +109,7 @@
 
     </header>
     <main>
-        <div class="mp-container">
+        <div>
             @yield('main')
         </div>
     </main>

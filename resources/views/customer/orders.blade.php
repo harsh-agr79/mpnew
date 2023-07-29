@@ -1,7 +1,7 @@
 @extends('customer/layout')
 
 @section('main')
-    <div>
+    <div class="mp-container">
         <div>
             <h5 class="center" style="text-transform: capitalize;">{{$page}} orders</h5>
         </div>

@@ -1,24 +1,27 @@
 @extends('customer/layout')
 
 @section('main')
-@php
-$bal = explode('|', $user->balance);
-@endphp
-<style>
-    label{
-        font-size: 8px;
-    }
-</style>
-<div class="center">
-    <h5>Detailed Summary</h5>
-</div>
+<div class="mp-container">
+
+
+    @php
+        $bal = explode('|', $user->balance);
+    @endphp
+    <style>
+        label {
+            font-size: 8px;
+        }
+    </style>
+    <div class="center">
+        <h5>Detailed Summary</h5>
+    </div>
     <div class="amber center" style="padding: 5px; margin-top: 10px; border-radius: 10px;">
         <h5 class="black-text" style="font-weight: 600;">Balance -@if ($bal[0] == 'red')
-            To Pay:
-        @else
-            To Recieve:
-        @endif
-        {{ money($bal[1]) }}</h5>
+                To Pay:
+            @else
+                To Recieve:
+            @endif
+            {{ money($bal[1]) }}</h5>
     </div>
     <div class="mp-card" style="margin-top: 10px;">
         <table>
@@ -27,7 +30,7 @@ $bal = explode('|', $user->balance);
             </thead>
             <tbody>
                 <tr>
-                  
+
                     <td>Balance -@if ($bal[0] == 'red')
                             To Pay:
                         @else
@@ -57,76 +60,76 @@ $bal = explode('|', $user->balance);
         </table>
     </div>
     <div>
-    <div class="mp-card row" style="margin-top: 10px;">
-        <div class="col s12">
-            <a href="{{url('user/statement')}}" class="home-btn">Click Here To See Full Statement</a>
+        <div class="mp-card row" style="margin-top: 10px;">
+            <div class="col s12">
+                <a href="{{ url('user/statement') }}" class="home-btn">Click Here To See Full Statement</a>
+            </div>
+            <div class="col s12" style="margin-top: 5px;">
+                <a class="home-btn modal-trigger" href="#modal1">Click Here To See Target Details</a>
+            </div>
         </div>
-        <div class="col s12" style="margin-top: 5px;">
-            <a class="home-btn modal-trigger" href="#modal1">Click Here To See Target Details</a>
-        </div>
-    </div>
-       
+
     </div>
     <div class="mp-card" style="margin-top: 10px;">
         <form class="row" style="padding: 0; margin: 0;">
-                <div class="col s2" style="padding: 0; margin: 0;">
-                    <label>Start Month:</label>
-                    <select name="startmonth" class="browser-default selectinp">
-                        <option value="">Select Start Month</option>
-                        <option value="{{ $smonth }}" selected>{{ $smonth }}</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="8">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-                <div class="col s4" style="padding: 0; margin: 0;">
-                    <label>Start Year:</label>
-                    <select name="startyear" class="browser-default selectinp">
-                        <option value="">Select Start Year</option>
-                        <option value="{{ $syear }}" selected>{{ $syear }}</option>
-                        <option value="2078">2078</option>
-                        <option value="2079">2079</option>
-                        <option value="2080">2080</option>
-                    </select>
-                </div>
-                <div class="col s2" style="padding: 0; margin: 0;">
-                    <label>End Month:</label>
-                    <select name="endmonth" value="{{ $emonth }}" class="browser-default selectinp">
-                        <option value="">Select End Month</option>
-                        <option value="{{ $emonth }}" selected>{{ $emonth }}</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="8">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-                <div class="col s4" style="padding: 0; margin: 0;">
-                    <label>End Year:</label>
-                    <select name="endyear" value="{{ $eyear }}" class="browser-default selectinp">
-                        <option value="">Select End Year</option>
-                        <option value="{{ $eyear }}" selected>{{ $eyear }}</option>
-                        <option value="2078">2078</option>
-                        <option value="2079">2079</option>
-                        <option value="2080">2080</option>
-                    </select>
-                </div>
+            <div class="col s2" style="padding: 0; margin: 0;">
+                <label>Start Month:</label>
+                <select name="startmonth" class="browser-default selectinp">
+                    <option value="">Select Start Month</option>
+                    <option value="{{ $smonth }}" selected>{{ $smonth }}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="8">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col s4" style="padding: 0; margin: 0;">
+                <label>Start Year:</label>
+                <select name="startyear" class="browser-default selectinp">
+                    <option value="">Select Start Year</option>
+                    <option value="{{ $syear }}" selected>{{ $syear }}</option>
+                    <option value="2078">2078</option>
+                    <option value="2079">2079</option>
+                    <option value="2080">2080</option>
+                </select>
+            </div>
+            <div class="col s2" style="padding: 0; margin: 0;">
+                <label>End Month:</label>
+                <select name="endmonth" value="{{ $emonth }}" class="browser-default selectinp">
+                    <option value="">Select End Month</option>
+                    <option value="{{ $emonth }}" selected>{{ $emonth }}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="8">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col s4" style="padding: 0; margin: 0;">
+                <label>End Year:</label>
+                <select name="endyear" value="{{ $eyear }}" class="browser-default selectinp">
+                    <option value="">Select End Year</option>
+                    <option value="{{ $eyear }}" selected>{{ $eyear }}</option>
+                    <option value="2078">2078</option>
+                    <option value="2079">2079</option>
+                    <option value="2080">2080</option>
+                </select>
+            </div>
             <div class="input-field col l1">
                 <button class="btn amber darken-1">Apply</button>
             </div>
@@ -320,8 +323,7 @@ $bal = explode('|', $user->balance);
                                     @foreach ($subcates as $item3)
                                         <label style="margin-right: 15px;">
                                             <input type="checkbox" name="{{ $item3 }}"
-                                                value="{{ $item3 }}"
-                                                onclick="Filter('{{ $item->category }}')" />
+                                                value="{{ $item3 }}" onclick="Filter('{{ $item->category }}')" />
                                             <span>{{ $item3 }}</span>
                                         </label>
                                     @endforeach
@@ -379,57 +381,11 @@ $bal = explode('|', $user->balance);
         </ul>
     </div>
 
-        @if ($numbills > 0)
-            <div style="margin-top: 10px;">
-                <div class="mp-card">
-                    <div>
-                        <h6 class="center">Average Purchase Report</h6>
-                    </div>
-                    <div class="container">
-                        <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Particular</th>
-                                <th>Purchase</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>Total Purchase</td>
-                            <td>{{ money($totalsales) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Purchase Per Bill </td>
-                            <td>{{ money($totalsales / $numbills) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Purchase Per Month</td>
-                            <td>{{ money($totalsales / $nummonths) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Purchase Per Day</td>
-                            <td>{{ money($totalsales / getNepaliDays($smonth, date('y', strtotime($syear)), $emonth, date('y', strtotime($eyear)), getNepaliDay(today()), getNepaliMonth(today()), date('y', strtotime(getNepaliYear(today()))))) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Bill Count</td>
-                            <td>{{$numbills}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        @else
-            <div>
-                <h5 class="center">
-                    No Sales Data for Given Date Range
-                </h5>
-            </div>
-        @endif
+    @if ($numbills > 0)
         <div style="margin-top: 10px;">
             <div class="mp-card">
                 <div>
-                    <h6 class="center">Quaterly Purchase</h6>
+                    <h6 class="center">Average Purchase Report</h6>
                 </div>
                 <div class="container">
                     <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
@@ -437,48 +393,94 @@ $bal = explode('|', $user->balance);
                 <table>
                     <thead>
                         <tr>
-                            <th>Quater</th>
-                            <th>Sales</th>
+                            <th>Particular</th>
+                            <th>Purchase</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @php
-                            $quatdata = [];
-                            
-                            foreach ($fquat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'First Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            foreach ($squat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Second Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            foreach ($tquat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Third Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            foreach ($frquat as $item) {
-                                $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Fourth Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                            }
-                            usort($quatdata, function ($a, $b) {
-                                return strtotime($a['id']) - strtotime($b['id']);
-                            });
-                            
-                            $qdata = collect($quatdata);
-                            $forqdata = [];
-                        @endphp
-                        @for ($i = 0; $i < count($qdata); $i++)
-                            @if ($qdata[$i]['year'] >= $syear && $qdata[$i]['year'] <= $eyear)
-                                @php
-                                    $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => $qdata[$i]['amount']];
-                                @endphp
-                                <tr>
-                                    <td>{{ $qdata[$i]['quat'] }}</td>
-                                    <td>{{ money($qdata[$i]['amount']) }}</td>
-                                </tr>
-                            @endif
-                        @endfor
-                    </tbody>
+                    <tr>
+                        <td>Total Purchase</td>
+                        <td>{{ money($totalsales) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Purchase Per Bill </td>
+                        <td>{{ money($totalsales / $numbills) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Purchase Per Month</td>
+                        <td>{{ money($totalsales / $nummonths) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Purchase Per Day</td>
+                        <td>{{ money($totalsales / getNepaliDays($smonth, date('y', strtotime($syear)), $emonth, date('y', strtotime($eyear)), getNepaliDay(today()), getNepaliMonth(today()), date('y', strtotime(getNepaliYear(today()))))) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bill Count</td>
+                        <td>{{ $numbills }}</td>
+                    </tr>
                 </table>
             </div>
         </div>
+    @else
+        <div>
+            <h5 class="center">
+                No Sales Data for Given Date Range
+            </h5>
+        </div>
+    @endif
+    <div style="margin-top: 10px;">
+        <div class="mp-card">
+            <div>
+                <h6 class="center">Quaterly Purchase</h6>
+            </div>
+            <div class="container">
+                <hr style="background-color: rgb(211, 211, 211); border: none; height: 1px;">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quater</th>
+                        <th>Sales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $quatdata = [];
+                        
+                        foreach ($fquat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'First Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        foreach ($squat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Second Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        foreach ($tquat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Third Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        foreach ($frquat as $item) {
+                            $quatdata[] = ['id' => $item->created_at, 'year' => $item->nepyear, 'quat' => 'Fourth Quater -' . $item->nepyear, 'amount' => $item->sl - $item->dis];
+                        }
+                        usort($quatdata, function ($a, $b) {
+                            return strtotime($a['id']) - strtotime($b['id']);
+                        });
+                        
+                        $qdata = collect($quatdata);
+                        $forqdata = [];
+                    @endphp
+                    @for ($i = 0; $i < count($qdata); $i++)
+                        @if ($qdata[$i]['year'] >= $syear && $qdata[$i]['year'] <= $eyear)
+                            @php
+                                $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => $qdata[$i]['amount']];
+                            @endphp
+                            <tr>
+                                <td>{{ $qdata[$i]['quat'] }}</td>
+                                <td>{{ money($qdata[$i]['amount']) }}</td>
+                            </tr>
+                        @endif
+                    @endfor
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <div class="mp-card container" style="margin-top: 10px;">
         <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
@@ -526,10 +528,12 @@ $bal = explode('|', $user->balance);
                     {{ $target[0]->enddate }}</h6>
                 <div class="row" style="margin-top: 50px;">
                     <div class="col s12 m6 left-align">
-                        <span style="font-size: 20px; font-weight:600;">Gross Target: {{money($target[0]->gross)}}</span><br>
-                        <span style="font-size: 20px; font-weight:600;">Net Target: {{money($target[0]->net)}}</span><br>
+                        <span style="font-size: 20px; font-weight:600;">Gross Target:
+                            {{ money($target[0]->gross) }}</span><br>
+                        <span style="font-size: 20px; font-weight:600;">Net Target:
+                            {{ money($target[0]->net) }}</span><br>
                         <span style="font-size: 20px; font-weight:600;">Achieved : <span class="red-text">
-                                {{money($net3)}}</span></span>
+                                {{ money($net3) }}</span></span>
                     </div>
                     <div class="col s12 m6 ">
                         <svg viewbox="0 0 100 100">
@@ -654,28 +658,29 @@ $bal = explode('|', $user->balance);
         };
     </script>
 
-<script>
-    function Filter(cat) {
-        $(`.${cat}`).hide();
-        var formData = $(`#${cat}form`).serializeArray()
-        if (formData.length == 0) {
-            $(`.${cat}`).show();
-        } else if (formData[formData.length - 1].name === 'incall') {
-            var clsnames = '';
-            for (let i = 0; i < formData.length - 1; i++) {
-                clsnames += "." + formData[i].name
-            }
-            $(`${clsnames}`).show();
-        } else {
-            if (formData.length > 0) {
-                for (let i = 0; i < formData.length; i++) {
-                    $(`.${formData[i].name}`).show();
-                }
-            } else {
+    <script>
+        function Filter(cat) {
+            $(`.${cat}`).hide();
+            var formData = $(`#${cat}form`).serializeArray()
+            if (formData.length == 0) {
                 $(`.${cat}`).show();
+            } else if (formData[formData.length - 1].name === 'incall') {
+                var clsnames = '';
+                for (let i = 0; i < formData.length - 1; i++) {
+                    clsnames += "." + formData[i].name
+                }
+                $(`${clsnames}`).show();
+            } else {
+                if (formData.length > 0) {
+                    for (let i = 0; i < formData.length; i++) {
+                        $(`.${formData[i].name}`).show();
+                    }
+                } else {
+                    $(`.${cat}`).show();
+                }
             }
-        }
 
-    }
-</script>
+        }
+    </script>
+</div>
 @endsection

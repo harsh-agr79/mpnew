@@ -2,7 +2,7 @@
 
 
 @section('main')
-    <div>
+    <div class="mp-container">
         <div class="mp-card" style="margin-top: 30px;">
             <form>
                 <div class="row">

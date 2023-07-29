@@ -1,7 +1,35 @@
 @extends('customer/layout')
 
 @section('main')
-<form enctype="multipart/form-data" action="{{route('user.addorder')}}" method="post">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="row bg-content textcol">
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#powerbank" class="browser-default"><div><i class="fa-solid fa-car-battery textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">powerbank</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#charger" class="browser-default"><div><i class="fa-solid fa-plug-circle-bolt textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">charger</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#cable" class="browser-default"><div><i class="fa-brands fa-usb textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">cable</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#earphone" class="browser-default"><div><i class="fa-sharp fa-solid fa-ear-listen textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">earphone</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#btitem" class="browser-default"><div><i class="fa-brands fa-bluetooth-b textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">bluetooth</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#otthers" class="browser-default"><div><i class="fa-sharp fa-solid fa-cart-plus textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">others</div></a>
+    </div>
+</div>
+<form enctype="multipart/form-data" class="mp-container" action="{{route('user.addorder')}}" method="post">
     @csrf
     <input type="hidden" name="date" value="{{ date('Y-m-d H:i:s') }}" required>
     <input type="hidden" name="name" value="{{ $user->name }}" required>
@@ -32,7 +60,7 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
-                        <tr style="display: none;"id={{ $item->id . 'list' }}>
+                        <tr style="display: none;" id="{{ $item->id . 'list' }}">
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->price }}</td>
                             <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
@@ -63,7 +91,7 @@
 </form>
 <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
     @foreach ($data as $item)
-        <div class="mp-card row prod" style="margin: 3px; padding: 10px;">
+        <div class="mp-card row prod" id="{{$item->category}}" style="margin: 3px; padding: 10px;">
             <div class="col s4" style="padding: 0;  margin: 0;">
                 <img src="{{ asset('storage/media/' . $item->img) }}" class="prod-img materialboxed" alt="">
             </div>
