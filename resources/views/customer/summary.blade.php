@@ -56,6 +56,9 @@ $bal = explode('|', $user->balance);
         <div class="col s12">
             <a href="{{url('user/statement')}}" class="home-btn">Click Here To See Full Statement</a>
         </div>
+        <div class="col s12">
+            <a class="home-btn">Click Here To See Target Details</a>
+        </div>
     </div>
        
     </div>
