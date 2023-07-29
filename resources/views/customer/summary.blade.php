@@ -64,7 +64,7 @@ $bal = explode('|', $user->balance);
     </div>
     <div class="mp-card" style="margin-top: 10px;">
         <form class="row" style="padding: 0; margin: 0;">
-                <div class="col s3" style="padding: 0; margin: 0;">
+                <div class="col s2" style="padding: 0; margin: 0;">
                     <select name="startmonth" class="browser-default selectinp">
                         <option value="">Select Start Month</option>
                         <option value="{{ $smonth }}" selected>{{ $smonth }}</option>
@@ -82,7 +82,7 @@ $bal = explode('|', $user->balance);
                         <option value="12">12</option>
                     </select>
                 </div>
-                <div class="col s3" style="padding: 0; margin: 0;">
+                <div class="col s4" style="padding: 0; margin: 0;">
                     <select name="startyear" class="browser-default selectinp">
                         <option value="">Select Start Year</option>
                         <option value="{{ $syear }}" selected>{{ $syear }}</option>
@@ -91,7 +91,7 @@ $bal = explode('|', $user->balance);
                         <option value="2080">2080</option>
                     </select>
                 </div>
-                <div class="col s3" style="padding: 0; margin: 0;">
+                <div class="col s2" style="padding: 0; margin: 0;">
                     <select name="endmonth" value="{{ $emonth }}" class="browser-default selectinp">
                         <option value="">Select End Month</option>
                         <option value="{{ $emonth }}" selected>{{ $emonth }}</option>
@@ -109,7 +109,7 @@ $bal = explode('|', $user->balance);
                         <option value="12">12</option>
                     </select>
                 </div>
-                <div class="col s3" style="padding: 0; margin: 0;">
+                <div class="col s4" style="padding: 0; margin: 0;">
                     <select name="endyear" value="{{ $eyear }}" class="browser-default selectinp">
                         <option value="">Select End Year</option>
                         <option value="{{ $eyear }}" selected>{{ $eyear }}</option>
