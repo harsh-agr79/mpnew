@@ -111,7 +111,7 @@
                     </div>
                 </form>
                 <div class="col s4" style="margin-top: 10px;">
-                    <a class="btn amber black-text" href="{{ url('user/statement) }}">
+                    <a class="btn amber black-text" href="{{ url('user/statement') }}">
                         Clear
                     </a>
                 </div>
