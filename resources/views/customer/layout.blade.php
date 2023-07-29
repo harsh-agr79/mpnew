@@ -93,6 +93,8 @@
                                 class="material-icons textcol">add</i></a></li>
                     <li class="bold"><a href="{{ url('/user/analytics') }}" class="textcol">Analytics<i
                                 class="material-icons textcol">equalizer</i></a></li>
+                    <li class="bold"><a href="{{ url('/user/summary') }}" class="textcol">Summary<i
+                                class="material-icons textcol">multiline_chart</i></a></li>
                     <li class="bold"><a href="{{ url('/user/statement') }}" class="textcol">Statement<i
                                 class="material-icons textcol">web</i></a></li>
                 </ul>
