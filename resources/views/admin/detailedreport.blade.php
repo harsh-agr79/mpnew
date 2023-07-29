@@ -77,14 +77,14 @@
                     <option value="2080">2080</option>
                 </select>
             </div>
-            <div class="input-field col s6 m4 l4">
+            <div class="input-field col s5 m4 l4">
                 <input type="text" name="name" id="customer" value="{{ $name }}" placeholder="Customer"
                     class="autocomplete browser-default inp black-text" autocomplete="off">
             </div>
-            <div class="input-field col l1">
+            <div class="input-field col s3 l1">
                 <button class="btn amber darken-1">Apply</button>
             </div>
-            <div class="input-field col l1">
+            <div class="input-field col s3 l1">
                 <a class="btn amber darken-1" href="{{ url($url.'/detailedreport') }}">Clear</a>
             </div>
             @if ($name != null)
