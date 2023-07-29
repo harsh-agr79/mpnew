@@ -7,7 +7,7 @@ $bal = explode('|', $user->balance);
 <div class="center">
     <h5>Detailed Summary</h5>
 </div>
-    <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
+    <div class="amber center" style="padding: 5px; margin-top: 10px; border-radius: 10px;">
         <h5 class="black-text" style="font-weight: 600;">Balance -@if ($bal[0] == 'red')
             To Pay:
         @else
@@ -51,7 +51,7 @@ $bal = explode('|', $user->balance);
             </tbody>
         </table>
     </div>
-    <div class="mp-card" style="margin-top: 30px;">
+    <div class="mp-card" style="margin-top: 10px;">
         <form class="row">
             <div class="row col s12 m6">
                 <div class="col s12">
@@ -141,7 +141,7 @@ $bal = explode('|', $user->balance);
         </form>
     </div>
 
-    <div class="mp-card" style="margin-top: 20px;">
+    <div class="mp-card" style="margin-top: 10px;">
         @php
             $numbills = 0;
             $totalsales = 0;
@@ -274,7 +274,7 @@ $bal = explode('|', $user->balance);
     </div>
 
         @if ($numbills > 0)
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 10px;">
                 <div class="mp-card">
                     <div>
                         <h6 class="center">Average Purchase Report</h6>
@@ -316,7 +316,7 @@ $bal = explode('|', $user->balance);
                 </h5>
             </div>
         @endif
-        <div style="margin-top: 20px;">
+        <div style="margin-top: 10px;">
             <div class="mp-card">
                 <div>
                     <h6 class="center">Quaterly Purchase</h6>
@@ -370,10 +370,10 @@ $bal = explode('|', $user->balance);
             </div>
         </div>
 
-    <div class="mp-card container" style="margin-top: 20px;">
+    <div class="mp-card container" style="margin-top: 10px;">
         <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
     </div>
-    <div class="mp-card container" style="margin-top: 20px;">
+    <div class="mp-card container" style="margin-top: 10px;">
         <div class="bar" id="top_x_div2" style="width: auto; height: 500px;"></div>
     </div>
     <script>
