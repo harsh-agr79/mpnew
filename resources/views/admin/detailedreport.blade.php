@@ -12,67 +12,70 @@
 @extends($type.'/layout')
 
 @section('main')
+<style>
+    label{
+        font-size: 8px;
+    }
+</style>
     <div class="mp-card" style="margin-top: 30px;">
         <form class="row">
-            <div class="row col s12 m6">
-                <div class="col s12">
-                    <span>Start Date</span>
-                </div>
-                <div class="col row s12">
-                    <select name="startmonth" class="browser-default col s3 m3 selectinp">
-                        <option value="">Select Start Month</option>
-                        <option value="{{ $smonth }}" selected>{{ $smonth }}</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="8">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <select name="startyear" class="browser-default col s9 m9 selectinp">
-                        <option value="">Select Start Year</option>
-                        <option value="{{ $syear }}" selected>{{ $syear }}</option>
-                        <option value="2078">2078</option>
-                        <option value="2079">2079</option>
-                        <option value="2080">2080</option>
-                    </select>
-                </div>
+            <div class="col s2" style="padding: 0; margin: 0;">
+                <label>Start Month:</label>
+                <select name="startmonth" class="browser-default selectinp">
+                    <option value="">Select Start Month</option>
+                    <option value="{{ $smonth }}" selected>{{ $smonth }}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="8">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
             </div>
-            <div class="row col s12 m6">
-                <div class="col s12">
-                    <span>End Date</span>
-                </div>
-                <div class="row col s12">
-                    <select name="endmonth" value="{{ $emonth }}" class="browser-default col s3 m3 selectinp">
-                        <option value="">Select End Month</option>
-                        <option value="{{ $emonth }}" selected>{{ $emonth }}</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="8">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <select name="endyear" value="{{ $eyear }}" class="browser-default col s9 m9 selectinp">
-                        <option value="">Select End Year</option>
-                        <option value="{{ $eyear }}" selected>{{ $eyear }}</option>
-                        <option value="2078">2078</option>
-                        <option value="2079">2079</option>
-                        <option value="2080">2080</option>
-                    </select>
-                </div>
+            <div class="col s4" style="padding: 0; margin: 0;">
+                <label>Start Year:</label>
+                <select name="startyear" class="browser-default selectinp">
+                    <option value="">Select Start Year</option>
+                    <option value="{{ $syear }}" selected>{{ $syear }}</option>
+                    <option value="2078">2078</option>
+                    <option value="2079">2079</option>
+                    <option value="2080">2080</option>
+                </select>
+            </div>
+            <div class="col s2" style="padding: 0; margin: 0;">
+                <label>End Month:</label>
+                <select name="endmonth" value="{{ $emonth }}" class="browser-default selectinp">
+                    <option value="">Select End Month</option>
+                    <option value="{{ $emonth }}" selected>{{ $emonth }}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="8">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col s4" style="padding: 0; margin: 0;">
+                <label>End Year:</label>
+                <select name="endyear" value="{{ $eyear }}" class="browser-default selectinp">
+                    <option value="">Select End Year</option>
+                    <option value="{{ $eyear }}" selected>{{ $eyear }}</option>
+                    <option value="2078">2078</option>
+                    <option value="2079">2079</option>
+                    <option value="2080">2080</option>
+                </select>
             </div>
             <div class="input-field col s6 m4 l4">
                 <input type="text" name="name" id="customer" value="{{ $name }}" placeholder="Customer"
