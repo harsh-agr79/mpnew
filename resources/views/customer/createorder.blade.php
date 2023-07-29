@@ -8,8 +8,7 @@
     <div class="mp-card" style="margin-top: 20px;">
         <div class="row">
                 <div class="col s2 center">
-                    <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;">
-                        Cart <i class="material-icons left">shopping_cart</i>
+                    <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;"><i class="material-icons">shopping_cart</i>
                     </a>
                 </div>
                 <div class='input-field col s10'>
