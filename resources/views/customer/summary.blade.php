@@ -4,6 +4,11 @@
 @php
 $bal = explode('|', $user->balance);
 @endphp
+<style>
+    label{
+        font-size: 10px;
+    }
+</style>
 <div class="center">
     <h5>Detailed Summary</h5>
 </div>
