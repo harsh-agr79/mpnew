@@ -363,4 +363,80 @@ class CustomerViewController extends Controller
 
         return view('customer/analytics', $result);
     }
+
+
+    public function summary(Request $request){
+        $year = getNepaliYear(today());
+
+        if($request->get('startyear')){
+            $result['syear'] = $request->get('startyear');
+        }
+        else
+        {
+            $result['syear'] = $year;
+        }
+        if($request->get('endyear')){
+            $result['eyear'] = $request->get('endyear');
+        }
+        else
+        {
+            $result['eyear'] = $year;
+        }
+        if($request->get('startmonth')){
+            $result['smonth'] = $request->get('startmonth');
+        }
+        else
+        {
+            $result['smonth'] = "1";
+        }
+        if($request->get('endmonth')){
+            $result['emonth'] = $request->get('endmonth');
+        }
+        else
+        {
+            $result['emonth'] = getNepaliMonth(today());
+        }
+        $cust = DB::table('customers')->where('id', session()->get('USER_ID'))->first();
+        $name = $cust->name;
+
+            $result['data'] = DB::table('orders')
+            ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name])
+            ->orderBy('created_at', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+            ->groupBy(['nepmonth', 'nepyear'])
+            ->get();
+
+            $result['fquat'] = DB::table('orders')
+            ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name])
+            ->whereIn('nepmonth', [1,2,3])
+            ->orderBy('created_at', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+            ->groupBy('nepyear')
+            ->get();
+        
+            $result['squat'] = DB::table('orders')
+            ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name])
+            ->whereIn('nepmonth', [4,5,6])
+            ->orderBy('created_at', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+            ->groupBy('nepyear')
+            ->get();
+
+            $result['tquat'] = DB::table('orders')
+            ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name])
+            ->whereIn('nepmonth', [7,8,9])
+            ->orderBy('created_at', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+            ->groupBy('nepyear')
+            ->get();
+
+            $result['frquat'] = DB::table('orders')
+            ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name])
+            ->whereIn('nepmonth', [10,11,12])
+            ->orderBy('created_at', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+            ->groupBy('nepyear')
+            ->get();
+        return view ('customer/summary', $result);
+    }
 }
