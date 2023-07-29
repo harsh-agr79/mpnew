@@ -31,7 +31,7 @@
             </div>
         </div>
         <div id="cart" class="modal">
-            <div class="modal-content">
+            <div class="modal-content bg-content">
                 <div class="center">
                     <h5>Cart</h5>
                 </div>
@@ -72,7 +72,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer bg-content">
                 <a class="btn red modal-close">
                     Edit
                 </a>
