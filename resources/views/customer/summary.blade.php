@@ -6,7 +6,7 @@ $bal = explode('|', $user->balance);
 @endphp
 <style>
     label{
-        font-size: 10px;
+        font-size: 8px;
     }
 </style>
 <div class="center">
