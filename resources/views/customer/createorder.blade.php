@@ -25,7 +25,7 @@
       <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">bluetooth</div></a>
     </div>
     <div class="col s2 center" style="padding:5px;">
-      <a href="#otthers" class="browser-default"><div><i class="fa-sharp fa-solid fa-cart-plus textcol" style="font-size: 25px;"></i></div>
+      <a href="#others" class="browser-default"><div><i class="fa-sharp fa-solid fa-cart-plus textcol" style="font-size: 25px;"></i></div>
       <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">others</div></a>
     </div>
 </div>

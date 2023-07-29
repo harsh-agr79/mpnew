@@ -3,6 +3,32 @@
 @extends('customer/layout')
 
 @section('main')
+<div class="row bg-content textcol">
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#powerbank" class="browser-default"><div><i class="fa-solid fa-car-battery textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">powerbank</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#charger" class="browser-default"><div><i class="fa-solid fa-plug-circle-bolt textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">charger</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#cable" class="browser-default"><div><i class="fa-brands fa-usb textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">cable</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#earphone" class="browser-default"><div><i class="fa-sharp fa-solid fa-ear-listen textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">earphone</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#btitem" class="browser-default"><div><i class="fa-brands fa-bluetooth-b textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">bluetooth</div></a>
+    </div>
+    <div class="col s2 center" style="padding:5px;">
+      <a href="#others" class="browser-default"><div><i class="fa-sharp fa-solid fa-cart-plus textcol" style="font-size: 25px;"></i></div>
+      <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">others</div></a>
+    </div>
+</div>
     <form enctype="multipart/form-data" action="{{ route('user.editorder') }}" method="post">
         @csrf
         <input type="hidden" name="orderid" value="{{ $order[0]->orderid }}">
@@ -87,7 +113,7 @@
     </form>
     <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
         @foreach ($order as $item)
-            <div class="mp-card row prod" style="margin: 3px; padding: 10px;">
+            <div class="mp-card row prod" id="{{$item->category}}" style="margin: 3px; padding: 10px;">
                 <div class="col s4" style="padding: 0;  margin: 0;">
                     <img src="{{ asset('storage/media/' . $item->img) }}" class="prod-img materialboxed" alt="">
                 </div>
