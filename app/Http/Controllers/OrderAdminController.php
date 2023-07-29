@@ -361,6 +361,10 @@ class OrderAdminController extends Controller
                         'nepyear'=>$nepyear,
                         'seen'=>$order->seen,
                         'seenby'=>$order->seenby,
+                        'save'=>$order->save,
+                        'discount'=>$order->discount,
+                        'remarks'=>$order->remarks,
+                        'userremarks'=>$order->userremarks,
                     ]);
                 }
             }

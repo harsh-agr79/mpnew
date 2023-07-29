@@ -198,15 +198,15 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::get('/home', [LoginController::class, 'home']);
     Route::get('/user/changemode', [CustomerController::class, 'changemode']);
 
-    Route::get('/user/createorder', [OrderController::class, 'createorder']);
-    Route::post('user/addorder', [OrderController::class, 'addorder'])->name('user.addorder');
-    Route::get('/user/detail/{id}', [OrderController::class, 'detail']);
+    Route::get('/user/createorder', [OrderController::class, 'createorder']); //done
+    Route::post('user/addorder', [OrderController::class, 'addorder'])->name('user.addorder'); //done
+    Route::get('/user/detail/{id}', [OrderController::class, 'detail']); //done
     Route::post('/user/editdetail', [OrderController::class, 'detailedit'])->name('user.detailedit');
-    Route::get('/user/oldorders', [OrderController::class, 'oldorders']);
-    Route::get('/user/savedorders', [OrderController::class, 'savedorders']);
+    Route::get('/user/oldorders', [OrderController::class, 'oldorders']); //done
+    Route::get('/user/savedorders', [OrderController::class, 'savedorders']); //done
     Route::get('/user/editorder/{id}', [OrderController::class, 'editorder']);
-    Route::post('/user/editorder', [OrderController::class, 'editorder_process'])->name('user.editoder');
-    Route::get('/user/deleteorder/{id}', [OrderController::class, 'deleteorder']);
+    Route::post('/user/editorder', [OrderController::class, 'editorder_process'])->name('user.editorder');
+    Route::get('/user/deleteorder/{id}', [OrderController::class, 'deleteorder']); //done
 
     Route::get('/user/analytics', [CustomerViewController::class, 'analytics']);
     Route::get('/user/summary', [CustomerViewController::class, 'summary']);

@@ -37,7 +37,7 @@ class OrderController extends Controller
             $save = 'save';
         }
         else{
-            $save = '';
+            $save = NULL;
         }
 
         for ($i=0; $i < count($item); $i++) { 
@@ -114,5 +114,89 @@ class OrderController extends Controller
     
 
         return view('customer/orders', $result);
+    }
+
+    public function deleteorder(Request $request,$orderid){
+        $order = DB::table('orders')->where('orderid',$orderid)->first();
+        if($order->mainstatus != 'blue'){
+            return back();
+        }
+        else{
+            DB::table('orders')->where('orderid',$orderid)->delete();
+            return redirect('user/oldorders');
+        }
+    }
+    public function editorder(Request $request, $orderid){
+        $result['order'] = DB::table('orders')->where('orderid', $orderid)
+        ->join('products', 'products.produni_id', '=', 'orders.produni_id')
+        ->selectRaw('orders.*, products.img, products.hide, products.stock, products.subcat')
+        ->get();
+        $result['data'] = DB::table('products')
+        ->whereNotIn('name', DB::table('orders')->where('orderid', $orderid)->pluck('item')->toArray())
+        ->where('hide', NULL)
+        ->orderBy('category', 'ASC')
+        ->orderBy('ordernum', 'ASC')->get();
+
+        return view('customer/editorder', $result);
+    }
+    public function editorder_process(Request $request)
+    {
+       $orderid = $request->post('orderid');
+       $order = DB::table('orders')->where('orderid',$orderid)->first();
+
+       $item=$request->post('item',[]);
+       $price=$request->post('price',[]);
+       $quantity=$request->post('quantity',[]);
+       $id = $request->post('id', []);
+       $status = $request->post('status',[]);
+
+       for ($i=0; $i < count($item); $i++) { 
+        if($quantity[$i] !== NULL && $quantity[$i] !== '0'){
+            if($id[$i]){
+                DB::table('orders')->where('orderid',$orderid)->where('id', $id[$i])->update([
+                    'item'=>$item[$i],
+                    'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
+                    'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                    'price'=>$price[$i],
+                    'quantity'=>$quantity[$i],
+                    'mainstatus'=>'blue',
+                    'status'=>$status[$i],
+                ]);
+            }
+            else{
+                DB::table('orders')->insert([
+                    'name'=>$order->name,
+                    'userid'=>$order->userid,
+                    'orderid'=>$orderid,
+                    'item'=>$item[$i],
+                    'cusuni_id'=>$order->cusuni_id,
+                    'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
+                    'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                    'price'=>$price[$i],
+                    'quantity'=>$quantity[$i],
+                    'approvedquantity'=>'0',
+                    'mainstatus'=>'blue',
+                    'status'=>$status[$i],
+                    'created_at'=>$order->created_at,
+                    'refname'=>$order->refname,
+                    'refid'=>$order->refid,
+                    'reftype'=>$order->reftype,
+                    'nepmonth'=>$order->nepmonth,
+                    'nepyear'=>$order->nepyear,
+                    'seen'=>$order->seen,
+                    'seenby'=>$order->seenby,
+                    'save'=>$order->save,
+                    'discount'=>$order->discount,
+                    'remarks'=>$order->remarks,
+                    'userremarks'=>$order->userremarks,
+                ]);
+            }
+        }
+        elseif ($quantity[$i] == NULL || $quantity[$i] == '0' && $id[$i] !== NULL) {
+            DB::table('orders')->where('id', $id[$i])->delete();
+        }
+    }
+    updateMainStatus($orderid);
+    return redirect('/user/detail/'.$orderid);
     }
 }
