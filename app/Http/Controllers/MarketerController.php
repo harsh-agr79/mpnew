@@ -824,7 +824,7 @@ class MarketerController extends Controller
 
 
     public function createorder(Request $request){
-        $result['data'] = DB::table('products')->orderBy('category', 'ASC')->orderBy('ordernum', 'ASC')->get();
+        $result['data'] = DB::table('products')->where('hide', '!=', 'on')->orWhereNull('hide')->orderBy('category', 'DESC')->orderBy('ordernum', 'ASC')->get();
         return view('admin/createorder', $result);
     }
     public function addorder(Request $request){

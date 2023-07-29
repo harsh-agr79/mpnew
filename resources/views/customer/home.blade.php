@@ -7,7 +7,7 @@
         </div>
         <div class="col l6 m12 s12 row center" style="margin-top: 20px;">
             <div class="col s12" style="margin-top: 30px;">
-                <a href="" class="home-btn spc">Create A New Order<i class="material-icons">add</i></a>
+                <a href="{{url('user/createorder')}}" class="home-btn spc">Create A New Order<i class="material-icons">add</i></a>
             </div>
             <div class="col s12" style="margin-top: 30px;">
                 <a href="" class="home-btn">Previous Orders<i class="material-icons">shopping_basket</i></a>

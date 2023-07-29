@@ -89,6 +89,8 @@
                 <ul class="collapsible collapsible-accordion">
                     <li class="bold"><a href="{{ url('/home') }}" class="textcol">Home<i
                                 class="material-icons textcol">home</i></a></li>
+                    <li class="bold"><a href="{{ url('/user/createorder') }}" class="textcol">Create Order<i
+                                    class="material-icons textcol">add</i></a></li>
                 </ul>
             </li>
         </ul>
