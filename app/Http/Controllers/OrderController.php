@@ -91,8 +91,28 @@ class OrderController extends Controller
         }
         $query = $query->paginate(50);
         $result['data']=$query;
+        $result['page'] = 'old';
     
 
-        return view('customer/prevorder', $result);
+        return view('customer/orders', $result);
+    }
+    public function savedorders(Request $request){
+        $cust = DB::table('customers')->where('id', session()->get('USER_ID'))->first();
+        $name = $cust->name;
+        $query = DB::table('orders');
+        $query = $query->where(['deleted'=>NULL, 'save'=>'save', 'name'=>$name])->orderBy('created_at', 'DESC')->groupBy('orderid');
+        if($request->get('date')){
+           $query = $query->whereDate('created_at', $request->get('date'));
+           $result['date']= $request->get('date');
+        }
+        else{
+            $result['date']= '';
+        }
+        $query = $query->paginate(50);
+        $result['data']=$query;
+        $result['page'] = 'saved';
+    
+
+        return view('customer/orders', $result);
     }
 }

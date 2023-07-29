@@ -3,7 +3,7 @@
 @section('main')
     <div>
         <div>
-            <h5 class="center">All Orders</h5>
+            <h5 class="center" style="text-transform: capitalize;">{{$page}} orders</h5>
         </div>
         <div class="mp-card">
             <form id="filter">
@@ -11,9 +11,21 @@
                     <div class="input-field col s12 m4">
                         <input type="date" name="date" value="{{ $date }}" class="browser-default inp black-text">
                     </div>
-                    <div class="col m4 s12" style="margin-top: 20px">
+                    <div class="col m4 s6" style="margin-top: 20px">
                         <button class="btn amber darken-1">Apply</button>
                         <a class="btn amber darken-1" href="{{ url('user/oldorders') }}">clear</a>
+                    </div>
+                    <div class="col m4 s6" style="margin-top: 20px">
+                        @if ($page == 'old')
+                            @php
+                                $u = 'saved';
+                            @endphp
+                        @else
+                            @php
+                                $u = 'old'
+                            @endphp
+                        @endif
+                        <a class="btn amber darken-1" href="{{url('/user/'.$u.'orders')}}">VIEW {{$u}} Orders</a>
                     </div>
                 </div>
             </form>
@@ -22,7 +34,7 @@
             <div class="center">
                 {{ $data->appends(\Request::except('page'))->links('vendor.pagination.materializecss') }}
             </div>
-            <div class="mp-card" style="overflow-x: scroll;">
+            <div class="mp-card" style="margin-top: 10px;">
                 <table>
                     <thead>
                         <tr>
@@ -35,7 +47,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr class=" @if ($item->seen == '') z-depth-2 @endif"
+                            <tr
                                 oncontextmenu="rightmenu({{ $item->orderid }}, '{{ $item->mainstatus }}'); return false;"
                                 onclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                 <td>
@@ -82,14 +94,14 @@
 
     <script>
         function rightmenu(orderid, status) {
-            console.log(orderid)
             var rmenu = document.getElementById("rightmenu");
-            if (admintype == "marketer" && status == 'blue') {
+            if (status == 'blue') {
+            console.log(orderid)
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
-                $('#rmeditlink').attr('href', '/marketer/editorder/' + orderid);
-                // $('#rmdeletelink').attr('href', 'marketer/deleteorder/' + orderid);
+                $('#rmeditlink').attr('href', '/user/editorder/' + orderid);
+                $('#rmdeletelink').attr('href', '/user/deleteorder/' + orderid);
             }
         }
 

@@ -91,6 +91,10 @@
                                 class="material-icons textcol">home</i></a></li>
                     <li class="bold"><a href="{{ url('/user/createorder') }}" class="textcol">Create Order<i
                                 class="material-icons textcol">add</i></a></li>
+                    <li class="bold"><a href="{{ url('/user/oldorders') }}" class="textcol">Old Orders<i
+                                class="material-icons textcol">shopping_basket</i></a></li>
+                    <li class="bold"><a href="{{ url('/user/savedorders') }}" class="textcol">Saved Orders<i
+                                class="material-icons textcol">save</i></a></li>
                     <li class="bold"><a href="{{ url('/user/analytics') }}" class="textcol">Analytics<i
                                 class="material-icons textcol">equalizer</i></a></li>
                     <li class="bold"><a href="{{ url('/user/summary') }}" class="textcol">Summary<i
