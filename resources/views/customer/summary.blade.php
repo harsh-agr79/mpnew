@@ -15,7 +15,7 @@ $bal = explode('|', $user->balance);
         @endif
         {{ money($bal[1]) }}</h5>
     </div>
-    <div class="mp-card" style="margin-top: 20px;">
+    <div class="mp-card" style="margin-top: 10px;">
         <table>
             <thead>
                 <th>Outstanding Amount in Days</th>
@@ -50,6 +50,14 @@ $bal = explode('|', $user->balance);
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div>
+    <div class="mp-card row" style="margin-top: 10px;">
+        <div class="col s12">
+            <a href="{{url('user/statement')}}" class="home-btn">Click Here To See Full Statement</a>
+        </div>
+    </div>
+       
     </div>
     <div class="mp-card" style="margin-top: 10px;">
         <form class="row">
@@ -119,25 +127,6 @@ $bal = explode('|', $user->balance);
             <div class="input-field col l1">
                 <a class="btn amber darken-1" href="{{ url('user/summary') }}">Clear</a>
             </div>
-            {{-- @if ($name != null) --}}
-            <div class="col s12 l6 row" style="margin-top: 20px;">
-                <div class="col s6 center">
-                    <a href="{{ url('user/statement') }}" class="btn amber darken-2">Statement</a>
-                </div>
-                <div class="col s6 center">
-                    @php
-                        if (getNepaliMonth(today()) == $emonth && getNepaliYear(today()) == $eyear) {
-                            $eday = getNepaliDay(today());
-                        } else {
-                            $eday = getLastDate($emonth, date('y', strtotime($eyear)));
-                        }
-                        
-                    @endphp
-                    <a href="{{ url('/user/analytics?date=' . getEnglishDate($syear, $smonth, 1) . '&date2=' . getEnglishDate($eyear, $emonth, $eday)) }}"
-                        class="btn amber darken-2">Product Analytics</a>
-                </div>
-            </div>
-            {{-- @endif --}}
         </form>
     </div>
 
