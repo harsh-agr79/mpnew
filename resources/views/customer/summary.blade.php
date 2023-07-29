@@ -64,7 +64,7 @@ $bal = explode('|', $user->balance);
     </div>
     <div class="mp-card" style="margin-top: 10px;">
         <form class="row">
-            <div class="row col s12 m6">
+            <div class="row col s6">
                 <div class="col s12">
                     <span>Start Date</span>
                 </div>
@@ -94,7 +94,7 @@ $bal = explode('|', $user->balance);
                     </select>
                 </div>
             </div>
-            <div class="row col s12 m6">
+            <div class="row col s6">
                 <div class="col s12">
                     <span>End Date</span>
                 </div>
