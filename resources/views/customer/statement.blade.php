@@ -105,18 +105,18 @@
                             class="inp browser-default black-text">
                     </div>
                     <div class="col s4" style="margin-top: 10px;">
-                        <button class="btn amber black-text">
+                        <button class="btn-small amber black-text">
                             Apply<i class="material-icons right">send</i>
                         </button>
                     </div>
                 </form>
                 <div class="col s4" style="margin-top: 10px;">
-                    <a class="btn amber black-text" href="{{ url('user/statement') }}">
+                    <a class="btn-small amber black-text" href="{{ url('user/statement') }}">
                         Clear
                     </a>
                 </div>
                 <div class="col s4" style="margin-top: 10px;">
-                    <a class="modal-trigger btn amber black-text" href="#modal1">
+                    <a class="modal-trigger btn-small amber black-text" href="#modal1">
                         Target Details
                     </a>
                 </div>
