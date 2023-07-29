@@ -64,12 +64,8 @@ $bal = explode('|', $user->balance);
     </div>
     <div class="mp-card" style="margin-top: 10px;">
         <form class="row">
-            <div class="row col s6">
-                <div class="col s12">
-                    <span>Start Date</span>
-                </div>
-                <div class="col row s12">
-                    <select name="startmonth" class="browser-default col s3 m3 selectinp">
+                <div class="col s2">
+                    <select name="startmonth" class="browser-default selectinp">
                         <option value="">Select Start Month</option>
                         <option value="{{ $smonth }}" selected>{{ $smonth }}</option>
                         <option value="1">1</option>
@@ -85,7 +81,9 @@ $bal = explode('|', $user->balance);
                         <option value="11">11</option>
                         <option value="12">12</option>
                     </select>
-                    <select name="startyear" class="browser-default col s9 m9 selectinp">
+                </div>
+                <div class="col s4">
+                    <select name="startyear" class="browser-default selectinp">
                         <option value="">Select Start Year</option>
                         <option value="{{ $syear }}" selected>{{ $syear }}</option>
                         <option value="2078">2078</option>
@@ -93,13 +91,8 @@ $bal = explode('|', $user->balance);
                         <option value="2080">2080</option>
                     </select>
                 </div>
-            </div>
-            <div class="row col s6">
-                <div class="col s12">
-                    <span>End Date</span>
-                </div>
-                <div class="row col s12">
-                    <select name="endmonth" value="{{ $emonth }}" class="browser-default col s3 m3 selectinp">
+                <div class="col s2">
+                    <select name="endmonth" value="{{ $emonth }}" class="browser-default selectinp">
                         <option value="">Select End Month</option>
                         <option value="{{ $emonth }}" selected>{{ $emonth }}</option>
                         <option value="1">1</option>
@@ -115,7 +108,9 @@ $bal = explode('|', $user->balance);
                         <option value="11">11</option>
                         <option value="12">12</option>
                     </select>
-                    <select name="endyear" value="{{ $eyear }}" class="browser-default col s9 m9 selectinp">
+                </div>
+                <div class="col s4">
+                    <select name="endyear" value="{{ $eyear }}" class="browser-default selectinp">
                         <option value="">Select End Year</option>
                         <option value="{{ $eyear }}" selected>{{ $eyear }}</option>
                         <option value="2078">2078</option>
@@ -123,7 +118,6 @@ $bal = explode('|', $user->balance);
                         <option value="2080">2080</option>
                     </select>
                 </div>
-            </div>
             <div class="input-field col l1">
                 <button class="btn amber darken-1">Apply</button>
             </div>
