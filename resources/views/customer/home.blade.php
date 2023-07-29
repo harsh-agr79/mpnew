@@ -10,7 +10,7 @@
                 <a href="{{url('user/createorder')}}" class="home-btn spc">Create A New Order<i class="material-icons">add</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
-                <a href="" class="home-btn">Previous Orders<i class="material-icons">shopping_basket</i></a>
+                <a href="{{url('user/oldorders')}}" class="home-btn">Previous Orders<i class="material-icons">shopping_basket</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
                 <a href="" class="home-btn">Saved Orders<i class="material-icons">save</i></a>

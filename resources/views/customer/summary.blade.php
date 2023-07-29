@@ -412,6 +412,10 @@ $bal = explode('|', $user->balance);
                             <td>{{ money($totalsales / getNepaliDays($smonth, date('y', strtotime($syear)), $emonth, date('y', strtotime($eyear)), getNepaliDay(today()), getNepaliMonth(today()), date('y', strtotime(getNepaliYear(today()))))) }}
                             </td>
                         </tr>
+                        <tr>
+                            <td>Bill Count</td>
+                            <td>{{$numbills}}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

@@ -1,10 +1,10 @@
 @extends('customer/layout')
 
 @section('main')
-<form enctype="multipart/form-data" method="post">
+<form enctype="multipart/form-data" action="{{route('user.addorder')}}" method="post">
     @csrf
-    <input type="hidden" name="date" value="{{ date('Y-m-d') }}" required>
-    <input type="hidden" name="main" value="{{ $user->name }}" required>
+    <input type="hidden" name="date" value="{{ date('Y-m-d H:i:s') }}" required>
+    <input type="hidden" name="name" value="{{ $user->name }}" required>
     <div class="mp-card" style="margin-top: 20px;">
         <div class="row">
                 <div class="col s2 center">
@@ -52,8 +52,11 @@
             <a class="btn red modal-close">
                 Edit
             </a>
-            <button class="btn amber" type="submit">
-                Submit
+            <button class="btn green" type="submit" name="submit" value="save">
+                Save
+            </button>
+            <button class="btn amber" type="submit" name="submit" value="submit">
+                Confirm
             </button>
         </div>
     </div>
