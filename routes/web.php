@@ -138,6 +138,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('frontsettings', [FrontController::class, 'index']);
     Route::post('frontimg', [FrontController::class, 'addimg'])->name('addimg');
     Route::get('delete/frontimg/{id}/{id2}', [FrontController::class, 'deleteimg']);
+    Route::post('frontmsg', [FrontController::class, 'addmsg'])->name('addmsg');
+    Route::get('delete/frontmsg/{id}', [FrontController::class, 'deletemsg']);
 
 
     //ADMIN SETTINGS

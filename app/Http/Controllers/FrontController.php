@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\File;
 class FrontController extends Controller
 {
     public function index(Request $request){
-        $result['data'] = DB::table('front')->get();
+        $result['data']=DB::table('front')->where('type', 'image')->get();
+        $result['data2']=DB::table('front')->where('type', 'message')->get();
         return view('admin/frontsettings', $result);
     }
 
@@ -28,6 +29,7 @@ class FrontController extends Controller
                 $image[] = $image_url;
                DB::table('front')->insert([
                     'image'=>$image_url,
+                    'type'=>'image',
                 ]);
             }
 
@@ -41,6 +43,18 @@ class FrontController extends Controller
         }
         DB::table('front')->where(['image'=>$image_path])->delete();
 
+        return redirect('frontsettings');
+    }
+    public function addmsg(Request $request){
+        $message = $request->post('message');
+        DB::table('front')->insert([
+            'message'=>$message,
+            'type'=>'message'
+        ]);
+        return redirect('frontsettings');
+    }
+    public function deletemsg(Request $request, $id){
+        DB::table('front')->where('id', $id)->delete();
         return redirect('frontsettings');
     }
 }

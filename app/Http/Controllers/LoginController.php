@@ -86,11 +86,9 @@ class LoginController extends Controller
 
     //CUSTOMER HOME PAGE
     public function home(){
-        $result['data']=DB::table('front')->get();
+        $result['data']=DB::table('front')->where('type', 'image')->get();
+        $result['data2']=DB::table('front')->where('type', 'message')->get();
         return view('customer/home', $result);
     }
-
- 
-
     
 }

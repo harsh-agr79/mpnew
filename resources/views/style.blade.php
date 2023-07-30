@@ -116,6 +116,7 @@ span.field-icon {
     width: 100%;
     border: 1px solid rgb(173, 173, 173);
     border-radius: 5px;
+    color: black;
 }
 
 input:focus {
@@ -312,7 +313,7 @@ input:focus {
   flex-shrink: 0;
   height: 30px;
   align-items: center;
-  animation: slide-left 20s linear infinite;
+  animation: slide-left 15s linear infinite;
 }
 .news-message p{
     font-size: 1.5em;
