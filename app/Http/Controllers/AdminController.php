@@ -71,9 +71,14 @@ class AdminController extends Controller
                 'password'=>$password,
                 'type'=>$type
             ]);
-
+            $initial = $request->post('name2');
+            DB::table('orders')->where('refname', $initial)->update([
+                'refname'=>$name
+            ]);
+            DB::table('customers')->where('refname', $initial)->update([
+                'refname'=>$name
+            ]);
             DB::table('permission')->where('userid', $id)->delete();
-
             $perms = $request->post('perm', []);
             for ($i=0; $i < count($perms); $i++) { 
                 $perm = explode('|', $perms[$i]);

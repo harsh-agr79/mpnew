@@ -17,6 +17,7 @@
                     <div class="col s6">
                         <input type="text" value="{{ $name }}" name="name"
                             class="inp black-text browser-default" placeholder="Name">
+                        <input type="hidden" name="name2" value="{{$name}}">
                     </div>
                 </div>
                 <div class="col s12 row">
