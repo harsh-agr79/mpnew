@@ -333,7 +333,7 @@ input:focus {
 }
 
 .bottom-sheet{
-    height: 60vh !important;
+    height: 70vh !important;
     border: none !important;
     outline: none !important;
 }
