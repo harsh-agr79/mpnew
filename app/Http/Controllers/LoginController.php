@@ -86,7 +86,8 @@ class LoginController extends Controller
 
     //CUSTOMER HOME PAGE
     public function home(){
-        return view('customer/home');
+        $result['data']=DB::table('front')->get();
+        return view('customer/home', $result);
     }
 
  
