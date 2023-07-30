@@ -312,13 +312,13 @@ input:focus {
   flex-shrink: 0;
   height: 30px;
   align-items: center;
-  color: var(--textcol);
   animation: slide-left 20s linear infinite;
 }
-p{
+.news-message p{
     font-size: 1.5em;
     font-weight: 600;
     padding-left: 1em;
+    color: var(--textcol);
   }
   @keyframes slide-left {
   from {
