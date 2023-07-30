@@ -47,6 +47,7 @@ body{
 
 body {
     font-family: 'Exo', 'sans-serif';
+    /* overflow-x: hidden; */
 }
 #loading {
   width: 100%;
@@ -298,5 +299,34 @@ input:focus {
 .mp-caro-item{
     height: 25vh;
     width: 100%;
+}
+.scroll-text{
+  display:flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  min-width: 100%;
+  overflow: hidden; 
+}
+.news-message{
+  display : flex;
+  flex-shrink: 0;
+  height: 50px;
+  align-items: center;
+  animation: slide-left 20s linear infinite;
+}
+p{
+    font-size: 2.5em;
+    font-weight: 100;
+    padding-left: 0.5em;
+  }
+  @keyframes slide-left {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
 }
 </style>

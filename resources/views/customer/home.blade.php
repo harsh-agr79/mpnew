@@ -17,6 +17,30 @@
                 </div>
             @endfor
            </div>
+           <div class="scroll-text">
+            <section class="news-message">
+              <p>China</p>
+              <p>Italy</p>
+              <p>Iran</p>
+              <p>South Korea</p>
+              <p>Spain</p>
+              <p>France</p>
+              <p>Germany</p>
+              <p>United States</p>
+              <p>Switzerland</p>
+              </section>
+           <section class="news-message">
+              <p>China</p>
+              <p>Italy</p>
+              <p>Iran</p>
+              <p>South Korea</p>
+              <p>Spain</p>
+              <p>France</p>
+              <p>Germany</p>
+              <p>United States</p>
+              <p>Switzerland</p>
+              </section>
+          </div>
         </div>
         <div class="col l6 m12 s12 row center" style="margin-top: 20px;">
             <div class="col s12" style="margin-top: 10px;">
