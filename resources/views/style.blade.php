@@ -310,7 +310,6 @@ input:focus {
 .news-message{
   display : flex;
   flex-shrink: 0;
-  padding-top: 5px;
   align-items: center;
   animation: slide-left 20s linear infinite;
 }
