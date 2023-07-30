@@ -310,14 +310,14 @@ input:focus {
 .news-message{
   display : flex;
   flex-shrink: 0;
-  height: 50px;
+  height: 20px;
   align-items: center;
   animation: slide-left 20s linear infinite;
 }
 p{
-    font-size: 2.5em;
-    font-weight: 100;
-    padding-left: 0.5em;
+    font-size: 1.5em;
+    font-weight: 600;
+    padding-left: 1em;
   }
   @keyframes slide-left {
   from {
