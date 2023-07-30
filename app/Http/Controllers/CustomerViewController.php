@@ -347,7 +347,7 @@ class CustomerViewController extends Controller
                 ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
                 ->get();
                 $result['data2'.$item->category] = DB::table('products')
-                ->where(['category'=>$item->category])
+                ->where(['category'=>$item->category, 'hide'=>NULL])
                 ->whereNotIn('produni_id', DB::table('orders')
                 ->where(['category'=>$item->category,'status'=>'approved','deleted'=>NULL, 'save'=>NULL])
                 ->where('created_at', '>=', $date)
