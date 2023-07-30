@@ -72,14 +72,15 @@ class AdminController extends Controller
                 'type'=>$type
             ]);
             $initial = $request->post('name2');
+            $initialid = $request->post('userid2');
             DB::table('orders')->where('refname', $initial)->update([
                 'refname'=>$name
             ]);
             DB::table('customers')->where('refname', $initial)->update([
                 'refname'=>$name
             ]);
-            DB::table('orders')->where('seenby', $initial)->update([
-                'seenby'=>$name
+            DB::table('orders')->where('seenby', $initialid)->update([
+                'seenby'=>$userid
             ]);
             DB::table('permission')->where('userid', $id)->delete();
             $perms = $request->post('perm', []);

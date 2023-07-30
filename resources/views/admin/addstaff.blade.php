@@ -27,6 +27,7 @@
                     <div class="col s6">
                         <input type="text" value="{{ $userid }}" name="userid"
                             class="inp black-text browser-default" placeholder="User Id">
+                        <input type="hidden" name="userid2" value="{{$userid}}">
                     </div>
                 </div>
                 <div class="col s12 row">
