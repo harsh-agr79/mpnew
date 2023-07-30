@@ -333,7 +333,7 @@ input:focus {
 }
 
 .bottom-sheet{
-    max-height: 100% !important;
+    max-height: 80% !important;
     border: none !important;
     outline: none !important;
     border-radius: 10px !important;
