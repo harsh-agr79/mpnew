@@ -312,6 +312,7 @@ input:focus {
   flex-shrink: 0;
   height: 30px;
   align-items: center;
+  color: var(--textcol);
   animation: slide-left 20s linear infinite;
 }
 p{
