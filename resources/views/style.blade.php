@@ -334,5 +334,7 @@ input:focus {
 
 .bottom-sheet{
     height: 60vh !important;
+    border: none !important;
+    outline: none !important;
 }
 </style>
