@@ -79,7 +79,5 @@ carousel()
     $('.mp-caro-item').addClass('hide');
     caroItem[next].classList.remove('hide');
   }
-        
-  
 
   

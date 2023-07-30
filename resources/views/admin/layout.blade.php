@@ -73,7 +73,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="{{ url()->previous() }}">
+                            <a onclick="history.back()">
                                 <i class="material-icons textcol">arrow_back</i>
                             </a>
                         </li>
