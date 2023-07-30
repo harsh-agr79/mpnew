@@ -78,6 +78,9 @@ class AdminController extends Controller
             DB::table('customers')->where('refname', $initial)->update([
                 'refname'=>$name
             ]);
+            DB::table('orders')->where('seenby', $initial)->update([
+                'seenby'=>$name
+            ]);
             DB::table('permission')->where('userid', $id)->delete();
             $perms = $request->post('perm', []);
             for ($i=0; $i < count($perms); $i++) { 
