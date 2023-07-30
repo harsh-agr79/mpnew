@@ -296,7 +296,7 @@ input:focus {
     transform: scale(1.07);
 }
 .mp-caro-item{
-    height: 30vh;
+    height: 25vh;
     width: 100%;
 }
 </style>
