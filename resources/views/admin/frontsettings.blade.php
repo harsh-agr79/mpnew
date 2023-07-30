@@ -46,7 +46,7 @@
             <div class="center">Announcement Message</div>
             <form style="margin-top: 10px;" action="{{ route('addmsg') }}" method="POST">
                 @csrf
-                <input type="text" name="message" class="browser-default inp" placeholder="Write Message">
+                <input type="text" name="message" class="browser-default inp" autocomplete="off" placeholder="Write Message">
                 <div class="center" style="margin-top: 10px">
                     <button class="btn amber">
                         Add Message
