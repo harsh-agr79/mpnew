@@ -258,7 +258,6 @@
                 url: "/user/finditem/" + id,
                 dataType: "json",
                 success: function(response) {
-                    // console.log(response.name)
                     $('#mod-name').text(response.name)
                     $('#mod-price').text('Rs.'+response.price)
                     $('#mod-category').text(response.category)
@@ -274,9 +273,6 @@
     $('.materialboxed').on('click', function(){
         history.pushState(null, document.title, location.href);
     })
-    // history.pushState(null, document.title, location.href);
-    // history.back();
-    // history.forward();
     window.onpopstate = function () {
         var prodimg = $('.materialboxed');
         var proddet = $('#details');
