@@ -151,8 +151,8 @@
     </div>
 
     <div id="details" class="modal bottom-sheet bg-content">
-        <div class="modal-content">
-            <div class="row">
+        <div class="modal-content bg-content">
+            <div class="row bg-content">
                 <div class="row col s12">
                     <div class="col s6">
                         <img id="mod-img1" class="materialboxed" height="100" src="" alt="">
