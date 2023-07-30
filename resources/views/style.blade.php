@@ -331,4 +331,8 @@ input:focus {
             transform: translateX(-100%);
   }
 }
+
+.bottom-sheet{
+    height: 60vh !important;
+}
 </style>

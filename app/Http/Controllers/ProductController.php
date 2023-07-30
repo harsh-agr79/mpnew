@@ -13,6 +13,10 @@ class ProductController extends Controller
         $c = DB::table('products')->get();
         return response()->json($c);
     }
+    public function getproductdetail(Request $request, $id){
+        $c = DB::table('products')->where('id', $id)->first();
+        return response()->json($c);
+    }
 
     public function index(Request $request){
         $result['data'] = DB::table('products')->where('deleted', NULL)->orderBy('category', 'ASC')->orderBy('ordernum', 'ASC')->get();

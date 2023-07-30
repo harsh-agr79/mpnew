@@ -215,5 +215,6 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::get('/user/statement', [CustomerViewController::class, 'statement']);
 
     Route::get('user/finditem', [ProductController::class, 'getproduct']);
+    Route::get('user/finditem/{id}', [ProductController::class, 'getproductdetail']);
 });
 
