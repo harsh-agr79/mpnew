@@ -23,7 +23,7 @@
             $cus = DB::table('customers')->where('name', $data[0]->name)->first();
         @endphp
         <div id="invoice" style="padding: 10px;">
-            <div class="row" style="font-size: 12px;">
+            <div class="row">
                 <div class="col s4">
                     <span>My Power</span><br>
                     <span>+977 9849239275</span><br>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <table>
-                <thead class="amber lighten-3">
+                <thead>
                     <th>SN</th>
                     <th>Item</th>
                     <th>Quantity</th>
@@ -96,12 +96,6 @@
 
             </div>
         </div>
-
-        <div>
-            <button class="btn-large amber" onclick="print()">
-                Print Order
-            </button>
-        </div>
        
 
       <!--JavaScript at end of body for optimized loading-->
@@ -109,10 +103,10 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
       <script>
-        function print(){
+        $(document).ready(function() {
             var inoice  = $('#invoice');
             html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
-        }
+        })
       </script>
     </body>
   </html>
