@@ -97,7 +97,7 @@
             </div>
         </div>
         <div>
-            <button class="amber" onclick="print()">
+            <button class="btn amber" onclick="print()">
                 Print
             </button>
         </div>
