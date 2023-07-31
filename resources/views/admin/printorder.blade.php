@@ -63,9 +63,9 @@
                         <tr>
                             <td>{{$a = $a + 1;}}</td>
                             <td>{{$item->item}}</td>
-                            <td>{{$item->quantity}}</td>
+                            <td>{{$item->approvedquantity}}</td>
                             <td>{{$item->price}}</td>
-                            <td>{{$b = $item->price * $item->quantity}}</td>
+                            <td>{{$b = $item->price * $item->approvedquantity}}</td>
                             <span class="hide">{{$total = $total + $b}}</span>
                         </tr>
                     @endforeach

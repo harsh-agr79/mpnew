@@ -389,4 +389,13 @@ class OrderAdminController extends Controller
         $result['data'] = DB::table('orders')->where('orderid',$orderid)->where('status', 'approved')->get();
         return view('admin/printorder', $result);
     }
+    public function bprintindex(Request $request){
+        $result['data'] = DB::table('orders')->where('deleted',NULL)->where('save', NULL)->orderBy('created_at','DESC')->groupBy('orderid')->paginate(100);
+
+        return view('admin/bprintindex', $result);
+    }
+
+    public function bulkprint(Request $request){
+        dd($request->post());
+    }
 }

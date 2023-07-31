@@ -152,6 +152,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('printorder/{id}', [OrderAdminController::class, 'print']);
 
+    Route::get('bulkprintorders', [OrderAdminController::class, 'bprintindex']);
+    Route::post('bulkprint', [OrderAdminController::class, 'bulkprint'])->name('bulkprint');
+
 
     //FOR SERVER SIDE BULK UPDATE
     Route::get('update', [FixController::class, 'update']);
