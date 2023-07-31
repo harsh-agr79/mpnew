@@ -41,6 +41,7 @@
                             <th></th>
                             <th>Date</th>
                             <th>Detail</th>
+                            <th>Amount</th>
                             <th>Delivered</th>
                             <th>recieved</th>
                         </tr>
@@ -62,6 +63,7 @@
                                         <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
                                     </div>
                                 </td>
+                                <td>{{getTotalAmount($item->orderid)}}</td>
                                 <td>
                                     @if ($item->delivered == 'on')
                                         <i class="material-icons textcol">check</i>

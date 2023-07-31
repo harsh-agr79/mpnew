@@ -89,7 +89,7 @@ class OrderController extends Controller
         else{
             $result['date']= '';
         }
-        $query = $query->paginate(50);
+        $query = $query->paginate(10);
         $result['data']=$query;
         $result['page'] = 'old';
     
@@ -108,7 +108,7 @@ class OrderController extends Controller
         else{
             $result['date']= '';
         }
-        $query = $query->paginate(50);
+        $query = $query->paginate(10);
         $result['data']=$query;
         $result['page'] = 'saved';
     
