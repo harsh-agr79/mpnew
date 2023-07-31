@@ -262,7 +262,7 @@ input:focus {
     border-radius: 5px;
     outline: none;
     border: 1px solid rgb(170, 170, 170);
-    width: 15vh; 
+    width: 10vh; 
 }
 .prod-container::-webkit-scrollbar{
     display: none;
