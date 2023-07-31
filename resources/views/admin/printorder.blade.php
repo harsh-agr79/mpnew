@@ -32,7 +32,7 @@
             ->where('name', $data[0]->name)
             ->first();
     @endphp
-    <div id="invoice" style="padding: 10px;">
+    <div id="invoice" style="padding: 10px; margin:10px;">
         <div class="row">
             <div class="col s4">
                 <span>My Power</span><br>
