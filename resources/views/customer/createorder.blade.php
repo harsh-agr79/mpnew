@@ -293,7 +293,7 @@
             scrollTop: $('#powerbank').offset().top - 250,
         }, 0);
         $(".prod-container").animate({
-                  scrollTop: $($(this).attr('data-target')).offset().top - 250,
+                  scrollTop: $($(this).attr('data-target')).offset().top - 240,
         }, 0);
         // $('.prod-container').scrollTo($(`${$(this).attr('data-target')}`))
     })
