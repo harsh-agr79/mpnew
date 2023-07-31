@@ -137,7 +137,8 @@
                             @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
                             <span
                                 class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                class="right col s6">{{ money($item->sl - $item->dis) }}</span>
+                        </div>
                         @if ($name == null)
                             @php
                                 $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -166,6 +167,10 @@
                                             ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
                                             ->get();
                                         $sls = $query;
+                                        $cslist = $sls->pluck('name')->toArray();
+                                        $sls2 = DB::table('customers')
+                                            ->whereNotIn('name', $cslist)
+                                            ->get();
                                     @endphp
                                     <table class="sortable">
                                         <thead>
@@ -186,6 +191,15 @@
                                                         class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
                                                         {{ $item2->type }}</td>
                                                     <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                </tr>
+                                            @endforeach
+                                            @foreach ($sls2 as $item2)
+                                                <tr>
+                                                    <td>{{ $item2->name }}</td>
+                                                    <td
+                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                        {{ $item2->type }}</td>
+                                                    <td>0</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -218,7 +232,8 @@
                                 @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
                                 <span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span>
+                            </div>
                             @if ($name == null)
                                 @php
                                     $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -247,6 +262,11 @@
                                                 ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
                                                 ->get();
                                             $sls = $query;
+                                            
+                                            $cslist = $sls->pluck('name')->toArray();
+                                            $sls2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist)
+                                                ->get();
                                         @endphp
                                         <table class="sortable">
                                             <thead>
@@ -260,7 +280,6 @@
                                                 @foreach ($sls as $item2)
                                                     <tr
                                                         ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
-
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
@@ -268,6 +287,15 @@
                                                             class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
                                                             {{ $item2->type }}</td>
                                                         <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                @foreach ($sls2 as $item2)
+                                                    <tr>
+                                                        <td>{{ $item2->name }}</td>
+                                                        <td
+                                                            class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                            {{ $item2->type }}</td>
+                                                        <td>0</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -300,7 +328,8 @@
                                 @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
                                 <span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span>
+                            </div>
                             @if ($name == null)
                                 @php
                                     $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -329,12 +358,16 @@
                                                 ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
                                                 ->get();
                                             $sls = $query;
+                                            $cslist = $sls->pluck('name')->toArray();
+                                            $sls2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist)
+                                                ->get();
                                         @endphp
                                         <table class="sortable">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Type</th>
+                                                    <th>type</th>
                                                     <th>Sales</th>
                                                 </tr>
                                             </thead>
@@ -342,7 +375,6 @@
                                                 @foreach ($sls as $item2)
                                                     <tr
                                                         ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
-
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
@@ -350,6 +382,15 @@
                                                             class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
                                                             {{ $item2->type }}</td>
                                                         <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                @foreach ($sls2 as $item2)
+                                                    <tr>
+                                                        <td>{{ $item2->name }}</td>
+                                                        <td
+                                                            class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                            {{ $item2->type }}</td>
+                                                        <td>0</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -382,7 +423,8 @@
                                 @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
                                 <span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span></div>
+                                    class="right col s6">{{ money($item->sl - $item->dis) }}</span>
+                            </div>
                             @if ($name == null)
                                 @php
                                     $totalsales = $totalsales + ($item->sl - $item->dis);
@@ -411,12 +453,17 @@
                                                 ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
                                                 ->get();
                                             $sls = $query;
+                                            $cslist = $sls->pluck('name')->toArray();
+                                            
+                                            $sls2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist)
+                                                ->get();
                                         @endphp
                                         <table class="sortable">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Type</th>
+                                                    <th>type</th>
                                                     <th>Sales</th>
                                                 </tr>
                                             </thead>
@@ -424,7 +471,6 @@
                                                 @foreach ($sls as $item2)
                                                     <tr
                                                         ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
-
                                                         <td>
                                                             {{ $item2->name }}
                                                         </td>
@@ -432,6 +478,15 @@
                                                             class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
                                                             {{ $item2->type }}</td>
                                                         <td>{{ money($item2->sl - $item2->dis) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                @foreach ($sls2 as $item2)
+                                                    <tr>
+                                                        <td>{{ $item2->name }}</td>
+                                                        <td
+                                                            class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                            {{ $item2->type }}</td>
+                                                        <td>0</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
