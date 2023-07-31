@@ -18,12 +18,22 @@
                 font-size: 10px;
                 font-weight: 600;
             }
+            .cont{
+                margin-right: 30vw;
+                margin-left: 30vw;
+                margin-top: 20px; 
+            }
+            @media screen and (max-width: 1100px){
+                .cont{
+                    margin: 0;
+                }
+            }
         </style>
         @php
             $cus = DB::table('customers')->where('name', $data[0]->name)->first();
         @endphp
-        <div style="margin-left: 20vw; margin-right: 20vw;">
-            <div id="invoice" style="padding: 10px;">
+        <div class="cont">
+            <div id="invoice" style="padding: 10px; border: 1px solid black; border-radius: 20px; margin: 20px;">
                 <div class="row">
                     <div class="col s4">
                         <span>My Power</span><br>
@@ -48,7 +58,7 @@
                     </div>
                 </div>
                 <table>
-                    <thead>
+                    <thead class="amber lighten-3">
                         <th>SN</th>
                         <th>Item</th>
                         <th>Quantity</th>
