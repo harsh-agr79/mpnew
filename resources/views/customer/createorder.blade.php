@@ -7,37 +7,37 @@
 
     <div class="row bg-content textcol">
         <div class="col s2 center" style="padding:5px;">
-            <a href="#powerbank" class="browser-default">
+            <a data-target="#powerbank" class="browser-default scroll-link">
                 <div><i class="fa-solid fa-car-battery textcol" style="font-size: 25px;"></i></div>
                 <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">powerbank</div>
             </a>
         </div>
         <div class="col s2 center" style="padding:5px;">
-            <a href="#charger" class="browser-default">
+            <a data-target="#charger" class="browser-default scroll-link">
                 <div><i class="fa-solid fa-plug-circle-bolt textcol" style="font-size: 25px;"></i></div>
                 <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">charger</div>
             </a>
         </div>
-        <div class="col s2 center" style="padding:5px;">
-            <a href="#cable" class="browser-default">
+        <div class="col s2 center" style="padding:5px; scroll-link">
+            <a data-target="#cable" class="browser-default scroll-link">
                 <div><i class="fa-brands fa-usb textcol" style="font-size: 25px;"></i></div>
                 <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">cable</div>
             </a>
         </div>
         <div class="col s2 center" style="padding:5px;">
-            <a href="#earphone" class="browser-default">
+            <a data-target="#earphone" class="browser-default scroll-link">
                 <div><i class="fa-sharp fa-solid fa-ear-listen textcol" style="font-size: 25px;"></i></div>
                 <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">earphone</div>
             </a>
         </div>
         <div class="col s2 center" style="padding:5px;">
-            <a href="#btitem" class="browser-default">
+            <a data-target="#btitem" class="browser-default scroll-link">
                 <div><i class="fa-brands fa-bluetooth-b textcol" style="font-size: 25px;"></i></div>
                 <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">bluetooth</div>
             </a>
         </div>
         <div class="col s2 center" style="padding:5px;">
-            <a href="#others" class="browser-default">
+            <a data-target="#others" class="browser-default scroll-link">
                 <div><i class="fa-sharp fa-solid fa-cart-plus textcol" style="font-size: 25px;"></i></div>
                 <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">others</div>
             </a>
@@ -104,9 +104,22 @@
             </div>
         </div>
     </form>
-    <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
+    <div class="prod-container">
+       @php
+        $category = '';
+        $category2 = '';
+       @endphp
         @foreach ($data as $item)
-            <div class="mp-card row prod" id="{{ $item->category }}" style="margin: 3px; padding: 10px;">
+            @php
+                if ($category2 == $item->category) {
+                    $category = '';
+                }
+                else{
+                    $category = $item->category;
+                }
+                $category2 = $item->category
+            @endphp
+            <div class="mp-card row prod" id="{{$category}}" style="margin: 3px; padding: 10px;">
                 <div class="col s4" style="padding: 0;  margin: 0;">
                     <img src="{{ asset('storage/media/' . $item->img) }}" class="prod-img materialboxed" alt="">
                 </div>
@@ -273,12 +286,24 @@
     $('.materialboxed').on('click', function(){
         history.pushState(null, document.title, location.href);
     })
+    $('.scroll-link').on('click', function(e){
+        e.preventDefault();
+        console.log($(this).attr('data-target'));
+        $(".prod-container").animate({
+            scrollTop: $('#powerbank').offset().top - 250,
+        }, 0);
+        $(".prod-container").animate({
+                  scrollTop: $($(this).attr('data-target')).offset().top - 250,
+        }, 500);
+        // $('.prod-container').scrollTo($(`${$(this).attr('data-target')}`))
+    })
     window.onpopstate = function () {
         var prodimg = $('.materialboxed');
         var proddet = $('#details');
         if(proddet.hasClass('open') || prodimg.hasClass('active')){
             $('#details').modal('close');
             $('.active').materialbox('close');
+            // $('.prod-container').css()
         }
         else{
             history.back();
