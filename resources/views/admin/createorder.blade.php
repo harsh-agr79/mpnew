@@ -238,7 +238,7 @@
             } else {
                 $('#cs-icon').text('close')
             }
-            console.log(prod);
+            // console.log(prod);
 
             for (var i = 0; i < prod.length; i++) {
                 let span = prod[i].getElementsByTagName('span');
