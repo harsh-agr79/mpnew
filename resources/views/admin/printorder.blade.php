@@ -96,7 +96,7 @@
 
             </div>
         </div>
-        <div class="center">
+        <div>
             <button class="amber" onclick="print()">
                 Print
             </button>
