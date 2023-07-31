@@ -8,6 +8,29 @@
             ->first();
     @endphp
     <div class="mp-container">
+        <div class="right center">
+            @if ($data[0]->mainstatus == 'blue')
+            <div>
+                <a class="btn-flat dropdown-trigger" data-target="menu">
+                    <i class="material-icons">more_vert</i>
+                </a>
+                <ul id='menu' class='dropdown-content'>
+                    <li><a href="{{url('/user/editorder/'.$data[0]->orderid)}}">Edit</a></li>
+                    <li><a href="{{url('/user/deleteorder/'.$data[0]->orderid)}}">Delete</a></li>
+                  </ul>
+            </div>
+            @endif
+            <div style="margin: 10px 0;">
+                <a href ="{{url('/user/saveorder/'.$data[0]->orderid)}}" target="_blank" class="btn-small amber white-text">
+                Img <i class="material-icons right">file_download</i>
+                </a>
+            </div>
+            <div>
+                <a href ="{{url('/user/printorder/'.$data[0]->orderid)}}" target="_blank" class="btn-small amber white-text">
+                PDF <i class="material-icons right">picture_as_pdf</i>
+                </a>
+            </div>
+           </div>
         <div>
             <h6>Customer: {{ $data[0]->name }}</h6>
             <h6>Shop Name: {{ $cus->shopname }}</h6>
@@ -72,9 +95,32 @@
                 </tbody>
             </table>
         </div>
-        <div class="bg-content mp-card" style="margin-top:30px;">
-            <div class="input-field col s12">
-                User Remarks: {{ $data['0']->remarks }}
+        <form method="post" action="{{ route('user.detailedit') }}">
+            @csrf
+            <input type="hidden" name="orderid" value="{{ $data[0]->orderid }}">
+            <div class="bg-content mp-card" style="margin-top:30px;">
+                <div class="input-field col s12">
+                    User Remarks:
+                    <textarea name="userremarks" class="browser-default inp" cols="30" rows="10">{{ $data[0]->userremarks }}</textarea>
+                </div>
+            </div>
+            <div class="fixed-action-btn">
+                <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})" style="border-radius: 10px;">
+                    Submit
+                    <i class="left material-icons">send</i>
+                </button>
+            </div>
+        </form>
+
+        <div class="mp-card row" style="margin-top: 10px;">
+            <div class="col s12">
+                Admin Remarks: {{$data[0]->remarks}}
+            </div>
+            <div class="col s12">
+                Cartoons: {{$data[0]->cartoons}}
+            </div>
+            <div class="col s12">
+                Transport Detail: {{$data[0]->transport}}
             </div>
         </div>
     </div>

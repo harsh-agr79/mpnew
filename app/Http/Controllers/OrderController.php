@@ -199,4 +199,12 @@ class OrderController extends Controller
     updateMainStatus($orderid);
     return redirect('/user/detail/'.$orderid);
     }
+
+    public function detailedit(Request $request){
+        $orderid = $request->post('orderid');
+        DB::table('orders')->where('orderid', $orderid)->update([
+            'userremarks'=>$request->post('userremarks')
+        ]);
+        return redirect('user/detail/'.$orderid);
+    }
 }

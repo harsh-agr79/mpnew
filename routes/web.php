@@ -223,5 +223,8 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 
     Route::get('user/finditem', [ProductController::class, 'getproduct']);
     Route::get('user/finditem/{id}', [ProductController::class, 'getproductdetail']);
+
+    Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
+    Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);
 });
 
