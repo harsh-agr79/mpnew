@@ -26,7 +26,7 @@
             $cus = DB::table('customers')->where('name', $data[0]->name)->first();
         @endphp
         <div id="invoice" style="padding: 10px;">
-            <div class="row">
+            <div class="row" style="font-size: 15px;">
                 <div class="col s4">
                     <span>My Power</span><br>
                     <span>+977 9849239275</span><br>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <table>
-                <thead>
+                <thead class="amber lighten-3">
                     <th>SN</th>
                     <th>Item</th>
                     <th>Quantity</th>
