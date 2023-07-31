@@ -102,11 +102,6 @@
 
         </div>
     </div>
-    {{-- <div class="center">
-        <button class="amber" onclick="print()">
-            Print
-        </button>
-    </div> --}}
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
