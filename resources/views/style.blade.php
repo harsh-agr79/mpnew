@@ -272,7 +272,7 @@ input:focus {
     margin-right: 20vw;
     height: 65vh; 
     overflow-y: scroll; 
-    margin-top: 10px;
+    margin-top: 20px;
 }
 @media screen and (max-width: 720px){
     .prod-container{
