@@ -396,6 +396,8 @@ class OrderAdminController extends Controller
     }
 
     public function bulkprint(Request $request){
-        dd($request->post());
+        $result['orderids'] = $request->post('orderid',[]);
+
+        return view('admin/bulkprint', $result);
     }
 }

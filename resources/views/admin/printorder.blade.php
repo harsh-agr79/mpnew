@@ -96,6 +96,12 @@
 
             </div>
         </div>
+
+        <div>
+            <button class="btn-large amber" onclick="print()">
+                Print Order
+            </button>
+        </div>
        
 
       <!--JavaScript at end of body for optimized loading-->
@@ -103,10 +109,10 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
       <script>
-        $(document).ready(function() {
+        function print(){
             var inoice  = $('#invoice');
             html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
-        })
+        }
       </script>
     </body>
   </html>
