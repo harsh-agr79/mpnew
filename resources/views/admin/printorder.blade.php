@@ -32,7 +32,7 @@
         @php
             $cus = DB::table('customers')->where('name', $data[0]->name)->first();
         @endphp
-        <div class="cont">
+        <div>
             <div id="invoice" style="padding: 10px; border: 1px solid black; border-radius: 20px; margin: 10px;">
                 <div class="row">
                     <div class="col s4">
