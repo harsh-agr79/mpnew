@@ -29,12 +29,12 @@
         </div>
         <div style="margin: 10px 0;">
             <a onclick="printorder('{{$data[0]->orderid}}');" target="_blank" class="btn-small amber white-text">
-            Image
+            Img <i class="material-icons right">file_download</i>
             </a>
         </div>
         <div>
             <a href ="{{url('printorder/'.$data[0]->orderid)}}" target="_blank" class="btn-small amber white-text">
-            PDF
+            PDF <i class="material-icons right">picture_as_pdf</i>
             </a>
         </div>
        </div>
