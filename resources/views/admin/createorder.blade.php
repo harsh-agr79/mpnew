@@ -105,7 +105,7 @@
                         </span>
                     </div>
                     <div class="row col s12 price-line valign-wrapper" style="padding: 0;  margin: 0;">
-                        <div class="col s4"><span class="prod-price">Rs.{{ $item->price }}</span></div>
+                        <div class="col s4 center"><span class="prod-price">Rs.{{ $item->price }}</span></div>
                         <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
                                 pattern="[0-9]*" placeholder="Quantity" class="browser-default prod-inp right"
                                 onkeyup="changequantity({{ $item->id }})"></div>
