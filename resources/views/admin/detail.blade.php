@@ -17,8 +17,8 @@
         }
     @endphp
     <div>
-       
-        <div class="right">
+       <div class="right center">
+        <div>
             <a class="btn-flat dropdown-trigger" data-target="menu">
                 <i class="material-icons">more_vert</i>
             </a>
@@ -27,16 +27,18 @@
                 <li><a href="{{url('deleteorder/'.$data[0]->orderid)}}">Delete</a></li>
               </ul>
         </div>
-        <div class="right" style="margin-left: 10px;">
+        <div style="margin: 10px 0;">
             <a onclick="printorder('{{$data[0]->orderid}}');" target="_blank" class="btn-small amber white-text">
             Image
             </a>
         </div>
-        <div class="right">
+        <div>
             <a href ="{{url('printorder/'.$data[0]->orderid)}}" target="_blank" class="btn-small amber white-text">
             PDF
             </a>
         </div>
+       </div>
+        
         <div style="font-size: 10px;">
             <h6 style="font-size: 12px;">Customer: {{$data[0]->name}}</h6>
             <h6 style="font-size: 12px;">Shop Name: {{$cus->shopname}}</h6>
