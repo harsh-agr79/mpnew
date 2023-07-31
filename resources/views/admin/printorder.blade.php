@@ -103,10 +103,10 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
       <script>
-        // $(document).ready(function() {
-        //     var inoice  = $('#invoice');
-        //     html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
-        // })
+        $(document).ready(function() {
+            var inoice  = $('#invoice');
+            html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
+        })
       </script>
     </body>
   </html>
