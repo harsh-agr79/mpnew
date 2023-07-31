@@ -47,7 +47,7 @@
         @csrf
         <input type="hidden" name="date" value="{{ date('Y-m-d H:i:s') }}" required>
         <input type="hidden" name="name" value="{{ $user->name }}" required>
-        <div class="mp-card" style="margin-top: 20px;">
+        <div class="mp-card" style="margin-top: 10px;">
             <div class="row" style="margin: 0; padding: 0;">
                 <div class="col s2 center" style="margin: 0; padding: 5px;">
                     <a class="btn amber modal-trigger" href="#cart"><i
