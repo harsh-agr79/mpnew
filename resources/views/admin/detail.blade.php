@@ -38,11 +38,11 @@
             </a>
         </div>
         <div style="font-size: 10px;">
-            <h6>Customer: {{$data[0]->name}}</h6>
-            <h6>Shop Name: {{$cus->shopname}}</h6>
-            <h6>orderid: {{$data[0]->orderid}}</h6>
-            <h6>Date: {{date('Y-m-d', strtotime($data[0]->created_at))}}</h6>
-            <h6>Miti: {{getNepaliDate($data[0]->created_at)}}</h6>
+            <h6 style="font-size: 12px;">Customer: {{$data[0]->name}}</h6>
+            <h6 style="font-size: 12px;">Shop Name: {{$cus->shopname}}</h6>
+            <h6 style="font-size: 12px;">orderid: {{$data[0]->orderid}}</h6>
+            <h6 style="font-size: 12px;">Date: {{date('Y-m-d', strtotime($data[0]->created_at))}}</h6>
+            <h6 style="font-size: 12px;">Miti: {{getNepaliDate($data[0]->created_at)}}</h6>
           
             @if($cus->refname != NULL)
             <h6>Referer: {{$cus->refname}}</h6>
