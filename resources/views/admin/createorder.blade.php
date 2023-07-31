@@ -36,14 +36,12 @@
                                 id="cs-icon">search</span></span>
                     </div>
                     <div class="col s2">
-                        <div class="switch" style="margin-top: 15px;">
+                        <div style="margin-top: 15px;">
                             <label>
-                              Active
-                              <input type="checkbox" onchange="toggleinactive()">
-                              <span class="lever"></span>
-                              All
-                            </label>
-                          </div>
+                                <input type="checkbox" onchange="toggleinactive()"/>
+                                <span>All Products</span>
+                              </label>
+                        </div>
                     </div>
                     <div class="col s12 center" style="margin:0; padding: 0;">
                         Bill Amount: <span id="totalamt"></span>
