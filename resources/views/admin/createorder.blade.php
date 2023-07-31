@@ -15,32 +15,38 @@
     <form enctype="multipart/form-data" action="{{ route($type.'.addorder') }}" method="post">
         @csrf
         <div class="mp-card" style="margin-top: 20px;">
-            <div class="row">
-                <div class="input-field col s6">
+            <div class="row" style="margin:0; padding: 0;">
+                <div class="input-field col s6" style="margin:0; padding: 5px;">
                     <input type="date" class="inp browser-default black-text" name="date" value="{{ date('Y-m-d') }}"
                         required>
                 </div>
-                <div class="input-field col s6">
+                <div class="input-field col s6" style="margin:0; padding: 5px;">
                     <input type="text" name="name" id="customer" name="customer" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off" required>
                 </div>
-                <div class="row col s12">
-                    <div class="col s4 center">
-                        <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;">
+                <div class="row col s12" style="margin:0; padding: 0;">
+                    <div class="col s4 center" style="margin:0; padding: 5px;">
+                        <a class="btn amber modal-trigger" href="#cart">
                             Cart <i class="material-icons left">shopping_cart</i>
                         </a>
                     </div>
-                    <div class='input-field col s8'>
+                    <div class='input-field col s8' style="margin:0; padding: 5px;">
                         <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()"
                             autocomplete="off" type='search' id='search' />
                         <span class="field-icon" id="close-search"><span class="material-icons"
                                 id="cs-icon">search</span></span>
                     </div>
+                    <div class="right" style="margin:0; padding: 0;">
+                        Bill Amount: <span id="totalamt"></span>
+                     </div>
                 </div>
             </div>
         </div>
         <div id="cart" class="modal">
             <div class="modal-content bg-content">
+                <div class="right">
+                    Bill Amount: <span id="totalamt2"></span>
+                 </div>
                 <div class="center">
                     <h5>Cart</h5>
                 </div>
@@ -54,10 +60,10 @@
                         @foreach ($data as $item)
                             <tr style="display: none;"id={{ $item->id . 'list' }}>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->price }}</td>
+                                <td class="gtprice">{{ $item->price }}</td>
                                 <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
-                                        class="browser-default prod-inp" onchange="changequantity2({{ $item->id }})"
+                                        class="browser-default prod-inp gtquantity" onkeyup="changequantity2({{ $item->id }})"
                                         onfocusout="changequantity2({{ $item->id }})"></td>
                                 <input type="hidden" name="item[]" value="{{ $item->name }}">
                                 <input type="hidden" name="price[]" value="{{ $item->price }}">
@@ -102,7 +108,7 @@
                         <div class="col s4"><span class="prod-price">Rs.{{ $item->price }}</span></div>
                         <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
                                 pattern="[0-9]*" placeholder="Quantity" class="browser-default prod-inp right"
-                                onchange="changequantity({{ $item->id }})"></div>
+                                onkeyup="changequantity({{ $item->id }})"></div>
                     </div>
                 </div>
 
@@ -156,6 +162,7 @@
                 $(`#${id}list`).show();
                 $(`#${id}listinp`).val(qval);
             }
+            getTotal();
         }
 
         function changequantity2(id) {
@@ -177,6 +184,20 @@
                 $(`#${id}listinp`).val(qval);
                 $(`#${id}viewinp`).val(qval);
             }
+            getTotal()
+        }
+
+        function getTotal(){
+            var price = $('.gtprice');
+            var quantity = $('.gtquantity');
+            var total = 0;
+            for (let i = 0; i < price.length; i++) {
+                if(quantity[i].value > 0){
+                    total = total + price[i].innerHTML * quantity[i].value;
+                }
+            }
+            $('#totalamt').text(total);
+            $('#totalamt2').text(total);
         }
     </script>
     <script>

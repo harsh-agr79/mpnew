@@ -60,14 +60,20 @@
                     <span class="field-icon" id="close-search"><span class="material-icons"
                             id="cs-icon">search</span></span>
                 </div>
+                <div class="right">
+                   Bill Amount: <span id="totalamt"></span>
+                </div>
             </div>
         </div>
         <div id="cart" class="modal">
             <div class="modal-content bg-content">
+                <div class="right">
+                    Bill Amount: <span id="totalamt2"></span>
+                 </div>
                 <div class="center">
                     <h5>Cart</h5>
                 </div>
-                <table>
+                <table class="gttable">
                     <thead>
                         <th>Name</th>
                         <th>price</th>
@@ -77,10 +83,10 @@
                         @foreach ($data as $item)
                             <tr style="display: none;" id="{{ $item->id . 'list' }}">
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->price }}</td>
+                                <td class="gtprice">{{ $item->price }}</td>
                                 <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
-                                        class="browser-default prod-inp" onchange="changequantity2({{ $item->id }})"
+                                        class="browser-default prod-inp gtquantity" onkeyup="changequantity2({{ $item->id }})"
                                         onfocusout="changequantity2({{ $item->id }})"></td>
                                 <input type="hidden" name="item[]" value="{{ $item->name }}">
                                 <input type="hidden" name="price[]" value="{{ $item->price }}">
@@ -141,7 +147,7 @@
                         <div class="col s4"><span class="prod-price">Rs.{{ $item->price }}</span></div>
                         <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
                                 pattern="[0-9]*" placeholder="Quantity" class="browser-default prod-inp right"
-                                onchange="changequantity({{ $item->id }})"></div>
+                                onkeyup="changequantity({{ $item->id }})"></div>
                     </div>
                 </div>
 
@@ -203,6 +209,7 @@
                 $(`#${id}list`).show();
                 $(`#${id}listinp`).val(qval);
             }
+            getTotal();
         }
 
         function changequantity2(id) {
@@ -224,6 +231,20 @@
                 $(`#${id}listinp`).val(qval);
                 $(`#${id}viewinp`).val(qval);
             }
+            getTotal();
+        }
+
+        function getTotal(){
+            var price = $('.gtprice');
+            var quantity = $('.gtquantity');
+            var total = 0;
+            for (let i = 0; i < price.length; i++) {
+                if(quantity[i].value > 0){
+                    total = total + price[i].innerHTML * quantity[i].value;
+                }
+            }
+            $('#totalamt').text(total);
+            $('#totalamt2').text(total);
         }
     </script>
     <script>
