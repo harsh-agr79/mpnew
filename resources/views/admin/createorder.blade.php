@@ -25,9 +25,8 @@
                         class="autocomplete browser-default inp black-text" autocomplete="off" required>
                 </div>
                 <div class="row col s12" style="margin:0; padding: 0;">
-                    <div class="col s4 center" style="margin:0; padding: 5px;">
-                        <a class="btn amber modal-trigger" href="#cart">
-                            Cart <i class="material-icons left">shopping_cart</i>
+                    <div class="col s2 center" style="margin:0; padding: 5px;">
+                        <a class="btn amber modal-trigger" href="#cart"><i class="material-icons">shopping_cart</i>
                         </a>
                     </div>
                     <div class='input-field col s8' style="margin:0; padding: 5px;">
@@ -36,7 +35,17 @@
                         <span class="field-icon" id="close-search"><span class="material-icons"
                                 id="cs-icon">search</span></span>
                     </div>
-                    <div class="right" style="margin:0; padding: 0;">
+                    <div class="col s2">
+                        <div class="switch" style="margin-top: 15px;">
+                            <label>
+                              Active
+                              <input type="checkbox" onchange="toggleinactive()">
+                              <span class="lever"></span>
+                              All
+                            </label>
+                          </div>
+                    </div>
+                    <div class="col s12 center" style="margin:0; padding: 0;">
                         Bill Amount: <span id="totalamt"></span>
                      </div>
                 </div>
@@ -86,7 +95,7 @@
     </form>
     <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
         @foreach ($data as $item)
-            <div class="mp-card row prod" style="margin: 3px; padding: 10px;">
+            <div class="mp-card row prod @if($item->hide == 'on') inactive @endif" style="margin: 3px; padding: 10px; @if($item->hide == 'on') display: none; @endif">
                 <div class="col s4" style="padding: 0;  margin: 0;">
                     <img src="{{ asset('storage/media/' . $item->img) }}" class="prod-img materialboxed" alt="">
                 </div>
@@ -237,6 +246,9 @@
                     }
                 }
             }
+        }
+        function toggleinactive(){
+            $('.inactive').toggle();
         }
     </script>
 @endsection
