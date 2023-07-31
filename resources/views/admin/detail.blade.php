@@ -12,15 +12,21 @@
         }
     @endphp
     <div>
+       
         <div class="right">
             <a class="btn-flat dropdown-trigger" data-target="menu">
                 <i class="material-icons">more_vert</i>
             </a>
             <ul id='menu' class='dropdown-content'>
                 <li><a href="{{url('editorder/'.$data[0]->orderid)}}">Edit</a></li>
-                <li><a href="#!">Print</a></li>
+                <li><a href ="{{url('printorder/'.$data[0]->orderid)}}" target="_blank">Print</a></li>
                 <li><a href="{{url('deleteorder/'.$data[0]->orderid)}}">Delete</a></li>
               </ul>
+        </div>
+        <div class="right">
+            <a onclick="printorder('{{$data[0]->orderid}}');" class="btn amber white-text">
+            Save Image
+            </a>
         </div>
         <div>
             <h6>Customer: {{$data[0]->name}}</h6>
@@ -157,6 +163,9 @@
         $("#select1").change(function() { //this occurs when select 1 changes
             $(".select2").val($(this).val());   
         });
+        function printorder(id){
+            window.open('/saveorder/'+id, '_blank', 'toolbar=0,location=0,menubar=0');
+        }
     </script>
     @if($data[0]->seen == NULL)
     <script>
@@ -173,6 +182,7 @@
                 }
             })
         })
+       
     </script>
     @endif
 @endsection

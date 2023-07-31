@@ -380,4 +380,13 @@ class OrderAdminController extends Controller
         updateMainStatus($orderid);
         return redirect('detail/'.$orderid);
     }
+    
+    public function save($orderid){
+        $result['data'] = DB::table('orders')->where('orderid',$orderid)->where('status', 'approved')->get();
+        return view('admin/saveorder', $result);
+    }
+    public function print($orderid){
+        $result['data'] = DB::table('orders')->where('orderid',$orderid)->where('status', 'approved')->get();
+        return view('admin/printorder', $result);
+    }
 }

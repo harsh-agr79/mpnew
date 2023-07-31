@@ -148,6 +148,10 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //TRASH CRUD
     Route::get('trash', [TrashController::class, 'index']);
 
+    //PRINT ORDERS
+    Route::get('saveorder/{id}', [OrderAdminController::class, 'save']);
+    Route::get('printorder/{id}', [OrderAdminController::class, 'print']);
+
 
     //FOR SERVER SIDE BULK UPDATE
     Route::get('update', [FixController::class, 'update']);
