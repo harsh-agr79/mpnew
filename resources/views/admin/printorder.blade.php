@@ -21,6 +21,15 @@
             font-size: 10px;
             font-weight: 600;
         }
+        .cont{
+            margin-left: 30vw;
+            margin-right: 30vw;
+        }
+        @media screen and (max-width: 1100px){
+            .cont{
+                margin: 0;
+            }
+        }
     </style>
     <div class="center">
         <button class="btn amber" onclick="print()">
