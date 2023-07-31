@@ -48,19 +48,19 @@
         <input type="hidden" name="date" value="{{ date('Y-m-d H:i:s') }}" required>
         <input type="hidden" name="name" value="{{ $user->name }}" required>
         <div class="mp-card" style="margin-top: 20px;">
-            <div class="row">
-                <div class="col s2 center">
+            <div class="row" style="margin: 0; padding: 0;">
+                <div class="col s2 center" style="margin: 0; padding: 5px;">
                     <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;"><i
                             class="material-icons">shopping_cart</i>
                     </a>
                 </div>
-                <div class='input-field col s10'>
+                <div class='input-field col s10' style="margin:0; padding: 5px;">
                     <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()"
                         autocomplete="off" type='search' id='search' />
                     <span class="field-icon" id="close-search"><span class="material-icons"
                             id="cs-icon">search</span></span>
                 </div>
-                <div class="right">
+                <div class="right" style="margin: 0; padding: 0;">
                    Bill Amount: <span id="totalamt"></span>
                 </div>
             </div>
