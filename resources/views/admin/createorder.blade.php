@@ -255,6 +255,7 @@
                     }
                 }
             }
+            toggleinactive();
         }
         function toggleinactive(){
             if($('#iactgl').is(":checked")){
