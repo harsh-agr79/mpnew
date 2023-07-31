@@ -22,95 +22,94 @@
             font-weight: 600;
         }
     </style>
-    @foreach ($orderids as $item)
-        {{-- @php
-            $data = DB::table('orders')
-                ->where('deleted', null)
-                ->where('save', null)
-                ->where('status', 'approved')
-                ->where('orderid', $item)
-                ->get();
-            $cus = DB::table('customers')
-                ->where('name', $data[0]->name)
-                ->first();
-        @endphp --}}
-        {{-- <div id="invoice" style="padding: 10px;">
-            <div class="row">
-                <div class="col s4">
-                    <span>My Power</span><br>
-                    <span>+977 9849239275</span><br>
-                    <span>Kathmandu</span><br>
+    <div id="invoice">
+        @foreach ($orderids as $item)
+            @php
+                $data = DB::table('orders')
+                    ->where('orderid', $item)
+                    ->get();
+                $cus = DB::table('customers')
+                    ->where('name', $data[0]->name)
+                    ->first();
+            @endphp
+            <div style="padding: 10px;">
+                <div class="row">
+                    <div class="col s4">
+                        <span>My Power</span><br>
+                        <span>+977 9849239275</span><br>
+                        <span>Kathmandu</span><br>
+                    </div>
+                    <div class="col s4 center">
+                        <img src="{{ asset('assets/light.png') }}" height="60" alt="">
+                    </div>
+                    <div class="col s4 right-align">
+                        Date: {{ date('Y-m-d', strtotime($data[0]->created_at)) }} <br>
+                        Miti: {{ getNepaliDate($data[0]->created_at) }}
+                    </div>
                 </div>
-                <div class="col s4 center">
-                    <img src="{{ asset('assets/light.png') }}" height="60" alt="">
-                </div>
-                <div class="col s4 right-align">
-                    Date: {{ date('Y-m-d', strtotime($data[0]->created_at)) }} <br>
-                    Miti: {{ getNepaliDate($data[0]->created_at) }}
-                </div>
-            </div>
-            <div>
                 <div>
-                    <span style="padding: 5px 10px; font-size: 15px; font-weight: 600;" class="amber black-text">Bill
-                        To</span><br>
-                    <span>Name: {{ $data[0]->name }}</span><br>
-                    <span>Shop Name: {{ $cus->shopname }}</span><br>
-                    <span>Address: {{ $cus->address }}</span><br>
-                    <span>Contact: {{ $cus->contact }}</span><br>
+                    <div>
+                        <span style="padding: 5px 10px; font-size: 15px; font-weight: 600;"
+                            class="amber black-text">Bill
+                            To</span><br>
+                        <span>Name: {{ $data[0]->name }}</span><br>
+                        <span>Shop Name: {{ $cus->shopname }}</span><br>
+                        <span>Address: {{ $cus->address }}</span><br>
+                        <span>Contact: {{ $cus->contact }}</span><br>
+                    </div>
                 </div>
-            </div>
-            <table>
-                <thead>
-                    <th>SN</th>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                </thead>
-                <tbody>
-                    @php
-                        $a = 0;
-                        $total = 0;
-                    @endphp
-                    @foreach ($data as $item)
-                        <tr>
-                            <td>{{ $a = $a + 1 }}</td>
-                            <td>{{ $item->item }}</td>
-                            <td>{{ $item->approvedquantity }}</td>
-                            <td>{{ $item->price }}</td>
-                            <td>{{ $b = $item->price * $item->approvedquantity }}</td>
-                            <span class="hide">{{ $total = $total + $b }}</span>
+                <table>
+                    <thead>
+                        <th>SN</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </thead>
+                    <tbody>
+                        @php
+                            $a = 0;
+                            $total = 0;
+                        @endphp
+                        @foreach ($data as $item)
+                            <tr>
+                                <td>{{ $a = $a + 1 }}</td>
+                                <td>{{ $item->item }}</td>
+                                <td>{{ $item->approvedquantity }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $b = $item->price * $item->approvedquantity }}</td>
+                                <span class="hide">{{ $total = $total + $b }}</span>
+                            </tr>
+                        @endforeach
+                        <tr class="amber lighten-3">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>Rs. {{ $total }}</td>
                         </tr>
-                    @endforeach
-                    <tr class="amber lighten-3">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Total</td>
-                        <td>Rs. {{ $total }}</td>
-                    </tr>
-                    <tr class="amber lighten-3">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Discount</td>
-                        <td>{{ $data[0]->discount }}% = Rs. {{ $total * 0.01 * $data[0]->discount }}</td>
-                    </tr>
-                    <tr class="amber lighten-3">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Total Discounted</td>
-                        <td>Rs. {{ $total - $total * 0.01 * $data[0]->discount }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="margin-top: 100px">
+                        <tr class="amber lighten-3">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Discount</td>
+                            <td>{{ $data[0]->discount }}% = Rs. {{ $total * 0.01 * $data[0]->discount }}</td>
+                        </tr>
+                        <tr class="amber lighten-3">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total Discounted</td>
+                            <td>Rs. {{ $total - $total * 0.01 * $data[0]->discount }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="html2pdf__page-break">
 
             </div>
-        </div> --}}
-        {{$item}}
-    @endforeach
+        @endforeach
+    </div>
 
 
     <!--JavaScript at end of body for optimized loading-->
@@ -118,8 +117,14 @@
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-  
+    <script>
+        $(document).ready(function() {
+            var inoice = $('#invoice');
+            html2pdf(invoice, {
+                filename: 'bulkprint.pdf'
+            });
+        })
+    </script>
 </body>
 
 </html>
