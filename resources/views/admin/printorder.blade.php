@@ -125,7 +125,11 @@
       <script>
         function print(){
             var inoice  = $('#invoice');
-            html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
+            html2pdf(invoice, { 
+                filename: `{{$data[0]->orderid}}`+'.pdf' ,
+                
+                jsPDF: { unit: 'mm', format: 'a4' }
+            });
         }
       </script>
     </body>
