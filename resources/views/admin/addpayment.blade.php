@@ -34,7 +34,7 @@
                             Name:
                         </div>
                         <div class="input-field col s6" style="margin-top: 0;">
-                            <input type="text" name="name" value="{{$name}}" id="customer" placeholder="Customer"
+                            <input type="text" name="name" value="{{$name}}" accesskey="c" id="customer" placeholder="Customer"
                                 class="autocomplete browser-default inp black-text" autocomplete="off" required>
                         </div>
                     </div>
