@@ -96,17 +96,21 @@
 
             </div>
         </div>
-       
+        <div class="center">
+            <button class="amber" onclick="print()">
+                Print
+            </button>
+        </div>
 
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
       <script>
-        $(document).ready(function() {
+        function print() {
             var inoice  = $('#invoice');
             html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
-        })
+        }
       </script>
     </body>
   </html>
