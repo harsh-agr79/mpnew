@@ -390,7 +390,24 @@ class OrderAdminController extends Controller
         return view('admin/printorder', $result);
     }
     public function bprintindex(Request $request){
-        $result['data'] = DB::table('orders')->where('deleted',NULL)->where('save', NULL)->orderBy('created_at','DESC')->groupBy('orderid')->paginate(100);
+        $query = DB::table('orders')->where('deleted', NULL)->where('save', NULL)->orderBy('created_at', 'DESC')->groupBy('orderid');
+        $result['date'] = '';
+        $result['date2'] =  '';
+        $result['name'] =  '';
+        if($request->get('date')){
+            $query = $query->where('created_at', '>=', $request->get('date'));
+            $result['date'] =  $request->get('date');
+        }
+        if($request->get('date2')){
+            $query = $query->where('created_at', '<=', $request->get('date2'));
+            $result['date2'] =  $request->get('date2');
+        }
+        if($request->get('name')){
+            $query = $query->where('name', $request->get('name'));
+            $result['name'] =  $request->get('name');
+        }
+        $query = $query->paginate(45);
+        $result['data'] = $query;
 
         return view('admin/bprintindex', $result);
     }

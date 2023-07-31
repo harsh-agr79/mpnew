@@ -27,11 +27,16 @@
             @php
                 $data = DB::table('orders')
                     ->where('orderid', $item)
+                    ->whereIn('mainstatus', ['amber darken-1', 'deep-purple', 'green'])
+                    ->where('status', 'approved')
                     ->get();
-                $cus = DB::table('customers')
+                if(count($data) > 0){
+                    $cus = DB::table('customers')
                     ->where('name', $data[0]->name)
                     ->first();
+                }
             @endphp
+            @if (count($data) > 0)
             <div style="padding: 10px;">
                 <div class="row">
                     <div class="col s4">
@@ -106,8 +111,8 @@
                 </table>
             </div>
             <div class="html2pdf__page-break">
-
             </div>
+            @endif 
         @endforeach
     </div>
 
@@ -124,6 +129,7 @@
                 filename: 'bulkprint.pdf'
             });
         })
+        
     </script>
 </body>
 

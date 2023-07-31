@@ -131,6 +131,11 @@
                                                 class="textcol">Chalan<i class="material-icons textcol">check</i></a>
                                         </li>
                                     @endif
+                                    @if ($admin->type == 'admin' || in_array('bulkprint', $perms))
+                                    <li class="cyan ligthen-3"><a href="{{ url('/bulkprintorders') }}"
+                                            class="black-text">Bulk Print<i class="material-icons black-text">print</i></a>
+                                    </li>
+                                    @endif
                                     @if ($admin->type == 'admin' || in_array('createorder', $perms))
                                         <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
                                                 class="black-text">Create Order<i

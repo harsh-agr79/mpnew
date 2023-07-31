@@ -190,13 +190,15 @@
                         </div>
                         <div class="col m6 s12">
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" name="perm[]" value="saveorder/{id}|printorder/{id}"
+                                @if (in_array('saveorder/{id}', $permission)) checked @endif />
                                 <span>Print Orders</span>
                             </label>
                         </div>
                         <div class="col m6 s12">
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" name="perm[]" value="bulkprintorders|bulkprint"
+                                @if (in_array('bulkprintorders', $permission)) checked @endif />
                                 <span>Bulk Print Orders</span>
                             </label>
                         </div>
