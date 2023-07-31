@@ -32,8 +32,8 @@
         @php
             $cus = DB::table('customers')->where('name', $data[0]->name)->first();
         @endphp
-        <div>
-            <div id="invoice" style="padding: 10px; border: 1px solid black; border-radius: 20px;">
+        <div class="cont">
+            <div id="invoice" style="padding: 10px; border: 1px solid black; border-radius: 20px; margin: 20px;">
                 <div class="row">
                     <div class="col s4">
                         <span>My Power</span><br>
