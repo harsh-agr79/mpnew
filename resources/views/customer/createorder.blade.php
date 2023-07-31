@@ -5,7 +5,7 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <div class="row bg-content textcol">
+    <div class="row bg-content textcol" style="z-index: 2;">
         <div class="col s2 center" style="padding:5px;">
             <a data-target="#powerbank" class="browser-default scroll-link">
                 <div><i class="fa-solid fa-car-battery textcol" style="font-size: 25px;"></i></div>
