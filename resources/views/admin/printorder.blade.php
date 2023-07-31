@@ -107,8 +107,8 @@
                     <tr class="amber lighten-3">
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td>Total Discounted</td>
+                        <td>Total</td>
+                        <td>Discounted</td>
                         <td>Rs. {{ $total - $total * 0.01 * $data[0]->discount }}</td>
                     </tr>
                 </tbody>
