@@ -23,13 +23,13 @@
               </ul>
         </div>
         <div class="right" style="margin-left: 10px;">
-            <a onclick="printorder('{{$data[0]->orderid}}');" target="_blank" class="btn amber white-text">
-            Save Image
+            <a onclick="printorder('{{$data[0]->orderid}}');" target="_blank" class="btn-small amber white-text">
+            Image
             </a>
         </div>
         <div class="right">
-            <a href ="{{url('printorder/'.$data[0]->orderid)}}" class="btn amber white-text">
-            Print PDF
+            <a href ="{{url('printorder/'.$data[0]->orderid)}}" class="btn-small amber white-text">
+            PDF
             </a>
         </div>
         <div>
