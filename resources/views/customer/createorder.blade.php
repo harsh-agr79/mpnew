@@ -98,12 +98,12 @@
                 </table>
             </div>
             <div class="modal-footer bg-content">
+                <button class="btn green left" type="submit" name="submit" value="save">
+                    Save
+                </button>
                 <a class="btn red modal-close">
                     Edit
                 </a>
-                <button class="btn green" type="submit" name="submit" value="save">
-                    Save
-                </button>
                 <button class="btn amber" type="submit" name="submit" value="submit">
                     Confirm
                 </button>
