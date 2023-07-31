@@ -1,6 +1,11 @@
 @extends('admin/layout')
 
 @section('main')
+    <style>
+        h6{
+            font-size:15px; 
+        }
+    </style>
     @php
         $total = 0;
         $cus = DB::table('customers')->where('name', $data[0]->name)->first();
@@ -32,7 +37,7 @@
             PDF
             </a>
         </div>
-        <div>
+        <div style="font-size: 10px;">
             <h6>Customer: {{$data[0]->name}}</h6>
             <h6>Shop Name: {{$cus->shopname}}</h6>
             <h6>orderid: {{$data[0]->orderid}}</h6>
