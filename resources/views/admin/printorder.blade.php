@@ -18,104 +18,90 @@
                 font-size: 10px;
                 font-weight: 600;
             }
-            .cont{
-                margin-right: 30vw;
-                margin-left: 30vw;
-                margin-top: 20px; 
-            }
-            @media screen and (max-width: 1100px){
-                .cont{
-                    margin: 0;
-                }
-            }
         </style>
         @php
             $cus = DB::table('customers')->where('name', $data[0]->name)->first();
         @endphp
-        <div class="cont">
-            <div id="invoice" style="padding: 10px; border: 1px solid black; border-radius: 20px; margin: 20px;">
-                <div class="row">
-                    <div class="col s4">
-                        <span>My Power</span><br>
-                        <span>+977 9849239275</span><br>
-                        <span>Kathmandu</span><br>
-                    </div>
-                    <div class="col s4 center">
-                        <img src="{{asset('assets/light.png')}}" height="60" alt="">
-                    </div>
-                    <div class="col s4 right-align">
-                        Date: {{date('Y-m-d', strtotime($data[0]->created_at))}} <br>
-                        Miti: {{getNepaliDate($data[0]->created_at)}}
-                    </div>
+        <div id="invoice" style="padding: 10px;">
+            <div class="row" style="font-size: 12px;">
+                <div class="col s4">
+                    <span>My Power</span><br>
+                    <span>+977 9849239275</span><br>
+                    <span>Kathmandu</span><br>
                 </div>
-                <div>
-                    <div >
-                        <span style="padding: 5px 10px; font-size: 15px; font-weight: 600;" class="amber black-text">Bill To</span><br>
-                        <span>Name: {{$data[0]->name}}</span><br>
-                        <span>Shop Name: {{$cus->shopname}}</span><br>
-                        <span>Address: {{$cus->address}}</span><br>
-                        <span>Contact: {{$cus->contact}}</span><br>
-                    </div>
+                <div class="col s4 center">
+                    <img src="{{asset('assets/light.png')}}" height="60" alt="">
                 </div>
-                <table>
-                    <thead class="amber lighten-3">
-                        <th>SN</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                    </thead>
-                    <tbody>
-                        @php
-                            $a = 0;
-                            $total = 0;
-                        @endphp
-                        @foreach ($data as $item)
-                            <tr>
-                                <td>{{$a = $a + 1;}}</td>
-                                <td>{{$item->item}}</td>
-                                <td>{{$item->approvedquantity}}</td>
-                                <td>{{$item->price}}</td>
-                                <td>{{$b = $item->price * $item->approvedquantity}}</td>
-                                <span class="hide">{{$total = $total + $b}}</span>
-                            </tr>
-                        @endforeach
-                        <tr class="amber lighten-3">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Total</td>
-                            <td>Rs. {{$total}}</td>
-                        </tr>
-                        <tr class="amber lighten-3">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Discount</td>
-                            <td>{{$data[0]->discount}}% = Rs. {{$total * 0.01 * $data[0]->discount}}</td>
-                        </tr>
-                        <tr class="amber lighten-3">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Total Discounted</td>
-                            <td>Rs. {{$total - $total * 0.01 * $data[0]->discount}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div style="margin-top: 100px">
-    
+                <div class="col s4 right-align">
+                    Date: {{date('Y-m-d', strtotime($data[0]->created_at))}} <br>
+                    Miti: {{getNepaliDate($data[0]->created_at)}}
                 </div>
             </div>
             <div>
-                <button class="btn-large amber" onclick="print()">
-                    Print Order
-                </button>
+                <div >
+                    <span style="padding: 5px 10px; font-size: 15px; font-weight: 600;" class="amber black-text">Bill To</span><br>
+                    <span>Name: {{$data[0]->name}}</span><br>
+                    <span>Shop Name: {{$cus->shopname}}</span><br>
+                    <span>Address: {{$cus->address}}</span><br>
+                    <span>Contact: {{$cus->contact}}</span><br>
+                </div>
+            </div>
+            <table>
+                <thead class="amber lighten-3">
+                    <th>SN</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </thead>
+                <tbody>
+                    @php
+                        $a = 0;
+                        $total = 0;
+                    @endphp
+                    @foreach ($data as $item)
+                        <tr>
+                            <td>{{$a = $a + 1;}}</td>
+                            <td>{{$item->item}}</td>
+                            <td>{{$item->approvedquantity}}</td>
+                            <td>{{$item->price}}</td>
+                            <td>{{$b = $item->price * $item->approvedquantity}}</td>
+                            <span class="hide">{{$total = $total + $b}}</span>
+                        </tr>
+                    @endforeach
+                    <tr class="amber lighten-3">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>Rs. {{$total}}</td>
+                    </tr>
+                    <tr class="amber lighten-3">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Discount</td>
+                        <td>{{$data[0]->discount}}% = Rs. {{$total * 0.01 * $data[0]->discount}}</td>
+                    </tr>
+                    <tr class="amber lighten-3">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total Discounted</td>
+                        <td>Rs. {{$total - $total * 0.01 * $data[0]->discount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 100px">
+
             </div>
         </div>
-      
 
-        
+        <div>
+            <button class="btn-large amber" onclick="print()">
+                Print Order
+            </button>
+        </div>
        
 
       <!--JavaScript at end of body for optimized loading-->
@@ -125,12 +111,7 @@
       <script>
         function print(){
             var inoice  = $('#invoice');
-            html2pdf(invoice, { 
-                margin: 0,
-                filename: `{{$data[0]->orderid}}`+'.pdf' ,
-
-                jsPDF: { unit: 'mm', format: 'a4' }
-            });
+            html2pdf(invoice, { filename: `{{$data[0]->orderid}}`+'.pdf' });
         }
       </script>
     </body>
