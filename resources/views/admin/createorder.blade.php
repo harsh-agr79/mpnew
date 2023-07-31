@@ -21,7 +21,7 @@
                         required>
                 </div>
                 <div class="input-field col s6" style="margin:0; padding: 5px;">
-                    <input type="text" name="name" id="customer" name="customer" placeholder="Customer"
+                    <input type="text" name="name" id="customer" name="customer" accesskey="c" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off" required>
                 </div>
                 <div class="row col s12" style="margin:0; padding: 0;">
