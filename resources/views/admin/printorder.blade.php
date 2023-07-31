@@ -53,7 +53,7 @@
             </div>
         </div>
         <table>
-            <thead>
+            <thead class="amber lighten-3">
                 <th>SN</th>
                 <th>Item</th>
                 <th>Quantity</th>
@@ -99,8 +99,12 @@
             </tbody>
         </table>
         <div style="margin-top: 100px">
-
         </div>
+    </div>
+    <div class="center">
+        <button class="amber" onclick="print()">
+            Print
+        </button>
     </div>
 
     <!--JavaScript at end of body for optimized loading-->
