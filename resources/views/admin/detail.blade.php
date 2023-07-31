@@ -45,7 +45,7 @@
             <h6 style="font-size: 12px;">Miti: {{getNepaliDate($data[0]->created_at)}}</h6>
           
             @if($cus->refname != NULL)
-            <h6>Referer: {{$cus->refname}}</h6>
+            <h6 style="font-size: 12px;">Referer: {{$cus->refname}}</h6>
             @endif
         </div>
         <div class="hide">
