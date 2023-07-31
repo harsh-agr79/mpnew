@@ -12,6 +12,16 @@
         }
     @endphp
     <div>
+        <div class="right">
+            <a class="btn-flat dropdown-trigger" data-target="menu">
+                <i class="material-icons">more_vert</i>
+            </a>
+            <ul id='menu' class='dropdown-content'>
+                <li><a href="{{url('editorder/'.$data[0]->orderid)}}">Edit</a></li>
+                <li><a href="#!">Print</a></li>
+                <li><a href="{{url('deleteorder/'.$data[0]->orderid)}}">Delete</a></li>
+              </ul>
+        </div>
         <div>
             <h6>Customer: {{$data[0]->name}}</h6>
             <h6>Shop Name: {{$cus->shopname}}</h6>

@@ -62,7 +62,7 @@ class OrderAdminController extends Controller
         updateMainStatus($request->post('orderid'));
 
         if($request->post('previous') == url('editorder/'.DB::table('orders')->where('id', $id[0])->first()->orderid)){
-            return redirect('pendingorders');
+            return redirect('dashboard');
         }
         else{
             return redirect($request->post('previous'));

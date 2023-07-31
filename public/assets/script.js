@@ -23,6 +23,7 @@ $(document).ready(function(){
   coverTrigger: false,
   constrainWidth: false,
 });
+$('.dropdown-trigger').dropdown();
  
  $(document).ready(function(){
   $('.modal').modal();
