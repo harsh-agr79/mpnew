@@ -29,7 +29,7 @@
                     <div class="col s2">
                         <div style="margin-top: 15px;">
                             <label>
-                                <input type="checkbox" onchange="toggleinactive()"/>
+                                <input type="checkbox" id="iactgl" onchange="toggleinactive()"/>
                                 <span>All Products</span>
                               </label>
                         </div>
@@ -95,7 +95,7 @@
     </form>
     <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-container">
         @foreach ($data as $item)
-            <div class="mp-card row prod @if($item->hide == 'on') inactive @endif" style="margin: 3px; padding: 10px; @if($item->hide == 'on') display: none; @endif">
+            <div class="mp-card row prod @if($item->hide == 'on') inactive @else active @endif" style="margin: 3px; padding: 10px; @if($item->hide == 'on') display: none; @endif">
                 <div class="col s4" style="padding: 0;  margin: 0;">
                     <img src="{{ asset('storage/media/' . $item->img) }}" class="prod-img materialboxed" alt="">
                 </div>
@@ -215,7 +215,15 @@
             const a = document.getElementById('search');
             const clsBtn = document.getElementById('close-search');
             let cont = document.getElementsByClassName('prod-container');
-            let prod = $('.prod')
+            // let prod = $('.active')
+                if($('#iactgl').is(":checked")){
+                //    console.log('true')
+                   var prod = $('.prod')
+                }
+                else{
+                    var prod = $('.active')
+                    // console.log('false')
+                }
             clsBtn.addEventListener("click", function() {
                 a.value = '';
                 a.focus();
@@ -230,6 +238,7 @@
             } else {
                 $('#cs-icon').text('close')
             }
+            console.log(prod);
 
             for (var i = 0; i < prod.length; i++) {
                 let span = prod[i].getElementsByTagName('span');
@@ -248,7 +257,13 @@
             }
         }
         function toggleinactive(){
-            $('.inactive').toggle();
+            if($('#iactgl').is(":checked")){
+                    $('.inactive').show()
+                }
+                else{
+                    $('.inactive').hide()
+                }
+            searchFun();
         }
     </script>
 @endsection
