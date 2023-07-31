@@ -60,7 +60,7 @@
                     <span class="field-icon" id="close-search"><span class="material-icons"
                             id="cs-icon">search</span></span>
                 </div>
-                <div class="right" style="margin: 0; padding: 0;">
+                <div class="center" style="margin: 0; padding: 0;">
                    Bill Amount: <span id="totalamt"></span>
                 </div>
             </div>
