@@ -28,7 +28,7 @@
             </a>
         </div>
         <div class="right">
-            <a href ="{{url('printorder/'.$data[0]->orderid)}}" class="btn-small amber white-text">
+            <a href ="{{url('printorder/'.$data[0]->orderid)}}" target="_blank" class="btn-small amber white-text">
             PDF
             </a>
         </div>
