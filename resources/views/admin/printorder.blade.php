@@ -22,6 +22,11 @@
             font-weight: 600;
         }
     </style>
+    <div class="center">
+        <button class="btn amber" onclick="print()">
+            Print
+        </button>
+    </div>
     @php
         $cus = DB::table('customers')
             ->where('name', $data[0]->name)
@@ -101,11 +106,7 @@
         <div style="margin-top: 100px">
         </div>
     </div>
-    <div class="center">
-        <button class="btn amber" onclick="print()">
-            Print
-        </button>
-    </div>
+    
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
@@ -114,12 +115,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        function print() {
             var inoice = $('#invoice');
             html2pdf(invoice, {
                 filename: `{{ $data[0]->orderid }}` + '.pdf'
             });
-        })
+        }
     </script>
 </body>
 
