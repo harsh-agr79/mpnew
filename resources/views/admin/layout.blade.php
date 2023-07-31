@@ -39,7 +39,7 @@
         <div class="navbar-fixed">
             <nav class="navbar topnv">
                 <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
-                            src="{{ asset('assets/' . $admin->mode . '.png') }}" height="60" alt=""></a>
+                            src="{{ asset('assets/' . $admin->mode . '.png') }}" height="50" alt=""></a>
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger"><i class="material-icons textcol">notifications</i></a>
