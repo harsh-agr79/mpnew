@@ -379,8 +379,8 @@
                                                             {{ $item2->name }}
                                                         </td>
                                                         <td
-                                                            class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                            {{ $item2->type }}</td>
+                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                        {{ $item2->type }}</td>
                                                         <td>{{ money($item2->sl - $item2->dis) }}</td>
                                                     </tr>
                                                 @endforeach
