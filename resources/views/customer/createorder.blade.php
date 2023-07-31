@@ -50,7 +50,7 @@
         <div class="mp-card" style="margin-top: 20px;">
             <div class="row" style="margin: 0; padding: 0;">
                 <div class="col s2 center" style="margin: 0; padding: 5px;">
-                    <a class="btn amber modal-trigger" href="#cart" style="margin-top: 20px;"><i
+                    <a class="btn amber modal-trigger" href="#cart"><i
                             class="material-icons">shopping_cart</i>
                     </a>
                 </div>
