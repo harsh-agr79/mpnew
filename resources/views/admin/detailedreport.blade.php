@@ -157,7 +157,7 @@
                                         $query = DB::table('orders');
                                         if ($type == 'marketer') {
                                             $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-                                            $query = $query->WhereIn('name', $cuslist);
+                                            $query = $query->WhereIn('orders.name', $cuslist);
                                         }
                                         $query = $query
                                             ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
@@ -252,7 +252,7 @@
                                             $query = DB::table('orders');
                                             if ($type == 'marketer') {
                                                 $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-                                                $query = $query->WhereIn('name', $cuslist);
+                                                $query = $query->WhereIn('orders.name', $cuslist);
                                             }
                                             $query = $query
                                                 ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
@@ -348,7 +348,7 @@
                                             $query = DB::table('orders');
                                             if ($type == 'marketer') {
                                                 $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-                                                $query = $query->WhereIn('name', $cuslist);
+                                                $query = $query->WhereIn('orders.name', $cuslist);
                                             }
                                             $query = $query
                                                 ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
@@ -443,7 +443,7 @@
                                             $query = DB::table('orders');
                                             if ($type == 'marketer') {
                                                 $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-                                                $query = $query->WhereIn('name', $cuslist);
+                                                $query = $query->WhereIn('orders.name', $cuslist);
                                             }
                                             $query = $query
                                                 ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
