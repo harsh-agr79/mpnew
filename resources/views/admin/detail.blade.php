@@ -19,13 +19,17 @@
             </a>
             <ul id='menu' class='dropdown-content'>
                 <li><a href="{{url('editorder/'.$data[0]->orderid)}}">Edit</a></li>
-                <li><a href ="{{url('printorder/'.$data[0]->orderid)}}" target="_blank">Print</a></li>
                 <li><a href="{{url('deleteorder/'.$data[0]->orderid)}}">Delete</a></li>
               </ul>
         </div>
-        <div class="right">
-            <a onclick="printorder('{{$data[0]->orderid}}');" class="btn amber white-text">
+        <div class="right" style="margin-left: 10px;">
+            <a onclick="printorder('{{$data[0]->orderid}}');" target="_blank" class="btn amber white-text">
             Save Image
+            </a>
+        </div>
+        <div class="right">
+            <a href ="{{url('printorder/'.$data[0]->orderid)}}" class="btn amber white-text">
+            Print PDF
             </a>
         </div>
         <div>
