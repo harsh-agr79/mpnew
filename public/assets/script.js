@@ -30,7 +30,6 @@ $('.dropdown-trigger').dropdown();
 });
 
 document.addEventListener('keydown', event => {
-  console.log(`User pressed: ${event.key}`);
   if(event.keyCode == 112){
     event.preventDefault();
     window.open('/dashboard', "_self");
@@ -38,6 +37,7 @@ document.addEventListener('keydown', event => {
   }
   if(event.keyCode == 113){
     event.preventDefault();
+    $('#search').focus();
     return false;
   }
   if(event.keyCode == 117){
