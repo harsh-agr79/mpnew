@@ -29,6 +29,39 @@ $('.dropdown-trigger').dropdown();
   $('.modal').modal();
 });
 
+document.addEventListener('keydown', event => {
+  console.log(`User pressed: ${event.key}`);
+  if(event.keyCode == 112){
+    event.preventDefault();
+    window.open('/dashboard', "_self");
+    return false;
+  }
+  if(event.keyCode == 113){
+    event.preventDefault();
+    return false;
+  }
+  if(event.keyCode == 117){
+    event.preventDefault();
+    window.open('/addpayment', "_self");
+    return false;
+  }
+  if(event.keyCode == 118){
+    event.preventDefault();
+    window.open('/detailedreport', "_self");
+    return false;
+  }
+  if(event.keyCode == 119){
+    event.preventDefault();
+    window.open('/statement', "_self");
+    return false;
+  }
+  if(event.keyCode == 120){
+    event.preventDefault();
+    window.open('/createorder', "_self");
+    return false;
+  }
+});
+
 
 //   autoplay()   
 // function autoplay() {
