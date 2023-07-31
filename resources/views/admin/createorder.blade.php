@@ -24,7 +24,16 @@
                     <input type="text" name="name" id="customer" name="customer" accesskey="c" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off" required>
                 </div>
+                
                 <div class="row col s12" style="margin:0; padding: 0;">
+                    <div class="col s2">
+                        <div style="margin-top: 15px;">
+                            <label>
+                                <input type="checkbox" onchange="toggleinactive()"/>
+                                <span>All Products</span>
+                              </label>
+                        </div>
+                    </div>
                     <div class="col s2 center" style="margin:0; padding: 5px;">
                         <a class="btn amber modal-trigger" href="#cart"><i class="material-icons">shopping_cart</i>
                         </a>
@@ -35,14 +44,7 @@
                         <span class="field-icon" id="close-search"><span class="material-icons"
                                 id="cs-icon">search</span></span>
                     </div>
-                    <div class="col s2">
-                        <div style="margin-top: 15px;">
-                            <label>
-                                <input type="checkbox" onchange="toggleinactive()"/>
-                                <span>All Products</span>
-                              </label>
-                        </div>
-                    </div>
+                   
                     <div class="col s12 center" style="margin:0; padding: 0;">
                         Bill Amount: <span id="totalamt"></span>
                      </div>
