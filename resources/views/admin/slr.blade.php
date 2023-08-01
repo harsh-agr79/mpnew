@@ -56,9 +56,11 @@
             <a id="rmeditlink">
                 <li>Edit</li>
             </a>
+            @if ($admin->type == 'admin')
             <a id="rmdeletelink">
                 <li class="border-top">Delete</li>
             </a>
+            @endif
         </ul>
     </div>
 
@@ -90,7 +92,7 @@
             var rmenu = document.getElementById("rightmenu");
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;
-            if (admintype == "admin") {
+            if (admintype == "admin" || jQuery.inArray("editslr/{id}", perms) > -1) {
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';

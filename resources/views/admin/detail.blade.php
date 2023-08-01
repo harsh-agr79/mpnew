@@ -19,16 +19,21 @@
     @endphp
     <div>
         <div class="right center">
+            @if ($admin->type == 'admin' || in_array('editorder/{id}', $perms))
             <div>
                 <a class="btn-flat dropdown-trigger" data-target="menu">
                     <i class="material-icons">more_vert</i>
                 </a>
                 <ul id='menu' class='dropdown-content'>
                     <li><a href="{{ url('editorder/' . $data[0]->orderid) }}">Edit</a></li>
+                    @if ($admin->type == 'admin')
                     <li><a href="{{ url('deleteorder/' . $data[0]->orderid) }}">Delete</a></li>
+                    @endif
+                   
                 </ul>
             </div>
-            @if ($data[0]->mainstatus != 'blue')
+            @endif
+            @if ($data[0]->mainstatus != 'blue' && $admin->type == 'admin' || $data[0]->mainstatus != 'blue' && in_array('saveorder/{id}',$perms))
                 <div style="margin: 10px 0;">
                     <a onclick="printorder('{{ $data[0]->orderid }}');" target="_blank" class="btn-small amber white-text">
                         Img <i class="material-icons right">file_download</i>
