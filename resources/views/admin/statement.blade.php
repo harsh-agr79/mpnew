@@ -56,7 +56,7 @@
             <table class="sortable">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>|</th>
                         <th>SN</th>
                         <th class="name">Name</th>
                         <th class="shop" style="display: none;">Shop</th>
