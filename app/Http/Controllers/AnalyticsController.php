@@ -688,12 +688,93 @@ class AnalyticsController extends Controller
     public function refstatement(Request $request){
         if($request->get('name')){
             $result['data'] = DB::table('customers')->where('refname', $request->get('name'))->get();
-            $result['name'] = $request->get('name');
+            $result['name2'] = $request->get('name');
+            $result['name'] = '';
+
+            $year = getNepaliYear(today());
+    
+            if($request->get('startyear')){
+                $result['syear'] = $request->get('startyear');
+            }
+            else
+            {
+                $result['syear'] = $year;
+            }
+            if($request->get('endyear')){
+                $result['eyear'] = $request->get('endyear');
+            }
+            else
+            {
+                $result['eyear'] = $year;
+            }
+            if($request->get('startmonth')){
+                $result['smonth'] = $request->get('startmonth');
+            }
+            else
+            {
+                $result['smonth'] = "1";
+            }
+            if($request->get('endmonth')){
+                $result['emonth'] = $request->get('endmonth');
+            }
+            else
+            {
+                $result['emonth'] = getNepaliMonth(today());
+            }
+            $ref = DB::table('admins')->where('name', $request->get('name'))->first();
+            $cuslist = marketercuslist($ref->id);
+            
+                $result['data2'] = DB::table('orders')
+                ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL])
+                ->orderBy('created_at', 'ASC')
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                ->groupBy(['nepmonth', 'nepyear'])
+                ->get();
+    
+                $result['fquat'] = DB::table('orders')
+                ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL])
+                ->whereIn('nepmonth', [1,2,3])
+                ->orderBy('created_at', 'ASC')
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                ->groupBy('nepyear')
+                ->get();
+    
+                $result['squat'] = DB::table('orders')
+                ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL])
+                ->whereIn('nepmonth', [4,5,6])
+                ->orderBy('created_at', 'ASC')
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                ->groupBy('nepyear')
+                ->get();
+    
+                $result['tquat'] = DB::table('orders')
+                ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL])
+                ->whereIn('nepmonth', [7,8,9])
+                ->orderBy('created_at', 'ASC')
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                ->groupBy('nepyear')
+                ->get();
+    
+                $result['frquat'] = DB::table('orders')
+                ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL])
+                ->whereIn('nepmonth', [10,11,12])
+                ->orderBy('created_at', 'ASC')
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
+                ->groupBy('nepyear')
+                ->get();
         }
         else{
             $result['name'] = '';
+            $result['name2'] = '';
             $result['data'] = 'no data';
         }
+
+    
 
         return view('admin/refererstatement', $result);
     }
