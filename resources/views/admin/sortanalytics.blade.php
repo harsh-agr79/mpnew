@@ -331,7 +331,7 @@
                                     ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->name }}', '{{ $item->item }}')">
                                     <td>
                                         <div class="{{ $item->actcolor }}"
-                                            style="height: 35px; width:5px;"></div>
+                                            style="height: 20px; width:5px;"></div>
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{$item->contact}}</td>
@@ -347,7 +347,7 @@
                                 <tr>
                                     <td>
                                         <div class="{{ $item->actcolor }}"
-                                            style="height: 35px; width:5px;"></div>
+                                            style="height: 20px; width:5px;"></div>
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->contact }}</td>
