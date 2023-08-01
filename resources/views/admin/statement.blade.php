@@ -1,15 +1,14 @@
 @php
-    if($admin->type == 'marketer'){
+    if ($admin->type == 'marketer') {
         $type = 'marketer';
         $url = '/marketer';
-    }
-    else{
+    } else {
         $type = 'admin';
-        $url= '';
-   }
-@endphp 
+        $url = '';
+    }
+@endphp
 
-@extends($type.'/layout')
+@extends($type . '/layout')
 
 
 @section('main')
@@ -17,7 +16,7 @@
         <div class="center">
             <h5>Statements</h5>
         </div>
-        <div class="switch  row" style="margin: 20px;">
+        <div class="mp-card switch row" style="margin: 20px;">
             <div class='input-field col s12 m4'>
                 <input class='validate browser-default inp search black-text' onkeyup="searchFun()" autocomplete="off"
                     type='search' name='search' id='search' />
@@ -169,9 +168,8 @@
             var type = `{{ $admin->type }}`;
             // console.log(type);
             if (type === 'marketer') {
-            window.open('/marketer/balancesheet/' + name, "_self");
-            }
-            else{
+                window.open('/marketer/balancesheet/' + name, "_self");
+            } else {
                 window.open('/balancesheet/' + name, "_self");
             }
         }
