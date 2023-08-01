@@ -24,6 +24,10 @@ class PaymentController extends Controller
             $query = $query->where('name', $request->get('name'));
             $result['name'] =  $request->get('name');
         }
+        if(session()->get('ADMIN_TYPE') == 'staff'){
+            $name = DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first()->email;
+            $query = $query->where('entry_by', $name);
+        }
         $query = $query->paginate(100);
         $result['data'] = $query;
         return view('admin/payment', $result);
