@@ -195,6 +195,9 @@ Route::group(['middleware'=>'MarketerAuth'], function() {
     Route::get('marketer/findcustomer', [CustomerController::class, 'getcustomer']);
     Route::get('marketer/finditem', [ProductController::class, 'getproduct']);
 
+    Route::get('/marketer/saveorder/{id}', [OrderAdminController::class, 'save']);
+    Route::get('/marketer/printorder/{id}', [OrderAdminController::class, 'print']);
+
     Route::get('marketer/payments', [MarketerController::class, 'index']);
     Route::get('marketer/addpayment', [MarketerController::class, 'addpay']);
     Route::get('marketer/editpayment/{id}', [MarketerController::class, 'addpay']);

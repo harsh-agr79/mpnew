@@ -8,6 +8,31 @@
             ->first();
     @endphp
     <div>
+        <div class="right center">
+            @if ($data[0]->mainstatus == 'blue')
+                <div>
+                    <a class="btn-flat dropdown-trigger" data-target="menu">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul id='menu' class='dropdown-content'>
+                        <li><a href="{{ url('/marketer/editorder/' . $data[0]->orderid) }}">Edit</a></li>
+                        <li><a href="{{ url('/marketer/deleteorder/' . $data[0]->orderid) }}">Delete</a></li>
+                    </ul>
+                </div>
+            @endif
+            <div style="margin: 10px 0;">
+                <a href="{{ url('/marketer/saveorder/' . $data[0]->orderid) }}" target="_blank"
+                    class="btn-small amber white-text">
+                    Img <i class="material-icons right">file_download</i>
+                </a>
+            </div>
+            <div>
+                <a href="{{ url('/marketer/printorder/' . $data[0]->orderid) }}" target="_blank"
+                    class="btn-small amber white-text">
+                    PDF <i class="material-icons right">picture_as_pdf</i>
+                </a>
+            </div>
+        </div>
         <div>
             <h6>Customer: {{ $data[0]->name }}</h6>
             <h6>Shop Name: {{ $cus->shopname }}</h6>
