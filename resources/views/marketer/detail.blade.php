@@ -20,6 +20,7 @@
                     </ul>
                 </div>
             @endif
+            @if ($data[0]->mainstatus != 'blue')
             <div style="margin: 10px 0;">
                 <a href="{{ url('/marketer/saveorder/' . $data[0]->orderid) }}" target="_blank"
                     class="btn-small amber white-text">
@@ -32,6 +33,7 @@
                     PDF <i class="material-icons right">picture_as_pdf</i>
                 </a>
             </div>
+            @endif
         </div>
         <div>
             <h6>Customer: {{ $data[0]->name }}</h6>
