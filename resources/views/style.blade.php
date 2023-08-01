@@ -12,7 +12,7 @@ elseif(session()->has('USER_LOGIN')){
     <style>
         :root{
     --bg: rgb(31, 31, 31);
-    --textcol: rgb(255, 255, 255);
+    --textcol: rgb(214, 214, 214);
     --bgunder: #0e0e0e;
     --bg-content: rgb(31, 31, 31);
     --td-hover: rgb(40, 40, 40);
