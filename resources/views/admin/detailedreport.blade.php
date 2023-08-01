@@ -168,9 +168,14 @@
                                             ->get();
                                         $sls = $query;
                                         $cslist = $sls->pluck('name')->toArray();
-                                        $sls2 = DB::table('customers')
-                                            ->whereNotIn('name', $cslist)
-                                            ->get();
+                                        $query2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist);
+                                            if ($type == 'marketer') {
+                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                $query2 = $query2->WhereIn('name', $cuslist);
+                                            }
+                                            $query2 = $query2->get();
+                                            $sls2 = $query2;
                                     @endphp
                                     <table class="sortable">
                                         <thead>
@@ -264,9 +269,14 @@
                                             $sls = $query;
                                             
                                             $cslist = $sls->pluck('name')->toArray();
-                                            $sls2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist)
-                                                ->get();
+                                            $query2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist);
+                                            if ($type == 'marketer') {
+                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                $query2 = $query2->WhereIn('name', $cuslist);
+                                            }
+                                            $query2 = $query2->get();
+                                            $sls2 = $query2;
                                         @endphp
                                         <table class="sortable">
                                             <thead>
@@ -359,9 +369,14 @@
                                                 ->get();
                                             $sls = $query;
                                             $cslist = $sls->pluck('name')->toArray();
-                                            $sls2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist)
-                                                ->get();
+                                            $query2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist);
+                                            if ($type == 'marketer') {
+                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                $query2 = $query2->WhereIn('name', $cuslist);
+                                            }
+                                            $query2 = $query2->get();
+                                            $sls2 = $query2;
                                         @endphp
                                         <table class="sortable">
                                             <thead>
@@ -455,9 +470,14 @@
                                             $sls = $query;
                                             $cslist = $sls->pluck('name')->toArray();
                                             
-                                            $sls2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist)
-                                                ->get();
+                                            $query2 = DB::table('customers')
+                                                ->whereNotIn('name', $cslist);
+                                            if ($type == 'marketer') {
+                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                                $query2 = $query2->WhereIn('name', $cuslist);
+                                            }
+                                            $query2 = $query2->get();
+                                            $sls2 = $query2;
                                         @endphp
                                         <table class="sortable">
                                             <thead>
