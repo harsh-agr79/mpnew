@@ -145,7 +145,7 @@
             var rmenu = document.getElementById("rightmenu");
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;
-            if (admintype == "admin" || jQuery.inArray("editcustomer/{id}", perms) > -1) {
+            if (admintype == "admin" || jQuery.inArray("editorder/{id}", perms) > -1) {
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
