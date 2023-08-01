@@ -56,9 +56,11 @@
             <table class="sortable">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>SN</th>
                         <th class="name">Name</th>
                         <th class="shop" style="display: none;">Shop</th>
+                        <th>Activity</th>
                         <th class="">type</th>
                         <th class="bal ">Balance</th>
                         <th class="tdy " style="display: none;">30 days</th>
@@ -76,9 +78,14 @@
                             $bal = explode('|', $item->balance);
                         @endphp
                         <tr ondblclick="openbs('{{ $item->name }}')">
+                            <td  sorttable_customkey="{{$item->actcolor}}">
+                                <div class="{{ $item->actcolor }}"
+                                    style="height: 20px; width:5px;"></div>
+                            </td>
                             <td>{{ $a = $a + 1 }}</td>
                             <td class="name">{{ $item->name }}</td>
                             <td class="shop" style="display: none;">{{ $item->shopname }}</td>
+                            <td>{{$item->activity}}</td>
                             <td
                                 class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
                                 {{ $item->type }}</td>
