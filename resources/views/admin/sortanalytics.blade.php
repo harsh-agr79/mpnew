@@ -345,7 +345,7 @@
                             @endforeach
                             @foreach ($pnodata as $item)
                                 <tr>
-                                    <td>
+                                    <td  sorttable_customkey="{{$item->actcolor}}">
                                         <div class="{{ $item->actcolor }}"
                                             style="height: 20px; width:5px;"></div>
                                     </td>
