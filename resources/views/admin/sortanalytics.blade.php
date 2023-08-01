@@ -316,7 +316,7 @@
                     <table class="sortable">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>|</th>
                                 <th>Name</th>
                                 <th>Contact</th>
                                 <th>Type</th>
