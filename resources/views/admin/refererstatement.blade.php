@@ -252,6 +252,9 @@
                         <div class="input-field col s3 l1">
                             <button class="btn amber darken-1">Apply</button>
                         </div>
+                        <div class="input-field col s3 l1">
+                            <a href="{{url('/refererstatement?name='.$name2)}}" class="btn amber darken-1">Clear</a>
+                        </div>
                     </form>
                 </div>
                 <div class="mp-card" style="margin-top: 20px;">
