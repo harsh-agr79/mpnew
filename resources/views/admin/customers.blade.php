@@ -25,7 +25,7 @@
         <div class="mp-card"  style="overflow-x: scroll;">
             <table class="sortable">
                 <thead>
-                    <th></th>
+                    <th>|</th>
                     <th>SN</th>
                     <th>Name</th>
                     <th>shop</th>
@@ -44,7 +44,7 @@
                     @endphp
                     @foreach ($data as $item)
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
-                            <td>
+                            <td sorttable_customkey="{{$item->activity}}">
                                 <div class="{{ $stat = $item->actcolor }}"
                                     style="height: 35px; width:10px;"></div>
                             </td>
