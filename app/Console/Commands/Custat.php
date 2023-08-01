@@ -28,7 +28,7 @@ class Custat extends Command
     public function handle()
     {
         foreach( DB::table('customers')->orderBy('id', 'ASC')->get() as $item){
-            $bills = DB::table('orders')->where('name', $item->name)
+            $bills = DB::table('orders')->where('name', $item->name)->where('deleted',NULL)->where('save', NULL)->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
             ->where('created_at', '>=', now()->subMonth(6))->groupBy('orderid')->get();
 
             $numbills = count($bills);
