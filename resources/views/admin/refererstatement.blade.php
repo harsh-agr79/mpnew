@@ -248,12 +248,12 @@
                                 <option value="2080">2080</option>
                             </select>
                         </div>
-                        <input type="hidden" name="name" value="{{$name2}}">
+                        <input type="hidden" name="name" value="{{ $name2 }}">
                         <div class="input-field col s3 l1">
                             <button class="btn amber darken-1">Apply</button>
                         </div>
                         <div class="input-field col s3 l1">
-                            <a href="{{url('/refererstatement?name='.$name2)}}" class="btn amber darken-1">Clear</a>
+                            <a href="{{ url('/refererstatement?name=' . $name2) }}" class="btn amber darken-1">Clear</a>
                         </div>
                     </form>
                 </div>
@@ -777,6 +777,116 @@
                         </div>
                     </div>
                 </div>
+                <div class="mp-card" style="margin-top: 10px;">
+                    <ul class="collapsible">
+                        @foreach ($catsales as $item)
+                            @php
+                                $amtchart[] = ['Category' => $item->category, 'Amount' => $item->samt - $item->damt];
+                                $quantchart[] = ['Category' => $item->category, 'Quantity' => $item->sum + 0];
+                            @endphp
+                            <li>
+                                <div class="collapsible-header row">
+                                    <div class="col s4 blue-text">{{ $item->category }}</div>
+                                    <div class="col s4">{{ $item->sum }}</div>
+                                    <div class="col s4">{{ money($item->samt - $item->damt) }}</div>
+                                </div>
+                                <div class="collapsible-body"><span>
+                                        @php
+                                            if ($item->category == 'powerbank') {
+                                                $prod = $pdatapowerbank;
+                                                $prod2 = $pdata2powerbank;
+                                            }
+                                            if ($item->category == 'charger') {
+                                                $prod = $pdatacharger;
+                                                $prod2 = $pdata2charger;
+                                            }
+                                            if ($item->category == 'cable') {
+                                                $prod = $pdatacable;
+                                                $prod2 = $pdata2cable;
+                                            }
+                                            if ($item->category == 'btitem') {
+                                                $prod = $pdatabtitem;
+                                                $prod2 = $pdata2btitem;
+                                            }
+                                            if ($item->category == 'earphone') {
+                                                $prod = $pdataearphone;
+                                                $prod2 = $pdata2earphone;
+                                            }
+                                            if ($item->category == 'others') {
+                                                $prod = $pdataothers;
+                                                $prod2 = $pdata2others;
+                                            }
+                                            
+                                        @endphp
+                                        <div>
+                                            @php
+                                                $subcates = DB::table('subcategory')
+                                                    ->where('parent', $item->category)
+                                                    ->pluck('subcategory')
+                                                    ->toArray();
+                                            @endphp
+                                            <form id="{{ $item->category }}form">
+                                                @foreach ($subcates as $item3)
+                                                    <label style="margin-right: 15px;">
+                                                        <input type="checkbox" name="{{ $item3 }}"
+                                                            value="{{ $item3 }}"
+                                                            onclick="Filter('{{ $item->category }}')" />
+                                                        <span>{{ $item3 }}</span>
+                                                    </label>
+                                                @endforeach
+                                                <label style="margin-right: 15px;">
+                                                    <input type="checkbox" name="incall" value="incall"
+                                                        onclick="Filter('{{ $item->category }}')" />
+                                                    <span>Must Include All Selected Tags</span>
+                                                </label>
+                                            </form>
+                                        </div>
+                                        <table class="sortable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Quantity</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($prod as $item2)
+                                                    @php
+                                                        $sbc = '';
+                                                        $sc = '';
+                                                        if ($item2->subcat != null) {
+                                                            $sbc = explode('|', $item2->subcat);
+                                                        }
+                                                    @endphp
+                                                    <tr class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
+                                                        ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item2->item }}')">
+                                                        <td>{{ $item2->item }}</td>
+                                                        <td>{{ $item2->sum }}</td>
+                                                        <td>{{ money($item2->samt - $item2->damt) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                @foreach ($prod2 as $item2)
+                                                    @php
+                                                        $sbc = '';
+                                                        $sc = '';
+                                                        if ($item2->subcat != null) {
+                                                            $sbc = explode('|', $item2->subcat);
+                                                        }
+                                                    @endphp
+                                                    <tr
+                                                        class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
+                                                        <td>{{ $item2->name }}</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </span></div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
 
                 <div class="mp-card container" style="margin-top: 20px;">
                     <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
@@ -907,6 +1017,29 @@
                         var chart = new google.charts.Bar(document.getElementById('top_x_div2'));
                         chart.draw(data, options);
                     };
+
+                    function Filter(cat) {
+                        $(`.${cat}`).hide();
+                        var formData = $(`#${cat}form`).serializeArray()
+                        if (formData.length == 0) {
+                            $(`.${cat}`).show();
+                        } else if (formData[formData.length - 1].name === 'incall') {
+                            var clsnames = '';
+                            for (let i = 0; i < formData.length - 1; i++) {
+                                clsnames += "." + formData[i].name
+                            }
+                            $(`${clsnames}`).show();
+                        } else {
+                            if (formData.length > 0) {
+                                for (let i = 0; i < formData.length; i++) {
+                                    $(`.${formData[i].name}`).show();
+                                }
+                            } else {
+                                $(`.${cat}`).show();
+                            }
+                        }
+
+                    }
                 </script>
             @endif
         </div>

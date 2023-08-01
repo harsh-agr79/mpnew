@@ -767,6 +767,44 @@ class AnalyticsController extends Controller
                 ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                 ->groupBy('nepyear')
                 ->get();
+
+            $date = getEnglishDate($result['syear'] ,  $result['smonth'],1);
+            $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
+
+            $result['date'] = $date;
+            $result['date2'] = $date2;
+
+            $result['catsales'] = DB::table('orders')
+            ->where(['deleted'=>NULL, 'save'=>NULL])
+            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)
+            ->whereIn('orders.name', $cuslist)
+            ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
+            ->groupBy('category')
+            ->orderBy('samt','DESC')
+            ->get();
+
+            foreach($result['catsales'] as $item){
+                $result['pdata'.$item->category] = DB::table('products')
+                ->where(['orders.category'=>$item->category,'status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
+                ->where('orders.created_at', '>=', $date)
+                ->where('orders.created_at', '<=', $date2)
+                ->whereIn('orders.name', $cuslist)
+                ->join('orders', 'products.produni_id', '=', 'orders.produni_id')
+                ->selectRaw('*, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')->groupBy('orders.produni_id')->orderBy('sum','desc')
+                ->get();
+                $result['pdata2'.$item->category] = DB::table('products')
+                ->where(['category'=>$item->category])
+                ->whereNotIn('produni_id', DB::table('orders')
+                ->where(['category'=>$item->category,'status'=>'approved','deleted'=>NULL, 'save'=>NULL])
+                ->where('created_at', '>=', $date)
+                ->where('created_at', '<=', $date2)
+                ->whereIn('orders.name', $cuslist)
+                ->pluck('produni_id')
+                ->toArray())
+                ->get();
+            }
         }
         else{
             $result['name'] = '';
