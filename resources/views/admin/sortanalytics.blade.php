@@ -317,6 +317,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Contact</th>
                                 <th>Type</th>
                                 <th>Item</th>
                                 <th>Quantity</th>
@@ -328,6 +329,7 @@
                                 <tr
                                     ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->name }}', '{{ $item->item }}')">
                                     <td>{{ $item->name }}</td>
+                                    <td>{{$item->contact}}</td>
                                     <td
                                 class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
                                 {{ $item->type }}</td>
@@ -339,6 +341,7 @@
                             @foreach ($pnodata as $item)
                                 <tr>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->contact }}</td>
                                     <td
                                     class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
                                     {{ $item->type }}</td>
