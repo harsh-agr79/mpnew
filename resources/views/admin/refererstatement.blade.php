@@ -777,6 +777,14 @@
                         </div>
                     </div>
                 </div>
+               
+
+                <div class="mp-card container" style="margin-top: 20px;">
+                    <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
+                </div>
+                <div class="mp-card container" style="margin-top: 20px;">
+                    <div class="bar" id="top_x_div2" style="width: auto; height: 500px;"></div>
+                </div>
                 <div class="mp-card" style="margin-top: 10px;">
                     <ul class="collapsible">
                         @foreach ($catsales as $item)
@@ -886,13 +894,6 @@
                             </li>
                         @endforeach
                     </ul>
-                </div>
-
-                <div class="mp-card container" style="margin-top: 20px;">
-                    <div class="bar" id="top_x_div" style="width: auto; height: 500px;"></div>
-                </div>
-                <div class="mp-card container" style="margin-top: 20px;">
-                    <div class="bar" id="top_x_div2" style="width: auto; height: 500px;"></div>
                 </div>
                 <script>
                     function openanadetail(date, date2, name) {
