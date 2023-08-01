@@ -17,6 +17,7 @@
                       <option value="userid">User Id</option>
                       <option value="referer">Referer</option>
                       <option value="uniqueid">Unique Id</option>
+                      <option value="activity">Activity</option>
                     </select>
                   </div>
             </div>
@@ -24,15 +25,18 @@
         <div class="mp-card"  style="overflow-x: scroll;">
             <table class="sortable">
                 <thead>
+                    <th></th>
                     <th>SN</th>
                     <th>Name</th>
                     <th>shop</th>
                     <th>Address</th>
                     <th>Type</th>
+                    <th>Bill Count</th>
                     <th class="contact" style="display: none;">Contact</th>
                     <th class="userid" style="display: none;">User id</th>
                     <th class="referer" style="display: none;">referer</th>
                     <th class="uniqueid" style="display: none;">Unique Id</th>
+                    <th class="activity" style="display: none;">activity</th>
                 </thead>
                 <tbody>
                     @php
@@ -40,15 +44,21 @@
                     @endphp
                     @foreach ($data as $item)
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                            <td>
+                                <div class="{{ $stat = $item->actcolor }}"
+                                    style="height: 35px; width:10px;"></div>
+                            </td>
                             <td>{{$a = $a + 1}}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->shopname }}</td>
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->type }}</td>
+                            <td>{{ $item->billcnt }}</td>
                             <td class="contact" style="display: none;">{{$item->contact}}</td>
                             <td class="userid" style="display: none;">{{$item->user_id}}</td>
                             <td class="referer" style="display: none;">{{$item->refname}}</td>
                             <td class="uniqueid" style="display: none;">{{$item->cusuni_id}}</td>
+                            <td class="activity" style="display: none;">{{$item->activity}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -112,6 +122,7 @@
             $('.userid').hide();
             $('.referer').hide();
             $('.uniqueid').hide();
+            $('.activity').hide();
             var clsnames = '';
             const vals = $('#fields').val();
             vals.forEach(e => {
