@@ -519,7 +519,7 @@ class MarketerController extends Controller
             ->where('orders.created_at', '<=', $date2)
             ->whereIn('orders.name', $cuslist)
             ->where('orders.item', $request->get('product'))
-            ->selectRaw('orders.*, customers.type, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
+            ->selectRaw('orders.*, customers.type, customers.contact, customers.actcolor, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
             ->orderBy('sum','desc')
             ->join('customers',  'orders.cusuni_id', '=', 'customers.cusuni_id')
             // ->select('orders.*', 'customers.type')
