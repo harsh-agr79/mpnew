@@ -316,6 +316,7 @@
                     <table class="sortable">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Contact</th>
                                 <th>Type</th>
@@ -328,6 +329,10 @@
                             @foreach ($pdata as $item)
                                 <tr
                                     ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->name }}', '{{ $item->item }}')">
+                                    <td>
+                                        <div class="{{ $item->actcolor }}"
+                                            style="height: 35px; width:10px;"></div>
+                                    </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{$item->contact}}</td>
                                     <td
@@ -340,6 +345,10 @@
                             @endforeach
                             @foreach ($pnodata as $item)
                                 <tr>
+                                    <td>
+                                        <div class="{{ $item->actcolor }}"
+                                            style="height: 35px; width:10px;"></div>
+                                    </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->contact }}</td>
                                     <td
