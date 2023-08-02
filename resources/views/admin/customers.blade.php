@@ -61,7 +61,7 @@
                             {{-- <td>{{ $item->address }}</td> --}}
                             <td>{{ $item->type }}</td>
                             {{-- <td>{{ $item->billcnt }}</td> --}}
-                            <td><input type="text" name="address[]" value="{{ $item->address }}"
+                            <td sorttable_customkey="{{$item->address}}"><input type="text" name="address[]" value="{{ $item->address }}"
                                     class="browser-default inp"></td>
                             <td><input type="text" name="area[]" value="{{ $item->area }}"
                                     class="browser-default inp"></td>
