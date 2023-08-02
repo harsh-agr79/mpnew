@@ -32,9 +32,9 @@
                     <th>SN</th>
                     <th>Name</th>
                     <th>shop</th>
-                    {{-- <th>Address</th>
+                    {{-- <th>Address</th> --}}
                     <th>Type</th>
-                    <th>Bill Count</th> --}}
+                    {{-- <th>Bill Count</th> --}}
                     <th>Address</th>
                     <th>Area</th>
                     <th>State</th>
@@ -58,9 +58,9 @@
                             <td>{{ $a = $a + 1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->shopname }}</td>
-                            {{-- <td>{{ $item->address }}</td>
+                            {{-- <td>{{ $item->address }}</td> --}}
                             <td>{{ $item->type }}</td>
-                            <td>{{ $item->billcnt }}</td> --}}
+                            {{-- <td>{{ $item->billcnt }}</td> --}}
                             <td><input type="text" name="address[]" value="{{ $item->address }}"
                                     class="browser-default inp"></td>
                             <td><input type="text" name="area[]" value="{{ $item->area }}"
