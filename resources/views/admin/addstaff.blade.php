@@ -367,7 +367,7 @@
                         <div class="col m6 s12">
                             <label>
                                 <input type="checkbox" name="perm[]"
-                                    value="frontsettings|frontimg|delete/frontimg/{id}/{id2}"
+                                    value="frontsettings|frontimg|delete/frontimg/{id}/{id2}|frontmsg|delete/frontmsg/{id}"
                                     @if (in_array('frontsettings', $permission)) checked @endif />
                                 <span>Front Settings</span>
                             </label>

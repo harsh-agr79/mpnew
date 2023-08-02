@@ -185,4 +185,7 @@ class CustomerController extends Controller
         ]);
         return redirect('/customers');
     }
+    public function addupdate(Request $request){
+        dd($request->post());
+    }
 }
