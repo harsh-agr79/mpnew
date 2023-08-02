@@ -527,13 +527,46 @@
                     @endif
                 @endif
             @endforeach
+            @if ($custs != 'no data')
             <li>
                 <div class="collapsible-header row">
                     <span class="left col s6 blue-text">Total</span><span
-                        class="right col s6">{{ money($totalsales[0]->sl - $totalsales[0]->dis) }}</span>
+                        class="right col s6">{{ money($tss[0]->sum - $tss[0]->dis) }}</span>
                 </div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                <div class="collapsible-body"><span>
+                        <table class="sortable">
+                            <thead>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Sales</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($custs as $item)
+                                    <tr>
+                                        <td>{{ $item->name }}</td>
+                                        <td
+                                            class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
+                                            {{ $item->type }}</td>
+                                        <td>{{ money($item->sum - $item->dis) }}</td>
+                                    </tr>
+                                @endforeach
+                                @foreach ($cusnts as $item)
+                                    <tr>
+                                        <td>{{ $item->name }}</td>
+                                        <td
+                                        class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
+                                        {{ $item->type }}</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+
+                    </span></div>
             </li>
+            @endif
+          
         </ul>
     </div>
     <div class="row" style="margin-top: 20px;">
