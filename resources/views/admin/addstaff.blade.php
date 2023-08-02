@@ -312,7 +312,7 @@
                         <div class="col m6 s12">
                             <label>
                                 <input type="checkbox" name="perm[]"
-                                    value="addcustomer|editcustomer/{id}|deletecustomer/{id}|addcus"
+                                    value="addcustomer|editcustomer/{id}|deletecustomer/{id}|addcus|custupdate"
                                     @if (in_array('addcustomer', $permission)) checked @endif />
                                 <span>Add/Edit Customers</span>
                             </label>

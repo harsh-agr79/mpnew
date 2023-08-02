@@ -168,14 +168,13 @@
                                             ->get();
                                         $sls = $query;
                                         $cslist = $sls->pluck('name')->toArray();
-                                        $query2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist);
-                                            if ($type == 'marketer') {
-                                                $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-                                                $query2 = $query2->WhereIn('name', $cuslist);
-                                            }
-                                            $query2 = $query2->get();
-                                            $sls2 = $query2;
+                                        $query2 = DB::table('customers')->whereNotIn('name', $cslist);
+                                        if ($type == 'marketer') {
+                                            $cuslist = marketercuslist(session()->get('ADMIN_ID'));
+                                            $query2 = $query2->WhereIn('name', $cuslist);
+                                        }
+                                        $query2 = $query2->get();
+                                        $sls2 = $query2;
                                     @endphp
                                     <table class="sortable">
                                         <thead>
@@ -269,8 +268,7 @@
                                             $sls = $query;
                                             
                                             $cslist = $sls->pluck('name')->toArray();
-                                            $query2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist);
+                                            $query2 = DB::table('customers')->whereNotIn('name', $cslist);
                                             if ($type == 'marketer') {
                                                 $cuslist = marketercuslist(session()->get('ADMIN_ID'));
                                                 $query2 = $query2->WhereIn('name', $cuslist);
@@ -369,8 +367,7 @@
                                                 ->get();
                                             $sls = $query;
                                             $cslist = $sls->pluck('name')->toArray();
-                                            $query2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist);
+                                            $query2 = DB::table('customers')->whereNotIn('name', $cslist);
                                             if ($type == 'marketer') {
                                                 $cuslist = marketercuslist(session()->get('ADMIN_ID'));
                                                 $query2 = $query2->WhereIn('name', $cuslist);
@@ -394,8 +391,8 @@
                                                             {{ $item2->name }}
                                                         </td>
                                                         <td
-                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                        {{ $item2->type }}</td>
+                                                            class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                            {{ $item2->type }}</td>
                                                         <td>{{ money($item2->sl - $item2->dis) }}</td>
                                                     </tr>
                                                 @endforeach
@@ -470,8 +467,7 @@
                                             $sls = $query;
                                             $cslist = $sls->pluck('name')->toArray();
                                             
-                                            $query2 = DB::table('customers')
-                                                ->whereNotIn('name', $cslist);
+                                            $query2 = DB::table('customers')->whereNotIn('name', $cslist);
                                             if ($type == 'marketer') {
                                                 $cuslist = marketercuslist(session()->get('ADMIN_ID'));
                                                 $query2 = $query2->WhereIn('name', $cuslist);
@@ -531,6 +527,13 @@
                     @endif
                 @endif
             @endforeach
+            <li>
+                <div class="collapsible-header row">
+                    <span class="left col s6 blue-text">Total</span><span
+                        class="right col s6">{{ money($totalsales[0]->sl - $totalsales[0]->dis) }}</span>
+                </div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
         </ul>
     </div>
     <div class="row" style="margin-top: 20px;">

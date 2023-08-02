@@ -386,6 +386,23 @@ class AnalyticsController extends Controller
             ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')->groupBy('name')
             ->get();
 
+            $date = getEnglishDate($result['syear'] ,  $result['smonth'],1);
+            $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
+
+            $result['totalsales'] = DB::table('orders')->where('deleted', NULL)->where('saved', NULL)->where('status', 'approved') 
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
+            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')
+            ->groupBy('deleted')
+            ->get();
+
+            $result['custs'] = DB::table('orders')->where('deleted', NULL)->where('saved', NULL)->where('status', 'approved') 
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
+            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')
+            ->groupBy('name')
+            ->get();
+
             $result['name'] = $request->get('name');
         }
         else{

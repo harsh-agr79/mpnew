@@ -59,7 +59,8 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->shopname }}</td>
                             {{-- <td>{{ $item->address }}</td> --}}
-                            <td>{{ $item->type }}</td>
+                            <td><input type="text" name="type[]" value="{{ $item->type }}"
+                                class="browser-default inp"></td>
                             {{-- <td>{{ $item->billcnt }}</td> --}}
                             <td sorttable_customkey="{{$item->address}}"><input type="text" name="address[]" value="{{ $item->address }}"
                                     class="browser-default inp"></td>
