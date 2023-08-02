@@ -191,7 +191,6 @@ class CustomerController extends Controller
         $area = $request->post('area', []);
         $state = $request->post('state', []);
         $district = $request->post('district', []);
-        $type = $request->post('type', []);
 
         for ($i=0; $i < count($ids); $i++) { 
            DB::table('customers')->where('id', $ids[$i])->update([
@@ -199,7 +198,6 @@ class CustomerController extends Controller
             'area'=>$area[$i],
             'state'=>$state[$i],
             'district'=>$district[$i],
-            'type'=>$type[$i],
            ]);
         }
         return redirect('customers');
