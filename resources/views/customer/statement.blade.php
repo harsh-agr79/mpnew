@@ -323,8 +323,8 @@
     </div>
 
 
-    <div id="modal1" class="modal black-text">
-        <div class="modal-content">
+    <div id="modal1" class="modal bg-content">
+        <div class="modal-content bg-content">
             @php
                 $today = date('Y-m-d');
                 $target = DB::table('target')
