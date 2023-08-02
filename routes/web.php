@@ -222,6 +222,8 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::post('/user/editorder', [OrderController::class, 'editorder_process'])->name('user.editorder');
     Route::get('/user/deleteorder/{id}', [OrderController::class, 'deleteorder']);
 
+    Route::get('/user/confirmorder/{id}', [OrderController::class, 'confirm']);
+
     Route::get('/user/analytics', [CustomerViewController::class, 'analytics']);
     Route::get('/user/summary', [CustomerViewController::class, 'summary']);
     Route::get('/user/statement', [CustomerViewController::class, 'statement']);

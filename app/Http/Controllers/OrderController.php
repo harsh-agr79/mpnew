@@ -207,4 +207,12 @@ class OrderController extends Controller
         ]);
         return redirect('user/detail/'.$orderid);
     }
+    public function confirm(Request $request, $orderid)
+    {
+        DB::table('orders')->where('orderid', $orderid)->update([
+            'created_at'=>date('Y-m-d H:i:s'),
+            'save'=>NULL
+        ]);
+        return redirect('user/oldorders');
+    }
 }

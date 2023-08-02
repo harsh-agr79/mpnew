@@ -44,6 +44,9 @@
                             <th>Amount</th>
                             <th>Delivered</th>
                             <th>recieved</th>
+                            @if ($page == 'saved')
+                                <th>Confirm</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -72,6 +75,13 @@
                                     @endif
                                 </td>
                                 <td>{{ $item->recieveddate }}</td>
+                                @if ($page == 'saved')
+                                    <td>
+                                        <a href="{{url('user/confirmorder/'.$item->orderid)}}" class="btn amber">
+                                            Send
+                                        </a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
