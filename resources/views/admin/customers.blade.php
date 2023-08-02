@@ -55,7 +55,7 @@
                             <td sorttable_customkey="{{ $item->activity }}">
                                 <div class="{{ $stat = $item->actcolor }}" style="height: 35px; width:10px;"></div>
                             </td>
-                            <td>{{$item->id}}</td>
+                            <td>{{$a = $a + 1}}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->shopname }}</td>
                             {{-- <td>{{ $item->address }}</td> --}}
