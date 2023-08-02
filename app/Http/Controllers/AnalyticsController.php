@@ -385,11 +385,7 @@ class AnalyticsController extends Controller
             ->where('status','approved') 
             ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')->groupBy('name')
             ->get();
-
-           
-
-          
-
+            
             $result['custs'] = 'no data';
             $result['name'] = $request->get('name');
         }
