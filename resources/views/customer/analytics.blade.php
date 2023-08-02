@@ -57,7 +57,7 @@
                         <tbody>
                             @foreach ($npdata as $item)
                                 <tr class=" @if ($item->seen == '') z-depth-2 @endif"
-                                    ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
+                                    onclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                     <td>{{ $item->created_at }}</td>
                                     <td>
                                         <div class="row" style="padding: 0; margin: 0;">
@@ -167,7 +167,7 @@
                                                             }
                                                         @endphp
                                                         <tr class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
-                                                            ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
+                                                            onclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
                                                             <td>{{ $item2->item }}</td>
                                                             <td>{{ $item2->sum }}</td>
                                                             <td>{{ money($item2->samt - $item2->damt) }}</td>

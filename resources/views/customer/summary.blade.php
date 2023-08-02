@@ -166,7 +166,7 @@
                     @endphp
                     <li>
                         <div class="collapsible-header row"
-                            ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
+                            onclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
                             <span
                                 class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                 class="right col s6">{{ money($item->sl - $item->dis) }}</span>
@@ -192,7 +192,7 @@
                         @endphp
                         <li>
                             <div class="collapsible-header row"
-                                ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
+                                onclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
                                 <span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{ money($item->sl - $item->dis) }}</span>
@@ -219,7 +219,7 @@
                         @endphp
                         <li>
                             <div class="collapsible-header row"
-                                ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
+                                onclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
                                 <span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{ money($item->sl - $item->dis) }}</span>
@@ -246,7 +246,7 @@
                         @endphp
                         <li>
                             <div class="collapsible-header row"
-                                ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
+                                onclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}')">
                                 <span
                                     class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
                                     class="right col s6">{{ money($item->sl - $item->dis) }}</span>
@@ -352,7 +352,7 @@
                                             }
                                         @endphp
                                         <tr class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
-                                            ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
+                                            onclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
                                             <td>{{ $item2->item }}</td>
                                             <td>{{ $item2->sum }}</td>
                                             <td>{{ money($item2->samt - $item2->damt) }}</td>
