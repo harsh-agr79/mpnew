@@ -26,7 +26,7 @@
             <form action="{{route('addup')}}" method="POST" enctype="multipart/form-data">
                 @csrf
            
-            <table>
+            <table class="sortable">
                 <thead>
                     <th>|</th>
                     <th>SN</th>
