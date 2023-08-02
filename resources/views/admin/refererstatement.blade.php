@@ -278,7 +278,6 @@
                             <div class="col s6" style="font-weight: 700;">Sales</div>
                         </div>
                         @foreach ($data2 as $item)
-                            @if ($item->nepyear > $syear && $item->nepyear < $eyear)
                                 @php
                                     $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
                                 @endphp
@@ -376,307 +375,44 @@
                                     @endif
 
                                 </li>
-                            @elseif($syear == $eyear)
-                                @if ($smonth <= $item->nepmonth && $emonth >= $item->nepmonth && $item->nepyear == $syear)
-                                    @php
-                                        $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                                    @endphp
-                                    <li>
-                                        <div class="collapsible-header row"
-                                            @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                                            <span
-                                                class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                                class="right col s6">{{ money($item->sl - $item->dis) }}</span>
-                                        </div>
-                                        @if ($name == null)
-                                            @php
-                                                $totalsales = $totalsales + ($item->sl - $item->dis);
-                                                $nummonths = $nummonths + 1;
-                                                $numbills =
-                                                    $numbills +
-                                                    DB::table('orders')
-                                                        ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                        ->groupBy('orderid')
-                                                        ->get()
-                                                        ->count();
-                                            @endphp
-                                            <div class="collapsible-body"><span>
-                                                    @php
-                                                        
-                                                        $query = DB::table('orders');
-                                                        if ($type == 'marketer') {
-                                                            $cuslist = marketercuslist($refid);
-                                                            $query = $query->WhereIn('orders.name', $cuslist);
-                                                        }
-                                                        $query = $query
-                                                            ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                            ->selectRaw('orders.*, customers.type, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
-                                                            ->orderBy('sl', 'DESC')
-                                                            ->groupBy('name')
-                                                            ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
-                                                            ->get();
-                                                        $sls = $query;
-                                                        
-                                                        $cslist = $sls->pluck('name')->toArray();
-                                                        $query2 = DB::table('customers')->whereNotIn('name', $cslist);
-                                                        if ($type == 'marketer') {
-                                                            $cuslist = marketercuslist($refid);
-                                                            $query2 = $query2->WhereIn('name', $cuslist);
-                                                        }
-                                                        $query2 = $query2->get();
-                                                        $sls2 = $query2;
-                                                    @endphp
-                                                    <table class="sortable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>type</th>
-                                                                <th>Sales</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($sls as $item2)
-                                                                <tr
-                                                                    ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
-                                                                    <td>
-                                                                        {{ $item2->name }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                                        {{ $item2->type }}</td>
-                                                                    <td>{{ money($item2->sl - $item2->dis) }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                            @foreach ($sls2 as $item2)
-                                                                <tr>
-                                                                    <td>{{ $item2->name }}</td>
-                                                                    <td
-                                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                                        {{ $item2->type }}</td>
-                                                                    <td>0</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </span>
-                                            </div>
-                                        @else
-                                            @php
-                                                $totalsales = $totalsales + ($item->sl - $item->dis);
-                                                $nummonths = $nummonths + 1;
-                                                $numbills =
-                                                    $numbills +
-                                                    DB::table('orders')
-                                                        ->where('name', $name)
-                                                        ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                        ->groupBy('orderid')
-                                                        ->get()
-                                                        ->count();
-                                            @endphp
-                                        @endif
-                                    </li>
-                                @endif
-                            @elseif($item->nepyear == $syear)
-                                @if ($smonth <= $item->nepmonth)
-                                    @php
-                                        $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                                    @endphp
-                                    <li>
-                                        <div class="collapsible-header row"
-                                            @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                                            <span
-                                                class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                                class="right col s6">{{ money($item->sl - $item->dis) }}</span>
-                                        </div>
-                                        @if ($name == null)
-                                            @php
-                                                $totalsales = $totalsales + ($item->sl - $item->dis);
-                                                $nummonths = $nummonths + 1;
-                                                $numbills =
-                                                    $numbills +
-                                                    DB::table('orders')
-                                                        ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                        ->groupBy('orderid')
-                                                        ->get()
-                                                        ->count();
-                                            @endphp
-                                            <div class="collapsible-body"><span>
-                                                    @php
-                                                        
-                                                        $query = DB::table('orders');
-                                                        if ($type == 'marketer') {
-                                                            $cuslist = marketercuslist($refid);
-                                                            $query = $query->WhereIn('orders.name', $cuslist);
-                                                        }
-                                                        $query = $query
-                                                            ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                            ->selectRaw('orders.*, customers.type, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
-                                                            ->orderBy('sl', 'DESC')
-                                                            ->groupBy('name')
-                                                            ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
-                                                            ->get();
-                                                        $sls = $query;
-                                                        $cslist = $sls->pluck('name')->toArray();
-                                                        $query2 = DB::table('customers')->whereNotIn('name', $cslist);
-                                                        if ($type == 'marketer') {
-                                                            $cuslist = marketercuslist($refid);
-                                                            $query2 = $query2->WhereIn('name', $cuslist);
-                                                        }
-                                                        $query2 = $query2->get();
-                                                        $sls2 = $query2;
-                                                    @endphp
-                                                    <table class="sortable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>type</th>
-                                                                <th>Sales</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($sls as $item2)
-                                                                <tr
-                                                                    ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
-                                                                    <td>
-                                                                        {{ $item2->name }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                                        {{ $item2->type }}</td>
-                                                                    <td>{{ money($item2->sl - $item2->dis) }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                            @foreach ($sls2 as $item2)
-                                                                <tr>
-                                                                    <td>{{ $item2->name }}</td>
-                                                                    <td
-                                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                                        {{ $item2->type }}</td>
-                                                                    <td>0</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </span>
-                                            </div>
-                                        @else
-                                            @php
-                                                $totalsales = $totalsales + ($item->sl - $item->dis);
-                                                $nummonths = $nummonths + 1;
-                                                $numbills =
-                                                    $numbills +
-                                                    DB::table('orders')
-                                                        ->where('name', $name)
-                                                        ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                        ->groupBy('orderid')
-                                                        ->get()
-                                                        ->count();
-                                            @endphp
-                                        @endif
-                                    </li>
-                                @endif
-                            @elseif($item->nepyear == $eyear)
-                                @if ($emonth >= $item->nepmonth)
-                                    @php
-                                        $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl - $item->dis];
-                                    @endphp
-                                    <li>
-                                        <div class="collapsible-header row"
-                                            @if ($name != null) ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item->nepyear, $item->nepmonth, getLastDate($item->nepmonth, date('y', strtotime($item->nepyear)))) }}', '{{ $name }}')" @endif>
-                                            <span
-                                                class="left col s6 blue-text">{{ $months[$item->nepmonth] }}-{{ $item->nepyear }}</span><span
-                                                class="right col s6">{{ money($item->sl - $item->dis) }}</span>
-                                        </div>
-                                        @if ($name == null)
-                                            @php
-                                                $totalsales = $totalsales + ($item->sl - $item->dis);
-                                                $nummonths = $nummonths + 1;
-                                                $numbills =
-                                                    $numbills +
-                                                    DB::table('orders')
-                                                        ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                        ->groupBy('orderid')
-                                                        ->get()
-                                                        ->count();
-                                            @endphp
-                                            <div class="collapsible-body"><span>
-                                                    @php
-                                                        
-                                                        $query = DB::table('orders');
-                                                        if ($type == 'marketer') {
-                                                            $cuslist = marketercuslist($refid);
-                                                            $query = $query->WhereIn('orders.name', $cuslist);
-                                                        }
-                                                        $query = $query
-                                                            ->where(['orders.deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                            ->selectRaw('orders.*, customers.type, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
-                                                            ->orderBy('sl', 'DESC')
-                                                            ->groupBy('name')
-                                                            ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
-                                                            ->get();
-                                                        $sls = $query;
-                                                        $cslist = $sls->pluck('name')->toArray();
-                                                        
-                                                        $query2 = DB::table('customers')->whereNotIn('name', $cslist);
-                                                        if ($type == 'marketer') {
-                                                            $cuslist = marketercuslist($refid);
-                                                            $query2 = $query2->WhereIn('name', $cuslist);
-                                                        }
-                                                        $query2 = $query2->get();
-                                                        $sls2 = $query2;
-                                                    @endphp
-                                                    <table class="sortable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>type</th>
-                                                                <th>Sales</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($sls as $item2)
-                                                                <tr
-                                                                    ondblclick="openanadetail('{{ getEnglishDate($item->nepyear, $item->nepmonth, 1) }}', '{{ getEnglishDate($item2->nepyear, $item2->nepmonth, getLastDate($item2->nepmonth, date('y', strtotime($item2->nepyear)))) }}', '{{ $item2->name }}')">
-                                                                    <td>
-                                                                        {{ $item2->name }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                                        {{ $item2->type }}</td>
-                                                                    <td>{{ money($item2->sl - $item2->dis) }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                            @foreach ($sls2 as $item2)
-                                                                <tr>
-                                                                    <td>{{ $item2->name }}</td>
-                                                                    <td
-                                                                        class="black-text  @if ($item2->type == 'dealer') purple lighten-5 @elseif($item2->type == 'wholesaler') lime lighten-5 @elseif($item2->type == 'retailer') light-blue lighten-5 @else @endif">
-                                                                        {{ $item2->type }}</td>
-                                                                    <td>0</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </span>
-                                            </div>
-                                        @else
-                                            @php
-                                                $totalsales = $totalsales + ($item->sl - $item->dis);
-                                                $nummonths = $nummonths + 1;
-                                                $numbills =
-                                                    $numbills +
-                                                    DB::table('orders')
-                                                        ->where('name', $name)
-                                                        ->where(['deleted' => null, 'status' => 'approved', 'save' => null, 'nepmonth' => $item->nepmonth, 'nepyear' => $item->nepyear])
-                                                        ->groupBy('orderid')
-                                                        ->get()
-                                                        ->count();
-                                            @endphp
-                                        @endif
-                                    </li>
-                                @endif
-                            @endif
                         @endforeach
+                        <li>
+                            <div class="collapsible-header row">
+                                <span class="left col s6 blue-text">Total</span><span
+                                    class="right col s6">{{ money($tss[0]->sum - $tss[0]->dis) }}</span>
+                            </div>
+                            <div class="collapsible-body"><span>
+                                    <table class="sortable">
+                                        <thead>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Sales</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($custs as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td
+                                                        class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                        {{ $item->type }}</td>
+                                                    <td>{{ money($item->sum - $item->dis) }}</td>
+                                                </tr>
+                                            @endforeach
+                                            @foreach ($cusnts as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td
+                                                    class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
+                                                    {{ $item->type }}</td>
+                                                    <td>0</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+            
+            
+                                </span></div>
+                        </li>
                     </ul>
                 </div>
                 <div class="row" style="margin-top: 20px;">

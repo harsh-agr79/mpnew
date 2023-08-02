@@ -773,11 +773,16 @@ class AnalyticsController extends Controller
             }
             $ref = DB::table('admins')->where('name', $request->get('name'))->first();
             $cuslist = marketercuslist($ref->id);
+
+            $date = getEnglishDate($result['syear'] ,  $result['smonth'], 1);
+            $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
             
                 $result['data2'] = DB::table('orders')
                 ->where(['deleted'=>NULL, 'status'=>'approved', 'save'=>NULL])
                 ->orderBy('created_at', 'ASC')
                 ->whereIn('orders.name', $cuslist)
+                ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
                 ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                 ->groupBy(['nepmonth', 'nepyear'])
                 ->get();
@@ -787,6 +792,8 @@ class AnalyticsController extends Controller
                 ->whereIn('nepmonth', [1,2,3])
                 ->orderBy('created_at', 'ASC')
                 ->whereIn('orders.name', $cuslist)
+                ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
                 ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                 ->groupBy('nepyear')
                 ->get();
@@ -796,6 +803,8 @@ class AnalyticsController extends Controller
                 ->whereIn('nepmonth', [4,5,6])
                 ->orderBy('created_at', 'ASC')
                 ->whereIn('orders.name', $cuslist)
+                ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
                 ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                 ->groupBy('nepyear')
                 ->get();
@@ -805,6 +814,8 @@ class AnalyticsController extends Controller
                 ->whereIn('nepmonth', [7,8,9])
                 ->orderBy('created_at', 'ASC')
                 ->whereIn('orders.name', $cuslist)
+                ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
                 ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                 ->groupBy('nepyear')
                 ->get();
@@ -814,8 +825,37 @@ class AnalyticsController extends Controller
                 ->whereIn('nepmonth', [10,11,12])
                 ->orderBy('created_at', 'ASC')
                 ->whereIn('orders.name', $cuslist)
+                ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)  
                 ->selectRaw('*, SUM(approvedquantity * price) as sl, SUM(discount * 0.01 * approvedquantity * price) as dis')
                 ->groupBy('nepyear')
+                ->get();
+
+                $result['tss'] = DB::table('orders')
+                ->where('deleted', NULL)->where('save', NULL)->where('status', 'approved') 
+                ->where('orders.created_at', '>=', $date)
+                ->where('orders.created_at', '<=', $date2)  
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')
+                ->groupBy('deleted')
+                ->get();
+    
+                $result['custs'] = DB::table('orders')->where('orders.deleted', NULL)->where('save', NULL)->where('status', 'approved') 
+                ->where('orders.created_at', '>=', $date)
+                ->where('orders.created_at', '<=', $date2)  
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('orders.*, customers.type, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')
+                ->groupBy('orders.name')
+                ->join('customers', 'orders.cusuni_id', '=', 'customers.cusuni_id')
+                ->orderBy('sum', 'DESC')
+                ->get();
+    
+                $result['cusnts'] = DB::table('customers')->whereNotIn('name', DB::table('orders')->where('deleted', NULL)->where('save', NULL)->where('status', 'approved') 
+                ->where('orders.created_at', '>=', $date)
+                ->where('orders.created_at', '<=', $date2)  
+                ->whereIn('orders.name', $cuslist)
+                ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')->groupBy('name')->pluck('name')->toArray())
+                ->whereIn('customers.name', $cuslist)
                 ->get();
 
             $date = getEnglishDate($result['syear'] ,  $result['smonth'],1);

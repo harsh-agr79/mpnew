@@ -223,7 +223,6 @@
                                         ->count();
                             @endphp
                         @endif
-
                     </li>
             @endforeach
             @if ($custs != 'no data')
