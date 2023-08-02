@@ -50,7 +50,7 @@
                         $a = 0;
                     @endphp
                     @foreach ($data as $item)
-                    <input type="hidden" name="id[]" value="{{$item->id}}">
+                    
                         <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td sorttable_customkey="{{ $item->activity }}">
                                 <div class="{{ $stat = $item->actcolor }}" style="height: 35px; width:10px;"></div>
@@ -61,6 +61,7 @@
                             {{-- <td>{{ $item->address }}</td> --}}
                             <td>{{ $item->type }}</td>
                             {{-- <td>{{ $item->billcnt }}</td> --}}
+                            <input type="hidden" name="id[]" value="{{$item->id}}">
                             <td sorttable_customkey="{{$item->address}}"><input type="text" name="address[]" value="{{ $item->address }}"
                                     class="browser-default inp"></td>
                             <td><input type="text" name="area[]" value="{{ $item->area }}"
