@@ -26,7 +26,7 @@
                         <p>{{ $item->message }}</p>
                     @endforeach
                 </section>
-                <section class="news-message">
+                <section class="news-message bg-content">
                     @foreach ($data2 as $item)
                         <p>{{ $item->message }}</p>
                     @endforeach
