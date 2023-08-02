@@ -186,6 +186,20 @@ class CustomerController extends Controller
         return redirect('/customers');
     }
     public function addupdate(Request $request){
-        dd($request->post());
+        $ids = $request->post('id', []);
+        $address = $request->post('address', []);
+        $area = $request->post('area', []);
+        $state = $request->post('state', []);
+        $district = $request->post('district', []);
+
+        for ($i=0; $i < count($ids); $i++) { 
+           DB::table('customers')->where('id', $ids[$i])->update([
+            'address'=>$address[$i],
+            'area'=>$area[$i],
+            'state'=>$state[$i],
+            'district'=>$district[$i],
+           ]);
+        }
+        return redirect('customers');
     }
 }

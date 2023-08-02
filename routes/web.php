@@ -96,7 +96,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('deletecustomer/{id}', [CustomerController::class, 'deletecustomer']);
     Route::post('addcus', [CustomerController::class, 'addcustomer_process'])->name('addcustomer');
 
-    Route::post('/custupdate', [CustomerController::class, 'addupdate'])->name('addup');
+    Route::post('custupdate', [CustomerController::class, 'addupdate'])->name('addup');
 
     //Payments CRUD
     Route::get('payments', [PaymentController::class, 'index']);

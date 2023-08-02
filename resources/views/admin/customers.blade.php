@@ -23,10 +23,10 @@
             </div>
         </div>
         <div class="mp-card" style="overflow-x: scroll;">
-            <form>
+            <form action="{{route('addup')}}" method="POST" enctype="multipart/form-data">
                 @csrf
            
-            <table class="sortable">
+            <table>
                 <thead>
                     <th>|</th>
                     <th>SN</th>
@@ -67,12 +67,12 @@
                                     class="browser-default inp"></td>
                             <td> <select id="state{{ $item->id }}" name="state[]"
                                     class="browser-default selectinp black-text" onchange="district({{ $item->id }})"
-                                    required>
+                                    >
                                     @if ($item->state != null)
                                         <option selected value="{{ $item->state }}">{{ $item->state }}</option>
                                         <option class="black-text" value="">State</option>
                                     @else
-                                        <option class="black-text" value="" selected disabled>State</option>
+                                        <option class="black-text" value="" selected>State</option>
                                     @endif
                                     <option class="black-text" value="Bagmati">Bagmati</option>
                                     <option class="black-text" value="Gandaki">Gandaki</option>
@@ -86,6 +86,8 @@
                                     class="browser-default selectinp black-text">
                                     @if ($item->state != null)
                                     <option selected value="{{ $item->district }}">{{ $item->district }}</option>
+                                    @else
+                                    <option class="black-text" value="" selected>District</option>
                                     @endif
                                 </select>
                             </td>
@@ -339,8 +341,8 @@
             console.log(dis)
             var sc = $(`#district${id}`);
             sc.empty();
-            sc.append($('<option></option>').attr('value', null).attr('disabled', 'true').attr('selected', 'true').text(
-                        'select sub-category'));
+            sc.append($('<option></option>').attr('value', null).attr('selected', 'true').text(
+                        'select District'));
             // dis.forEach(element => {
             //     $sc.append($('<option></option>')
             //                 .attr("value", value.subcategory).text(value.subcategory))

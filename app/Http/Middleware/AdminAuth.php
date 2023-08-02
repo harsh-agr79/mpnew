@@ -27,7 +27,7 @@ class AdminAuth
                 }
                 else{
                     $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
-                    $perms2 = ['dashboard', 'logout', 'admin/changemode', 'findcustomer', 'finditem', 'getref'];
+                    $perms2 = ['dashboard', 'logout', 'admin/changemode', 'findcustomer', 'finditem', 'getref'. 'custupdate'];
                     $uri =  $url = request()->route()->uri;
                     if(in_array($uri, $perms) || in_array($uri, $perms2)){
                         view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
