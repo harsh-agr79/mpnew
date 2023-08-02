@@ -34,7 +34,7 @@
             </div>
             @endif
             @if ($data[0]->mainstatus != 'blue' && $admin->type == 'admin' || $data[0]->mainstatus != 'blue' && in_array('saveorder/{id}',$perms))
-                <div style="margin: 10px 0;">
+                <div style="margin: 2px 0;">
                     <a onclick="printorder('{{ $data[0]->orderid }}');" target="_blank" class="btn-small amber white-text">
                         Img <i class="material-icons right">file_download</i>
                     </a>
