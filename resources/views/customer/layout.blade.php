@@ -63,7 +63,9 @@
                         </li>
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger">
                             @if ($user->profileimg !== NULL)
+                            <i>
                                 <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
+                            </i>
                             @else
                             <i class="material-icons textcol">face</i>
                             @endif
