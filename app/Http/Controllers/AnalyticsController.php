@@ -975,7 +975,8 @@ class AnalyticsController extends Controller
             $othnum = "0";
            }
             $res[] = [
-                'date'=>$item->nepmonth.'-'.$item->nepyear,
+                'month'=>$item->nepmonth,
+                'year'=>$item->nepyear,
                 'powerbank'=>$data2->where('category','powerbank')->first()->sum,
                 'charger'=>$data2->where('category','charger')->first()->sum,
                 'cable'=>$data2->where('category','cable')->first()->sum,

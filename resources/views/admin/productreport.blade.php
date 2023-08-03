@@ -70,6 +70,9 @@
                 </div>
             </form>
         </div>
+        @php
+              $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
+        @endphp
         <div class="mp-card" style="margin-top: 10px;">
             <table>
                 <thead>
@@ -84,7 +87,7 @@
                 <tbody>
                     @for ($i = 0; $i < count($data); $i++)
                         <tr>
-                            <th>{{$data[$i]['date']}}</th>
+                            <th>{{$months[$data[$i]['month']]}}-{{$data[$i]['year']}}</th>
                             <td>{{$data[$i]['powerbank']}}</td>
                             <td>{{$data[$i]['charger']}}</td>
                             <td>{{$data[$i]['cable']}}</td>
