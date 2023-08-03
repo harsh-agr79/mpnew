@@ -940,7 +940,6 @@ class AnalyticsController extends Controller
         }
         $date = getEnglishDate($result['syear'] ,  $result['smonth'], 1);
         $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
-        $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
 
         $data = DB::table('orders')
         ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
