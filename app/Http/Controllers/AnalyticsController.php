@@ -941,16 +941,48 @@ class AnalyticsController extends Controller
         $date = getEnglishDate($result['syear'] ,  $result['smonth'], 1);
         $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
 
-        $result['data'] = DB::table('orders')
+        $data = DB::table('orders')
         ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
         ->where('orders.created_at', '>=', $date)
         ->where('orders.created_at', '<=', $date2)
-        ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['category', 'nepmonth', 'nepyear'])->orderBy('created_at','desc')
+        ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','desc')
         ->orderBy('category','desc')
         ->get();
 
-        foreach($result['data'] as $item){
-            echo $item->category, ' ',$item->sum, ' ', $item->nepmonth, '-', $item->nepyear, '<br>';
+        $res = array();
+
+        foreach($data as $item){
+            $data2 = DB::table('orders')
+            ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
+            ->where('orders.nepmonth', $item->nepmonth)
+            ->where('orders.nepyear', $item->nepyear)
+            ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['category','nepmonth', 'nepyear'])->orderBy('created_at','desc')
+            ->orderBy('category','desc')
+            ->get();
+           $oth =  DB::table('orders')
+           ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL, 'category'=>'others'])
+           ->where('orders.nepmonth', $item->nepmonth)
+           ->where('orders.nepyear', $item->nepyear)
+           ->selectRaw('*, SUM(approvedquantity) as sum')
+           ->get();
+
+           if($oth[0]->sum != NULL){
+            $othnum = $oth[0]->sum;
+           }
+           else{
+            $othnum = "0";
+           }
+            $res[] = [
+                'date'=>$item->nepmonth.'-'.$item->nepyear,
+                'powerbank'=>$data2->where('category','powerbank')->first()->sum,
+                'charger'=>$data2->where('category','charger')->first()->sum,
+                'cable'=>$data2->where('category','cable')->first()->sum,
+                'earphone'=>$data2->where('category','earphone')->first()->sum,
+                'btitem'=>$data2->where('category','btitem')->first()->sum,
+                'others'=>$othnum,
+            ];
         }
+
+        dd($res);
     }
 }
