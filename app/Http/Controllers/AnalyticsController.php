@@ -942,7 +942,8 @@ class AnalyticsController extends Controller
         $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
 
         $data = DB::table('orders')
-        ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
+        ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
         ->where('orders.created_at', '>=', $date)
         ->where('orders.created_at', '<=', $date2)
         ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','desc')
@@ -953,18 +954,20 @@ class AnalyticsController extends Controller
 
         foreach($data as $item){
             $data2 = DB::table('orders')
-            ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
-            ->where('orders.nepmonth', $item->nepmonth)
-            ->where('orders.nepyear', $item->nepyear)
+            ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)
             ->selectRaw('*, SUM(approvedquantity) as sum')
             ->groupBy(['category','nepmonth', 'nepyear'])
             ->orderBy('created_at','desc')
             ->orderBy('category','desc')
             ->get();
            $oth =  DB::table('orders')
-           ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL, 'category'=>'others'])
-           ->where('orders.nepmonth', $item->nepmonth)
-           ->where('orders.nepyear', $item->nepyear)
+           ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved', 'category'=>'others'])
+           ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+           ->where('orders.created_at', '>=', $date)
+           ->where('orders.created_at', '<=', $date2)
            ->selectRaw('*, SUM(approvedquantity) as sum')
            ->get();
 
