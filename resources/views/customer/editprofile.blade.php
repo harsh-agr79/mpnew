@@ -22,27 +22,27 @@
             </div>
             <input type="hidden" name="olddp" value="{{$user->profileimg}}">
             <div class="col s12 row" style="margin-top: 20px;">
-                <div class="col s6">Address:</div>
+                <div class="col s6 center">Address:</div>
                 <div class="col s6"><input type="text" class="browser-default inp black-text" name="address"
                         placeholder="Address" value="{{ $user->address }}"></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">Shopname:</div>
+                <div class="col s6 center">Shopname:</div>
                 <div class="col s6"><input type="text" class="browser-default inp black-text" name="shopname"
                         placeholder="Shopname" value="{{ $user->shopname }}"></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">Contact 1:</div>
+                <div class="col s6 center">Contact 1:</div>
                 <div class="col s6"><input type="text" class="browser-default inp black-text" name="contact1"
                         placeholder="contact 1" value="{{ $user->contact }}"></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">Contact 2:</div>
+                <div class="col s6 center">Contact 2:</div>
                 <div class="col s6"><input type="text" class="browser-default inp black-text" name="contact2"
                         placeholder="contact 2" value="{{ $user->contact2 }}"></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">Tax Type( PAN/VAT ):</div>
+                <div class="col s6 center">Tax Type( PAN/VAT ):</div>
                 <div class="col s6"><select name="taxtype" class="browser-default selectinp black-text">
                     @if ($user->taxtype != NULL)
                         <option value="{{$user->taxtype}}">{{$user->taxtype}}</option>
@@ -54,12 +54,12 @@
                 </select></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">PAN/VAT No. </div>
+                <div class="col s6 center">PAN/VAT No. </div>
                 <div class="col s6"><input type="text" class="browser-default inp black-text" name="taxnum"
                         placeholder="PAN/VAT Number" value="{{ $user->taxnum }}"></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">DOB:</div>
+                <div class="col s6 center">DOB:</div>
                 <div class="col s6"><input type="date" class="browser-default inp black-text" name="dob"
                         placeholder="DOB" value="{{ $user->DOB }}"></div>
             </div>
