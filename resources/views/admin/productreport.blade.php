@@ -91,6 +91,7 @@
         </div>
         @php
         $chartdata = [];
+        $a = 0;
         $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
         @endphp
         @if ($sort == 'normal')
@@ -146,7 +147,7 @@
                 <tbody>
                     @foreach (json_decode($testdata) as $item)
                         <tr>
-                            <td> {{ $months[$item->month] }}-{{ $item->year }}</td>
+                            <td sorttable_customkey="{{$a = $a + 1}}"> {{ $months[$item->month] }}-{{ $item->year }}</td>
                             @foreach ($item->prod as $item2)
                                 <td>{{ $item2->quant }}</td>
                             @endforeach
