@@ -66,7 +66,11 @@
                                   {{$item->price}}
                                 </td>
                                 <td>
+                                    @if ($item->status == 'pending')
+                                    {{ $a = $item->quantity * $item->price }}
+                                    @else
                                     {{ $a = $item->approvedquantity * $item->price }}
+                                    @endif
                                     <span class="hide">{{ $total = $total + $a }}</span>
                                 </td>
                             </tr>
