@@ -55,6 +55,12 @@
                                 </div>
                             </div>
                         </li>
+                       
+                        <li>
+                            <a onclick="history.back()">
+                                <i class="material-icons textcol">arrow_back</i>
+                            </a>
+                        </li>
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger">
                             @if ($user->profileimg !== NULL)
                                 <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
@@ -80,11 +86,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <a onclick="history.back()">
-                                <i class="material-icons textcol">arrow_back</i>
-                            </a>
                         </li>
                     </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
                             class="material-icons textcol">menu</i></a>
