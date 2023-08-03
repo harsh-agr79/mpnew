@@ -162,6 +162,10 @@
                                         <li><a href="{{ url('/detailedreport') }}" class="textcol">Detailed Report<i
                                                     class="material-icons textcol">show_chart</i></a></li>
                                     @endif
+                                    @if ($admin->type == 'admin'))
+                                    <li><a href="{{ url('/productreport') }}" class="textcol">Product Report<i
+                                                class="material-icons textcol">show_chart</i></a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </li>
