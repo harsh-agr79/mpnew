@@ -87,7 +87,7 @@
                 <tbody>
                     @for ($i = 0; $i < count($data); $i++)
                         <tr>
-                            <td sorttable_customkey="{{$i}}">{{$months[$data[$i]['month']]}}-{{$data[$i]['year']}}</td>
+                            <td sorttable_customkey="{{$i}}" style="font-weight: 600">{{$months[$data[$i]['month']]}}-{{$data[$i]['year']}}</td>
                             <td>{{$data[$i]['powerbank']}}</td>
                             <td>{{$data[$i]['charger']}}</td>
                             <td>{{$data[$i]['cable']}}</td>
