@@ -956,8 +956,8 @@ class AnalyticsController extends Controller
             $data2 = DB::table('orders')
             ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
             ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-            ->where('orders.created_at', '>=', $date)
-            ->where('orders.created_at', '<=', $date2)
+            ->where('nepmonth', $item->nepmonth)
+            ->where('nepyear',$item->nepyear)
             ->selectRaw('*, SUM(approvedquantity) as sum')
             ->groupBy(['category','nepmonth', 'nepyear'])
             ->orderBy('created_at','desc')
@@ -966,8 +966,8 @@ class AnalyticsController extends Controller
            $oth =  DB::table('orders')
            ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved', 'category'=>'others'])
            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-           ->where('orders.created_at', '>=', $date)
-           ->where('orders.created_at', '<=', $date2)
+           ->where('nepmonth', $item->nepmonth)
+            ->where('nepyear',$item->nepyear)
            ->selectRaw('*, SUM(approvedquantity) as sum')
            ->get();
 
