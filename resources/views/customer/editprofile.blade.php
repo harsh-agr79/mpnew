@@ -42,7 +42,7 @@
                         placeholder="contact 2" value="{{ $user->contact2 }}"></div>
             </div>
             <div class="col s12 row">
-                <div class="col s6">Tax Type:</div>
+                <div class="col s6">Tax Type( PAN/VAT ):</div>
                 <div class="col s6"><select name="taxtype" class="browser-default selectinp black-text">
                     @if ($user->taxtype != NULL)
                         <option value="{{$user->taxtype}}">{{$user->taxtype}}</option>
