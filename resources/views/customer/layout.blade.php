@@ -63,7 +63,7 @@
                         </li>
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger">
                             @if ($user->profileimg !== NULL)
-                            <i>
+                            <i class="valign-wrapper">
                                 <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
                             </i>
                             @else
