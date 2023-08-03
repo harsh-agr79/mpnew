@@ -342,8 +342,8 @@ input:focus {
     border-radius: 10px !important;
 }
 .edpr_img{
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%; 
 }
 .nav-dp{

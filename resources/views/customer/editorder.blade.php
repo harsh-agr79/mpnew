@@ -189,7 +189,7 @@
 
             </div>
         @endforeach
-    </div>
+        </div>
 
     <div class="fixed-action-btn">
         <a class="btn btn-large red modal-trigger" href="#cart" style="border-radius: 10px;">
