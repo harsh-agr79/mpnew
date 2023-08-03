@@ -348,6 +348,6 @@ input:focus {
 }
 .nav-dp{
     height: 40px;
-    margin: 10px 7px 0 7px;
+    margin: 7px 7px 0 7px;
 }
 </style>
