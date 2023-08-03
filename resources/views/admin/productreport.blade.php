@@ -74,7 +74,7 @@
               $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
         @endphp
         <div class="mp-card" style="margin-top: 10px;">
-            <table>
+            <table class="sortable">
                 <thead>
                     <th>Date/Category</th>
                     <th>Powerbank</th>
