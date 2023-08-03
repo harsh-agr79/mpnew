@@ -940,6 +940,7 @@ class AnalyticsController extends Controller
         }
         $date = getEnglishDate($result['syear'] ,  $result['smonth'], 1);
         $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
+        $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
 
         $data = DB::table('orders')
         ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
@@ -956,7 +957,9 @@ class AnalyticsController extends Controller
             ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
             ->where('orders.nepmonth', $item->nepmonth)
             ->where('orders.nepyear', $item->nepyear)
-            ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['category','nepmonth', 'nepyear'])->orderBy('created_at','desc')
+            ->selectRaw('*, SUM(approvedquantity) as sum')
+            ->groupBy(['category','nepmonth', 'nepyear'])
+            ->orderBy('created_at','desc')
             ->orderBy('category','desc')
             ->get();
            $oth =  DB::table('orders')
@@ -983,6 +986,7 @@ class AnalyticsController extends Controller
             ];
         }
 
-        dd($res);
+        $result['data'] = collect($res);
+        return view('admin/productreport', $result);
     }
 }
