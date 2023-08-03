@@ -61,37 +61,11 @@
                             {{-- <td>{{ $item->address }}</td> --}}
                             <td>{{ $item->type }}</td>
                             {{-- <td>{{ $item->billcnt }}</td> --}}
-                            <input type="hidden" name="id[]" value="{{$item->id}}">
-                            <td sorttable_customkey="{{$item->address}}"><input type="text" name="address[]" value="{{ $item->address }}"
-                                    class="browser-default inp"></td>
-                            <td><input type="text" name="area[]" value="{{ $item->area }}"
-                                    class="browser-default inp"></td>
-                            <td> <select id="state{{ $item->id }}" name="state[]"
-                                    class="browser-default selectinp black-text" onchange="district({{ $item->id }})"
-                                    >
-                                    @if ($item->state != null)
-                                        <option selected value="{{ $item->state }}">{{ $item->state }}</option>
-                                        <option class="black-text" value="">State</option>
-                                    @else
-                                        <option class="black-text" value="" selected>State</option>
-                                    @endif
-                                    <option class="black-text" value="Bagmati">Bagmati</option>
-                                    <option class="black-text" value="Gandaki">Gandaki</option>
-                                    <option class="black-text" value="Karnali">Karnali</option>
-                                    <option class="black-text" value="Lumbini">Lumbini</option>
-                                    <option class="black-text" value="Madhesh">Madhesh</option>
-                                    <option class="black-text" value="Koshi">Koshi</option>
-                                    <option class="black-text" value="Sudur Paschim">Sudur Paschim</option>
-                                </select></td>
-                            <td> <select id="district{{ $item->id }}" name="district[]"
-                                    class="browser-default selectinp black-text">
-                                    @if ($item->state != null)
-                                    <option selected value="{{ $item->district }}">{{ $item->district }}</option>
-                                    @else
-                                    <option class="black-text" value="" selected>District</option>
-                                    @endif
-                                </select>
-                            </td>
+                            {{-- <input type="hidden" name="id[]" value="{{$item->id}}"> --}}
+                            <td sorttable_customkey="{{$item->address}}">{{$item->address}}</td>
+                            <td>{{$item->area}}</td>
+                            <td>{{$item->state}}</td>
+                            <td>{{$item->district}}</td>
                             <td class="contact" style="display: none;">{{ $item->contact }}</td>
                             <td class="userid" style="display: none;">{{ $item->user_id }}</td>
                             <td class="referer" style="display: none;">{{ $item->refname }}</td>
