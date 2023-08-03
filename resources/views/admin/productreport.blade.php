@@ -1,7 +1,7 @@
 @extends('admin/layout')
 
 @section('main')
-    <div>
+    <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
             <form class="row">
                 <div class="col s2" style="padding: 0; margin: 0;">
@@ -71,7 +71,8 @@
             </form>
         </div>
         @php
-              $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
+            $chartdata = array();
+            $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
         @endphp
         <div class="mp-card" style="margin-top: 10px;">
             <table class="sortable">
@@ -86,63 +87,68 @@
                 </thead>
                 <tbody>
                     @for ($i = 0; $i < count($data); $i++)
+                    @php
+                        $chartdata[] = [$data[$i]['month'].'-'.$data[$i]['year'], 
+                                        intval($data[$i]['powerbank']),
+                                        intval($data[$i]['charger']),
+                                        intval($data[$i]['cable']),
+                                        intval($data[$i]['earphone']), 
+                                        intval($data[$i]['btitem']), 
+                                        intval($data[$i]['others'])
+                                    ];
+                    @endphp
                         <tr>
-                            <td sorttable_customkey="{{$i}}" style="font-weight: 600">{{$months[$data[$i]['month']]}}-{{$data[$i]['year']}}</td>
-                            <td>{{$data[$i]['powerbank']}}</td>
-                            <td>{{$data[$i]['charger']}}</td>
-                            <td>{{$data[$i]['cable']}}</td>
-                            <td>{{$data[$i]['earphone']}}</td>
-                            <td>{{$data[$i]['btitem']}}</td>
-                            <td>{{$data[$i]['others']}}</td>
+                            <td sorttable_customkey="{{ $i }}" style="font-weight: 600">
+                                {{ $months[$data[$i]['month']] }}-{{ $data[$i]['year'] }}</td>
+                            <td>{{ $data[$i]['powerbank'] }}</td>
+                            <td>{{ $data[$i]['charger'] }}</td>
+                            <td>{{ $data[$i]['cable'] }}</td>
+                            <td>{{ $data[$i]['earphone'] }}</td>
+                            <td>{{ $data[$i]['btitem'] }}</td>
+                            <td>{{ $data[$i]['others'] }}</td>
                         </tr>
                     @endfor
                 </tbody>
             </table>
         </div>
+        <div class="mp-card center" style="margin-top: 10px;">
+            <div id="linechart_material" style="height: 500px"></div>
+        </div>
 
-        <div id="linechart_material" style="width: 900px; height: 500px"></div>
         <script>
-                  google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
+            google.charts.load('current', {
+                'packages': ['line']
+            });
+            google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
+            function drawChart() {
+                var chartdata = @json($chartdata);
+                console.log(chartdata)
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Day');
-      data.addColumn('number', 'Guardians of the Galaxy');
-      data.addColumn('number', 'The Avengers');
-      data.addColumn('number', 'Transformers: Age of Extinction');
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Date');
+                data.addColumn('number', 'Powerbank');
+                data.addColumn('number', 'Charger');
+                data.addColumn('number', 'cable');
+                data.addColumn('number', 'earphone');
+                data.addColumn('number', 'btitem');
+                data.addColumn('number', 'others');
 
-      data.addRows([
-        [1,  37.8, 80.8, 41.8],
-        [2,  30.9, 69.5, 32.4],
-        [3,  25.4,   57, 25.7],
-        [4,  11.7, 18.8, 10.5],
-        [5,  11.9, 17.6, 10.4],
-        [6,   8.8, 13.6,  7.7],
-        [7,   7.6, 12.3,  9.6],
-        [8,  12.3, 29.2, 10.6],
-        [9,  16.9, 42.9, 14.8],
-        [10, 12.8, 30.9, 11.6],
-        [11,  5.3,  7.9,  4.7],
-        [12,  6.6,  8.4,  5.2],
-        [13,  4.8,  6.3,  3.6],
-        [14,  4.2,  6.2,  3.4]
-      ]);
+                data.addRows(chartdata);
 
-      var options = {
-        chart: {
-          title: 'Box Office Earnings in First Two Weeks of Opening',
-          subtitle: 'in millions of dollars (USD)'
-        },
-        width: 900,
-        height: 500
-      };
+                var options = {
+                    chart: {
+                        title: 'Box Office Earnings in First Two Weeks of Opening',
+                        subtitle: 'in millions of dollars (USD)'
+                    },
+                    width: 900,
+                    height: 500
+                };
 
-      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+                var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
+                chart.draw(data, google.charts.Line.convertOptions(options));
+            }
         </script>
     </div>
 @endsection
