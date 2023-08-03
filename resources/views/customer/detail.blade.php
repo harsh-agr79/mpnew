@@ -67,7 +67,7 @@
                                 {{ $item->price }}
                             </td>
                             <td>
-                                {{ $a = $item->quantity * $item->price }}
+                                {{ $a = $item->approvedquantity * $item->price }}
                                 <span class="hide">{{ $total = $total + $a }}</span>
                             </td>
                         </tr>
