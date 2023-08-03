@@ -220,6 +220,12 @@ input:focus {
 .bar text{
     fill: var(--textcol);
 }
+#linechart_material rect:nth-child(16){
+                fill: rgba(255, 0, 0, 0);
+            }
+/* #linechart_material text{
+                fill: var(--textcol)
+            } */
 
 .search{
     outline: none;

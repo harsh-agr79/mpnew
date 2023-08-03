@@ -946,7 +946,7 @@ class AnalyticsController extends Controller
         ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
         ->where('orders.created_at', '>=', $date)
         ->where('orders.created_at', '<=', $date2)
-        ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','desc')
+        ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','ASC')
         ->orderBy('category','desc')
         ->get();
 

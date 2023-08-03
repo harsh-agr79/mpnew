@@ -111,8 +111,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="mp-card center" style="margin-top: 10px;">
-            <div id="linechart_material" style="height: 500px"></div>
+        <style>
+         
+        </style>
+        <div class="mp-card" style="margin-top: 10px; padding: 20px;">
+            <div id="linechart_material" style="width: auto; height: 500px;"></div>
         </div>
 
         <script>
@@ -123,7 +126,6 @@
 
             function drawChart() {
                 var chartdata = @json($chartdata);
-                console.log(chartdata)
 
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Date');
@@ -138,11 +140,13 @@
 
                 var options = {
                     chart: {
-                        title: 'Box Office Earnings in First Two Weeks of Opening',
-                        subtitle: 'in millions of dollars (USD)'
+                        title: 'Monthly Break Down Of Sales of Each Product Category',
+                        subtitle: 'in Number of Items Sold'
                     },
-                    width: 900,
-                    height: 500
+                    height: 500,
+                    backgroundColor: {
+                    fill: 'transparent'
+                    }
                 };
 
                 var chart = new google.charts.Line(document.getElementById('linechart_material'));
@@ -150,5 +154,6 @@
                 chart.draw(data, google.charts.Line.convertOptions(options));
             }
         </script>
+       
     </div>
 @endsection
