@@ -500,7 +500,7 @@ class CustomerViewController extends Controller
             $image_name = session()->get('USER_ID').time().'userdp'.'.'.$ext;
             $image_resize = Image::make($file->getRealPath());
             $image_resize->fit(300);
-            $image_resize->save(public_path('customerdp/'.$image_name));
+            $image_resize->save('customerdp/'.$image_name);
             $image = 'customerdp/'.$image_name;
 
                 DB::table('customers')->where('id', session()->get('USER_ID'))->update([
