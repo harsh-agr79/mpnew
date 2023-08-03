@@ -74,7 +74,7 @@
                                 <div id="settings" class="col s12">
                                     <div class="settings-group">
                                         <a href="{{ url('/user/editprofile') }}" class="bg-content textcol">
-                                            <div>Edit Profile
+                                            <div>View Profile
                                             </div>
                                         </a>
                                         <a href="{{ url('/user/changemode') }}" class="bg-content textcol">
