@@ -43,7 +43,7 @@
         <div class="center">
             <span class="title">Login</span>
         </div>
-        <form action="{{route('auth')}}" autocomplete="off" method="POST">
+        <form action="{{ route('auth') }}" autocomplete="off" method="POST">
             @csrf
             @method('post')
             <span class="red-text center"
@@ -63,8 +63,7 @@
                 </div>
             </div>
             <div class="center">
-                <button class="btn black-text bg" type="submit"
-                    name="action">Submit
+                <button class="btn black-text bg" type="submit" name="action">Submit
                     <i class="material-icons right">send</i>
                 </button>
             </div>
@@ -108,6 +107,44 @@
         }
     </script>
     <script>
+        $(document).ready(function() {
+            const deviceType = () => {
+                const ua = navigator.userAgent;
+                if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+                    return "tablet";
+                } else if (
+                    /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/
+                    .test(ua)) {
+                    return "mobile";
+                }
+                return "desktop";
+            };
+            var device = deviceType()
+            console.log(device);
+
+            const getUA = () => {
+                let device = "Unknown";
+                const ua = {
+                    "Generic Linux": /Linux/i,
+                    "Android": /Android/i,
+                    "BlackBerry": /BlackBerry/i,
+                    "Bluebird": /EF500/i,
+                    "Chrome OS": /CrOS/i,
+                    "Datalogic": /DL-AXIS/i,
+                    "Honeywell": /CT50/i,
+                    "iPad": /iPad/i,
+                    "iPhone": /iPhone/i,
+                    "iPod": /iPod/i,
+                    "macOS": /Macintosh/i,
+                    "Windows": /IEMobile|Windows/i,
+                    "Zebra": /TC70|TC55/i,
+                }
+                Object.keys(ua).map(v => navigator.userAgent.match(ua[v]) && (device = v));
+                return device;
+            }
+
+            console.log(getUA());
+        })
         let deferredPrompt;
         const addBtn = document.querySelector('#install');
         const card = document.querySelector('#flash');
