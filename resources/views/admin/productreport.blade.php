@@ -115,7 +115,7 @@
          
         </style>
         <div class="mp-card" style="margin-top: 10px; padding: 20px;">
-            <div id="linechart_material" style="width: auto; height: 500px;"></div>
+            <div id="linechart_material" style="width: auto; height: 700px;"></div>
         </div>
 
         <script>
@@ -143,7 +143,7 @@
                         title: 'Monthly Break Down Of Sales of Each Product Category',
                         subtitle: 'in Number of Items Sold'
                     },
-                    height: 500,
+                    height: 700,
                     backgroundColor: {
                     fill: 'transparent'
                     }
