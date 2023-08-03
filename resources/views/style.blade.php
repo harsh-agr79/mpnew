@@ -347,7 +347,7 @@ input:focus {
     border-radius: 50%; 
 }
 .nav-dp{
-    height: 50px;
-    margin: 7px 7px 0 7px;
+    height: 40px;
+    margin: 12px 7px 0 7px;
 }
 </style>
