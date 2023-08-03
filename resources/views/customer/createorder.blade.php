@@ -315,7 +315,7 @@
         }, 0);
         $(".prod-container").animate({
                   scrollTop: $($(this).attr('data-target')).offset().top - 240,
-        }, 800);
+        }, 0);
         // $('.prod-container').scrollTo($(`${$(this).attr('data-target')}`))
     })
     window.onpopstate = function () {
