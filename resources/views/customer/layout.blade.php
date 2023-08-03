@@ -14,6 +14,7 @@
     <title>Admin</title>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="icon" href="{{ asset('/assets/light.png') }}">
+    <link rel="stylesheet" href="{{asset('/assets/'.$user->mode.".css")}}">
     <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}">
     <link rel="shortcut icon" href="{{ asset('icons/favicon.ico') }}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-touch-icon.png') }}">
@@ -31,7 +32,6 @@
             font-family: 'Exo';
         }
     </style>
-    @extends('style')
 </head>
 
 <body class="has-fixed-sidenav">
