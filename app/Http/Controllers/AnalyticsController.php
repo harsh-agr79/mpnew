@@ -946,6 +946,11 @@ class AnalyticsController extends Controller
         ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
         ->where('orders.created_at', '>=', $date)
         ->where('orders.created_at', '<=', $date2)
+        ->where(function ($query) use ($request){
+            if($request->get('name')){
+                $query->where('orders.name', $request->get('name'));
+            }
+        })
         ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','ASC')
         ->orderBy('category','desc')
         ->get();
@@ -958,6 +963,11 @@ class AnalyticsController extends Controller
             ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
             ->where('nepmonth', $item->nepmonth)
             ->where('nepyear',$item->nepyear)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
             ->selectRaw('*, SUM(approvedquantity) as sum')
             ->groupBy(['category','nepmonth', 'nepyear'])
             ->orderBy('created_at','desc')
@@ -968,6 +978,11 @@ class AnalyticsController extends Controller
            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
            ->where('nepmonth', $item->nepmonth)
             ->where('nepyear',$item->nepyear)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
            ->selectRaw('*, SUM(approvedquantity) as sum')
            ->get();
 
@@ -987,6 +1002,12 @@ class AnalyticsController extends Controller
                 'btitem'=>$data2->where('category','btitem')->first()->sum,
                 'others'=>$othnum,
             ];
+        }
+        if ($request->get('name')) {
+            $result['name'] = $request->get('name');
+        }
+        else{
+            $result['name'] = '';
         }
 
         $result['data'] = collect($res);

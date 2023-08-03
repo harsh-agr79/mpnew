@@ -62,6 +62,10 @@
                         <option value="2080">2080</option>
                     </select>
                 </div>
+                <div class="input-field col s5 m4 l4">
+                    <input type="text" name="name" id="customer" value="{{$name}}" placeholder="Customer"
+                        class="autocomplete browser-default inp black-text" autocomplete="off">
+                </div>
                 <div class="input-field col s3 l1">
                     <button class="btn amber darken-1">Apply</button>
                 </div>
@@ -153,6 +157,25 @@
 
                 chart.draw(data, google.charts.Line.convertOptions(options));
             }
+            $(document).ready(function() {
+            $.ajax({
+                type: 'get',
+                url: '/findcustomer',
+                success: function(response2) {
+
+                    var custarray2 = response2;
+                    var datacust2 = {};
+                    for (var i = 0; i < custarray2.length; i++) {
+
+                        datacust2[custarray2[i].name] = null;
+                    }
+                    // console.log(datacust2)
+                    $('input#customer').autocomplete({
+                        data: datacust2,
+                    });
+                }
+            })
+        })
         </script>
        
     </div>
