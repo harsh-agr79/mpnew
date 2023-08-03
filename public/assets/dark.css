@@ -9,7 +9,7 @@
 *{
     color: white;
 }
-body{
+body, html{
     background: #0e0e0e;
 }
 .topnv{
