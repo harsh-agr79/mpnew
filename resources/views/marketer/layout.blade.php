@@ -32,6 +32,7 @@
             font-family: 'Exo';
         }
     </style>
+    @extends('style')
 </head>
 
 <body class="has-fixed-sidenav">
