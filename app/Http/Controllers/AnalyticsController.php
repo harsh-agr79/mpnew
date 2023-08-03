@@ -906,4 +906,51 @@ class AnalyticsController extends Controller
 
         return view('admin/refererstatement', $result);
     }
+
+    public function productreport(Request $request){
+        $year = getNepaliYear(today());
+    
+        if($request->get('startyear')){
+            $result['syear'] = $request->get('startyear');
+        }
+        else
+        {
+            $result['syear'] = $year;
+        }
+        if($request->get('endyear')){
+            $result['eyear'] = $request->get('endyear');
+        }
+        else
+        {
+            $result['eyear'] = $year;
+        }
+        if($request->get('startmonth')){
+            $result['smonth'] = $request->get('startmonth');
+        }
+        else
+        {
+            $result['smonth'] = "1";
+        }
+        if($request->get('endmonth')){
+            $result['emonth'] = $request->get('endmonth');
+        }
+        else
+        {
+            $result['emonth'] = getNepaliMonth(today());
+        }
+        $date = getEnglishDate($result['syear'] ,  $result['smonth'], 1);
+        $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
+
+        $result['data'] = DB::table('orders')
+        ->where(['status'=>'approved','orders.deleted'=>NULL, 'save'=>NULL])
+        ->where('orders.created_at', '>=', $date)
+        ->where('orders.created_at', '<=', $date2)
+        ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['category', 'nepmonth', 'nepyear'])->orderBy('created_at','desc')
+        ->orderBy('category','desc')
+        ->get();
+
+        foreach($result['data'] as $item){
+            echo $item->category, ' ',$item->sum, ' ', $item->nepmonth, '-', $item->nepyear, '<br>';
+        }
+    }
 }
