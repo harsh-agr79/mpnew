@@ -149,6 +149,14 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //TRASH CRUD
     Route::get('trash', [TrashController::class, 'index']);
+    Route::get('restoreorder/{id}', [TrashController::class, 'restoreor']);
+    Route::get('restorepayment/{id}', [TrashController::class, 'restorepay']);
+    Route::get('restorecus/{id}', [TrashController::class, 'restorecus']);
+    Route::get('restoreprod/{id}', [TrashController::class, 'restoreprod']);
+    Route::get('permdeleteorder/{id}', [TrashController::class, 'deleteor']);
+    Route::get('permdeletepayment/{id}', [TrashController::class, 'deletepay']);
+    Route::get('permdeletecus/{id}', [TrashController::class, 'deletecus']);
+    Route::get('permdeleteprod/{id}', [TrashController::class, 'deleteprod']);
 
     //PRINT ORDERS
     Route::get('saveorder/{id}', [OrderAdminController::class, 'save']);
