@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Image;
 
 class CustomerViewController extends Controller
 {
@@ -482,5 +484,48 @@ class CustomerViewController extends Controller
          ->where('enddate', '>=', $today)
          ->get();
         return view ('customer/summary', $result);
+    }
+
+    public function editprofile(Request $request){
+        return view('customer/editprofile');
+    }
+    public function edpr_process(Request $request){
+        if($file = $request->file('dp')){
+
+            if(File::exists($request->post('olddp'))) {
+                File::delete($request->post('olddp'));
+            }
+            $file = $request->file('dp');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = session()->get('USER_ID').time().'userdp'.'.'.$ext;
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->fit(300);
+            $image_resize->save(public_path('customerdp/'.$image_name));
+            $image = 'customerdp/'.$image_name;
+
+                DB::table('customers')->where('id', session()->get('USER_ID'))->update([
+                    'profileimg'=>$image
+                ]);
+            }
+
+        $address = $request->post('address');
+        $shopname = $request->post('shopname');
+        $contact1 = $request->post('contact1');
+        $contact2 = $request->post('contact2');
+        $taxtype = $request->post('taxtype');
+        $taxnum = $request->post('taxnum');
+        $dob = $request->post('dob');
+
+        DB::table('customers')->where('id', session()->get('USER_ID'))->update([
+            'address'=>$address,
+            'shopname'=>$shopname,
+            'contact'=>$contact1,
+            'contact2'=>$contact2,
+            'taxtype'=>$taxtype,
+            'taxnum'=>$taxnum,
+            'DOB'=>$dob,
+        ]);
+
+        return redirect('/user/editprofile');
     }
 }

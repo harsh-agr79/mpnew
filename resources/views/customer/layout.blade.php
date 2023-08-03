@@ -56,10 +56,14 @@
                             </div>
                         </li>
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger"><i
-                                    class="material-icons textcol">settings</i></a>
+                                    class="material-icons textcol">face</i></a>
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
                                 <div id="settings" class="col s12">
                                     <div class="settings-group">
+                                        <a href="{{ url('/user/editprofile') }}" class="bg-content textcol">
+                                            <div>Edit Profile
+                                            </div>
+                                        </a>
                                         <a href="{{ url('/user/changemode') }}" class="bg-content textcol">
                                             <div>Change Mode
                                             </div>

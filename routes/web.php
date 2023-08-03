@@ -241,5 +241,8 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 
     Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);
+
+    Route::get('/user/editprofile', [CustomerViewController::class, 'editprofile']);
+    Route::post('/user/editprofile', [CustomerViewController::class, 'edpr_process'])->name('editpr');
 });
 
