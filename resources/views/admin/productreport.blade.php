@@ -131,10 +131,10 @@
                 data.addColumn('string', 'Date');
                 data.addColumn('number', 'Powerbank');
                 data.addColumn('number', 'Charger');
-                data.addColumn('number', 'cable');
-                data.addColumn('number', 'earphone');
-                data.addColumn('number', 'btitem');
-                data.addColumn('number', 'others');
+                data.addColumn('number', 'Cable');
+                data.addColumn('number', 'Earphone');
+                data.addColumn('number', 'BTitem');
+                data.addColumn('number', 'Others');
 
                 data.addRows(chartdata);
 
