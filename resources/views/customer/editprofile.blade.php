@@ -47,7 +47,7 @@
                     @if ($user->taxtype != NULL)
                         <option value="{{$user->taxtype}}">{{$user->taxtype}}</option>
                     @else
-                    <option value="" selected disabled>Select Tax Type</option>
+                    <option value="" selected disabled>Select PAN/VAT</option>
                     @endif
                     <option value="PAN">PAN</option>
                     <option value="PAN">VAT</option>
