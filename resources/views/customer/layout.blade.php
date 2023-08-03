@@ -55,8 +55,13 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger"><i
-                                    class="material-icons textcol">face</i></a>
+                        <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger">
+                            @if ($user->profileimg !== NULL)
+                                <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
+                            @else
+                            <i class="material-icons textcol">face</i>
+                            @endif
+                            </a>
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
                                 <div id="settings" class="col s12">
                                     <div class="settings-group">
