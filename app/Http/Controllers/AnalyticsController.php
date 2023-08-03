@@ -941,68 +941,145 @@ class AnalyticsController extends Controller
         $date = getEnglishDate($result['syear'] ,  $result['smonth'], 1);
         $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
 
-        $data = DB::table('orders')
-        ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
-        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-        ->where('orders.created_at', '>=', $date)
-        ->where('orders.created_at', '<=', $date2)
-        ->where(function ($query) use ($request){
-            if($request->get('name')){
-                $query->where('orders.name', $request->get('name'));
-            }
-        })
-        ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','ASC')
-        ->orderBy('category','desc')
-        ->get();
-
-        $res = array();
-
-        foreach($data as $item){
-            $data2 = DB::table('orders')
+        if($request->get('category')){
+            $category = $request->get('category'); 
+            $data = DB::table('orders')
             ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
             ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-            ->where('nepmonth', $item->nepmonth)
-            ->where('nepyear',$item->nepyear)
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)
+            ->where('orders.category', $category)
             ->where(function ($query) use ($request){
                 if($request->get('name')){
                     $query->where('orders.name', $request->get('name'));
                 }
             })
-            ->selectRaw('*, SUM(approvedquantity) as sum')
-            ->groupBy(['category','nepmonth', 'nepyear'])
-            ->orderBy('created_at','desc')
+            ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','ASC')
             ->orderBy('category','desc')
             ->get();
-           $oth =  DB::table('orders')
-           ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved', 'category'=>'others'])
-           ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-           ->where('nepmonth', $item->nepmonth)
-            ->where('nepyear',$item->nepyear)
+            $items = DB::table('products')->where('category', $category)->get();
+
+            $res = array();
+            foreach($data as $item){
+            $res2 = array();
+            $data2 = DB::table('orders')
+                    ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+                    ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+                    ->where('orders.nepmonth', $item->nepmonth)
+                    ->where('orders.nepyear', $item->nepyear)
+                    ->where('orders.category', $category)
+                    ->where(function ($query) use ($request){
+                        if($request->get('name')){
+                            $query->where('orders.name', $request->get('name'));
+                        }
+                    })
+                    ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy('item')->orderBy('name','ASC');
+                foreach($items as $item2){
+                    $data3 = $data2->where('item', $item2->name)->get();
+                    if(count($data3)>0){
+                        $res2[] = [
+                            'name'=>$item2->name,
+                            'quant'=>$data3[0]->sum
+                        ];
+                    }
+                    else{
+                        $res2[] = [
+                            'name'=>$item2->name,
+                            'quant'=>'0'
+                        ];
+                    }
+                    $data2 = DB::table('orders')
+                    ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+                    ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+                    ->where('orders.nepmonth', $item->nepmonth)
+                    ->where('orders.nepyear', $item->nepyear)
+                    ->where('orders.category', $category)
+                    ->where(function ($query) use ($request){
+                        if($request->get('name')){
+                            $query->where('orders.name', $request->get('name'));
+                        }
+                    })
+                    ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy('item')->orderBy('name','ASC');
+                }
+                $res[] = [
+                    'month'=>$item->nepmonth,
+                    'year'=>$item->nepyear,
+                    'prod'=>$res2
+                ];
+            }
+            $result['testdata'] = json_encode($res);
+            $result['data'] = $items;
+            $result['sort'] = 'category';
+            $result['category'] = $category;
+        }
+        else{
+            $data = DB::table('orders')
+            ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+            ->where('orders.created_at', '>=', $date)
+            ->where('orders.created_at', '<=', $date2)
             ->where(function ($query) use ($request){
                 if($request->get('name')){
                     $query->where('orders.name', $request->get('name'));
                 }
             })
-           ->selectRaw('*, SUM(approvedquantity) as sum')
-           ->get();
-
-           if($oth[0]->sum != NULL){
-            $othnum = $oth[0]->sum;
-           }
-           else{
-            $othnum = "0";
-           }
-            $res[] = [
-                'month'=>$item->nepmonth,
-                'year'=>$item->nepyear,
-                'powerbank'=>$data2->where('category','powerbank')->first()->sum,
-                'charger'=>$data2->where('category','charger')->first()->sum,
-                'cable'=>$data2->where('category','cable')->first()->sum,
-                'earphone'=>$data2->where('category','earphone')->first()->sum,
-                'btitem'=>$data2->where('category','btitem')->first()->sum,
-                'others'=>$othnum,
-            ];
+            ->selectRaw('*, SUM(approvedquantity) as sum')->groupBy(['nepmonth', 'nepyear'])->orderBy('created_at','ASC')
+            ->orderBy('category','desc')
+            ->get();
+    
+            $res = array();
+    
+            foreach($data as $item){
+                $data2 = DB::table('orders')
+                ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+                ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+                ->where('nepmonth', $item->nepmonth)
+                ->where('nepyear',$item->nepyear)
+                ->where(function ($query) use ($request){
+                    if($request->get('name')){
+                        $query->where('orders.name', $request->get('name'));
+                    }
+                })
+                ->selectRaw('*, SUM(approvedquantity) as sum')
+                ->groupBy(['category','nepmonth', 'nepyear'])
+                ->orderBy('created_at','desc')
+                ->orderBy('category','desc')
+                ->get();
+               $oth =  DB::table('orders')
+               ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved', 'category'=>'others'])
+               ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+               ->where('nepmonth', $item->nepmonth)
+                ->where('nepyear',$item->nepyear)
+                ->where(function ($query) use ($request){
+                    if($request->get('name')){
+                        $query->where('orders.name', $request->get('name'));
+                    }
+                })
+               ->selectRaw('*, SUM(approvedquantity) as sum')
+               ->get();
+    
+               if($oth[0]->sum != NULL){
+                $othnum = $oth[0]->sum;
+               }
+               else{
+                $othnum = "0";
+               }
+                $res[] = [
+                    'month'=>$item->nepmonth,
+                    'year'=>$item->nepyear,
+                    'powerbank'=>$data2->where('category','powerbank')->first()->sum,
+                    'charger'=>$data2->where('category','charger')->first()->sum,
+                    'cable'=>$data2->where('category','cable')->first()->sum,
+                    'earphone'=>$data2->where('category','earphone')->first()->sum,
+                    'btitem'=>$data2->where('category','btitem')->first()->sum,
+                    'others'=>$othnum,
+                ];
+            }
+        $result['data'] = collect($res);
+        $result['sort'] = 'normal';
+        $result['category'] = '';
         }
+      
         if ($request->get('name')) {
             $result['name'] = $request->get('name');
         }
@@ -1010,7 +1087,6 @@ class AnalyticsController extends Controller
             $result['name'] = '';
         }
 
-        $result['data'] = collect($res);
         return view('admin/productreport', $result);
     }
 }

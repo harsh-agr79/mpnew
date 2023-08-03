@@ -62,9 +62,24 @@
                         <option value="2080">2080</option>
                     </select>
                 </div>
-                <div class="input-field col s5 m4 l4">
-                    <input type="text" name="name" id="customer" value="{{$name}}" placeholder="Customer"
+                <div class="input-field col s6 m4 l4">
+                    <input type="text" name="name" id="customer" value="{{ $name }}" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off">
+                </div>
+                <div class="input-field col s6 m4 l4">
+                    <select name="category" class="browser-default selectinp black-text">
+                        @if ($category != '')
+                            <option value="{{$category}}" selected>{{$category}}</option>
+                        @else
+                        <option value="" selected disabled>Select Category</option>
+                        @endif
+                        <option value="powerbank">Powerbank</option>
+                        <option value="charger">Charger</option>
+                        <option value="cable">Cable</option>
+                        <option value="earphone">earphone</option>
+                        <option value="btitem">btitem</option>
+                        <option value="others">others</option>
+                    </select>
                 </div>
                 <div class="input-field col s3 l1">
                     <button class="btn amber darken-1">Apply</button>
@@ -75,19 +90,20 @@
             </form>
         </div>
         @php
-            $chartdata = array();
-            $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
+        $chartdata = [];
+        $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
         @endphp
-        <div class="mp-card" style="margin-top: 10px;">
+        @if ($sort == 'normal')
+        <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
             <table class="sortable">
                 <thead>
                     <th>Date/Category</th>
-                    <th>Powerbank</th>
-                    <th>Charger</th>
-                    <th>Cable</th>
-                    <th>Earphone</th>
-                    <th>Btitem</th>
-                    <th>Others</th>
+                  <th>Powerbank</th>
+                  <th>Charger</th>
+                  <th>Cable</th>
+                  <th>Earphone</th>
+                  <th>Btitem</th>
+                  <th>Others</th>
                 </thead>
                 <tbody>
                     @for ($i = 0; $i < count($data); $i++)
@@ -115,12 +131,35 @@
                 </tbody>
             </table>
         </div>
-        <style>
-         
-        </style>
         <div class="mp-card" style="margin-top: 10px; padding: 20px;">
             <div id="linechart_material" style="width: auto; height: 600px;"></div>
         </div>
+        @elseif($sort == 'category')
+        <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
+            <table class="sortable">
+                <thead>
+                    <th>Date/Category</th>
+                   @foreach ($data as $item)
+                       <th>{{$item->name}}</th>
+                   @endforeach
+                </thead>
+                <tbody>
+                    @foreach (json_decode($testdata) as $item)
+                        <tr>
+                            <td> {{ $months[$item->month] }}-{{ $item->year }}</td>
+                            @foreach ($item->prod as $item2)
+                                <td>{{ $item2->quant }}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endif
+    
+     
+
+       
 
         <script>
             google.charts.load('current', {
@@ -149,7 +188,7 @@
                     },
                     height: 600,
                     backgroundColor: {
-                    fill: 'transparent'
+                        fill: 'transparent'
                     }
                 };
 
@@ -158,25 +197,25 @@
                 chart.draw(data, google.charts.Line.convertOptions(options));
             }
             $(document).ready(function() {
-            $.ajax({
-                type: 'get',
-                url: '/findcustomer',
-                success: function(response2) {
+                $.ajax({
+                    type: 'get',
+                    url: '/findcustomer',
+                    success: function(response2) {
 
-                    var custarray2 = response2;
-                    var datacust2 = {};
-                    for (var i = 0; i < custarray2.length; i++) {
+                        var custarray2 = response2;
+                        var datacust2 = {};
+                        for (var i = 0; i < custarray2.length; i++) {
 
-                        datacust2[custarray2[i].name] = null;
+                            datacust2[custarray2[i].name] = null;
+                        }
+                        // console.log(datacust2)
+                        $('input#customer').autocomplete({
+                            data: datacust2,
+                        });
                     }
-                    // console.log(datacust2)
-                    $('input#customer').autocomplete({
-                        data: datacust2,
-                    });
-                }
+                })
             })
-        })
         </script>
-       
+
     </div>
 @endsection
