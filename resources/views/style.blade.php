@@ -360,9 +360,15 @@ input:focus {
 .bal-popup{
     position: fixed;
     z-index: 1005;
-    top: 30%;
-    right: 10%;
-    left: 10%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.649);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bal-popcard{
+    width: 90vw;
 }
 .overlay {
     position: absolute;
