@@ -132,4 +132,9 @@
             </div>
         </div>
     </div>
+    <script>
+          window.onpopstate = function () {
+            window.open('/home');
+          }
+    </script>
 @endsection
