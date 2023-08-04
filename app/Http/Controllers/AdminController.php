@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -35,7 +36,7 @@ class AdminController extends Controller
            $result['name'] = $data->name;
            $result['userid'] = $data->email;
            $result['contact'] = $data->contact;
-           $result['password'] = $data->password;
+           $result['password'] = '';
            $result['type'] = $data->type;
 
            $result['permission'] = DB::table('permission')->where('userid', $data->id)->pluck('perm')->toArray();
@@ -68,7 +69,7 @@ class AdminController extends Controller
                 'name'=>$name,
                 'email'=>$userid,
                 'contact'=>$contact,
-                'password'=>$password,
+                'password'=>Hash::make($password),
                 'type'=>$type
             ]);
             $initial = $request->post('name2');

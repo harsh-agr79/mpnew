@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 class CustomerController extends Controller
@@ -48,7 +49,7 @@ class CustomerController extends Controller
             $result['address'] = $cus->address;
             $result['uniqueid'] = $cus->cusuni_id;
             $result['refname'] = $cus->refname;
-            $result['password'] = $cus->password;
+            $result['password'] = '';
             $result['openbalance'] = $cus->openbalance;
             $result['obtype'] = $cus->obtype;
             $result['type'] = $cus->type;
@@ -111,7 +112,7 @@ class CustomerController extends Controller
                 'refname'=>$request->post('refname'),
                 'refid'=>$refid,
                 'reftype'=>$reftype,
-                'password'=>$request->post('password'),
+                'password'=>Hash::make($request->post('password')),
                 'openbalance'=>$request->post('openbalance'),
                 'obtype'=>$request->post('obtype'),
                 'type'=>$request->post('type'),
