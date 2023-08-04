@@ -6,6 +6,9 @@
             margin: 0;
             padding: 0;
         }
+        label {
+            font-size: 8px;
+        }
     </style>
     <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
