@@ -78,11 +78,11 @@ pointer-events: all!important;
                         <option value="2080">2080</option>
                     </select>
                 </div>
-                <div class="input-field col s6 m4 l4">
+                <div class="input-field col s6 m4 l4" style="padding: 0; margin: 5px;">
                     <input type="text" name="name" id="customer" value="{{ $name }}" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off">
                 </div>
-                <div class="input-field col s6 m4 l4">
+                <div class="input-field col s6 m4 l4" style="padding: 0; margin: 5px;">
                     <select name="category" class="browser-default selectinp black-text">
                         @if ($category != '')
                             <option value="{{ $category }}" selected>{{ $category }}</option>
@@ -98,7 +98,7 @@ pointer-events: all!important;
                         <option value="others">others</option>
                     </select>
                 </div>
-                <div class=" input-field col s12 m4 l4">
+                <div class=" input-field col s12 m4 l4" style="padding: 0; margin: 5px;">
                     <div class="switch">
                         <label>
                             Active Products
@@ -108,7 +108,7 @@ pointer-events: all!important;
                         </label>
                     </div>
                 </div>
-                <div class="col s12 row">
+                <div class="col s12 row" style="padding: 0; margin: 5px;">
                     <div class="input-field col s6 l1">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
