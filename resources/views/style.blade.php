@@ -291,8 +291,8 @@ input:focus {
     background: rgb(255, 195, 66);
     color: black;
     border-radius: 10px; 
-    padding: 15px 20px; 
-    font-size: 20px;
+    padding: 15px; 
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -305,7 +305,7 @@ input:focus {
     background: rgb(255, 178, 12)
 }
 .spc{
-    transform: scale(1.07);
+    transform: scale(1.04);
 }
 .mp-caro-item{
     height: 30vh;
