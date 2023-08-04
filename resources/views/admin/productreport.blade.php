@@ -98,7 +98,7 @@ pointer-events: all!important;
                         <option value="others">others</option>
                     </select>
                 </div>
-                <div class=" input-field col s6 m4 l4">
+                <div class=" input-field col s12 m4 l4">
                     <div class="switch">
                         <label>
                             Active Products
@@ -109,10 +109,10 @@ pointer-events: all!important;
                     </div>
                 </div>
                 <div class="col s12 row">
-                    <div class="input-field col s3 l1">
+                    <div class="input-field col s6 l1">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
-                    <div class="input-field col s3 l1">
+                    <div class="input-field col s6 l1">
                         <a class="btn amber darken-1" href="{{ url('/productreport') }}">Clear</a>
                     </div>
                 </div>
