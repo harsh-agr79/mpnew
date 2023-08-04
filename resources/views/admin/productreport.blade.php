@@ -98,12 +98,14 @@
                         </label>
                     </div>
                 </div>
+                <div class="col s12 row">
                     <div class="input-field col s3 l1">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
                     <div class="input-field col s3 l1">
                         <a class="btn amber darken-1" href="{{ url('/productreport') }}">Clear</a>
                     </div>
+                </div>
 
 
             </form>
@@ -185,7 +187,7 @@
                 }
             </script>
         @elseif($sort == 'category')
-            <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
+            {{-- <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
                 <table style="width: 100%;">
                     <thead>
                         <tr>
@@ -230,7 +232,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
             <div class="mp-card" style="margin-top: 10px; padding: 20px;">
                 <div id="linechart_material" style="width: auto; height: 600px;"></div>
             </div>
