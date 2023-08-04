@@ -979,13 +979,15 @@ class AnalyticsController extends Controller
                     if(count($data3)>0){
                         $res2[] = [
                             'name'=>$item2->name,
-                            'quant'=>$data3[0]->sum
+                            'quant'=>$data3[0]->sum,
+                            'hide'=>$item2->hide
                         ];
                     }
                     else{
                         $res2[] = [
                             'name'=>$item2->name,
-                            'quant'=>'0'
+                            'quant'=>'0',
+                            'hide'=>$item2->hide
                         ];
                     }
                     $data2 = DB::table('orders')

@@ -82,12 +82,26 @@
                         <option value="others">others</option>
                     </select>
                 </div>
-                <div class="input-field col s3 l1">
-                    <button class="btn amber darken-1">Apply</button>
+                <div class=" input-field col s6 m4 l4">
+                    <div class="switch">
+                        <label>
+                          Active Products
+                          <input type="checkbox" onclick="togglehidden()">
+                          <span class="lever"></span>
+                          All Products
+                        </label>
+                      </div>
                 </div>
-                <div class="input-field col s3 l1">
-                    <a class="btn amber darken-1" href="{{ url('/productreport') }}">Clear</a>
+                <div class="col s12 row">
+                    <div class="input-field col s3 l1">
+                        <button class="btn amber darken-1">Apply</button>
+                    </div>
+                    <div class="input-field col s3 l1">
+                        <a class="btn amber darken-1" href="{{ url('/productreport') }}">Clear</a>
+                    </div>
                 </div>
+                
+               
             </form>
         </div>
         @php
@@ -142,7 +156,10 @@
                 <thead>
                     <th>Date/Category</th>
                    @foreach ($data as $item)
-                       <th>{{$item->name}}</th>
+                       <th @if ($item->hide == 'on')
+                           style="display: none;"
+                           class="hidden"
+                       @endif>{{$item->name}}</th>
                    @endforeach
                 </thead>
                 <tbody>
@@ -150,7 +167,10 @@
                         <tr>
                             <td sorttable_customkey="{{$a = $a + 1}}"> {{ $months[$item->month] }}-{{ $item->year }}</td>
                             @foreach ($item->prod as $item2)
-                                <td>{{ $item2->quant }}</td>
+                                <td @if ($item2->hide == 'on')
+                                    style="display: none;"
+                                    class="hidden"
+                                @endif>{{ $item2->quant }}</td>
                             @endforeach
                         </tr>
                     @endforeach
@@ -217,6 +237,9 @@
                     }
                 })
             })
+            function togglehidden(){
+                $('.hidden').toggle();
+            }
         </script>
 
     </div>
