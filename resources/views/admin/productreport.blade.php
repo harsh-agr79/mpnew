@@ -1,12 +1,12 @@
 @extends('admin/layout')
 
 @section('main')
-<style>
-    .cbth{
-        margin: 0;
-        padding: 0;
-    }
-</style>
+    <style>
+        .cbth {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
     <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
             <form class="row">
@@ -149,34 +149,71 @@
             <div class="mp-card" style="margin-top: 10px; padding: 20px;">
                 <div id="linechart_material" style="width: auto; height: 600px;"></div>
             </div>
+            <script>
+                google.charts.load('current', {
+                    'packages': ['line']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var chartdata = @json($chartdata);
+                    console.log(chartdata);
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Date');
+                    data.addColumn('number', 'Powerbank');
+                    data.addColumn('number', 'Charger');
+                    data.addColumn('number', 'Cable');
+                    data.addColumn('number', 'Earphone');
+                    data.addColumn('number', 'BTitem');
+                    data.addColumn('number', 'Others');
+
+                    data.addRows(chartdata);
+
+                    var options = {
+                        chart: {
+                            title: 'Monthly Break Down Of Sales of Each Product Category',
+                            subtitle: 'in Number of Items Sold'
+                        },
+                        height: 600,
+                        backgroundColor: {
+                            fill: 'transparent'
+                        }
+                    };
+
+                    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+                    chart.draw(data, google.charts.Line.convertOptions(options));
+                }
+            </script>
         @elseif($sort == 'category')
             <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
                 <table style="width: 100%;">
                     <thead>
                         <tr>
                             <th></th>
-                        @foreach ($data as $item)
-                            <th
-                                @if ($item->hide == 'on') style="display: none;"
+                            @foreach ($data as $item)
+                                <th
+                                    @if ($item->hide == 'on') style="display: none;"
                            class="hidden" @endif>
-                           <label class="cbth">
-                                <input type="checkbox" value="{{ $item->produni_id }}"
-                                    pname="{{ $item->name }}" class="chartcb" onclick="getchartdata();" />
-                                    <span></span>
-                                </label>
-                            </th>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Date/Category</th>
-                        @foreach ($data as $item)
-                            <th
-                                @if ($item->hide == 'on') style="display: none;"
+                                    <label class="cbth">
+                                        <input type="checkbox" value="{{ $item->produni_id }}"
+                                            pname="{{ $item->name }}" class="chartcb" onclick="getchartdata();" />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <th>Date/Category</th>
+                            @foreach ($data as $item)
+                                <th
+                                    @if ($item->hide == 'on') style="display: none;"
                            class="hidden" @endif>
-                            {{$item->name}}
-                            </th>
-                        @endforeach
-                    </tr>
+                                    {{ $item->name }}
+                                </th>
+                            @endforeach
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (json_decode($testdata) as $item)
@@ -199,48 +236,58 @@
             <div class="mp-card" style="margin-top: 10px; padding: 20px;">
                 <div id="linechart_material" style="width: auto; height: 600px;"></div>
             </div>
-        @endif
+            <script>
+                function getchartdata() {
+                    google.charts.load('current', {
+                        'packages': ['line']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
 
 
+                    function drawChart() {
+                        var trs = $('tbody tr');
+                        var cb = $('.chartcb:checked');
+                        var chartdata = [];
+                        var chartcol = [];
+                        for (let i = 0; i < cb.length; i++) {
+                            chartcol[i] = cb[i].getAttribute('pname');
+                        }
+                        for (let i = 0; i < trs.length; i++) {
+                            chartdata[i] = [];
+                            var date = trs[i].getElementsByClassName('date');
+                            chartdata[i][0] = date[0].innerText;
+                            for (let j = 0; j < cb.length; j++) {
+                                var tds = trs[i].getElementsByClassName(cb[j].value);
+                                chartdata[i][j + 1] = parseInt(tds[0].innerText);
+                            }
+                        }
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'date');
+                        for (let i = 0; i < chartcol.length; i++) {
+                            data.addColumn('number', chartcol[i]);
+                        }
+                        data.addRows(chartdata);
 
+                        var options = {
+                            chart: {
+                                title: 'Monthly Break Down Of Sales of Each Product',
+                                subtitle: 'in Number of Items Sold'
+                            },
+                            height: 600,
+                            backgroundColor: {
+                                fill: 'transparent'
+                            }
+                        };
 
-        <script>
-            google.charts.load('current', {
-                'packages': ['line']
-            });
-            google.charts.setOnLoadCallback(drawChart);
+                        var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
-            function drawChart() {
-                var chartdata = @json($chartdata);
-                console.log(chartdata);
-
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Date');
-                data.addColumn('number', 'Powerbank');
-                data.addColumn('number', 'Charger');
-                data.addColumn('number', 'Cable');
-                data.addColumn('number', 'Earphone');
-                data.addColumn('number', 'BTitem');
-                data.addColumn('number', 'Others');
-
-                data.addRows(chartdata);
-
-                var options = {
-                    chart: {
-                        title: 'Monthly Break Down Of Sales of Each Product Category',
-                        subtitle: 'in Number of Items Sold'
-                    },
-                    height: 600,
-                    backgroundColor: {
-                        fill: 'transparent'
+                        chart.draw(data, google.charts.Line.convertOptions(options));
                     }
-                };
-
-                var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-                chart.draw(data, google.charts.Line.convertOptions(options));
-            }
+                }
+            </script>
+        @endif
+        <script>
             $(document).ready(function() {
                 $.ajax({
                     type: 'get',
@@ -263,55 +310,6 @@
 
             function togglehidden() {
                 $('.hidden').toggle();
-            }
-
-            function getchartdata() {
-                google.charts.load('current', {
-                    'packages': ['line']
-                });
-                google.charts.setOnLoadCallback(drawChart);
-
-
-
-                function drawChart() {
-                    var trs = $('tbody tr');
-                    var cb = $('.chartcb:checked');
-                    var chartdata = [];
-                    var chartcol = [];
-                    for (let i = 0; i < cb.length; i++) {
-                        chartcol[i] = cb[i].getAttribute('pname');
-                    }
-                    for (let i = 0; i < trs.length; i++) {
-                        chartdata[i] = [];
-                        var date = trs[i].getElementsByClassName('date');
-                        chartdata[i][0] = date[0].innerText;
-                        for (let j = 0; j < cb.length; j++) {
-                            var tds = trs[i].getElementsByClassName(cb[j].value);
-                            chartdata[i][j + 1] = parseInt(tds[0].innerText);
-                        }
-                    }
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'date');
-                    for (let i = 0; i < chartcol.length; i++) {
-                        data.addColumn('number', chartcol[i]);
-                    }
-                    data.addRows(chartdata);
-
-                    var options = {
-                        chart: {
-                            title: 'Monthly Break Down Of Sales of Each Product',
-                            subtitle: 'in Number of Items Sold'
-                        },
-                        height: 600,
-                        backgroundColor: {
-                            fill: 'transparent'
-                        }
-                    };
-
-                    var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-                    chart.draw(data, google.charts.Line.convertOptions(options));
-                }
             }
         </script>
 
