@@ -47,7 +47,7 @@ body{
 
 body {
     font-family: 'Exo', 'sans-serif';
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 #loading {
   width: 100%;

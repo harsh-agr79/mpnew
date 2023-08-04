@@ -1,6 +1,12 @@
 @extends('admin/layout')
 
 @section('main')
+<style>
+    .cbth{
+        margin: 0;
+        padding: 0;
+    }
+</style>
     <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
             <form class="row">
@@ -145,19 +151,32 @@
             </div>
         @elseif($sort == 'category')
             <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
-                <table>
+                <table style="width: 100%;">
                     <thead>
+                        <tr>
+                            <th></th>
+                        @foreach ($data as $item)
+                            <th
+                                @if ($item->hide == 'on') style="display: none;"
+                           class="hidden" @endif>
+                           <label class="cbth">
+                                <input type="checkbox" value="{{ $item->produni_id }}"
+                                    pname="{{ $item->name }}" class="chartcb" onclick="getchartdata();" />
+                                    <span></span>
+                                </label>
+                            </th>
+                        @endforeach
+                    </tr>
+                    <tr>
                         <th>Date/Category</th>
                         @foreach ($data as $item)
                             <th
                                 @if ($item->hide == 'on') style="display: none;"
                            class="hidden" @endif>
-                                <label>
-                                    <input type="checkbox" value="{{ $item->produni_id }}" pname="{{ $item->name }}"
-                                        class="chartcb" onclick="getchartdata();" />
-                                    <span></span>
-                                </label>{{ $item->name }}</th>
+                            {{$item->name}}
+                            </th>
                         @endforeach
+                    </tr>
                     </thead>
                     <tbody>
                         @foreach (json_decode($testdata) as $item)
@@ -268,7 +287,7 @@
                         chartdata[i][0] = date[0].innerText;
                         for (let j = 0; j < cb.length; j++) {
                             var tds = trs[i].getElementsByClassName(cb[j].value);
-                            chartdata[i][j+1] = parseInt(tds[0].innerText);
+                            chartdata[i][j + 1] = parseInt(tds[0].innerText);
                         }
                     }
                     var data = new google.visualization.DataTable();
