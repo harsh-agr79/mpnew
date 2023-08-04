@@ -36,7 +36,7 @@ class AdminController extends Controller
            $result['name'] = $data->name;
            $result['userid'] = $data->email;
            $result['contact'] = $data->contact;
-           $result['password'] = '';
+           $result['password'] = $data->password;
            $result['type'] = $data->type;
 
            $result['permission'] = DB::table('permission')->where('userid', $data->id)->pluck('perm')->toArray();
@@ -61,8 +61,14 @@ class AdminController extends Controller
         $name = $request->get('name');
         $userid = $request->get('userid');
         $contact = $request->get('contact');
-        $password = $request->get('password');
         $type = $request->get('type');
+
+        if($request->get('passwordnew')){
+            $password = $request->get('passwordnew');
+        }
+        else{
+            $password = $request->get('passwordold');
+        }
 
         if($id>0){
             DB::table('admins')->where('id', $id)->update([

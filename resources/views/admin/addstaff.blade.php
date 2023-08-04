@@ -44,11 +44,12 @@
                         Password:
                     </div>
                     <div class='input-field col s6'>
-                        <input class='validate browser-default inp black-text' value="{{ $password }}"
-                            placeholder="password" type='password' name='password' id='password' required />
+                        <input class='validate browser-default inp black-text'
+                            placeholder="password" type='password' name='passwordnew' id='password'/>
                         <span toggle="#password" class="field-icon toggle-password"><span
                                 class="material-icons black-text">visibility</span></span>
                     </div>
+                    <input type="hidden" name="passwordold" value="{{$password}}">
                 </div>
                 <div class="col s12 row">
                     <div class="col s6">
