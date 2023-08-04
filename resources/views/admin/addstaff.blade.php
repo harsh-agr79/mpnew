@@ -45,7 +45,9 @@
                     </div>
                     <div class='input-field col s6'>
                         <input class='validate browser-default inp black-text'
-                            placeholder="password" type='password' name='passwordnew' id='password'/>
+                            placeholder="password" type='password' name='passwordnew' id='password' @if ($id == '')
+                            required
+                        @endif/>
                         <span toggle="#password" class="field-icon toggle-password"><span
                                 class="material-icons black-text">visibility</span></span>
                     </div>
