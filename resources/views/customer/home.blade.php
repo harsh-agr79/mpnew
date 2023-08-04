@@ -58,7 +58,7 @@
         </div>
     </div>
 
-        <div class="mp-card bal-popup" id="balpop" style="padding: 10px;">
+        <div class="bal-popup" id="balpop">
             @php
                 $bal = explode('|', $user->balance);
             @endphp
