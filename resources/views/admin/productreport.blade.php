@@ -9,6 +9,11 @@
         label {
             font-size: 8px;
         }
+        [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+          position: static;
+          left: 0px; 
+          opacity: 1; 
+        }
     </style>
     <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
@@ -199,11 +204,8 @@
                                 <th
                                     @if ($item->hide == 'on') style="display: none;"
                            class="hidden" @endif>
-                                    {{-- <label class="cbth">
                                         <input type="checkbox" value="{{ $item->produni_id }}"
                                             pname="{{ $item->name }}" class="chartcb" onclick="getchartdata();" />
-                                        <span></span>
-                                    </label> --}}
                                 </th>
                             @endforeach
                         </tr>
