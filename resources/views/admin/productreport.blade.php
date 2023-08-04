@@ -20,7 +20,7 @@ pointer-events: all!important;
     <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
             <form class="row">
-                <div class="col s2" style="padding: 0; margin: 0;">
+                <div class="col s2" style="padding: 3px; margin: 0;">
                     <label>Start Month:</label>
                     <select name="startmonth" class="browser-default selectinp">
                         <option value="">Select Start Month</option>
@@ -39,7 +39,7 @@ pointer-events: all!important;
                         <option value="12">12</option>
                     </select>
                 </div>
-                <div class="col s4" style="padding: 0; margin: 0;">
+                <div class="col s4" style="padding: 3px; margin: 0;">
                     <label>Start Year:</label>
                     <select name="startyear" class="browser-default selectinp">
                         <option value="">Select Start Year</option>
@@ -49,7 +49,7 @@ pointer-events: all!important;
                         <option value="2080">2080</option>
                     </select>
                 </div>
-                <div class="col s2" style="padding: 0; margin: 0;">
+                <div class="col s2" style="padding: 3px; margin: 0;">
                     <label>End Month:</label>
                     <select name="endmonth" value="{{ $emonth }}" class="browser-default selectinp">
                         <option value="">Select End Month</option>
@@ -68,7 +68,7 @@ pointer-events: all!important;
                         <option value="12">12</option>
                     </select>
                 </div>
-                <div class="col s4" style="padding: 0; margin: 0;">
+                <div class="col s4" style="padding: 3px; margin: 0;">
                     <label>End Year:</label>
                     <select name="endyear" value="{{ $eyear }}" class="browser-default selectinp">
                         <option value="">Select End Year</option>
@@ -78,11 +78,11 @@ pointer-events: all!important;
                         <option value="2080">2080</option>
                     </select>
                 </div>
-                <div class="input-field col s6 m4 l4" style="padding: 0; margin: 5px;">
+                <div class="input-field col s6 m4 l4" style="padding: 3px; margin: 0;">
                     <input type="text" name="name" id="customer" value="{{ $name }}" placeholder="Customer"
                         class="autocomplete browser-default inp black-text" autocomplete="off">
                 </div>
-                <div class="input-field col s6 m4 l4" style="padding: 0; margin: 5px;">
+                <div class="input-field col s6 m4 l4" style="padding: 3px; margin: 0;">
                     <select name="category" class="browser-default selectinp black-text">
                         @if ($category != '')
                             <option value="{{ $category }}" selected>{{ $category }}</option>
@@ -98,9 +98,9 @@ pointer-events: all!important;
                         <option value="others">others</option>
                     </select>
                 </div>
-                <div class=" input-field col s12 m4 l4" style="padding: 0; margin: 5px;">
+                <div class=" input-field col s12 m4 l4" style="padding: 3px; margin: 0;">
                     <div class="switch">
-                        <label>
+                        <label style="font-size: 15px; !important">
                             Active Products
                             <input type="checkbox" onclick="togglehidden()">
                             <span class="lever"></span>
@@ -108,7 +108,7 @@ pointer-events: all!important;
                         </label>
                     </div>
                 </div>
-                <div class="col s12 row" style="padding: 0; margin: 5px;">
+                <div class="col s12 row" style="padding: 3px; margin: 0;">
                     <div class="input-field col s6 l1">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
