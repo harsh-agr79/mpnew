@@ -70,8 +70,9 @@
                     <select name="category" class="browser-default selectinp black-text">
                         @if ($category != '')
                             <option value="{{$category}}" selected>{{$category}}</option>
+                            <option value="" selected>Select Category</option>
                         @else
-                        <option value="" selected disabled>Select Category</option>
+                        <option value="" selected>Select Category</option>
                         @endif
                         <option value="powerbank">Powerbank</option>
                         <option value="charger">Charger</option>
