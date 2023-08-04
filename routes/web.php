@@ -33,7 +33,7 @@ use App\Http\Controllers\CustomerViewController;
 
 Route::get('/',[LoginController::class, 'login']);
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
-Route::get('update', [FixController::class, 'encryptpass']);
+// Route::get('update', [FixController::class, 'encryptpass']);
 
    //LOGOUT FUNCTION
 Route::get('/logout', function(){
