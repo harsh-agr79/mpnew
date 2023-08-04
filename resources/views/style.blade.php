@@ -285,6 +285,10 @@ input:focus {
     .prod-container{
         margin: 0;
     }
+    .mp-caro-item{
+    height: 56vw;
+    width: 100vw;
+}
 }
 .home-btn{
     /* width: 200px !important; */
@@ -307,9 +311,10 @@ input:focus {
 .spc{
     transform: scale(1.04);
 }
+
 .mp-caro-item{
-    height: 56vw;
-    width: 100vw;
+    height: 30vh;
+    width: 100%;
 }
 .scroll-text{
   display:flex;
