@@ -199,11 +199,11 @@
                                 <th
                                     @if ($item->hide == 'on') style="display: none;"
                            class="hidden" @endif>
-                                    <label class="cbth">
+                                    {{-- <label class="cbth">
                                         <input type="checkbox" value="{{ $item->produni_id }}"
                                             pname="{{ $item->name }}" class="chartcb" onclick="getchartdata();" />
                                         <span></span>
-                                    </label>
+                                    </label> --}}
                                 </th>
                             @endforeach
                         </tr>
