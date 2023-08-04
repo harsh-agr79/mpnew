@@ -2,8 +2,29 @@
 
 @section('main')
     <div class="mp-container">
-        <div>
-            <h5 class="center" style="text-transform: capitalize;">{{$page}} orders</h5>
+        <div class="row">
+            <div class="col s4">
+                <div class="valign-wrapper">
+                    <div class="blue" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Pending</span>
+                </div>
+                <div class="valign-wrapper">
+                    <div class="amber darken-1" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Approved</span>
+                </div>
+                <div class="valign-wrapper">
+                    <div class="deep-purple" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Packing Order</span>
+                </div>
+            </div>
+            <div class="col s4">
+                <h5 class="center" style="text-transform: capitalize;">{{$page}} orders</h5>
+            </div>
+            <div class="col s4">
+                <div class="valign-wrapper">
+                    <div class="red" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Rejected</span>
+                </div>
+                <div class="valign-wrapper">
+                    <div class="green" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Delivered</span>
+                </div>
+            </div>
         </div>
         <div class="mp-card">
             <form id="filter">
