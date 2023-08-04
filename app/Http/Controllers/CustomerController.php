@@ -49,7 +49,7 @@ class CustomerController extends Controller
             $result['address'] = $cus->address;
             $result['uniqueid'] = $cus->cusuni_id;
             $result['refname'] = $cus->refname;
-            $result['password'] = '';
+            $result['password'] = $cus->password;
             $result['openbalance'] = $cus->openbalance;
             $result['obtype'] = $cus->obtype;
             $result['type'] = $cus->type;
@@ -101,6 +101,12 @@ class CustomerController extends Controller
                }
            }
         if($id > 0){
+            if($request->get('passwordnew')){
+                $password = Hash::make($request->get('passwordnew'));
+            }
+            else{
+                $password = $request->get('passwordold');
+            }
             
             DB::table('customers')->where('id', $id)->update([
                 'name'=>$request->post('name'),
@@ -112,7 +118,7 @@ class CustomerController extends Controller
                 'refname'=>$request->post('refname'),
                 'refid'=>$refid,
                 'reftype'=>$reftype,
-                'password'=>Hash::make($request->post('password')),
+                'password'=>$password,
                 'openbalance'=>$request->post('openbalance'),
                 'obtype'=>$request->post('obtype'),
                 'type'=>$request->post('type'),
@@ -169,7 +175,7 @@ class CustomerController extends Controller
                 'refname'=>$request->post('refname'),
                 'refid'=>$refid,
                 'reftype'=>$reftype,
-                'password'=>$request->post('password'),
+                'password'=>Hash::make($request->post('passwordnew')),
                 'openbalance'=>$request->post('openbalance'),
                 'obtype'=>$request->post('obtype'),
                 'type'=>$request->post('type'),
