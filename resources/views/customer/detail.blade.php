@@ -131,21 +131,5 @@
                 Transport Detail: {{ $data[0]->transport }}
             </div>
         </div>
-        {{-- <span class="btn amber" onclick="disback()">
-            disable
-        </span> --}}
     </div>
-    {{-- <script language='javascript' type='text/javascript'>
-        function DisableBackButton() {
-            window.history.forward()
-        }
-        DisableBackButton();
-        window.onload = DisableBackButton();
-        window.onpageshow = function(evt) {
-            if (evt.persisted) DisableBackButton()
-        }
-        window.onunload = function() {
-            void(0)
-        }
-    </script> --}}
 @endsection
