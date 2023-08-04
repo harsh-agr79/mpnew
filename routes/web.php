@@ -245,5 +245,7 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 
     Route::get('/user/editprofile', [CustomerViewController::class, 'editprofile']);
     Route::post('/user/editprofile', [CustomerViewController::class, 'edpr_process'])->name('editpr');
+
+    Route::get('/user/timeupdate', [LoginController::class, 'set_time']);
 });
 

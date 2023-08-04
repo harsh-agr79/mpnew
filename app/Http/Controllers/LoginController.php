@@ -103,5 +103,12 @@ class LoginController extends Controller
         $result['data2']=DB::table('front')->where('type', 'message')->get();
         return view('customer/home', $result);
     }
+
+    public function set_time(Request $request){
+        $request->session()->forget('USER_TIME');
+        $request->session()->put('USER_TIME', time());
+        
+        return response()->json('success', 200);
+    }
     
 }

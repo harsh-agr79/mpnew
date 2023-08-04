@@ -184,6 +184,20 @@
         });
     </script>
 
+    @if (time() - session()->get('USER_TIME') > 20)
+    <script>
+          $(function() {
+                $.ajax({
+                    url: "/user/timeupdate",
+                    type: 'get',
+                    success: function(response) {
+                        
+                    }
+                })
+            })
+    </script>
+    @endif
+
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
