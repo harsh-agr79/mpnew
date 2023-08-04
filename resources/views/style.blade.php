@@ -288,7 +288,13 @@ input:focus {
     .mp-caro-item{
     height: 56vw;
     width: 100vw;
+    }
 }
+@media screen and (max-width: 900px){
+    .mp-caro-item{
+    height: 50vh;
+    width: 100vw;
+    }
 }
 .home-btn{
     /* width: 200px !important; */
