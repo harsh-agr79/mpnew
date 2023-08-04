@@ -226,6 +226,13 @@
                         </div>
                         <div class="col m6 s12">
                             <label>
+                                <input type="checkbox" name="perm[]" value="productreport"
+                                    @if (in_array('productreport', $permission)) checked @endif />
+                                <span>View Product Report</span>
+                            </label>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>
                                 <input type="checkbox" name="perm[]" value="statement|balancesheet/{id}"
                                     @if (in_array('statement', $permission)) checked @endif />
                                 <span>View Statements</span>
