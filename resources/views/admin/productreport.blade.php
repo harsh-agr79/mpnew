@@ -69,10 +69,10 @@
                 <div class="input-field col s6 m4 l4">
                     <select name="category" class="browser-default selectinp black-text">
                         @if ($category != '')
-                            <option value="{{$category}}" selected>{{$category}}</option>
+                            <option value="{{ $category }}" selected>{{ $category }}</option>
                             <option value="">Select Category</option>
                         @else
-                        <option value="" selected>Select Category</option>
+                            <option value="" selected>Select Category</option>
                         @endif
                         <option value="powerbank">Powerbank</option>
                         <option value="charger">Charger</option>
@@ -85,12 +85,12 @@
                 <div class=" input-field col s6 m4 l4">
                     <div class="switch">
                         <label>
-                          Active Products
-                          <input type="checkbox" onclick="togglehidden()">
-                          <span class="lever"></span>
-                          All Products
+                            Active Products
+                            <input type="checkbox" onclick="togglehidden()">
+                            <span class="lever"></span>
+                            All Products
                         </label>
-                      </div>
+                    </div>
                 </div>
                 <div class="col s12 row">
                     <div class="input-field col s3 l1">
@@ -100,88 +100,91 @@
                         <a class="btn amber darken-1" href="{{ url('/productreport') }}">Clear</a>
                     </div>
                 </div>
-                
-               
+
+
             </form>
         </div>
         @php
-        $chartdata = [];
-        $a = 0;
-        $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
+            $chartdata = [];
+            $a = 0;
+            $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
         @endphp
         @if ($sort == 'normal')
-        <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
-            <table class="sortable">
-                <thead>
-                    <th>Date/Category</th>
-                  <th>Powerbank</th>
-                  <th>Charger</th>
-                  <th>Cable</th>
-                  <th>Earphone</th>
-                  <th>Btitem</th>
-                  <th>Others</th>
-                </thead>
-                <tbody>
-                    @for ($i = 0; $i < count($data); $i++)
-                    @php
-                        $chartdata[] = [$data[$i]['month'].'-'.$data[$i]['year'], 
-                                        intval($data[$i]['powerbank']),
-                                        intval($data[$i]['charger']),
-                                        intval($data[$i]['cable']),
-                                        intval($data[$i]['earphone']), 
-                                        intval($data[$i]['btitem']), 
-                                        intval($data[$i]['others'])
-                                    ];
-                    @endphp
-                        <tr>
-                            <td sorttable_customkey="{{ $i }}" style="font-weight: 600">
-                                {{ $months[$data[$i]['month']] }}-{{ $data[$i]['year'] }}</td>
-                            <td>{{ $data[$i]['powerbank'] }}</td>
-                            <td>{{ $data[$i]['charger'] }}</td>
-                            <td>{{ $data[$i]['cable'] }}</td>
-                            <td>{{ $data[$i]['earphone'] }}</td>
-                            <td>{{ $data[$i]['btitem'] }}</td>
-                            <td>{{ $data[$i]['others'] }}</td>
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
-        </div>
-        <div class="mp-card" style="margin-top: 10px; padding: 20px;">
-            <div id="linechart_material" style="width: auto; height: 600px;"></div>
-        </div>
+            <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
+                <table class="sortable">
+                    <thead>
+                        <th>Date/Category</th>
+                        <th>Powerbank</th>
+                        <th>Charger</th>
+                        <th>Cable</th>
+                        <th>Earphone</th>
+                        <th>Btitem</th>
+                        <th>Others</th>
+                    </thead>
+                    <tbody>
+                        @for ($i = 0; $i < count($data); $i++)
+                            @php
+                                $chartdata[] = [$data[$i]['month'] . '-' . $data[$i]['year'], intval($data[$i]['powerbank']), intval($data[$i]['charger']), intval($data[$i]['cable']), intval($data[$i]['earphone']), intval($data[$i]['btitem']), intval($data[$i]['others'])];
+                            @endphp
+                            <tr>
+                                <td sorttable_customkey="{{ $i }}" style="font-weight: 600">
+                                    {{ $months[$data[$i]['month']] }}-{{ $data[$i]['year'] }}</td>
+                                <td>{{ $data[$i]['powerbank'] }}</td>
+                                <td>{{ $data[$i]['charger'] }}</td>
+                                <td>{{ $data[$i]['cable'] }}</td>
+                                <td>{{ $data[$i]['earphone'] }}</td>
+                                <td>{{ $data[$i]['btitem'] }}</td>
+                                <td>{{ $data[$i]['others'] }}</td>
+                            </tr>
+                        @endfor
+                    </tbody>
+                </table>
+            </div>
+            <div class="mp-card" style="margin-top: 10px; padding: 20px;">
+                <div id="linechart_material" style="width: auto; height: 600px;"></div>
+            </div>
         @elseif($sort == 'category')
-        <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
-            <table class="sortable">
-                <thead>
-                    <th>Date/Category</th>
-                   @foreach ($data as $item)
-                       <th @if ($item->hide == 'on')
-                           style="display: none;"
-                           class="hidden"
-                       @endif>{{$item->name}}</th>
-                   @endforeach
-                </thead>
-                <tbody>
-                    @foreach (json_decode($testdata) as $item)
-                        <tr>
-                            <td sorttable_customkey="{{$a = $a + 1}}"> {{ $months[$item->month] }}-{{ $item->year }}</td>
-                            @foreach ($item->prod as $item2)
-                                <td @if ($item2->hide == 'on')
-                                    style="display: none;"
-                                    class="hidden"
-                                @endif>{{ $item2->quant }}</td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+            <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
+                <table>
+                    <thead>
+                        <th>Date/Category</th>
+                        @foreach ($data as $item)
+                            <th
+                                @if ($item->hide == 'on') style="display: none;"
+                           class="hidden" @endif>
+                                <label>
+                                    <input type="checkbox" value="{{ $item->produni_id }}" pname="{{ $item->name }}"
+                                        class="chartcb" onclick="getchartdata();" />
+                                    <span></span>
+                                </label>{{ $item->name }}</th>
+                        @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach (json_decode($testdata) as $item)
+                            <tr>
+                                <td sorttable_customkey="{{ $a = $a + 1 }}" class="date">
+                                    {{ $months[$item->month] }}-{{ $item->year }}</td>
+                                @foreach ($item->prod as $item2)
+                                    <td
+                                        @if ($item2->hide == 'on') style="display: none;"
+                                    class="hidden {{ $item2->uniid }}"
+                                @else
+                                class="{{ $item2->uniid }}" @endif>
+                                        {{ $item2->quant }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="mp-card" style="margin-top: 10px; padding: 20px;">
+                <div id="linechart_material" style="width: auto; height: 600px;"></div>
+            </div>
         @endif
-    
-     
 
-       
+
+
+
 
         <script>
             google.charts.load('current', {
@@ -191,6 +194,7 @@
 
             function drawChart() {
                 var chartdata = @json($chartdata);
+                console.log(chartdata);
 
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Date');
@@ -237,8 +241,58 @@
                     }
                 })
             })
-            function togglehidden(){
+
+            function togglehidden() {
                 $('.hidden').toggle();
+            }
+
+            function getchartdata() {
+                google.charts.load('current', {
+                    'packages': ['line']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+
+
+                function drawChart() {
+                    var trs = $('tbody tr');
+                    var cb = $('.chartcb:checked');
+                    var chartdata = [];
+                    var chartcol = [];
+                    for (let i = 0; i < cb.length; i++) {
+                        chartcol[i] = cb[i].getAttribute('pname');
+                    }
+                    for (let i = 0; i < trs.length; i++) {
+                        chartdata[i] = [];
+                        var date = trs[i].getElementsByClassName('date');
+                        chartdata[i][0] = date[0].innerText;
+                        for (let j = 0; j < cb.length; j++) {
+                            var tds = trs[i].getElementsByClassName(cb[j].value);
+                            chartdata[i][j+1] = parseInt(tds[0].innerText);
+                        }
+                    }
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'date');
+                    for (let i = 0; i < chartcol.length; i++) {
+                        data.addColumn('number', chartcol[i]);
+                    }
+                    data.addRows(chartdata);
+
+                    var options = {
+                        chart: {
+                            title: 'Monthly Break Down Of Sales of Each Product',
+                            subtitle: 'in Number of Items Sold'
+                        },
+                        height: 600,
+                        backgroundColor: {
+                            fill: 'transparent'
+                        }
+                    };
+
+                    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+                    chart.draw(data, google.charts.Line.convertOptions(options));
+                }
             }
         </script>
 

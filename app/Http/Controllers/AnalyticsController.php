@@ -980,14 +980,16 @@ class AnalyticsController extends Controller
                         $res2[] = [
                             'name'=>$item2->name,
                             'quant'=>$data3[0]->sum,
-                            'hide'=>$item2->hide
+                            'hide'=>$item2->hide,
+                            'uniid'=>$item2->produni_id,
                         ];
                     }
                     else{
                         $res2[] = [
                             'name'=>$item2->name,
                             'quant'=>'0',
-                            'hide'=>$item2->hide
+                            'hide'=>$item2->hide,
+                            'uniid'=>$item2->produni_id
                         ];
                     }
                     $data2 = DB::table('orders')
