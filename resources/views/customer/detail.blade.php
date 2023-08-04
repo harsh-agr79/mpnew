@@ -133,6 +133,9 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            history.pushState(null, document.title, location.href);
+        })
           window.onpopstate = function () {
             window.open('/home');
           }
