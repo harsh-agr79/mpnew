@@ -101,6 +101,14 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td id="totalrows"></td>
+                        <td>Total</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -138,7 +146,7 @@
             const a = document.getElementById('search');
             const clsBtn = document.getElementById('close-search');
             let table = document.getElementsByTagName('table');
-            let tr = $('tr')
+            let tr = $('tbody tr')
             clsBtn.addEventListener("click", function() {
                 a.value = '';
                 a.focus();
@@ -153,7 +161,7 @@
             } else {
                 $('#cs-icon').text('close')
             }
-
+            let sum = 0;
             for (var i = 0; i < tr.length; i++) {
                 let td = tr[i].getElementsByTagName('td');
                 // console.log(td);
@@ -162,6 +170,7 @@
                         let textvalue = td[j].textContent || td[j].innerHTML;
                         if (textvalue.toLowerCase().indexOf(filter) > -1) {
                             tr[i].style.display = "";
+                            sum = sum + 1;
                             break;
                         } else {
                             tr[i].style.display = "none"
@@ -169,6 +178,7 @@
                     }
                 }
             }
+            $('#totalrows').text(sum);
         }
 
         function openbs(name) {
