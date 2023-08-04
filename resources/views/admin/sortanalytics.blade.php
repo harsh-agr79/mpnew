@@ -416,7 +416,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '{!! URL::to('finditem') !!}',
+                url: `{{$url}}`+'finditem',
                 success: function(response) {
 
                     var custarray = response;

@@ -8,14 +8,16 @@
                     <div class="blue" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Pending</span>
                 </div>
                 <div class="valign-wrapper">
-                    <div class="amber darken-1" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Approved</span>
+                    <div class="amber darken-1" style="width: 10px; height:10px; margin-right: 5px;"></div>
+                    <span>Approved</span>
                 </div>
                 <div class="valign-wrapper">
-                    <div class="deep-purple" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Packing Order</span>
+                    <div class="deep-purple" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Packing
+                        Order</span>
                 </div>
             </div>
             <div class="col s4">
-                    <h5 class="center">All Orders</h5>
+                <h5 class="center">All Orders</h5>
             </div>
             <div class="col s4">
                 <div class="valign-wrapper">
@@ -29,17 +31,44 @@
         <div class="mp-card">
             <form id="filter">
                 <div class="row">
-                    <div class="input-field col s12 m4">
-                        <input type="date" name="date" value="{{$date}}" class="browser-default inp black-text">
+                    <div class="row col s12">
+                        <div class="input-field col s12 m4">
+                            <input type="date" name="date" value="{{ $date }}"
+                                class="browser-default inp black-text">
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <input type="date" name="date2" value="{{ $date2 }}"
+                                class="browser-default inp black-text">
+                        </div>
+                        <div class="input-field col s12 m4 l4">
+                            <input type="text" name="name" id="customer" value="{{ $name }}"
+                                placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off">
+                        </div>
                     </div>
-                    <div class="input-field col s12 m4 l4">
-                        <input type="text" name="name" id="customer" value="{{$name}}" placeholder="Customer"
-                            class="autocomplete browser-default inp black-text" autocomplete="off">
+                    <div class="row col s12">
+                        <div class="input-field col s12 l4 m4">
+                            <input type="text" name="product" id="product" value="{{ $product }}"
+                                placeholder="Product" class="autocomplete browser-default inp black-text" autocomplete="off">
+                        </div>
+                        <div class="input-field col s12 m4 l4">
+                            <select name="status" class="browser-default selectinp">
+                                @if ($status != '')
+                                    <option value="{{ $status }}" selected>{{ $status }}</option>
+                                    <option value="">Item Status</option>
+                                @else
+                                    <option value="" selected disabled>Item Status</option>
+                                @endif
+                                <option value="pending">Pending</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="approved">Approved</option>
+                            </select>
+                        </div>
+                        <div class="col m4 s12" style="margin-top: 20px">
+                            <button class="btn amber darken-1">Apply</button>
+                            <a class="btn amber darken-1" href="{{ url('orders') }}">clear</a>
+                        </div>
                     </div>
-                    <div class="col m4 s12" style="margin-top: 20px">
-                        <button class="btn amber darken-1">Apply</button>
-                        <a class="btn amber darken-1" href="{{url('orders')}}">clear</a>
-                    </div>
+                    
                 </div>
             </form>
         </div>
@@ -54,6 +83,9 @@
                             <th></th>
                             <th>Date</th>
                             <th>Detail</th>
+                            @if ($product != '')
+                                <th>Quantity</th>
+                            @endif
                             <th>Delivered</th>
                             <th>recieved</th>
                             @if ($admin->type == 'admin' || in_array('totalamount', $perms))
@@ -65,27 +97,33 @@
                         @foreach ($data as $item)
                             <tr class=" @if ($item->seen == '') z-depth-2 @endif"
                                 oncontextmenu="rightmenu({{ $item->orderid }}); return false;"
-                                ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
+                                ondblclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                 <td>
-                                    <div id="{{ $item->orderid . 'order' }}" class="{{$item->mainstatus}}"
+                                    <div id="{{ $item->orderid . 'order' }}" class="{{ $item->mainstatus }}"
                                         style="height: 35px; width:10px;"></div>
                                 </td>
                                 <td>{{ getNepaliDate($item->created_at) }}</td>
                                 <td>
                                     <div class="row" style="padding: 0; margin: 0;">
-                                        <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
+                                        <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}
+                                        </div>
                                         <div class="col s4 m3 l3" style="font-size: 8px;">{{ $item->orderid }}</div>
                                         <div class="col s8 m4 l4" style="font-size: 8px;">{{ $item->refname }}</div>
                                     </div>
                                 </td>
-                                <td>@if ($item->delivered == 'on')
-                                    <i class="material-icons textcol">check</i>
-                                @else
-                                    <i class="material-icons textcol">close</i>
-                                @endif</td>
-                                <td>{{$item->recieveddate}}</td>
+                                @if ($product != '')
+                                <td>{{$item->quantity}}</td>
+                            @endif
+                                <td>
+                                    @if ($item->delivered == 'on')
+                                        <i class="material-icons textcol">check</i>
+                                    @else
+                                        <i class="material-icons textcol">close</i>
+                                    @endif
+                                </td>
+                                <td>{{ $item->recieveddate }}</td>
                                 @if ($admin->type == 'admin' || in_array('totalamount', $perms))
-                                <td class="tamt" style="display: none;"> {{ getTotalAmount($item->orderid) }}</td>
+                                    <td class="tamt" style="display: none;"> {{ getTotalAmount($item->orderid) }}</td>
                                 @endif
                             </tr>
                         @endforeach
@@ -103,15 +141,15 @@
                 <li>Edit</li>
             </a>
             @if ($admin->type == 'admin')
-            <a id="rmdeletelink">
-                <li class="border-top">Delete</li>
-            </a>
+                <a id="rmdeletelink">
+                    <li class="border-top">Delete</li>
+                </a>
             @endif
         </ul>
     </div>
 
     <script>
-           function rightmenu(orderid) {
+        function rightmenu(orderid) {
             console.log(orderid)
             var rmenu = document.getElementById("rightmenu");
             var perms = @json($perms);
@@ -155,15 +193,14 @@
             }
         }
 
-        function opendetail(orderid, seen ,ms) {
+        function opendetail(orderid, seen, ms) {
             var perms = @json($perms);
             var admintype = `{{ $admin->type }}`;
             if (admintype == "admin" || jQuery.inArray("detail/{id}", perms) > -1) {
                 if (admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1) {
                     window.open('/detail/' + orderid, "_self");
                 }
-            }
-            else if(admintype == 'staff' && jQuery.inArray("chalan", perms) > -1 && ms == 'deep-purple'){
+            } else if (admintype == 'staff' && jQuery.inArray("chalan", perms) > -1 && ms == 'deep-purple') {
                 window.open('/chalandetail/' + orderid, "_self");
             }
         }
@@ -184,6 +221,25 @@
                     // console.log(datacust2)
                     $('input#customer').autocomplete({
                         data: datacust2,
+                    });
+                }
+            })
+        })
+        $(document).ready(function() {
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('finditem') !!}',
+                success: function(response) {
+
+                    var custarray = response;
+                    var datacust = {};
+                    for (var i = 0; i < custarray.length; i++) {
+
+                        datacust[custarray[i].name] = null;
+                    }
+                    // console.log(datacust2)
+                    $('input#product').autocomplete({
+                        data: datacust,
                     });
                 }
             })

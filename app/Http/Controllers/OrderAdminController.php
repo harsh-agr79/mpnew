@@ -100,22 +100,46 @@ class OrderAdminController extends Controller
     //ALL ORDERS VIEWS
 
     public function orders(Request $request){
+        $result['date']= '';
+        $result['date2']= '';
+        $result['status']= '';
+        $result['product']= '';
+        $result['name']= '';
+
         $query = DB::table('orders');
-        $query = $query->where(['deleted'=>NULL, 'save'=>NULL])->orderBy('created_at', 'DESC')->groupBy('orderid');
+        $query = $query->where(['deleted'=>NULL, 'save'=>NULL])->orderBy('created_at', 'DESC');
         if($request->get('name')){
-           $query = $query->where('name', $request->get('name'));
+           $query = $query->where('name', $request->get('name'))->groupBy('orderid');
            $result['name']= $request->get('name');
         }
         else{
             $result['name'] ='';
         }
         if($request->get('date')){
-           $query = $query->whereDate('created_at', $request->get('date'));
+           $query = $query->where('created_at', '>=', $request->get('date'))->groupBy('orderid');
            $result['date']= $request->get('date');
         }
-        else{
-            $result['date']= '';
-        }
+        if($request->get('date2')){
+            $query = $query->where('created_at', '<=', $request->get('date'))->groupBy('orderid');
+            $result['date2']= $request->get('date2');
+         }
+         if($request->get('status') && $request->get('product') == ''){
+            $query = $query->where('status',$request->get('status'))->groupBy('orderid');
+            $result['status']= $request->get('status');
+         }
+         if($request->get('status') == '' && $request->get('product') != ''){
+            $query = $query->where('item',$request->get('product'));
+            $result['product'] = $request->get('product');
+         }
+         if($request->get('status') && $request->get('product') != ''){
+            $query = $query->where('status',$request->get('status'));
+            $query = $query->where('item',$request->get('product'));
+            $result['status']= $request->get('status');
+            $result['product'] = $request->get('product');
+         }
+         else{
+            $query = $query->groupBy('orderid');
+         }
         $query = $query->paginate(50);
         $result['data']=$query;
     
