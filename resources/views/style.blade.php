@@ -308,7 +308,7 @@ input:focus {
     transform: scale(1.04);
 }
 .mp-caro-item{
-    height: 56%;
+    height: 56vw;
     width: 100%;
 }
 .scroll-text{
