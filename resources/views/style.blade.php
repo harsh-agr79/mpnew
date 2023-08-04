@@ -131,6 +131,7 @@ input:focus {
 
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 /* Track */
