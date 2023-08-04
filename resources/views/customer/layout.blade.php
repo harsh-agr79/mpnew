@@ -184,7 +184,7 @@
         });
     </script>
 
-    @if (time() - session()->get('USER_TIME') > 20)
+    @if (time() - session()->get('USER_TIME') > 21600)
     <script>
           $(function() {
                 $.ajax({
