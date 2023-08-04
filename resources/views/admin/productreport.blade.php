@@ -204,7 +204,7 @@
                                 </th>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th>Date/Category</th>
                             @foreach ($data as $item)
                                 <th
@@ -213,11 +213,11 @@
                                     {{ $item->name }}
                                 </th>
                             @endforeach
-                        </tr>
+                        </tr> --}}
                     </thead>
                     <tbody>
                         @foreach (json_decode($testdata) as $item)
-                            {{-- <tr>
+                            <tr>
                                 <td sorttable_customkey="{{ $a = $a + 1 }}" class="date">
                                     {{ $months[$item->month] }}-{{ $item->year }}</td>
                                 @foreach ($item->prod as $item2)
@@ -225,7 +225,7 @@
                                         @if ($item2->hide == 'on') style="display: none;" class="hidden {{ $item2->uniid }}" @else class="{{ $item2->uniid }}" @endif>
                                         {{ $item2->quant }}</td>
                                 @endforeach
-                            </tr> --}}
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
