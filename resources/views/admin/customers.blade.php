@@ -23,9 +23,7 @@
             </div>
         </div>
         <div class="mp-card" style="overflow-x: scroll;">
-            <form action="{{route('addup')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-           
+            <form>           
             <table class="sortable">
                 <thead>
                     <th>|</th>
@@ -82,13 +80,13 @@
                     </tr>
                 </tfoot>
             </table>
-            <div class="fixed-action-btn">
+            {{-- <div class="fixed-action-btn">
                 <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})"
                     style="border-radius: 10px;">
                     Submit
                     <i class="left material-icons">send</i>
                 </button>
-            </div>
+            </div> --}}
         </form>
         </div>
     </div>
