@@ -3,17 +3,19 @@
 @section('main')
     <style>
         .cbth {
-            margin: 0;
-            padding: 0;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         label {
             font-size: 8px;
         }
         [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
-          position: static;
-          left: 0px; 
-          opacity: 1; 
-        }
+position: static!important;
+left: 0px!important;
+opacity: 1!important;
+visibility: visible!important;
+pointer-events: all!important;
+}
     </style>
     <div class="center">
         <div class="mp-card" style="margin-top: 30px;">
@@ -205,7 +207,7 @@
                                     @if ($item->hide == 'on') style="display: none;"
                            class="hidden" @endif>
                                         <input type="checkbox" value="{{ $item->produni_id }}"
-                                            pname="{{ $item->name }}" class="chartcb" onclick="getchartdata();" />
+                                            pname="{{ $item->name }}" class="chartcb cbth" onclick="getchartdata();" />
                                 </th>
                             @endforeach
                         </tr>
