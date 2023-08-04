@@ -187,7 +187,7 @@
                 }
             </script>
         @elseif($sort == 'category')
-            {{-- <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
+            <div class="mp-card" style="margin-top: 10px; overflow-x: scroll;">
                 <table style="width: 100%;">
                     <thead>
                         <tr>
@@ -217,22 +217,19 @@
                     </thead>
                     <tbody>
                         @foreach (json_decode($testdata) as $item)
-                            <tr>
+                            {{-- <tr>
                                 <td sorttable_customkey="{{ $a = $a + 1 }}" class="date">
                                     {{ $months[$item->month] }}-{{ $item->year }}</td>
                                 @foreach ($item->prod as $item2)
                                     <td
-                                        @if ($item2->hide == 'on') style="display: none;"
-                                    class="hidden {{ $item2->uniid }}"
-                                @else
-                                class="{{ $item2->uniid }}" @endif>
+                                        @if ($item2->hide == 'on') style="display: none;" class="hidden {{ $item2->uniid }}" @else class="{{ $item2->uniid }}" @endif>
                                         {{ $item2->quant }}</td>
                                 @endforeach
-                            </tr>
+                            </tr> --}}
                         @endforeach
                     </tbody>
                 </table>
-            </div> --}}
+            </div>
             <div class="mp-card" style="margin-top: 10px; padding: 20px;">
                 <div id="linechart_material" style="width: auto; height: 600px;"></div>
             </div>
