@@ -137,7 +137,7 @@
             history.pushState(null, document.title, location.href);
         })
           window.onpopstate = function () {
-            window.open('/home', "_self");
+            window.open('/home',  "_self");
           }
     </script>
 @endsection
