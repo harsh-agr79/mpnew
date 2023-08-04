@@ -33,6 +33,7 @@ use App\Http\Controllers\CustomerViewController;
 
 Route::get('/',[LoginController::class, 'login']);
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
+Route::get('update', [FixController::class, 'encryptpass']);
 
    //LOGOUT FUNCTION
 Route::get('/logout', function(){
@@ -168,7 +169,6 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
 
     //FOR SERVER SIDE BULK UPDATE
-    Route::get('update', [FixController::class, 'update']);
 
 
     //FOR AJAX UPDATES AND GETS

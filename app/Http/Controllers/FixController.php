@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class FixController extends Controller
 {
@@ -125,5 +126,22 @@ class FixController extends Controller
             ]);
         }
         // echo 'done';
+    }
+    public function encryptpass(){
+        $admins = DB::table('admins')->get();
+
+        foreach($admins as $item){
+            DB::table('admins')->where('id', $item->id)->update([
+                'password'=>Hash::make($item->password)
+                ]);
+        }
+
+        $customers = DB::table('customers')->get();
+
+        foreach($customers as $item){
+            DB::table('customers')->where('id', $item->id)->update([
+                'password'=>Hash::make($item->password)
+                ]);
+        }
     }
 }
