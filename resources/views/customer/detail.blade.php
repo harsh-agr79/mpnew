@@ -109,7 +109,7 @@
             <div class="bg-content mp-card" style="margin-top:30px;">
                 <div class="input-field col s12">
                     User Remarks:
-                    <textarea name="userremarks" class="browser-default inp" cols="30" rows="10">{{ $data[0]->userremarks }}</textarea>
+                    <textarea name="userremarks" class="browser-default inp textcol" cols="30" rows="10">{{ $data[0]->userremarks }}</textarea>
                 </div>
             </div>
             <div class="fixed-action-btn">

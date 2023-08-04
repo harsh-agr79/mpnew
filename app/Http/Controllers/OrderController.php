@@ -205,7 +205,7 @@ class OrderController extends Controller
         DB::table('orders')->where('orderid', $orderid)->update([
             'userremarks'=>$request->post('userremarks')
         ]);
-        return redirect('user/detail/'.$orderid);
+        return redirect('user/oldorders');
     }
     public function confirm(Request $request, $orderid)
     {
