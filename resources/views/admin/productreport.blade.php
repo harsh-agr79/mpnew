@@ -208,7 +208,7 @@
                             <th>Date/Category</th>
                             @foreach ($data as $item)
                                 <th @if ($item->hide == 'on') style="display: none;" class="hidden" @endif>
-                                    {{ $item->produni/-id }}
+                                    {{ $item->produni_id }}
                                 </th>
                             @endforeach
                         </tr>
