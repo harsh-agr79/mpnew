@@ -1,7 +1,7 @@
 @extends('customer/layout')
 
 @section('main')
-    <div class="row @if (time() - session()->get('USER_TIME') < 30) overlay  @endif" id="home" style="padding: 0; margin: 0;">
+    <div class="row overlay" id="home" style="padding: 0; margin: 0;">
         <div class="col l6 m12 s12" style="padding: 0; margin: 0;">
             <div class="mp-caro-cont">
                 @for ($i = 0; $i < count($data); $i++)
@@ -58,7 +58,6 @@
         </div>
     </div>
 
-    @if (time() - session()->get('USER_TIME') < 30)
         <div class="mp-card bal-popup" id="balpop" style="padding: 10px;">
             @php
                 $bal = explode('|', $user->balance);
@@ -100,7 +99,6 @@
             </div>
 
         </div>
-    @endif
 
     <script>
         $(document).bind("click", function(event) {
