@@ -21,18 +21,18 @@
                 </div>
             @endif
             @if ($data[0]->mainstatus != 'blue')
-            <div style="margin: 10px 0;">
-                <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}" target="_blank"
-                    class="btn-small amber white-text">
-                    Img <i class="material-icons right">file_download</i>
-                </a>
-            </div>
-            <div>
-                <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}" target="_blank"
-                    class="btn-small amber white-text">
-                    PDF <i class="material-icons right">picture_as_pdf</i>
-                </a>
-            </div>
+                <div style="margin: 10px 0;">
+                    <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}" target="_blank"
+                        class="btn-small amber white-text">
+                        Img <i class="material-icons right">file_download</i>
+                    </a>
+                </div>
+                <div>
+                    <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}" target="_blank"
+                        class="btn-small amber white-text">
+                        PDF <i class="material-icons right">picture_as_pdf</i>
+                    </a>
+                </div>
             @endif
         </div>
         <div>
@@ -68,9 +68,9 @@
                             </td>
                             <td>
                                 @if ($item->status == 'pending')
-                                {{ $a = $item->quantity * $item->price }}
+                                    {{ $a = $item->quantity * $item->price }}
                                 @else
-                                {{ $a = $item->approvedquantity * $item->price }}
+                                    {{ $a = $item->approvedquantity * $item->price }}
                                 @endif
                                 <span class="hide">{{ $total = $total + $a }}</span>
                             </td>
@@ -133,11 +133,15 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            history.pushState(null, document.title, location.href);
-        })
-          window.onpopstate = function () {
-            window.open('/home',  "_self");
-          }
+      disableback();
+        function disableback(){
+            window.history.pushState(null, "", window.location.href);
+            console.log(window.location.href)
+        }
+        window.onpopstate = function() {
+      disableback();
+            window.history.pushState(null, "", window.location.href);
+            window.open('/home', "_self")
+        }
     </script>
 @endsection
