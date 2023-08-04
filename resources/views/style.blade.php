@@ -286,7 +286,7 @@ input:focus {
         margin: 0;
     }
     .mp-caro-item{
-    height: 55vw;
+    height: 56vw;
     width: 100vw;
     }
 }
