@@ -367,6 +367,7 @@ input:focus {
     align-items: center;
     justify-content: center;
 }
+
 .bal-popcard{
     width: 90vw;
 }

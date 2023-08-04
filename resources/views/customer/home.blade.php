@@ -1,6 +1,8 @@
 @extends('customer/layout')
 
 @section('main')
+
+
     <div class="row" style="padding: 0; margin: 0;">
         <div class="col l6 m12 s12" style="padding: 0; margin: 0;">
             <div class="mp-caro-cont">
@@ -56,15 +58,55 @@
                 <a href="{{ url('user/statement') }}" class="home-btn">Statement <i class="material-icons">web</i></a>
             </div>
         </div>
+        <div class="col l6 m12 s12 center hide-on-med-and-down" id="balpop-pc" onclick="closefunc()">
+            @php
+                $bal = explode('|', $user->balance);
+            @endphp
+            <div class="center mp-card">
+                <div class="center amber white-text" style="border-radius: 10px; padding: 10px;">
+                    @if ($bal[0] == 'red')
+                        <h5>Amount To Pay: {{ money($bal[1]) }}</h5>
+                    @else
+                        <h5>Amount To Recieve: {{ money($bal[1]) }}</h5>
+                    @endif
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <th>Outstanding Amount In Days</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>30 Days</td>
+                                <td>{{ $user->thirdays }}</td>
+                            </tr>
+                            <tr>
+                                <td>45 Days</td>
+                                <td>{{ $user->fourdays }}</td>
+                            </tr>
+                            <tr>
+                                <td>60 Days</td>
+                                <td>{{ $user->sixdays }}</td>
+                            </tr>
+                            <tr>
+                                <td>90 Days</td>
+                                <td>{{ $user->nindays }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        </div>
     </div>
-
+   
       
-
    
 @endsection
 
 @if (time() - session()->get('USER_TIME') < 20)
-<div class="bal-popup" id="balpop" onclick="closefunc()">
+<div class="bal-popup hide-on-large-only" id="balpop" onclick="closefunc()">
     @php
         $bal = explode('|', $user->balance);
     @endphp
