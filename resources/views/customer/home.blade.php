@@ -1,7 +1,7 @@
 @extends('customer/layout')
 
 @section('main')
-    <div class="row" style="padding: 0; margin: 0;">
+    <div class="row @if (time() - session()->get('USER_TIME') < 30) overlay  @endif" id="home" style="padding: 0; margin: 0;">
         <div class="col l6 m12 s12" style="padding: 0; margin: 0;">
             <div class="mp-caro-cont">
                 @for ($i = 0; $i < count($data); $i++)
@@ -57,4 +57,56 @@
             </div>
         </div>
     </div>
+
+    @if (time() - session()->get('USER_TIME') < 30)
+        <div class="mp-card bal-popup" id="balpop" style="padding: 10px;">
+            @php
+                $bal = explode('|', $user->balance);
+            @endphp
+            <div class="center">
+                <div class="center amber white-text" style="border-radius: 10px; padding: 10px;">
+                    @if ($bal[0] == 'red')
+                        <h5>Amount To Pay: {{ money($bal[1]) }}</h5>
+                    @else
+                        <h5>Amount To Recieve: {{ money($bal[1]) }}</h5>
+                    @endif
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <th>Outstanding Amount In Days</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>30 Days</td>
+                                <td>{{ $user->thirdays }}</td>
+                            </tr>
+                            <tr>
+                                <td>45 Days</td>
+                                <td>{{ $user->fourdays }}</td>
+                            </tr>
+                            <tr>
+                                <td>60 Days</td>
+                                <td>{{ $user->sixdays }}</td>
+                            </tr>
+                            <tr>
+                                <td>90 Days</td>
+                                <td>{{ $user->nindays }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    @endif
+
+    <script>
+        $(document).bind("click", function(event) {
+            var balpop = document.getElementById("balpop");
+            balpop.style.display = 'none';
+            $('#home').removeClass('overlay')
+        });
+    </script>
 @endsection

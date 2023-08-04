@@ -357,4 +357,23 @@ input:focus {
     height: 45px;
     /* margin: 7px 7px 0 7px; */
 }
+.bal-popup{
+    position: fixed;
+    z-index: 1005;
+    top: 30%;
+    right: 10%;
+    left: 10%;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* background: #000000; */
+    opacity: .6;
+    filter: grayscale(100%);
+    z-index: 0;
+    overflow: hidden;
+}
 </style>

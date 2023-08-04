@@ -27,6 +27,7 @@ $('.dropdown-trigger').dropdown();
  
  $(document).ready(function(){
   $('.modal').modal();
+
 });
 
 document.addEventListener('keydown', event => {
