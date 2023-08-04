@@ -309,7 +309,7 @@ input:focus {
 }
 .mp-caro-item{
     height: 56vw;
-    width: 100%;
+    width: 100vw;
 }
 .scroll-text{
   display:flex;
