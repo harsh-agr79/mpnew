@@ -64,7 +64,7 @@ class AdminController extends Controller
         $type = $request->get('type');
 
         if($request->get('passwordnew')){
-            $password = $request->get('passwordnew');
+            $password = Hash::make($request->get('passwordnew'));
         }
         else{
             $password = $request->get('passwordold');
@@ -75,7 +75,7 @@ class AdminController extends Controller
                 'name'=>$name,
                 'email'=>$userid,
                 'contact'=>$contact,
-                'password'=>Hash::make($password),
+                'password'=>$password,
                 'type'=>$type
             ]);
             $initial = $request->post('name2');
@@ -107,7 +107,7 @@ class AdminController extends Controller
                 'name'=>$name,
                 'email'=>$userid,
                 'contact'=>$contact,
-                'password'=>$password,
+                'password'=>Hash::make($password),
                 'type'=>$type
             ]);
         }
