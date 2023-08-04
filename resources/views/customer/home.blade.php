@@ -102,6 +102,7 @@
 
     <script>
         $(document).bind("click", function(event) {
+            event.preventDefault();
             var balpop = document.getElementById("balpop");
             balpop.style.display = 'none';
             $('#home').removeClass('overlay')
