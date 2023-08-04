@@ -98,14 +98,12 @@
                         </label>
                     </div>
                 </div>
-                <div class="col s12 row">
                     <div class="input-field col s3 l1">
                         <button class="btn amber darken-1">Apply</button>
                     </div>
                     <div class="input-field col s3 l1">
                         <a class="btn amber darken-1" href="{{ url('/productreport') }}">Clear</a>
                     </div>
-                </div>
 
 
             </form>
@@ -312,6 +310,5 @@
                 $('.hidden').toggle();
             }
         </script>
-
     </div>
 @endsection
