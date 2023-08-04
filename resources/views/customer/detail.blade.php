@@ -131,17 +131,21 @@
                 Transport Detail: {{ $data[0]->transport }}
             </div>
         </div>
+        {{-- <span class="btn amber" onclick="disback()">
+            disable
+        </span> --}}
     </div>
-    <script>
-      disableback();
-        function disableback(){
-            window.history.pushState(null, "", window.location.href);
-            console.log(window.location.href)
+    {{-- <script language='javascript' type='text/javascript'>
+        function DisableBackButton() {
+            window.history.forward()
         }
-        window.onpopstate = function() {
-      disableback();
-            window.history.pushState(null, "", window.location.href);
-            window.open('/home', "_self")
+        DisableBackButton();
+        window.onload = DisableBackButton();
+        window.onpageshow = function(evt) {
+            if (evt.persisted) DisableBackButton()
         }
-    </script>
+        window.onunload = function() {
+            void(0)
+        }
+    </script> --}}
 @endsection

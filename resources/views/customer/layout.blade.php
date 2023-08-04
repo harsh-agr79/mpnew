@@ -35,7 +35,7 @@
     @extends('style')
 </head>
 
-<body class="has-fixed-sidenav">
+<body class="has-fixed-sidenav" onload="disback()">
     <header>
         <div class="navbar-fixed">
             <nav class="navbar topnv">
