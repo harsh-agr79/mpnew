@@ -204,16 +204,14 @@
                                 </th>
                             @endforeach
                         </tr>
-                        {{-- <tr>
+                        <tr>
                             <th>Date/Category</th>
                             @foreach ($data as $item)
-                                <th
-                                    @if ($item->hide == 'on') style="display: none;"
-                           class="hidden" @endif>
+                                <th @if ($item->hide == 'on') style="display: none;" class="hidden" @endif>
                                     {{ $item->name }}
                                 </th>
                             @endforeach
-                        </tr> --}}
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (json_decode($testdata) as $item)
