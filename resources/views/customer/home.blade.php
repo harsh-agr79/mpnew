@@ -63,7 +63,7 @@
    
 @endsection
 
-@if (time() - session()->get('USER_TIME') < 10)
+@if (time() - session()->get('USER_TIME') < 20)
 <div class="bal-popup" id="balpop" onclick="closefunc()">
     @php
         $bal = explode('|', $user->balance);
