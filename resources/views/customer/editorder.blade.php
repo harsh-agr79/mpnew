@@ -3,6 +3,11 @@
 @extends('customer/layout')
 
 @section('main')
+<script type="text/javascript">
+    function preback() { window.history.forward(); }
+    setTimeout("preback()", 0);
+    window.onunload = function() {null};
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="row bg-content textcol">
@@ -268,5 +273,9 @@
                 }
             }
         }
+    $('#rform').submit(function(){
+        $('.sub-btn').text('Order Sent').attr('disabled', 'true');
+        window.history.pushState(null, document.title, '/home');
+    })
     </script>
 @endsection
