@@ -318,6 +318,12 @@
 
 
     </header>
+    @if($admin->type != 'marketer')
+                <div id="reload-btn" style="display: none;">
+                   <a href="{{url('/')}}" class="btn white black-text" style="border-radius: 20px; position: fixed; top: 10%; left: 50%;
+                   transform: translateX(-50%);"><i class="material-icons left">arrow_upward</i>New Orders</a> 
+                </div>
+        @endif
     <main>
         <div class="mp-container">
             @yield('main')
@@ -466,7 +472,7 @@
                 // };
                 // new Notification(title, options);
                 notification(message);
-                // $('#reload-btn').show();
+                $('#reload-btn').show();
             });
         })
             function notification(message) {
