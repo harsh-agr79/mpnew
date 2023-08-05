@@ -348,7 +348,7 @@
      
                  let chatInput = $('#chatInput');
      
-                 var name = $('#cusname').text()
+                 var name = `{{$user->name}}`
  
                  var message = "New Order From " + name
                 $('#rform').on('submit', function() {
