@@ -465,7 +465,7 @@
                 // };
                 // new Notification(title, options);
                 notification(message);
-                $('#reload-btn').show();
+                // $('#reload-btn').show();
             });
         })
             function notification(message) {
