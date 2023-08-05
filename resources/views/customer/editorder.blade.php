@@ -36,7 +36,7 @@
       <div style="font-size: 8px; text-transform: uppercase; margin-top:4px;" class="textcol">others</div></a>
     </div>
 </div>
-    <form enctype="multipart/form-data" class="mp-container" action="{{ route('user.editorder') }}" method="post">
+    <form enctype="multipart/form-data" class="mp-container" id="rform" action="{{ route('user.editorder') }}" method="post">
         @csrf
         <input type="hidden" name="orderid" value="{{ $order[0]->orderid }}">
         <div class="mp-card" style="margin-top: 20px;">
@@ -112,7 +112,7 @@
                 <a class="btn red modal-close">
                     Edit
                 </a>
-                <button class="btn amber" type="submit">
+                <button class="btn amber" class="sub-btn" type="submit">
                     Submit
                 </button>
             </div>
