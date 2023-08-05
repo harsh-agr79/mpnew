@@ -46,7 +46,11 @@ class CustomerController extends Controller
             $result['shopname'] = $cus->shopname;
             $result['userid'] = $cus->user_id;
             $result['contact'] = $cus->contact;
+            $result['contact2'] = $cus->contact2;
             $result['address'] = $cus->address;
+            $result['area'] = $cus->area;
+            $result['state'] = $cus->state;
+            $result['district'] = $cus->district;
             $result['uniqueid'] = $cus->cusuni_id;
             $result['refname'] = $cus->refname;
             $result['password'] = $cus->password;
@@ -61,7 +65,11 @@ class CustomerController extends Controller
             $result['shopname'] = '';
             $result['userid'] = '';
             $result['contact'] = '';
+            $result['contact2'] = '';
             $result['address'] = '';
+            $result['area'] = '';
+            $result['state'] = '';
+            $result['district'] = '';
             $result['uniqueid'] = '';
             $result['refname'] = '';
             $result['password'] = '';
