@@ -12,14 +12,14 @@
             @if ($data[0]->mainstatus == 'blue')
             <div class="col s12">
                 <div style="margin: 10px 0;">
-                    <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}"
+                    <a href="{{ url('/user/editorder/' . $data[0]->orderid) }}"
                         class="btn-small amber white-text">
                         Edit
                         <i class="material-icons right">edit</i>
                     </a>
                 </div>
                 <div>
-                    <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}"
+                    <a href="{{ url('/user/deleteorder/' . $data[0]->orderid) }}"
                         class="btn-small red white-text">
                         Delete
                         <i class="material-icons right">delete</i>
