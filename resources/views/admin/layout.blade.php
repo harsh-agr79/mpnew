@@ -164,8 +164,9 @@
                                                     class="material-icons textcol">show_chart</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('productreport', $perms))
-                                    <li><a href="{{ url('/productreport') }}" class="textcol">Product Report<i
-                                                class="material-icons textcol">show_chart</i></a></li>
+                                    <li><a href="{{ url('/productreport') }}" class="textcol">Product Report<i class="material-symbols-outlined textcol">
+                                        query_stats
+                                    </i></a></li>
                                     @endif
                                 </ul>
                             </div>
