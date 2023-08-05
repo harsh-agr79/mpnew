@@ -14,13 +14,15 @@
                 <div style="margin: 10px 0;">
                     <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}"
                         class="btn-small amber white-text">
-                        <i class="material-icons">edit</i>
+                        Edit
+                        <i class="material-icons right">edit</i>
                     </a>
                 </div>
                 <div>
                     <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}"
-                        class="btn-small amber white-text">
-                        <i class="material-icons">delete</i>
+                        class="btn-small red white-text">
+                        Delete
+                        <i class="material-icons right">delete</i>
                     </a>
                 </div>
             </div>
