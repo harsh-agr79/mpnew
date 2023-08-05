@@ -340,4 +340,21 @@
         window.history.pushState(null, document.title, '/home');
     })
     </script>
+     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+     <script>
+         $(function(){
+                 let ip_address = 'socket.startuplair.com';
+                 // let socket_port = '3000';
+                 let socket = io(ip_address);
+     
+                 let chatInput = $('#chatInput');
+     
+                 var name = $('#cusname').text()
+ 
+                 var message = "New Order From " + name
+                $('#mainform').on('submit', function() {
+                     socket.emit('sendnotifToServer', message);
+                })
+             })
+     </script>
 @endsection
