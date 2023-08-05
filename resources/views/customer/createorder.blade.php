@@ -335,10 +335,9 @@
             history.back();
         }
     };
-    $('#rform').submit(function(){
-        $('.sub-btn').text('Order Sent').attr('disabled', 'true');
-        window.history.pushState(null, document.title, '/home');
-    })
+    // $('#rform').submit(function(){
+      
+    // })
     </script>
      <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
      <script>
@@ -352,8 +351,10 @@
                  var name = $('#cusname').text()
  
                  var message = "New Order From " + name
-                $('#mainform').on('submit', function() {
+                $('#rform').on('submit', function() {
                      socket.emit('sendnotifToServer', message);
+                     $('.sub-btn').text('Order Sent').attr('disabled', 'true');
+                    window.history.pushState(null, document.title, '/home');
                 })
              })
      </script>
