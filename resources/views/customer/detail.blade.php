@@ -8,30 +8,38 @@
             ->first();
     @endphp
     <div class="mp-container">
-        <div class="right center">
+        <div class="right center row">
             @if ($data[0]->mainstatus == 'blue')
-                <div>
-                    <a class="btn-flat dropdown-trigger" data-target="menu">
-                        <i class="material-icons">more_vert</i>
+            <div class="col s6">
+                <div style="margin: 10px 0;">
+                    <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}"
+                        class="btn-small amber white-text">
+                        <i class="material-icons">edit</i>
                     </a>
-                    <ul id='menu' class='dropdown-content'>
-                        <li><a href="{{ url('/user/editorder/' . $data[0]->orderid) }}">Edit</a></li>
-                        <li><a href="{{ url('/user/deleteorder/' . $data[0]->orderid) }}">Delete</a></li>
-                    </ul>
                 </div>
+                <div>
+                    <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}"
+                        class="btn-small amber white-text">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </div>
+            </div>
+
             @endif
             @if ($data[0]->mainstatus != 'blue')
-                <div style="margin: 10px 0;">
-                    <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}" target="_blank"
-                        class="btn-small amber white-text">
-                        Img <i class="material-icons right">file_download</i>
-                    </a>
-                </div>
-                <div>
-                    <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}" target="_blank"
-                        class="btn-small amber white-text">
-                        PDF <i class="material-icons right">picture_as_pdf</i>
-                    </a>
+                <div class="col s6">
+                    <div style="margin: 10px 0;">
+                        <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}" target="_blank"
+                            class="btn-small amber white-text">
+                            Img <i class="material-icons right">file_download</i>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ url('/user/printorder/' . $data[0]->orderid) }}" target="_blank"
+                            class="btn-small amber white-text">
+                            PDF <i class="material-icons right">picture_as_pdf</i>
+                        </a>
+                    </div>
                 </div>
             @endif
         </div>
@@ -132,4 +140,12 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        clickButton()
+
+        function clickButton() {
+            document.querySelector('.eddl').click();
+        }
+    </script>
 @endsection
