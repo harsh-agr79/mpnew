@@ -109,12 +109,12 @@
                                     <option class="black-text" value="" selected disabled>Select State</option>
                                 @endif
                                 <option value="Bagmati">Bagmati</option>
-                                <option value="Karnali">Bagmati</option>
-                                <option value="Koshi">Bagmati</option>
-                                <option value="Gandaki">Bagmati</option>
-                                <option value="Madhesh">Bagmati</option>
-                                <option value="Lumbini">Bagmati</option>
-                                <option value="Sudur Paschim">Bagmati</option>
+                                <option value="Karnali">Karnali</option>
+                                <option value="Koshi">Koshi</option>
+                                <option value="Gandaki">Gandaki</option>
+                                <option value="Madhesh">Madhesh</option>
+                                <option value="Lumbini">Lumbini</option>
+                                <option value="Sudur Paschim">Sudur Paschim</option>
                             </select>
                         </div>
                     </div>
