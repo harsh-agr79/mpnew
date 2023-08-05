@@ -10,7 +10,7 @@
     <div class="mp-container">
         <div class="right center row">
             @if ($data[0]->mainstatus == 'blue')
-            <div class="col s6">
+            <div class="col s12">
                 <div style="margin: 10px 0;">
                     <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}"
                         class="btn-small amber white-text">
@@ -27,7 +27,7 @@
 
             @endif
             @if ($data[0]->mainstatus != 'blue')
-                <div class="col s6">
+                <div class="col s12">
                     <div style="margin: 10px 0;">
                         <a href="{{ url('/user/saveorder/' . $data[0]->orderid) }}" target="_blank"
                             class="btn-small amber white-text">
