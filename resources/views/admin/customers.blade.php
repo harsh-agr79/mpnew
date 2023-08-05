@@ -42,6 +42,9 @@
                     <th class="referer" style="display: none;">referer</th>
                     <th class="uniqueid" style="display: none;">Unique Id</th>
                     <th class="activity" style="display: none;">activity</th>
+                    @if($admin->type == 'admin')
+                    <th>Direct Login</th>
+                    @endif
                 </thead>
                 <tbody>
                     @php
@@ -69,6 +72,11 @@
                             <td class="referer" style="display: none;">{{ $item->refname }}</td>
                             <td class="uniqueid" style="display: none;">{{ $item->cusuni_id }}</td>
                             <td class="activity" style="display: none;">{{ $item->activity }}</td>
+                            @if($admin->type == 'admin')
+                                <td><a href="{{url('directlogin/customer/'.$item->id)}}" class="btn-small amber textcol"><i class="material-symbols-outlined textcol">
+                                    login
+                                </i></a></td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

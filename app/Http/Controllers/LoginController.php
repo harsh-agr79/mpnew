@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller
 {
@@ -110,5 +111,30 @@ class LoginController extends Controller
         
         return response()->json('success', 200);
     }
+    public function changeLogin(Request $request, $id){
+        if(session()->get('ADMIN_TYPE') == 'admin'){
+            $admin = Crypt::encryptString(session()->get('ADMIN_ID'));
+            $customer = DB::Table('customers')->where('id', $id)->first();
     
+            session()->flush();
+            $request->session()->put('USER_LOGIN', true);
+            $request->session()->put('USER_ID', $customer->id);
+            $request->session()->put('USER_TIME', time());
+            $request->Session()->put('ADMIN_DIRECT', true);
+            $request->session()->put('ADMIN_ID', $admin);
+        }
+        return redirect('/');
+    }
+    public function changeLoginBack(Request $request, $id){
+        if(session()->has('ADMIN_DIRECT')){
+            $adminid = Crypt::decryptString($id);
+            $admin = DB::table('admins')->where('id',$adminid)->first();
+            session()->flush();
+                    $request->session()->put('ADMIN_LOGIN', true);
+                    $request->session()->put('ADMIN_ID', $admin->id);
+                    $request->session()->put('ADMIN_TIME', time() );
+                    $request->session()->put('ADMIN_TYPE', $admin->type);
+        }
+        return redirect('/');
+    }
 }

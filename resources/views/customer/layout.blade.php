@@ -25,6 +25,7 @@
         rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
@@ -114,6 +115,13 @@
                                 class="material-icons textcol">multiline_chart</i></a></li>
                     <li class="bold"><a href="{{ url('/user/statement') }}" class="textcol">Statement<i
                                 class="material-icons textcol">web</i></a></li>
+                    @if(session()->has('ADMIN_DIRECT'))
+                    <li class="bold"><a href="{{ url('/admin/directlogin/goback/'.session()->get('ADMIN_ID')) }}" class="textcol">Back To Admin Panel<i class="material-symbols-outlined textcol">
+                        logout
+                    </i></a></li>
+                    @else
+                        
+                    @endif
                 </ul>
             </li>
         </ul>

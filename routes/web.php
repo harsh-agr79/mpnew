@@ -182,6 +182,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('finditem', [ProductController::class, 'getproduct']);
     Route::get('/getref', [AnalyticsController::class, 'getref']);
     Route::get('/getsubcat/{id}', [SubcategoryController::class, 'getsubcat']);
+
+    Route::get('/directlogin/customer/{id}',[ LoginController::class, 'changeLogin']);
 });
 
 
@@ -247,5 +249,6 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::post('/user/editprofile', [CustomerViewController::class, 'edpr_process'])->name('editpr');
 
     Route::get('/user/timeupdate', [LoginController::class, 'set_time']);
+    Route::get('/admin/directlogin/goback/{id}', [LoginController::class, 'changeLoginBack']);
 });
 
