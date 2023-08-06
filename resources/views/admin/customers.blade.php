@@ -122,7 +122,7 @@
                                     <td class="target" style="display: none;">{{ money($t = $target->net) }}</td>
                                     @if (!$sales->isEmpty())
                                         <td class="sales" style="display: none;">
-                                            {{ money($s = $sales[0]->samt - $sales[0]->damt) }}</td>
+                                            {{$s = $sales[0]->samt - $sales[0]->damt }}</td>
                                         <td class="completed" style="display: none;">{{ round(($s / $t) * 100) }}%</td>
                                     @else
                                         <td class="sales"style="display: none;"></td>
@@ -134,7 +134,7 @@
                                     <td class="target" style="display: none;"></td>
                                     @if (!$sales->isEmpty())
                                         <td class="sales" style="display: none;">
-                                            {{ money($s = $sales[0]->samt - $sales[0]->damt) }}</td>
+                                            {{$s = $sales[0]->samt - $sales[0]->damt }}</td>
                                         <td class="completed" style="display: none;"></td>
                                     @else
                                         <td class="sales"style="display: none;"></td>
@@ -158,8 +158,11 @@
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td id="totalrows"></td>
+                            <td></td>
                             <td>Total Rows</td>
+                            <td id="totalrows"></td>
+                            <td>Total Sales:</td>
+                            <td id="totalsales"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -211,6 +214,7 @@
             }
 
             let sum = 0;
+            let sale = 0;
             for (var i = 0; i < tr.length; i++) {
                 let td = tr[i].getElementsByTagName('td');
                 // console.log(td);
@@ -219,6 +223,9 @@
                         let textvalue = td[j].textContent || td[j].innerHTML;
                         if (textvalue.toLowerCase().indexOf(filter) > -1) {
                             tr[i].style.display = "";
+                            var sales = tr[i].getElementsByClassName('sales');
+                            var ttl = parseInt(sales[0].textContent) || 0; 
+                            sale = sale + ttl;
                             sum = sum + 1;
                             break;
                         } else {
@@ -228,6 +235,7 @@
                 }
             }
             $('#totalrows').text(sum);
+            $('#totalsales').text(sale);
         }
     </script>
     <script>
