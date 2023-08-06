@@ -129,13 +129,13 @@
                                         <td class="completed" style="display: none;"></td>
                                     @endif
                                 @else
-                                    <td class="startdate" style="display: none;"></td>
-                                    <td class="enddate" style="display: none;"></td>
+                                    <td class="startdate" style="display: none;">{{$date}}</td>
+                                    <td class="enddate" style="display: none;">{{$date2}}</td>
                                     <td class="target" style="display: none;"></td>
                                     @if (!$sales->isEmpty())
                                         <td class="sales" style="display: none;">
                                             {{ money($s = $sales[0]->samt - $sales[0]->damt) }}</td>
-                                        <td class="completed" style="display: none;">{{ round(($s / $t) * 100) }}%</td>
+                                        <td class="completed" style="display: none;"></td>
                                     @else
                                         <td class="sales"style="display: none;"></td>
                                         <td class="completed" style="display: none;"></td>
