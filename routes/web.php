@@ -19,6 +19,7 @@ use App\Http\Controllers\MarketerController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerViewController;
+use App\Http\Controllers\AdminChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -182,6 +183,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('finditem', [ProductController::class, 'getproduct']);
     Route::get('/getref', [AnalyticsController::class, 'getref']);
     Route::get('/getsubcat/{id}', [SubcategoryController::class, 'getsubcat']);
+
+    Route::get('/Chats', [AdminChatController::class, 'Adminchat']);
 
     Route::get('/directlogin/customer/{id}',[ LoginController::class, 'changeLogin']);
 });

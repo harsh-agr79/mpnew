@@ -54,6 +54,9 @@ class CustomerController extends Controller
             $result['district'] = $cus->district;
             $result['uniqueid'] = $cus->cusuni_id;
             $result['refname'] = $cus->refname;
+            $result['taxtype'] = $cus->taxtype;
+            $result['taxnum'] = $cus->taxnum;
+            $result['DOB'] = $cus->DOB;
             $result['password'] = $cus->password;
             $result['openbalance'] = $cus->openbalance;
             $result['obtype'] = $cus->obtype;
@@ -73,6 +76,9 @@ class CustomerController extends Controller
             $result['district'] = '';
             $result['uniqueid'] = '';
             $result['refname'] = '';
+            $result['taxtype'] = '';
+            $result['taxnum'] = '';
+            $result['DOB'] = '';
             $result['password'] = '';
             $result['openbalance'] = '';
             $result['obtype'] = '';
@@ -129,6 +135,9 @@ class CustomerController extends Controller
                 'contact2'=>$request->post('contact2'),
                 'cusuni_id'=>$request->post('uniqueid'),
                 'refname'=>$request->post('refname'),
+                'taxtype'=>$request->post('taxtype'),
+                'taxnum'=>$request->post('taxnum'),
+                'DOB'=>$request->post('DOB'),
                 'refid'=>$refid,
                 'reftype'=>$reftype,
                 'password'=>$password,
@@ -190,6 +199,9 @@ class CustomerController extends Controller
                 'contact2'=>$request->post('contact2'),
                 'cusuni_id'=>$request->post('uniqueid'),
                 'refname'=>$request->post('refname'),
+                'taxtype'=>$request->post('taxtype'),
+                'taxnum'=>$request->post('taxnum'),
+                'DOB'=>$request->post('DOB'),
                 'refid'=>$refid,
                 'reftype'=>$reftype,
                 'password'=>Hash::make($request->post('passwordnew')),

@@ -2,7 +2,7 @@
 
 @section('main')
     <div>
-        <div class="mp-card" style="margin-top: 5vh;">
+        <div class="mp-card container" style="margin-top: 5vh;">
             <div>
                 <h6 class="center">Add Customer</h6>
             </div>
@@ -11,42 +11,42 @@
                 <div class="row">
 
 
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Name:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="name" value="{{ $name }}"
                                 class="inp black-text browser-default" placeholder="Name" required>
                         </div>
                         <input type="hidden" name="name1" value="{{ $name }}">
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Shop-Name:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="shopname" value="{{ $shopname }}"
                                 class="inp black-text browser-default" placeholder="Shop-name" required>
                         </div>
                     </div>
-                    <div class="col s12 row">
+                    <div class="col s12 row valign-wrapper">
                         @error('userid')
-                            <div class="red-text">{{ $message }}</div>
-                        @enderror
-                        <div class="col s6">
+                        <div class="red-text">{{ $message }}</div>
+                    @enderror
+                        <div class="col s4 right-align">
                             User ID:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="userid" value="{{ $userid }}"
                                 class="inp black-text browser-default" placeholder="User Id" required>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6" style="margin-top:20px;">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Password:
                         </div>
-                        <div class='input-field col s6'>
+                        <div class='input-field col s8'>
                             <input class='validate browser-default inp black-text' placeholder="password" type='password'
                                 name='passwordnew' id='password' @if ($id == '') required @endif />
                             <span toggle="#password" class="field-icon toggle-password"><span
@@ -54,55 +54,54 @@
                         </div>
                     </div>
                     <input type="hidden" name="passwordold" value="{{ $password }}">
-                    <div class="col s12 row">
+                    <div class="col s12 row valign-wrapper">
                         @error('contact')
-                            <div class="red-text">{{ $message }}</div>
-                        @enderror
-                        <div class="col s6">
+                        <div class="red-text">{{ $message }}</div>
+                    @enderror
+                        <div class="col s4 right-align">
                             Contact:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="contact" value="{{ $contact }}"
                                 class="inp black-text browser-default" placeholder="contact" required>
                         </div>
                     </div>
-                    <div class="col s12 row">
+                    <div class="col s12 row valign-wrapper">
                         @error('contact')
-                            <div class="red-text">{{ $message }}</div>
-                        @enderror
-                        <div class="col s6">
+                        <div class="red-text">{{ $message }}</div>
+                    @enderror
+                        <div class="col s4 right-align">
                             Contact 2:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="contact2" value="{{ $contact2 }}"
                                 class="inp black-text browser-default" placeholder="contact 2" required>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Address:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="address" value="{{ $address }}"
                                 class="inp black-text browser-default" placeholder="Address" required>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Area:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="area" value="{{ $area }}"
                                 class="inp black-text browser-default" placeholder="Area" required>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             State:
                         </div>
-                        <div class="col s6">
-                            <select id="state" name="state"
-                                class="browser-default selectinp black-text" required>
+                        <div class="col s8">
+                            <select id="state" name="state" class="browser-default selectinp black-text" required>
                                 @if ($state != null)
                                     <option selected value="{{ $state }}">{{ $state }}</option>
                                 @else
@@ -118,11 +117,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             District:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <select id="district" name="district" class="browser-default selectinp black-text" required>
                                 @if ($district != null)
                                     <option selected value="{{ $district }}">{{ $district }}</option>
@@ -132,44 +131,69 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col s12 row">
+                    <div class="col s12 row valign-wrapper">
                         @error('uniqueid')
-                            <div class="red-text">{{ $message }}</div>
-                        @enderror
-                        <div class="col s6">
+                        <div class="red-text">{{ $message }}</div>
+                    @enderror
+                        <div class="col s4 right-align">
                             Unique Id:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <input type="text" name="uniqueid" value="{{ $uniqueid }}"
                                 class="inp black-text browser-default" placeholder="Unique Id" required>
                         </div>
                         <input type="hidden" name="uniold" value="{{ $uniqueid }}">
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Referer:
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s8">
                             <input type="text" name="refname" value="{{ $refname }}" id="customer"
                                 class="autocomplete inp black-text browser-default" placeholder="referer"
                                 autocomplete="off">
                         </div>
                     </div>
-
-                    <div class="col s12 row">
-                        <div class="col s6">
-                            Open Balance:
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
+                            Tax Type:
                         </div>
-                        <div class="col s6">
-                            <input type="text" name="openbalance" value="{{ $openbalance }}"
-                                class="inp black-text browser-default" placeholder="openbalance">
+                        <div class="col s8">
+                            <select id="select1" name="taxtype" class="browser-default selectinp black-text">
+                                @if ($taxtype != null)
+                                    <option selected value="{{ $taxtype }}">{{ $taxtype }}</option>
+                                    <option class="black-text" value="">PAN/VAT Type</option>
+                                @else
+                                    <option class="black-text" value="" selected disabled>PAN/VAT Type</option>
+                                @endif
+                                <option class="black-text" value="PAN">PAN</option>
+                                <option class="black-text" value="VAT">VAT</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
-                            Open-balance Type:
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
+                            Tax Number:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
+                            <input type="text" name="taxnum" value="{{ $taxnum }}"
+                                class="inp black-text browser-default" placeholder="PAN/VAT no.">
+                        </div>
+                    </div>
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
+                            DOB:
+                        </div>
+                        <div class="col s8">
+                            <input type="date" name="DOB" value="{{ $DOB }}"
+                                class="inp black-text browser-default" placeholder="DOB">
+                        </div>
+                    </div>
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
+                            Open Balance:
+                        </div>
+                        <div class="col s8">
                             <select id="select1" name="obtype" class="browser-default selectinp black-text">
                                 @if ($obtype != null)
                                     <option selected value="{{ $obtype }}">{{ $obtype }}</option>
@@ -182,11 +206,29 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
+                            Open-balance Type:
+                        </div>
+                        <div class="col s8">
+                            <select id="select1" name="obtype" class="browser-default selectinp black-text">
+                                @if ($obtype != null)
+                                    <option selected value="{{ $obtype }}">{{ $obtype }}</option>
+                                    <option class="black-text" value="">Open Balance Type</option>
+                                @else
+                                    <option class="black-text" value="" selected disabled>Open Balance Type</option>
+                                @endif
+                                <option class="black-text" value="debit">Debit</option>
+                                <option class="black-text" value="credit">Credit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Type:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <select id="select1" name="type" class="browser-default selectinp black-text" required>
                                 @if ($type != null)
                                     <option selected value="{{ $type }}">{{ $type }}</option>
@@ -200,11 +242,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col s12 row">
-                        <div class="col s6">
+                    <div class="col s12 row valign-wrapper">
+                        <div class="col s4 right-align">
                             Website From:
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <select id="select1" name="from" class="browser-default selectinp black-text">
                                 @if ($from != null)
                                     <option selected value="{{ $from }}">{{ $from }}</option>
@@ -231,8 +273,8 @@
         </div>
     </div>
     <script>
-       $('#state').on('change', function() {
-        var value = $('#state').val()
+        $('#state').on('change', function() {
+            var value = $('#state').val()
             // console.log(value);
             var bag = [
                 "sindhuli",
@@ -324,42 +366,42 @@
                 "kailali",
                 "kanchanpur"
             ]
-           
-            if(value == 'Bagmati'){
+
+            if (value == 'Bagmati') {
                 var dis = bag;
             }
-            if(value == 'Gandaki'){
+            if (value == 'Gandaki') {
                 var dis = gan;
             }
-            if(value == 'Karnali'){
+            if (value == 'Karnali') {
                 var dis = kar
             }
-            if(value == 'Madhesh'){
+            if (value == 'Madhesh') {
                 var dis = mad
             }
-            if(value == 'Koshi'){
+            if (value == 'Koshi') {
                 var dis = kos
             }
-            if(value == 'Lumbini'){
+            if (value == 'Lumbini') {
                 var dis = lum
             }
-            if(value == 'Sudur Paschim'){
-               var dis = sud
+            if (value == 'Sudur Paschim') {
+                var dis = sud
             }
             console.log(dis)
             var sc = $('#district');
             sc.empty();
             sc.append($('<option></option>').attr('value', null).attr('selected', 'true').text(
-                        'select District'));
+                'select District'));
             // dis.forEach(element => {
             //     $sc.append($('<option></option>')
             //                 .attr("value", value.subcategory).text(value.subcategory))
             // });
             for (let i = 0; i < dis.length; i++) {
                 sc.append($('<option></option>')
-                            .attr("value", dis[i]).text(dis[i]))
+                    .attr("value", dis[i]).text(dis[i]))
             }
-       })
+        })
     </script>
     <script>
         var clicked = 0;
