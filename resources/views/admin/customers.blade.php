@@ -122,19 +122,19 @@
                                     <td class="target" style="display: none;">{{ money($t = $target->net) }}</td>
                                     @if (!$sales->isEmpty())
                                         <td class="sales" style="display: none;">
-                                            {{$s = $sales[0]->samt - $sales[0]->damt }}</td>
+                                            {{ $s = $sales[0]->samt - $sales[0]->damt }}</td>
                                         <td class="completed" style="display: none;">{{ round(($s / $t) * 100) }}%</td>
                                     @else
                                         <td class="sales"style="display: none;"></td>
                                         <td class="completed" style="display: none;"></td>
                                     @endif
                                 @else
-                                    <td class="startdate" style="display: none;">{{$date}}</td>
-                                    <td class="enddate" style="display: none;">{{$date2}}</td>
+                                    <td class="startdate" style="display: none;">{{ $date }}</td>
+                                    <td class="enddate" style="display: none;">{{ $date2 }}</td>
                                     <td class="target" style="display: none;"></td>
                                     @if (!$sales->isEmpty())
                                         <td class="sales" style="display: none;">
-                                            {{$s = $sales[0]->samt - $sales[0]->damt }}</td>
+                                            {{ $s = $sales[0]->samt - $sales[0]->damt }}</td>
                                         <td class="completed" style="display: none;"></td>
                                     @else
                                         <td class="sales"style="display: none;"></td>
@@ -194,6 +194,7 @@
     <script>
         const searchFun = () => {
             var filter = $('#search').val().toLowerCase();
+            var text = filter.split(" ");
             const a = document.getElementById('search');
             const clsBtn = document.getElementById('close-search');
             let table = document.getElementsByTagName('table');
@@ -213,27 +214,36 @@
                 $('#cs-icon').text('close')
             }
 
-            let sum = 0;
-            let sale = 0;
-            for (var i = 0; i < tr.length; i++) {
-                let td = tr[i].getElementsByTagName('td');
-                // console.log(td);
-                for (var j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        let textvalue = td[j].textContent || td[j].innerHTML;
-                        if (textvalue.toLowerCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            var sales = tr[i].getElementsByClassName('sales');
-                            var ttl = parseInt(sales[0].textContent) || 0; 
-                            sale = sale + ttl;
-                            sum = sum + 1;
-                            break;
-                        } else {
-                            tr[i].style.display = "none"
+
+            for (let k = 0; k < text.length; k++) {
+
+                for (var i = 0; i < tr.length; i++) {
+                    let td = tr[i].getElementsByTagName('td');
+                    // console.log(td);
+                    for (var j = 0; j < td.length; j++) {
+                        if (td[j]) {
+                            let textvalue = td[j].textContent || td[j].innerHTML;
+                            if (textvalue.toLowerCase().indexOf(text[k]) > -1) {
+                                tr[i].style.display = "";
+                                break;
+                            } else {
+                                tr[i].style.display = "none"
+                            }
                         }
                     }
                 }
+                tr = $('tbody > tr:not([style*="display: none"])');
             }
+            let sum = 0;
+            let sale = 0;
+            var newtr = $('tbody > tr:not([style*="display: none"])');
+            for (var i = 0; i < newtr.length; i++) {
+                let sales = tr[i].getElementsByClassName('sales');
+                var ttl = parseInt(sales[0].textContent) || 0;
+                sale = sale + ttl;
+                sum = sum + 1;
+            }
+
             $('#totalrows').text(sum);
             $('#totalsales').text(sale);
         }
