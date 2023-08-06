@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="mp-card" style="margin-top:10px; margin-bottom:10px;">
+        <div class="mp-card" style="margin-bottom:10px;">
             <div class="row" style="margin: 0; padding: 0;">
                 <div class="col s4">
                     Totol Rows: <span id="totalrows"></span>
