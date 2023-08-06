@@ -231,6 +231,7 @@
                                 <option class="black-text" value="dealer">Dealer</option>
                                 <option class="black-text" value="wholesaler">wholesaler</option>
                                 <option class="black-text" value="retailer">Retailer</option>
+                                <option class="black-text" value="ecommerce">Ecommerce</option>
                             </select>
                         </div>
                     </div>
