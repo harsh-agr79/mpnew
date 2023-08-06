@@ -75,7 +75,7 @@
                         </div>
                         <div class="col s8">
                             <input type="text" name="contact2" value="{{ $contact2 }}"
-                                class="inp black-text browser-default" placeholder="contact 2" required>
+                                class="inp black-text browser-default" placeholder="contact 2">
                         </div>
                     </div>
                     <div class="col s12 row valign-wrapper">
