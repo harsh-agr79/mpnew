@@ -150,53 +150,57 @@ class OrderController extends Controller
        $id = $request->post('id', []);
        $status = $request->post('status',[]);
 
-       for ($i=0; $i < count($item); $i++) { 
-        if($quantity[$i] !== NULL && $quantity[$i] !== '0'){
-            if($id[$i]){
-                DB::table('orders')->where('orderid',$orderid)->where('id', $id[$i])->update([
-                    'item'=>$item[$i],
-                    'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
-                    'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
-                    'price'=>$price[$i],
-                    'quantity'=>$quantity[$i],
-                    'mainstatus'=>'blue',
-                    'status'=>$status[$i],
-                ]);
+       if($order->mainstatus == 'blue'){
+        for ($i=0; $i < count($item); $i++) { 
+            if($quantity[$i] !== NULL && $quantity[$i] !== '0'){
+                if($id[$i]){
+                    DB::table('orders')->where('orderid',$orderid)->where('id', $id[$i])->update([
+                        'item'=>$item[$i],
+                        'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
+                        'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                        'price'=>$price[$i],
+                        'quantity'=>$quantity[$i],
+                        'mainstatus'=>'blue',
+                        'status'=>$status[$i],
+                    ]);
+                }
+                else{
+                    DB::table('orders')->insert([
+                        'name'=>$order->name,
+                        'userid'=>$order->userid,
+                        'orderid'=>$orderid,
+                        'item'=>$item[$i],
+                        'cusuni_id'=>$order->cusuni_id,
+                        'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
+                        'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                        'price'=>$price[$i],
+                        'quantity'=>$quantity[$i],
+                        'approvedquantity'=>'0',
+                        'mainstatus'=>'blue',
+                        'status'=>$status[$i],
+                        'created_at'=>$order->created_at,
+                        'refname'=>$order->refname,
+                        'refid'=>$order->refid,
+                        'reftype'=>$order->reftype,
+                        'nepmonth'=>$order->nepmonth,
+                        'nepyear'=>$order->nepyear,
+                        'seen'=>$order->seen,
+                        'seenby'=>$order->seenby,
+                        'save'=>$order->save,
+                        'discount'=>$order->discount,
+                        'remarks'=>$order->remarks,
+                        'userremarks'=>$order->userremarks,
+                    ]);
+                }
             }
-            else{
-                DB::table('orders')->insert([
-                    'name'=>$order->name,
-                    'userid'=>$order->userid,
-                    'orderid'=>$orderid,
-                    'item'=>$item[$i],
-                    'cusuni_id'=>$order->cusuni_id,
-                    'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
-                    'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
-                    'price'=>$price[$i],
-                    'quantity'=>$quantity[$i],
-                    'approvedquantity'=>'0',
-                    'mainstatus'=>'blue',
-                    'status'=>$status[$i],
-                    'created_at'=>$order->created_at,
-                    'refname'=>$order->refname,
-                    'refid'=>$order->refid,
-                    'reftype'=>$order->reftype,
-                    'nepmonth'=>$order->nepmonth,
-                    'nepyear'=>$order->nepyear,
-                    'seen'=>$order->seen,
-                    'seenby'=>$order->seenby,
-                    'save'=>$order->save,
-                    'discount'=>$order->discount,
-                    'remarks'=>$order->remarks,
-                    'userremarks'=>$order->userremarks,
-                ]);
+            elseif ($quantity[$i] == NULL || $quantity[$i] == '0' && $id[$i] !== NULL) {
+                DB::table('orders')->where('id', $id[$i])->delete();
             }
         }
-        elseif ($quantity[$i] == NULL || $quantity[$i] == '0' && $id[$i] !== NULL) {
-            DB::table('orders')->where('id', $id[$i])->delete();
-        }
-    }
-    updateMainStatus($orderid);
+        updateMainStatus($orderid);
+       }
+
+     
     return redirect('/user/detail/'.$orderid);
     }
 
