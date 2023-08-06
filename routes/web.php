@@ -258,5 +258,7 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 
     Route::get('/user/timeupdate', [LoginController::class, 'set_time']);
     Route::get('/admin/directlogin/goback/{id}', [LoginController::class, 'changeLoginBack']);
+
+    Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
 });
 

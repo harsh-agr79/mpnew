@@ -74,17 +74,17 @@
                         @foreach ($data as $item)
                             <tr
                                 oncontextmenu="rightmenu({{ $item->orderid }}, '{{ $item->mainstatus }}'); return false;"
-                                onclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
+                              >
                                 <td>
                                     <div id="{{ $item->orderid . 'order' }}" class="{{ $item->mainstatus }}"
                                         style="height: 35px; width:10px;"></div>
                                 </td>
                                 <td>{{ getNepaliDate($item->created_at) }}</td>
-                                <td>
+                                <td   onclick="opendetail({{ $item->orderid }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                     <div class="row" style="padding: 0; margin: 0;">
-                                        <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}
+                                        <div class="col s12 blue-text" style="font-size: 12px; font-weight: 600;">{{ $item->name }}
                                         </div>
-                                        <div class="col s12" style="font-size: 8px;">{{ $item->orderid }}</div>
+                                        <div class="col s12 blue-text" style="font-size: 8px;">{{ $item->orderid }}</div>
                                     </div>
                                 </td>
                                 <td>{{getTotalAmount($item->orderid)}}</td>
@@ -95,7 +95,14 @@
                                         <i class="material-icons textcol">close</i>
                                     @endif
                                 </td>
-                                <td>{{ $item->recieveddate }}</td>
+                                <td>
+                                    <label>
+                                        <input @if ($item->recieved == 'on')
+                                            checked
+                                        @endif type="checkbox" onclick="recieve({{$item->orderid}})"/>
+                                        <span></span>
+                                      </label>
+                                </td>
                                 @if ($page == 'saved')
                                     <td>
                                         <a href="{{url('user/confirmorder/'.$item->orderid)}}" class="btn amber">
@@ -170,6 +177,15 @@
 
         function opendetail(orderid, seen, ms) {
                 window.open('/user/detail/' + orderid, "_self");
+        }
+        function recieve(id){
+            $.ajax({
+                    type: 'get',
+                    url: '/user/recieve/' + id,
+                    success: function(response) {
+                        console.log(response);
+                    }
+                })
         }
     </script>
 @endsection

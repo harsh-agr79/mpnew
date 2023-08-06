@@ -215,4 +215,19 @@ class OrderController extends Controller
         ]);
         return redirect('user/oldorders');
     }
+    public function recieveorder(Request $request, $id){
+        $order = DB::table('orders')->where('orderid', $id)->get();
+        if($order[0]->recieved == NULL){
+            $val = 'on';
+        }
+        else{
+            $val = NULL;
+        }
+        DB::table('orders')->where('orderid', $id)->update([
+            'recieved'=>$val,
+            'recieveddate'=>date('Y-m-d H:i:s')
+        ]);
+        $msg = 'success';
+        return response()->json($msg,200);
+    }
 }
