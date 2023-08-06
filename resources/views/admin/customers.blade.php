@@ -260,7 +260,7 @@
             var newtr = $('tbody > tr:not([style*="display: none"])');
             for (var i = 0; i < newtr.length; i++) {
                 let sales = tr[i].getElementsByClassName('sales');
-                let balance = tr[i].getElementsByClassName('balance');
+                let balance = tr[i].getElementsByClassName('balance red');
                 var ttl = parseInt(sales[0].textContent) || 0;
                 var bal = parseInt(balance[0].textContent) || 0;
                 sale = sale + ttl;
