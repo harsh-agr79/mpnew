@@ -215,7 +215,7 @@ class CustomerController extends Controller
                 'cus_from'=>$request->post('from'),
             ]);
         }
-      return redirect('/customers');
+      return redirect('/customeractions');
     }
 
     public function deletecustomer(Request $request, $id){
