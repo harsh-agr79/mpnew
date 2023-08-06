@@ -101,6 +101,11 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     Route::post('custupdate', [CustomerController::class, 'addupdate'])->name('addup');
 
+    Route::post('addtarget', [CustomerController::class, 'addtarget'])->name('addtarget');
+    Route::get('deletetarget/{id}/{id2}', [CustomerController::class, 'deletetarget']);
+    Route::get('/gettarget/{id}', [CustomerController::class, 'gettarget']);
+    Route::post('/updatetarget', [CustomerController::class, 'updatetarget'])->name('edittarget');
+
     //Payments CRUD
     Route::get('payments', [PaymentController::class, 'index']);
     Route::get('addpayment', [PaymentController::class, 'addpay']);

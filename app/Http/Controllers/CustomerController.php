@@ -63,6 +63,8 @@ class CustomerController extends Controller
             $result['type'] = $cus->type;
             $result['from'] = $cus->cus_from;
             $result['id'] = $cus->id;
+
+            $result['targets'] = DB::table('target')->where('customerid', $id)->get();
         }
         else{
             $result['name'] = '';
@@ -85,6 +87,8 @@ class CustomerController extends Controller
             $result['type'] = '';
             $result['from'] = '';
             $result['id'] = '';
+
+            $result['targts'] = '';
         }
         return view('admin/addcustomer',$result);
     }
@@ -237,5 +241,96 @@ class CustomerController extends Controller
            ]);
         }
         return redirect('customers');
+    }
+
+    public function addtarget(Request $request){
+        $startdate = $request->post('startdate');
+        $enddate = $request->post('enddate');
+        $gross = $request->post('gross');
+        $net = $request->post('net');
+
+        if($startdate == NULL || $enddate == NULL || $gross == NULL || $net == NULL){
+            
+        }
+        else{
+            $data1 = DB::table('target')->where('customerid', $request->post('id'))
+        ->where('startdate', '<=', $startdate)
+        ->where('enddate', '>=', $startdate)
+        ->get();
+
+        $data2 = DB::table('target')->where('customerid', $request->post('id'))
+        ->where('startdate', '<=', $enddate)
+        ->where('enddate', '>=', $enddate)
+        ->get();
+        $data3 = DB::table('target')->where('customerid', $request->post('id'))
+        ->where('startdate', '>=', $startdate)
+        ->where('enddate', '<=', $enddate)
+        ->get();
+
+        if(count($data1) > 0 || count ($data2) > 0 || count($data3) > 0)
+        {
+            $request->session()->flash('message2', "Date you entered already exists in a range");
+        }
+        else{
+            DB::table('target')->insert([
+                'customerid'=>$request->post('id'),
+                'userid'=>$request->post('user_id'),
+                'gross'=>$gross,
+                'net'=>$net,
+                'startdate'=>$startdate,
+                'enddate'=>$enddate,
+            ]);
+        }
+        }
+
+        return redirect('editcustomer/'.$request->post('id'));
+    }
+    public function deletetarget(Request $request, $userid, $id){
+        DB::table('target')->where('id', $id)->delete();
+        return redirect('editcustomer/'.$userid);
+    }
+    public function gettarget(Request $request,$id){
+        $tar = DB::table('target')->where('id',$id)->first();
+        return response()->json($tar);
+    }
+    public function updatetarget(Request $request){
+        $id= $request->post('id');
+        $userid= $request->post('userid');
+        $startdate = $request->post('startdate');
+        $enddate = $request->post('enddate');
+        $gross = $request->post('gross');
+        $net = $request->post('net');
+
+        $data1 = DB::table('target')->where('customerid', $userid)
+        ->where('id', '!=', $id)
+        ->where('startdate', '<=', $startdate)
+        ->where('enddate', '>=', $startdate)
+        ->get();
+
+        $data2 = DB::table('target')->where('customerid', $userid)
+        ->where('id', '!=', $id)
+        ->where('startdate', '<=', $enddate)
+        ->where('enddate', '>=', $enddate)
+        ->get();
+        $data3 = DB::table('target')->where('customerid', $userid)
+        ->where('id', '!=', $id)
+        ->where('startdate', '>=', $startdate)
+        ->where('enddate', '<=', $enddate)
+        ->get();
+
+        if(count($data1) > 0 || count ($data2) > 0 || count($data3) > 0)
+        {
+            $request->session()->flash('message2', "Date you entered already exists in a range");
+        }
+        else{
+            DB::table('target')->where('id', $id)->update([
+                'gross'=>$gross,
+                'net'=>$net,
+                'startdate'=>$startdate,
+                'enddate'=>$enddate,
+            ]);
+        }
+
+        return redirect('editcustomer/'.$userid);
     }
 }

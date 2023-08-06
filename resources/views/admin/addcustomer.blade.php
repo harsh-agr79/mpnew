@@ -32,8 +32,8 @@
                     </div>
                     <div class="col s12 row valign-wrapper">
                         @error('userid')
-                        <div class="red-text">{{ $message }}</div>
-                    @enderror
+                            <div class="red-text">{{ $message }}</div>
+                        @enderror
                         <div class="col s4 right-align">
                             User ID:
                         </div>
@@ -56,8 +56,8 @@
                     <input type="hidden" name="passwordold" value="{{ $password }}">
                     <div class="col s12 row valign-wrapper">
                         @error('contact')
-                        <div class="red-text">{{ $message }}</div>
-                    @enderror
+                            <div class="red-text">{{ $message }}</div>
+                        @enderror
                         <div class="col s4 right-align">
                             Contact:
                         </div>
@@ -68,8 +68,8 @@
                     </div>
                     <div class="col s12 row valign-wrapper">
                         @error('contact')
-                        <div class="red-text">{{ $message }}</div>
-                    @enderror
+                            <div class="red-text">{{ $message }}</div>
+                        @enderror
                         <div class="col s4 right-align">
                             Contact 2:
                         </div>
@@ -133,8 +133,8 @@
                     </div>
                     <div class="col s12 row valign-wrapper">
                         @error('uniqueid')
-                        <div class="red-text">{{ $message }}</div>
-                    @enderror
+                            <div class="red-text">{{ $message }}</div>
+                        @enderror
                         <div class="col s4 right-align">
                             Unique Id:
                         </div>
@@ -264,6 +264,110 @@
             </form>
         </div>
     </div>
+    @if ($id > 0)
+        <div class="mp-card container" style="margin-top: 10px; margin-bottom: 30px;">
+            <form action="{{ route('addtarget') }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{ $id }}">
+                <input type="hidden" name="user_id" value="{{ $userid }}">
+                <div class="row">
+                    <div class="col s3">
+                        <label> Gross:</label>
+                        <input type="text" class="browser-default inp" placeholder="Gross Target" name="gross">
+                    </div>
+                    <div class="col s3">
+                        <label> Net:</label>
+                        <input type="text" class="browser-default inp" placeholder="Net Target" name="net">
+                    </div>
+                    <div class="col s3">
+                        <label> Start Date:</label>
+                        <input type="date" class="browser-default inp" placeholder="startdate" name="startdate">
+                    </div>
+                    <div class="col s3">
+                        <label> End Date:</label>
+                        <input type="date" class="browser-default inp" placeholder="Gross Target" name="enddate">
+                    </div>
+                    <div class="col s12 center" style="margin-top: 10px;">
+                        <button class="btn amber">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div>
+                <table>
+                    <thead>
+                        <th>start Date</th>
+                        <th>End Date</th>
+                        <th>Gross</th>
+                        <th>Net</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($targets as $item)
+                            <tr>
+                                <td>{{ $item->startdate }}</td>
+                                <td>{{ $item->enddate }}</td>
+                                <td>{{ $item->gross }}</td>
+                                <td>{{ $item->net }}</td>
+                                <td><a class="btn amber modal-trigger" href="#edittarget"
+                                        onclick="changeform({{ $item->id }})"><i class="material-icons">edit</i></a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('deletetarget/' . $id . '/' . $item->id) }}" class="btn-small red">
+                                        <i class="material-icons">
+                                            delete
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="edittarget" class="modal">
+            <form action="{{route('edittarget')}}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="row">
+                        <input type="hidden" name="id" id="tarid">
+                        <input type="hidden" name="userid" value="{{$id}}">
+                        <div class="col s4">Gross:</div>
+                        <div class="col s8"><input type="text" name="gross" id="gross" class="browser-default inp"></div>
+                        <div class="col s4">Net:</div>
+                        <div class="col s8"><input type="text" name="net" id="net" class="browser-default inp"></div>
+                        <div class="col s4">Start date:</div>
+                        <div class="col s8"><input type="date" name="startdate" id="sdate" class="browser-default inp"></div>
+                        <div class="col s4">End Date:</div>
+                        <div class="col s8"><input type="date" name="enddate" id="edate" class="browser-default inp"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn amber">Update</button>
+                </div>
+            </form>
+        </div>
+        <script>
+            function changeform(id) {
+                console.log(id);
+                $.ajax({
+                    type: 'get',
+                    url: '/gettarget/' + id,
+                    success: function(response) {
+                        console.log(response);
+                        $('#gross').val(response.gross)
+                        $('#net').val(response.net)
+                        $('#sdate').val(response.startdate)
+                        $('#edate').val(response.enddate)
+                        $('#tarid').val(response.id)
+                    }
+                })
+            }
+        </script>
+    @endif
+
     <script>
         $('#state').on('change', function() {
             var value = $('#state').val()
