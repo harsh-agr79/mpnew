@@ -219,13 +219,15 @@ class OrderController extends Controller
         $order = DB::table('orders')->where('orderid', $id)->get();
         if($order[0]->recieved == NULL){
             $val = 'on';
+            $date = date('Y-m-d H:i:s');
         }
         else{
             $val = NULL;
+            $date = NULL;
         }
         DB::table('orders')->where('orderid', $id)->update([
             'recieved'=>$val,
-            'recieveddate'=>date('Y-m-d H:i:s')
+            'recieveddate'=>$date
         ]);
         $msg = 'success';
         return response()->json($msg,200);
