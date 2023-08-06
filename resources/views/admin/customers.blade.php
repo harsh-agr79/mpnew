@@ -194,7 +194,7 @@
     <script>
         const searchFun = () => {
             var filter = $('#search').val().toLowerCase();
-            var text = filter.split(" ");
+            var text = filter.split(",");
             const a = document.getElementById('search');
             const clsBtn = document.getElementById('close-search');
             let table = document.getElementsByTagName('table');
