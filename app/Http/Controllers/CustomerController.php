@@ -34,7 +34,8 @@ class CustomerController extends Controller
     }
 
     public function index(Request $request){
-        $result['data'] = DB::table('customers')->where('deleted','!=','on')->orWhereNull('deleted')->get();
+        $result['data'] = DB::table('customers')->where('deleted','!=','on')->orWhereNull('deleted')
+        ->get();
 
         return view('admin/customers', $result);
     }

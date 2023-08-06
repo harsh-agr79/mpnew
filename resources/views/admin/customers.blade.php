@@ -13,6 +13,15 @@
                 <div class="input-field col s12 m6 l6">
                     <select multiple onchange="fieldsfilter()" id="fields">
                         <option value="" disabled>Select Fields</option>
+                        <option value="address">Address</option>
+                        <option value="area">Area</option>
+                        <option value="state">state</option>
+                        <option value="district">District</option>
+                        <option value="startdate">Target Start Date</option>
+                        <option value="enddate">Target End Date</option>
+                        <option value="target">Target Net</option>
+                        <option value="sales">Total Sales</option>
+                        <option value="completed">Target Completed</option>
                         <option value="contact">Contact</option>
                         <option value="userid">User Id</option>
                         <option value="referer">Referer</option>
@@ -33,10 +42,15 @@
                     {{-- <th>Address</th> --}}
                     <th>Type</th>
                     {{-- <th>Bill Count</th> --}}
-                    <th>Address</th>
-                    <th>Area</th>
-                    <th>State</th>
-                    <th>District</th>
+                    <th class="address" style="display: none;">Address</th>
+                    <th class="area" style="display: none;">Area</th>
+                    <th class="state" style="display: none;">State</th>
+                    <th class="district" style="display: none;">District</th>
+                    <th class="startdate" style="display: none;">Target Start Date</th>
+                    <th class="enddate" style="display: none;">Target End Date</th>
+                    <th class="target" style="display: none;">Target net</th>
+                    <th class="sales" style="display: none;">Total Sales</th>
+                    <th class="completed" style="display: none;">Target Completed</th>
                     <th class="contact" style="display: none;">Contact</th>
                     <th class="userid" style="display: none;">User id</th>
                     <th class="referer" style="display: none;">referer</th>
@@ -63,10 +77,45 @@
                             <td>{{ $item->type }}</td>
                             {{-- <td>{{ $item->billcnt }}</td> --}}
                             {{-- <input type="hidden" name="id[]" value="{{$item->id}}"> --}}
-                            <td sorttable_customkey="{{$item->address}}">{{$item->address}}</td>
-                            <td>{{$item->area}}</td>
-                            <td>{{$item->state}}</td>
-                            <td>{{$item->district}}</td>
+                            <td class="address" style="display: none;" sorttable_customkey="{{$item->address}}">{{$item->address}}</td>
+                            <td class="area" style="display: none;">{{$item->area}}</td>
+                            <td class="state" style="display: none;">{{$item->state}}</td>
+                            <td class="district" style="display: none;">{{$item->district}}</td>
+                            @php
+                                $target = DB::table('target')->where('customerid', $item->id)
+                                ->where('enddate', '>=', date('Y-m-d'))
+                                ->where('startdate', '<=', date('Y-m-d'))
+                                ->first();
+                                if($target != NULL){
+                                    $sales = DB::table('orders')->where('name',$item->name)
+                                    ->where('created_at', '>=', $target->startdate)
+                                    ->where('created_at', '<=', $target->enddate)
+                                    ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
+                                    ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+                                    ->selectRaw('*,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
+                                    ->groupBy('deleted')
+                                    ->get();
+                                }
+                            @endphp
+                            @if($target != Null)
+                            <td class="startdate" style="display: none;">{{$target->startdate}}</td>
+                            <td class="enddate" style="display: none;">{{$target->enddate}}</td>
+                            <td class="target" style="display: none;">{{money($t = $target->net)}}</td>
+                            @if (!$sales->isEmpty())
+                            <td class="sales" style="display: none;">{{money($s = $sales[0]->samt-$sales[0]->damt)}}</td>
+                            <td class="completed" style="display: none;">{{round( ($s/$t) * 100 )}}%</td>
+                            @else
+                            <td class="sales"style="display: none;"></td>                                
+                            <td class="completed" style="display: none;"></td>                                
+                            @endif
+                            
+                            @else
+                            <td class="startdate" style="display: none;"></td>
+                            <td class="enddate" style="display: none;"></td>
+                            <td class="target" style="display: none;"></td>
+                            <td class="sales" style="display: none;"></td>
+                            <td class="completed" style="display: none;"></td>
+                            @endif
                             <td class="contact" style="display: none;">{{ $item->contact }}</td>
                             <td class="userid" style="display: none;">{{ $item->user_id }}</td>
                             <td class="referer" style="display: none;">{{ $item->refname }}</td>
@@ -157,6 +206,15 @@
     </script>
     <script>
         function fieldsfilter() {
+            $('.address').hide();
+            $('.area').hide();
+            $('.state').hide();
+            $('.district').hide();
+            $('.startdate').hide();
+            $('.enddate').hide();
+            $('.target').hide();
+            $('.sales').hide();
+            $('.completed').hide();
             $('.contact').hide();
             $('.userid').hide();
             $('.referer').hide();
