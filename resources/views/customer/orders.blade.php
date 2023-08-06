@@ -99,7 +99,7 @@
                                     <label>
                                         <input @if ($item->recieved == 'on')
                                             checked
-                                        @endif type="checkbox" onclick="recieve({{$item->orderid}})"/>
+                                        @endif @if($item->mainstatus != 'green') disabled @endif type="checkbox" onclick="recieve({{$item->orderid}})"/>
                                         <span></span>
                                       </label>
                                 </td>
