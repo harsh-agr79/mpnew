@@ -8,7 +8,7 @@
             <div class="mp-caro-cont">
                 @for ($i = 0; $i < count($data); $i++)
                     <div class="mp-caro-item valign-wrapper @if ($i != 0) hide @endif"
-                        style="background: url('{{ asset('/storage/media/' . $data[$i]->image) }}'); background-size: cover; background-position: center; background-repeat: no-repeat; ">
+                        style="background: url('{{ asset($data[$i]->image) }}'); background-size: cover; background-position: center; background-repeat: no-repeat; ">
                         <div style="width: 100vw;">
                             <div class="btn-floating left"
                                 style="margin: 5px; background: rgba(0, 0, 0, 0.219); border-radius: 50%" onclick="prev()">
