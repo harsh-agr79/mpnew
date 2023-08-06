@@ -163,12 +163,12 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td></td>
-                            <td></td>
                             <td>Total Rows</td>
                             <td id="totalrows"></td>
                             <td>Total Sales:</td>
                             <td id="totalsales"></td>
+                            <td>Total Balance(To Recieve Only):</td>
+                            <td id="totalbalance"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -242,16 +242,21 @@
             }
             let sum = 0;
             let sale = 0;
+            let bala = 0;
             var newtr = $('tbody > tr:not([style*="display: none"])');
             for (var i = 0; i < newtr.length; i++) {
                 let sales = tr[i].getElementsByClassName('sales');
+                let balance = tr[i].getElementsByClassName('balance');
                 var ttl = parseInt(sales[0].textContent) || 0;
+                var bal = parseInt(balance[0].textContent) || 0;
                 sale = sale + ttl;
+                bala = bala + bal;
                 sum = sum + 1;
             }
 
             $('#totalrows').text(sum);
             $('#totalsales').text(sale);
+            $('#totalbalance').text(bala);
         }
     </script>
     <script>
