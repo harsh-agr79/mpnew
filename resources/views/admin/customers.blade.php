@@ -38,10 +38,10 @@
                     Total Rows: <span id="totalrows"></span>
                 </div>
                 <div class="col s4">
-                    Total Sales: <span id="totalsales"></span>
+                    Total Balance(To Recieve): <span id="totalbalance"></span>
                 </div>
                 <div class="col s4">
-                    Total Balance(To Recieve): <span id="totalbalance"></span>
+                    Total Sales: <span id="totalsales"></span>
                 </div>
             </div>
         </div>
@@ -157,9 +157,10 @@
                                     @endif
                                 @endif
                                 @php
-                                    $bal = explode("|", $item->balance)
+                                    $bal = explode('|', $item->balance);
                                 @endphp
-                                <td class="balance {{$bal[0]}} black-text lighten-5" style="display: none;">{{$bal[1]}}</td>
+                                <td class="balance {{ $bal[0] }} black-text lighten-5" style="display: none;">
+                                    {{ $bal[1] }}</td>
                                 <td class="contact" style="display: none;">{{ $item->contact }}</td>
                                 <td class="userid" style="display: none;">{{ $item->user_id }}</td>
                                 <td class="referer" style="display: none;">{{ $item->refname }}</td>
