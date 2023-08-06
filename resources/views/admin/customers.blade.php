@@ -35,13 +35,13 @@
         <div class="mp-card" style="margin-bottom:10px;">
             <div class="row" style="margin: 0; padding: 0;">
                 <div class="col s4">
-                    Totol Rows: <span id="totalrows"></span>
+                    Total Rows: <span id="totalrows"></span>
                 </div>
                 <div class="col s4">
-                    Totol Sales: <span id="totalsales"></span>
+                    Total Sales: <span id="totalsales"></span>
                 </div>
                 <div class="col s4">
-                    Totol Balance(To Recieve): <span id="totalbalance"></span>
+                    Total Balance(To Recieve): <span id="totalbalance"></span>
                 </div>
             </div>
         </div>
