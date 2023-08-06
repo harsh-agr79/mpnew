@@ -39,6 +39,7 @@ document.addEventListener('keydown', event => {
   if(event.keyCode == 113){
     event.preventDefault();
     $('#search').focus();
+    $('#search').val('');
     return false;
   }
   if(event.keyCode == 117){
