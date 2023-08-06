@@ -250,7 +250,7 @@
                                                     class="material-icons textcol">people</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin')
-                                    <li><a href="{{ url('/customeraction') }}" class="textcol">Customer Actions<i class="material-symbols-outlined">
+                                    <li><a href="{{ url('/customeraction') }}" class="textcol">Customer Actions<i class="material-symbols-outlined textcol">
                                         manage_accounts
                                     </i></a></li>
                                     @endif
