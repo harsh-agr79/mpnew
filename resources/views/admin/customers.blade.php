@@ -32,119 +32,145 @@
             </div>
         </div>
         <div class="mp-card" style="overflow-x: scroll;">
-            <form>           
-            <table class="sortable">
-                <thead>
-                    <th>|</th>
-                    <th>SN</th>
-                    <th>Name</th>
-                    <th>shop</th>
-                    {{-- <th>Address</th> --}}
-                    <th>Type</th>
-                    {{-- <th>Bill Count</th> --}}
-                    <th class="address" style="display: none;">Address</th>
-                    <th class="area" style="display: none;">Area</th>
-                    <th class="state" style="display: none;">State</th>
-                    <th class="district" style="display: none;">District</th>
-                    <th class="startdate" style="display: none;">Target Start Date</th>
-                    <th class="enddate" style="display: none;">Target End Date</th>
-                    <th class="target" style="display: none;">Target net</th>
-                    <th class="sales" style="display: none;">Total Sales</th>
-                    <th class="completed" style="display: none;">Target Completed</th>
-                    <th class="contact" style="display: none;">Contact</th>
-                    <th class="userid" style="display: none;">User id</th>
-                    <th class="referer" style="display: none;">referer</th>
-                    <th class="uniqueid" style="display: none;">Unique Id</th>
-                    <th class="activity" style="display: none;">activity</th>
-                    @if($admin->type == 'admin')
-                    <th>Direct Login</th>
-                    @endif
-                </thead>
-                <tbody>
-                    @php
-                        $a = 0;
-                    @endphp
-                    @foreach ($data as $item)
-                    
-                        <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
-                            <td sorttable_customkey="{{ $item->activity }}">
-                                <div class="{{ $stat = $item->actcolor }}" style="height: 35px; width:10px;"></div>
-                            </td>
-                            <td>{{$a = $a + 1}}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->shopname }}</td>
-                            {{-- <td>{{ $item->address }}</td> --}}
-                            <td>{{ $item->type }}</td>
-                            {{-- <td>{{ $item->billcnt }}</td> --}}
-                            {{-- <input type="hidden" name="id[]" value="{{$item->id}}"> --}}
-                            <td class="address" style="display: none;" sorttable_customkey="{{$item->address}}">{{$item->address}}</td>
-                            <td class="area" style="display: none;">{{$item->area}}</td>
-                            <td class="state" style="display: none;">{{$item->state}}</td>
-                            <td class="district" style="display: none;">{{$item->district}}</td>
-                            @php
-                                $target = DB::table('target')->where('customerid', $item->id)
-                                ->where('enddate', '>=', date('Y-m-d'))
-                                ->where('startdate', '<=', date('Y-m-d'))
-                                ->first();
-                                if($target != NULL){
-                                    $sales = DB::table('orders')->where('name',$item->name)
-                                    ->where('created_at', '>=', $target->startdate)
-                                    ->where('created_at', '<=', $target->enddate)
-                                    ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
-                                    ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-                                    ->selectRaw('*,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
-                                    ->groupBy('deleted')
-                                    ->get();
-                                }
-                            @endphp
-                            @if($target != Null)
-                            <td class="startdate" style="display: none;">{{$target->startdate}}</td>
-                            <td class="enddate" style="display: none;">{{$target->enddate}}</td>
-                            <td class="target" style="display: none;">{{money($t = $target->net)}}</td>
-                            @if (!$sales->isEmpty())
-                            <td class="sales" style="display: none;">{{money($s = $sales[0]->samt-$sales[0]->damt)}}</td>
-                            <td class="completed" style="display: none;">{{round( ($s/$t) * 100 )}}%</td>
-                            @else
-                            <td class="sales"style="display: none;"></td>                                
-                            <td class="completed" style="display: none;"></td>                                
-                            @endif
-                            
-                            @else
-                            <td class="startdate" style="display: none;"></td>
-                            <td class="enddate" style="display: none;"></td>
-                            <td class="target" style="display: none;"></td>
-                            <td class="sales" style="display: none;"></td>
-                            <td class="completed" style="display: none;"></td>
-                            @endif
-                            <td class="contact" style="display: none;">{{ $item->contact }}</td>
-                            <td class="userid" style="display: none;">{{ $item->user_id }}</td>
-                            <td class="referer" style="display: none;">{{ $item->refname }}</td>
-                            <td class="uniqueid" style="display: none;">{{ $item->cusuni_id }}</td>
-                            <td class="activity" style="display: none;">{{ $item->activity }}</td>
-                            @if($admin->type == 'admin')
-                                <td><a href="{{url('directlogin/customer/'.$item->id)}}" class="btn-small amber textcol"><i class="material-symbols-outlined textcol">
-                                    login
-                                </i></a></td>
-                            @endif
+            <form>
+                <table class="sortable">
+                    <thead>
+                        <th>|</th>
+                        <th>SN</th>
+                        <th>Name</th>
+                        <th>shop</th>
+                        {{-- <th>Address</th> --}}
+                        <th>Type</th>
+                        {{-- <th>Bill Count</th> --}}
+                        <th class="address" style="display: none;">Address</th>
+                        <th class="area" style="display: none;">Area</th>
+                        <th class="state" style="display: none;">State</th>
+                        <th class="district" style="display: none;">District</th>
+                        <th class="startdate" style="display: none;">Target Start Date</th>
+                        <th class="enddate" style="display: none;">Target End Date</th>
+                        <th class="target" style="display: none;">Target net</th>
+                        <th class="sales" style="display: none;">Total Sales</th>
+                        <th class="completed" style="display: none;">Target Completed</th>
+                        <th class="contact" style="display: none;">Contact</th>
+                        <th class="userid" style="display: none;">User id</th>
+                        <th class="referer" style="display: none;">referer</th>
+                        <th class="uniqueid" style="display: none;">Unique Id</th>
+                        <th class="activity" style="display: none;">activity</th>
+                        @if ($admin->type == 'admin')
+                            <th>Direct Login</th>
+                        @endif
+                    </thead>
+                    <tbody>
+                        @php
+                            $a = 0;
+                        @endphp
+                        @foreach ($data as $item)
+                            <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                                <td sorttable_customkey="{{ $item->activity }}">
+                                    <div class="{{ $stat = $item->actcolor }}" style="height: 35px; width:10px;"></div>
+                                </td>
+                                <td>{{ $a = $a + 1 }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->shopname }}</td>
+                                {{-- <td>{{ $item->address }}</td> --}}
+                                <td>{{ $item->type }}</td>
+                                {{-- <td>{{ $item->billcnt }}</td> --}}
+                                {{-- <input type="hidden" name="id[]" value="{{$item->id}}"> --}}
+                                <td class="address" style="display: none;" sorttable_customkey="{{ $item->address }}">
+                                    {{ $item->address }}</td>
+                                <td class="area" style="display: none;">{{ $item->area }}</td>
+                                <td class="state" style="display: none;">{{ $item->state }}</td>
+                                <td class="district" style="display: none;">{{ $item->district }}</td>
+                                @php
+                                    $target = DB::table('target')
+                                        ->where('customerid', $item->id)
+                                        ->where('enddate', '>=', date('Y-m-d'))
+                                        ->where('startdate', '<=', date('Y-m-d'))
+                                        ->first();
+                                    if ($target != null) {
+                                        $sales = DB::table('orders')
+                                            ->where('name', $item->name)
+                                            ->where('created_at', '>=', $target->startdate)
+                                            ->where('created_at', '<=', $target->enddate)
+                                            ->where(['deleted' => null, 'save' => null, 'status' => 'approved'])
+                                            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+                                            ->selectRaw('*,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
+                                            ->groupBy('deleted')
+                                            ->get();
+                                    } else {
+                                        if (date('Y-m-d') < date('Y-10-18')) {
+                                            $date2 = date('Y-10-17');
+                                            $date = date('Y-m-d', strtotime($date2 . ' -1 year +1 day'));
+                                        } else {
+                                            $date = date('Y-10-18');
+                                            $date2 = date('Y-m-d', strtotime($date . ' + 1 year -1 day'));
+                                        }
+                                        $sales = DB::table('orders')
+                                            ->where('name', $item->name)
+                                            ->where('created_at', '>=', $date)
+                                            ->where('created_at', '<=', $date2)
+                                            ->where(['deleted' => null, 'save' => null, 'status' => 'approved'])
+                                            ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+                                            ->selectRaw('*,SUM(approvedquantity * price) as samt, SUM(discount * 0.01 * approvedquantity * price) as damt')
+                                            ->groupBy('deleted')
+                                            ->get();
+                                    }
+                                @endphp
+                                @if ($target != null)
+                                    <td class="startdate" style="display: none;">{{ $target->startdate }}</td>
+                                    <td class="enddate" style="display: none;">{{ $target->enddate }}</td>
+                                    <td class="target" style="display: none;">{{ money($t = $target->net) }}</td>
+                                    @if (!$sales->isEmpty())
+                                        <td class="sales" style="display: none;">
+                                            {{ money($s = $sales[0]->samt - $sales[0]->damt) }}</td>
+                                        <td class="completed" style="display: none;">{{ round(($s / $t) * 100) }}%</td>
+                                    @else
+                                        <td class="sales"style="display: none;"></td>
+                                        <td class="completed" style="display: none;"></td>
+                                    @endif
+                                @else
+                                    <td class="startdate" style="display: none;"></td>
+                                    <td class="enddate" style="display: none;"></td>
+                                    <td class="target" style="display: none;"></td>
+                                    @if (!$sales->isEmpty())
+                                        <td class="sales" style="display: none;">
+                                            {{ money($s = $sales[0]->samt - $sales[0]->damt) }}</td>
+                                        <td class="completed" style="display: none;">{{ round(($s / $t) * 100) }}%</td>
+                                    @else
+                                        <td class="sales"style="display: none;"></td>
+                                        <td class="completed" style="display: none;"></td>
+                                    @endif
+                                @endif
+                                <td class="contact" style="display: none;">{{ $item->contact }}</td>
+                                <td class="userid" style="display: none;">{{ $item->user_id }}</td>
+                                <td class="referer" style="display: none;">{{ $item->refname }}</td>
+                                <td class="uniqueid" style="display: none;">{{ $item->cusuni_id }}</td>
+                                <td class="activity" style="display: none;">{{ $item->activity }}</td>
+                                @if ($admin->type == 'admin')
+                                    <td><a href="{{ url('directlogin/customer/' . $item->id) }}"
+                                            class="btn-small amber textcol"><i class="material-symbols-outlined textcol">
+                                                login
+                                            </i></a></td>
+                                @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td id="totalrows"></td>
+                            <td>Total Rows</td>
                         </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td id="totalrows"></td>
-                        <td>Total Rows</td>
-                    </tr>
-                </tfoot>
-            </table>
-            {{-- <div class="fixed-action-btn">
+                    </tfoot>
+                </table>
+                {{-- <div class="fixed-action-btn">
                 <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})"
                     style="border-radius: 10px;">
                     Submit
                     <i class="left material-icons">send</i>
                 </button>
             </div> --}}
-        </form>
+            </form>
         </div>
     </div>
 
@@ -184,7 +210,7 @@
                 $('#cs-icon').text('close')
             }
 
-           let sum = 0;
+            let sum = 0;
             for (var i = 0; i < tr.length; i++) {
                 let td = tr[i].getElementsByTagName('td');
                 // console.log(td);
@@ -365,40 +391,40 @@
                 "kailali",
                 "kanchanpur"
             ]
-           
-            if(value == 'Bagmati'){
+
+            if (value == 'Bagmati') {
                 var dis = bag;
             }
-            if(value == 'Gandaki'){
+            if (value == 'Gandaki') {
                 var dis = gan;
             }
-            if(value == 'Karnali'){
+            if (value == 'Karnali') {
                 var dis = kar
             }
-            if(value == 'Madhesh'){
+            if (value == 'Madhesh') {
                 var dis = mad
             }
-            if(value == 'Koshi'){
+            if (value == 'Koshi') {
                 var dis = kos
             }
-            if(value == 'Lumbini'){
+            if (value == 'Lumbini') {
                 var dis = lum
             }
-            if(value == 'Sudur Paschim'){
-               var dis = sud
+            if (value == 'Sudur Paschim') {
+                var dis = sud
             }
             console.log(dis)
             var sc = $(`#district${id}`);
             sc.empty();
             sc.append($('<option></option>').attr('value', null).attr('selected', 'true').text(
-                        'select District'));
+                'select District'));
             // dis.forEach(element => {
             //     $sc.append($('<option></option>')
             //                 .attr("value", value.subcategory).text(value.subcategory))
             // });
             for (let i = 0; i < dis.length; i++) {
                 sc.append($('<option></option>')
-                            .attr("value", dis[i]).text(dis[i]))
+                    .attr("value", dis[i]).text(dis[i]))
             }
         }
     </script>
