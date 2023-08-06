@@ -22,6 +22,7 @@
                         <option value="target">Target Net</option>
                         <option value="sales">Total Sales</option>
                         <option value="completed">Target Completed</option>
+                        <option value="balance">Balance</option>
                         <option value="contact">Contact</option>
                         <option value="userid">User Id</option>
                         <option value="referer">Referer</option>
@@ -51,6 +52,7 @@
                         <th class="target" style="display: none;">Target net</th>
                         <th class="sales" style="display: none;">Total Sales</th>
                         <th class="completed" style="display: none;">Target Completed</th>
+                        <th class="balance" style="display: none;">Balance</th>
                         <th class="contact" style="display: none;">Contact</th>
                         <th class="userid" style="display: none;">User id</th>
                         <th class="referer" style="display: none;">referer</th>
@@ -141,6 +143,10 @@
                                         <td class="completed" style="display: none;"></td>
                                     @endif
                                 @endif
+                                @php
+                                    $bal = explode("|", $item->balance)
+                                @endphp
+                                <td class="balance {{$bal[0]}} black-text lighten-5" style="display: none;">{{$bal[1]}}</td>
                                 <td class="contact" style="display: none;">{{ $item->contact }}</td>
                                 <td class="userid" style="display: none;">{{ $item->user_id }}</td>
                                 <td class="referer" style="display: none;">{{ $item->refname }}</td>
@@ -264,6 +270,7 @@
             $('.referer').hide();
             $('.uniqueid').hide();
             $('.activity').hide();
+            $('.balance').hide();
             var clsnames = '';
             const vals = $('#fields').val();
             vals.forEach(e => {
