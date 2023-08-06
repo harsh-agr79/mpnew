@@ -194,16 +194,8 @@
                             Open Balance:
                         </div>
                         <div class="col s8">
-                            <select id="select1" name="obtype" class="browser-default selectinp black-text">
-                                @if ($obtype != null)
-                                    <option selected value="{{ $obtype }}">{{ $obtype }}</option>
-                                    <option class="black-text" value="">Open Balance Type</option>
-                                @else
-                                    <option class="black-text" value="" selected disabled>Open Balance Type</option>
-                                @endif
-                                <option class="black-text" value="debit">Debit</option>
-                                <option class="black-text" value="credit">Credit</option>
-                            </select>
+                            <input type="text" name="openbalance" value="{{ $openbalance }}"
+                                class="inp black-text browser-default" placeholder="openbalance">
                         </div>
                     </div>
 
