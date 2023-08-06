@@ -333,4 +333,9 @@ class CustomerController extends Controller
 
         return redirect('editcustomer/'.$userid);
     }
+
+    public function actions(Request $request){
+        $result['data'] = DB::table('customers')->where('deleted', NULL)->get();
+        return view('admin/customeraction', $result);
+    }
 }

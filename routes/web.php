@@ -94,6 +94,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //Customers CRUD
     Route::get('customers', [CustomerController::class, 'index']);
+    Route::get('customeractions', [CustomerController::class, 'actions']);
     Route::get('addcustomer', [CustomerController::class, 'addcustomer']);
     Route::get('editcustomer/{id}', [CustomerController::class, 'addcustomer']);
     Route::get('deletecustomer/{id}', [CustomerController::class, 'deletecustomer']);

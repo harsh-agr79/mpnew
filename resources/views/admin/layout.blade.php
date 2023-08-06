@@ -249,6 +249,11 @@
                                         <li><a href="{{ url('/customers') }}" class="textcol">View Customers<i
                                                     class="material-icons textcol">people</i></a></li>
                                     @endif
+                                    @if ($admin->type == 'admin')
+                                    <li><a href="{{ url('/customeraction') }}" class="textcol">Customer Actions<i class="material-symbols-outlined">
+                                        manage_accounts
+                                    </i></a></li>
+                                    @endif
                                     @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
                                         <li><a href="{{ url('/addcustomer') }}" class="textcol">Add Customer<i
                                                     class="material-icons textcol">person_add</i></a></li>
