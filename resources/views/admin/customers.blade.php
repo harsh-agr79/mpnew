@@ -32,6 +32,19 @@
                 </div>
             </div>
         </div>
+        <div class="mp-card" style="margin-top:10px; margin-bottom:10px;">
+            <div class="row" style="margin: 0; padding: 0;">
+                <div class="col s4">
+                    Totol Rows: <span id="totalrows"></span>
+                </div>
+                <div class="col s4">
+                    Totol Sales: <span id="totalsales"></span>
+                </div>
+                <div class="col s4">
+                    Totol Balance(To Recieve): <span id="totalbalance"></span>
+                </div>
+            </div>
+        </div>
         <div class="mp-card" style="overflow-x: scroll;">
             <form>
                 <table class="sortable">
@@ -161,7 +174,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot>
+                    {{-- <tfoot>
                         <tr>
                             <td>Total Rows</td>
                             <td id="totalrows"></td>
@@ -170,7 +183,7 @@
                             <td>Total Balance(To Recieve Only):</td>
                             <td id="totalbalance"></td>
                         </tr>
-                    </tfoot>
+                    </tfoot> --}}
                 </table>
                 {{-- <div class="fixed-action-btn">
                 <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})"
