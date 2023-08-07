@@ -530,7 +530,7 @@ input:focus {
     background: var(--bg-content);
 }
 .user-chat-box{  
-    height: 90%;
+    height: 80vh;
     margin: 0;
     padding: 0;
 }
@@ -538,7 +538,7 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
