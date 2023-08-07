@@ -533,9 +533,10 @@ input:focus {
     height: 80vh;
     margin: 0;
     padding: 0;
+    overflow: scroll;
 }
 .user-chat-messageinp{
-    padding-bottom: 10px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -543,5 +544,22 @@ input:focus {
     bottom: 0;
     left: 0;
     right: 0;
+}
+.user-message-div{
+    max-width: 65%;
+    padding: 10px;
+    margin: 10px;
+}
+.user-message-right{
+    border-radius:10px 0 10px 10px; 
+    background: var(--bg-content);
+    float: right;
+    color: var(--textcol)
+}
+.user-message-left{
+    border-radius:0 10px 10px 10px; 
+    background: rgb(255, 195, 66);
+    /* float: right; */
+    color: var(--textcol);
 }
 </style>
