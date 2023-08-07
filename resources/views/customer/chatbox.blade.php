@@ -16,7 +16,7 @@
 
             </div>
         </div>
-        <div class="user-chat-messageinp center" style="padding: 0; margin: 0;">
+        <div class="user-chat-messageinp center" style="margin: 0;">
             <div style="margin:0; padding: 0;">
                 <a class="btn-flat">
                     <i class="material-symbols-outlined textcol" style="font-size: 30px;">

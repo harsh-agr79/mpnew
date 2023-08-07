@@ -535,7 +535,7 @@ input:focus {
     padding: 0;
 }
 .user-chat-messageinp{
-    padding: 5px;
+    padding-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
