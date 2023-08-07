@@ -12,90 +12,26 @@
             </div>
         </div>
         <div class="row user-chat-box" style="margin: 0; padding: 0;">
-            <div class="col s12">
-                <div class="user-message-div user-message-right">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
+            @foreach ($chat as $item)
+                @if ($item->sendtype == 'user')
+                <div class="col s12">
+                    <div class="user-message-div user-message-right">
+                        <p style="font-size: 12px;">
+                           {{$item->message}}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-left">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
+                @else
+                <div class="col s12">
+                    <div class="user-message-div user-message-left">
+                        <p style="font-size: 12px;">
+                           {{$item->message}}
+                        </p>
+                        <span style="font-size: 7px">{{$item->sentname}}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-right">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-left">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-right">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-left">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-right">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-left">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-right">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-left">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-right">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="user-message-div user-message-left">
-                    <p style="font-size: 12px;">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae praesentium ipsa officiis accusamus, amet iure consequuntur libero non voluptas. Possimus quo, commodi minus, beatae impedit voluptate, laudantium nulla obcaecati dignissimos harum debitis. Repellat aliquam at, natus qui quia itaque aliquid aperiam sapiente enim soluta, magnam adipisci, porro minima in tenetur.
-                    </p>
-                </div>
-            </div>
+                @endif
+            @endforeach
         </div>
         <div class="user-chat-messageinp center" style="margin: 0;">
             <div style="margin:0; padding: 0;">
@@ -118,4 +54,9 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"
+        integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('assets/cuschat.js') }}"></script>
 @endsection
