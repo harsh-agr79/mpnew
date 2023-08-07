@@ -311,3 +311,129 @@ input:focus {
     height: 45px;
     /* margin: 7px 7px 0 7px; */
 }
+.chat-list{
+    height: 91vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.chat-list-item{
+    /* padding: 0 20px; */
+    /* border-radius: 20px; */
+    background: var(--bg-content);
+    margin: 0;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    transition: ease-in 0.25s;
+}
+.chat-list-item:hover{
+    background: var(--td-hover);
+}
+.chat-list-img{
+    height: 60px;
+    padding-top: 5px; 
+    border-radius: 50%;
+}
+.chat-list-username{
+    font-size: 17px;
+    font-weight: 600;
+}
+.chat-list-channel{
+    font-size: 10px;
+    margin-left: 30px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgb(255, 163, 163);
+}
+.chat-list-message{
+    font-size: 12px;
+    width: 100px;
+    text-align: left;
+    overflow: hidden;
+}
+.chat-box-messageinp{
+    /* width: 100%; */
+    /* background: rgb(139, 139, 139); */
+    padding: 0;
+}
+.chat-box{
+    height: 91vh;
+}
+.chat-box-header{
+    padding: 5px 30px;
+}
+.chat-box-username{
+    margin-left: 40px;
+    font-weight: 800;
+    font-size: 20px;
+}
+.chat-box-convo{
+    height: 72vh;
+    overflow-y: scroll;
+}
+.msginp {
+    background: var(--bg-content);
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 10px 20px;
+    margin: 0;
+    border-radius: 20px; 
+}
+.msginp:focus{
+    outline: none;
+    border: none;
+}
+.chat-message{
+    padding: 10px;
+    max-width: 65%;
+    margin: 10px;
+    font-size: 12px;
+}
+.message-left{
+    border-radius: 0 10px 10px 10px;
+    background: rgb(255, 195, 66);
+    color: black;
+}
+.message-right{
+    border-radius: 10px 0 10px 10px;
+    background: var(--bg-content);
+    color: var(--textcol);
+   
+}
+.chat-detail{
+    height: 91vh;
+    background: var(--bg-content);
+    margin: 0;
+    padding: 0;
+}
+.chat-detail-img{
+    height: 200px;
+    border-radius: 50%; 
+}
+.chat-detail-username h5{
+    font-weight: 600;
+}
+.chat-detail-actchannel{
+    padding: 5px 20px;
+    background: #ffa5a5;
+    border-radius: 30px; 
+}
+.chat-box-channel-list{
+    height: 45vh;
+    margin-top: 20px;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+}
+.chat-box-channel{
+    margin: 10px;
+}
+.chat-box-channel .channel-item{
+    padding: 10px 50px;
+    background: #ffa5a5;
+    border-radius: 30px; 
+}
+.unseen-msg{
+    padding: 2px 5px;
+    background: red;
+    font-size: 10px;
+    border-radius: 20px;
+}

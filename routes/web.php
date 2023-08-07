@@ -20,6 +20,7 @@ use App\Http\Controllers\TrashController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerViewController;
 use App\Http\Controllers\AdminChatController;
+use App\Http\Controllers\UserChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -190,7 +191,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/getref', [AnalyticsController::class, 'getref']);
     Route::get('/getsubcat/{id}', [SubcategoryController::class, 'getsubcat']);
 
-    Route::get('/Chats', [AdminChatController::class, 'Adminchat']);
+    Route::get('/chats/{id}/{id2}', [AdminChatController::class, 'adminchat']);
+    Route::POST('/addmsgadmin', [AdminChatController::class, 'addmsgadmin']);
+    Route::get('/getchatlist', [AdminChatController::class, 'getchatlist']);
+
+    Route::post('/addchannel', [AdminChatController::class, 'addchannel'])->name('addchannel');
+    Route::post('/editchannel', [AdminChatController::class, 'editchannel'])->name('editchannel');
+    Route::get('/getchannel/{id}', [AdminChatController::class, 'getchannel']);
 
     Route::get('/directlogin/customer/{id}',[ LoginController::class, 'changeLogin']);
 });
@@ -261,5 +268,8 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::get('/admin/directlogin/goback/{id}', [LoginController::class, 'changeLoginBack']);
 
     Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
+
+    Route::get('/user/chatlist', [UserChatController::class, 'chatlist']);
+    Route::get('/user/chatbox/{id}', [UserChatController::class, 'chatbox']);
 });
 
