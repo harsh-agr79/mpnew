@@ -1,8 +1,8 @@
 @extends('customer/layout')
 
 @section('main')
-    <div>
-        {{-- <div class="row user-chat-header valign-wrapper">
+    <div style="margin: 0; padding: 0;">
+        <div class="row user-chat-header valign-wrapper" style="margin: 0">
             <div class="col s3">
                 <div style="background: {{$chan->color}}; height: 40px; width: 40px; border-radius: 50%;">           
                 </div>
@@ -10,8 +10,8 @@
             <div class="col s9">
                 <h5 style="font-size: 20px;">{{$chan->name}}</h5>
             </div>
-        </div> --}}
-        <div class="row user-chat-box">
+        </div>
+        <div class="row user-chat-box" style="margin: 0; padding: 0;">
             <div class="col s12">
 
             </div>
