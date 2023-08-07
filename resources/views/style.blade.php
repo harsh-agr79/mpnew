@@ -538,9 +538,9 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* position: absolute;
+    position: absolute;
     bottom: 0;
-    left: 25;
-    right: 0; */
+    left: 0;
+    right: 0;
 }
 </style>
