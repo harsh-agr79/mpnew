@@ -549,17 +549,15 @@ input:focus {
     max-width: 65%;
     padding: 10px;
     margin: 10px;
+    color: var(--textcol);
 }
 .user-message-right{
     border-radius:10px 0 10px 10px; 
     background: var(--bg-content);
     float: right;
-    color: var(--textcol)
 }
 .user-message-left{
     border-radius:0 10px 10px 10px; 
     background: rgb(255, 195, 66);
-    /* float: right; */
-    color: var(--textcol);
 }
 </style>
