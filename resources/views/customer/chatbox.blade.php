@@ -69,26 +69,26 @@
             msgSection.scrollTo(0, msgSection.scrollHeight);
         });
         $(function() {
-            let ip_address = "socket.startuplair.com";
+            let ip_address = "socket.startuplair.com";  
             // let socket_port = "3000";
             let socket = io(ip_address);
             let type = ['admin', 'staff', 'marketer']
 
             socket.on("sendMsgToClient", (message) => {
                 console.log(message);
-                if (message[0].sid == `{{ $user->id }}` && message[0].channel == `{{ $channel }}` && type.indexOf(message[0].sendtype) > -1)
-                    $('#userchatbox').append(`
-                <div class="col s12">\
-                        <div class="user-message-div user-message-left">\
-                            <span style="font-size: 12px;">\
-                              ${message[0].message} \
-                            </span><br>\
-                            <span style="font-size: 7px">${message[0].sentname}</span>\
-                        </div>\
-                    </div>\
-                `)
-                var msgSection = document.querySelector("#userchatbox");
-                msgSection.scrollTo(0, msgSection.scrollHeight);
+                // if (message[0].sid == `{{ $user->id }}` && message[0].channel == `{{ $channel }}` && type.indexOf(message[0].sendtype) > -1)
+                //     $('#userchatbox').append(`
+                // <div class="col s12">\
+                //         <div class="user-message-div user-message-left">\
+                //             <span style="font-size: 12px;">\
+                //               ${message[0].message} \
+                //             </span><br>\
+                //             <span style="font-size: 7px">${message[0].sentname}</span>\
+                //         </div>\
+                //     </div>\
+                // `)
+                // var msgSection = document.querySelector("#userchatbox");
+                // msgSection.scrollTo(0, msgSection.scrollHeight);
 
             });
         });
