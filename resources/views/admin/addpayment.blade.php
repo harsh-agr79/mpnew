@@ -25,8 +25,8 @@
                             date:
                         </div>
                         <div class="col s6">
-                            <input type="datetime-local" value="{{ $date }}" name="date"
-                                class="inp black-text browser-default" placeholder="Date" required>
+                            <input type="datetime-local" step="any" value="{{ $date }}" name="date"
+                                class="inp black-text browser-default" placeholder="Date">
                         </div>
                     </div>
                     <div class="col s12 row">
