@@ -6,7 +6,7 @@ $(document).ready(function () {
 $("#message-inp").on("submit", (e) => {
     // console.log('Hello');
     e.preventDefault();
-    let ip_address = "socket.mypowerworld.com";
+    let ip_address = "socket.startuplair.com";
     // let socket_port = "3000";
     let socket = io(ip_address);
     // let message = $('#msgval').val();
