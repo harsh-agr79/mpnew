@@ -69,7 +69,7 @@
             msgSection.scrollTo(0, msgSection.scrollHeight);
         });
         $(function() {
-            let ip_address = "socket.startuplair.com";  
+            let ip_address = "socket.startuplair.com";
             // let socket_port = "3000";
             let socket = io(ip_address);
             let type = ['admin', 'staff', 'marketer']
