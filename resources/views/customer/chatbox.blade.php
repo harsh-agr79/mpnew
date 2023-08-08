@@ -62,7 +62,7 @@
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"
         integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous">
     </script>
-    <script src="{{ asset('assets/cuschat.js') }}"></script>
+    {{-- <script src="{{ asset('assets/cuschat.js') }}"></script> --}}
     <script>
         $(document).ready(function() {
             var msgSection = document.querySelector("#userchatbox");
