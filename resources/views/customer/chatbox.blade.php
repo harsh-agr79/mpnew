@@ -75,6 +75,7 @@
             let type = ['admin', 'staff', 'marketer']
 
             socket.on("sendMsgToClient", (message) => {
+                console.log(message);
                 if (message[0].sid == `{{ $user->id }}` && message[0].channel == `{{ $channel }}` && type.indexOf(message[0].sendtype) > -1)
                     $('#userchatbox').append(`
                 <div class="col s12">\
