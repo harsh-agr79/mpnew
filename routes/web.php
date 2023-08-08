@@ -271,5 +271,6 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
 
     Route::get('/user/chatlist', [UserChatController::class, 'chatlist']);
     Route::get('/user/chatbox/{id}', [UserChatController::class, 'chatbox']);
+    Route::POST('/addmsguser', [UserChatController::class, 'addmsguser']);
 });
 

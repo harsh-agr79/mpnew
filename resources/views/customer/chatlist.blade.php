@@ -27,7 +27,7 @@
                 </a>
             @endforeach
             @foreach($noChatList as $item)
-            <a href="{{url('user/chatbox/'.$chan->shortname)}}" class="mp-card row valign-wrapper textcol" style="margin:5px; padding: 10px;">
+            <a href="{{url('user/chatbox/'.$item->shortname)}}" class="mp-card row valign-wrapper textcol" style="margin:5px; padding: 10px;">
                 <div class="col s3 center">
                     <div style="background: {{$item->color}}; height: 60px; width: 60px; border-radius: 50%;">
                         

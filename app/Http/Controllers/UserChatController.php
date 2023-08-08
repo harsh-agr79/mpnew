@@ -19,4 +19,34 @@ class UserChatController extends Controller
         $result['channel'] = $id;
         return view('customer/chatbox', $result);
     }
+    public function addmsguser(Request $request){
+        $sendtype = 'user';
+        $sentBy = session()->get('USER_ID');
+        $sentname = DB::table('customers')->where('id', session()->get('USER_ID'))->first()->user_id;
+        $sid = session()->get('USER_ID');
+        $channel = $request->post('channel');
+        $message = $request->post('message');
+        $time = time();
+
+        DB::table('chat')->insert([
+            'sid'=>$sid,
+            'sendtype'=>$sendtype,
+            'sentBy'=>$sentBy,
+            'sentname'=>$sentname,
+            'channel'=>$channel,
+            'message'=>$message,
+            'created_at'=>$time,
+        ]);
+        $res = array();
+        $res[] =  [
+            'sid'=>$sid,
+            'sendtype'=>$sendtype,
+            'sentBy'=>$sentBy,
+            'channel'=>$channel,
+            'sentname'=>$sentname,
+            'message'=>$message,
+            'created_at'=>$time,
+        ];
+        return response()->json($res);
+    }
 }

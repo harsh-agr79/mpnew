@@ -102,13 +102,13 @@
                                     <div class="chat-message message-right right">
                                         {{ $item->message }}<br>
                                         <span style="font-size: 7px; padding: 0; margin: 0;">
-                                            {{$item->sentname}}
+                                            {{ $item->sentname }}
                                         </span>
                                     </div>
                                 </div>
                             @else
                                 <div class="col s12" style="margin:0, padding: 0;">
-                                    <div class="chat-message message-left">
+                                    <div class="chat-message message-left left">
                                         {{ $item->message }}
                                     </div>
                                 </div>
@@ -156,9 +156,11 @@
                             <h5>{{ $user->name }}</h5>
                         </div>
                         @php
-                            $chan = DB::table('channels')->where('shortname', $channel)->first();
+                            $chan = DB::table('channels')
+                                ->where('shortname', $channel)
+                                ->first();
                         @endphp
-                        <div class="chat-detail-actchannel" style="background: {{$chan->color}}">
+                        <div class="chat-detail-actchannel" style="background: {{ $chan->color }}">
                             <h6>{{ $chan->name }}</h6>
                         </div>
                     </div>
@@ -167,9 +169,11 @@
                             <span class="channel-item">Channel 1 <span class="unseen-msg">4</span></span>
                         </div> --}}
                         @foreach ($channels as $item)
-                        <div class="col s12 chat-box-channel">
-                            <a class="channel-item textcol" href="{{url('chats/'.$user->id.'/'.$item->shortname)}}" style="background: {{$item->color}}">{{$item->name}}</a>
-                        </div>
+                            <div class="col s12 chat-box-channel">
+                                <a class="channel-item textcol"
+                                    href="{{ url('chats/' . $user->id . '/' . $item->shortname) }}"
+                                    style="background: {{ $item->color }}">{{ $item->name }}</a>
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -199,9 +203,13 @@
                             <td>{{ $a = $a + 1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->shortname }}</td>
-                            <td><div style="background: {{$item->color}}; height: 20px; width: 50px;"></div></td>
+                            <td>
+                                <div style="background: {{ $item->color }}; height: 20px; width: 50px;"></div>
+                            </td>
                             <td>{{ $item->adminonly }}</td>
-                            <td><a class="btn amber textcol modal-trigger modal-close" href="#editchannel" onclick="editchannel({{$item->id}});"><i class="material-symbols-outlined textcol">
+                            <td><a class="btn amber textcol modal-trigger modal-close" href="#editchannel"
+                                    onclick="editchannel({{ $item->id }});"><i
+                                        class="material-symbols-outlined textcol">
                                         edit
                                     </i></a></td>
                         </tr>
@@ -212,30 +220,30 @@
     </div>
     <div id="addchannel" class="modal">
         <div class="modal-content">
-            <form method="POST" action="{{route('addchannel')}}">
+            <form method="POST" action="{{ route('addchannel') }}">
                 @csrf
                 <div class="row">
                     <div class="row col s12">
                         <div class="col s3">Name: </div>
-                        <div class="col s9"> <input type="text" name="name" class="inp black-text browser-default"
-                                placeholder="Name" required></div>
+                        <div class="col s9"> <input type="text" name="name"
+                                class="inp black-text browser-default" placeholder="Name" required></div>
                     </div>
                     <div class="row col s12">
                         <div class="col s3">Short Name: </div>
-                        <div class="col s9"> <input type="text" name="shortname" class="inp black-text browser-default"
-                                placeholder="Short Name" required></div>
+                        <div class="col s9"> <input type="text" name="shortname"
+                                class="inp black-text browser-default" placeholder="Short Name" required></div>
                     </div>
                     <div class="row col s12">
                         <div class="col s3">Color: </div>
-                        <div class="col s9"> <input type="color" name="color" value="#00000000" class="browser-default"
-                                placeholder="Color" required></div>
+                        <div class="col s9"> <input type="color" name="color" value="#00000000"
+                                class="browser-default" placeholder="Color" required></div>
                     </div>
                     <div class="row col s12">
                         <div class="col s3">Only Admin Can Message: </div>
                         <div class="col s9"> <label>
-                            <input type="checkbox" name="adminonly"/>
-                            <span>Only Admin</span>
-                          </label></div>
+                                <input type="checkbox" name="adminonly" />
+                                <span>Only Admin</span>
+                            </label></div>
                     </div>
                     <div class="col s12 center">
                         <button class="btn amber">
@@ -248,31 +256,31 @@
     </div>
     <div id="editchannel" class="modal">
         <div class="modal-content">
-            <form method="POST" action="{{route('editchannel')}}">
+            <form method="POST" action="{{ route('editchannel') }}">
                 @csrf
                 <input type="hidden" name="id" id="chid">
                 <div class="row">
                     <div class="row col s12">
                         <div class="col s3">Name: </div>
-                        <div class="col s9"> <input type="text" name="name" id="chname" class="inp black-text browser-default"
-                                placeholder="Name" required></div>
+                        <div class="col s9"> <input type="text" name="name" id="chname"
+                                class="inp black-text browser-default" placeholder="Name" required></div>
                     </div>
                     <div class="row col s12">
                         <div class="col s3">Short Name: </div>
-                        <div class="col s9"> <input type="text" id="chsname" name="shortname" class="inp black-text browser-default"
-                                placeholder="Short Name" required></div>
+                        <div class="col s9"> <input type="text" id="chsname" name="shortname"
+                                class="inp black-text browser-default" placeholder="Short Name" required></div>
                     </div>
                     <div class="row col s12">
                         <div class="col s3">Color: </div>
-                        <div class="col s9"> <input type="color" id="chcolor" name="color" value="#00000000" class="browser-default"
-                                placeholder="Color" required></div>
+                        <div class="col s9"> <input type="color" id="chcolor" name="color" value="#00000000"
+                                class="browser-default" placeholder="Color" required></div>
                     </div>
                     <div class="row col s12">
                         <div class="col s3">Only Admin Can Message: </div>
                         <div class="col s9"> <label>
-                            <input type="checkbox" id="chaonly" name="adminonly"/>
-                            <span>Only Admin</span>
-                          </label></div>
+                                <input type="checkbox" id="chaonly" name="adminonly" />
+                                <span>Only Admin</span>
+                            </label></div>
                     </div>
                     <div class="col s12 center">
                         <button class="btn amber">
@@ -337,6 +345,28 @@
             // console.log(custdata);
 
         })
+        $(function() {
+            let ip_address = "socket.startuplair.com";
+            // let socket_port = "3000";
+            let socket = io(ip_address);
+
+            socket.on("sendMsgToClient", (message) => {
+                console.log(message);
+                if (message[0].sendtype == 'user' && message[0].sid == `{{ $user->id }}` && message[0]
+                    .channel == `{{ $channel }}`) {
+                    $("#chatboxmsgdiv").append(`\
+        <div class="col s12" style="margin:0, padding: 0;">\
+                                    <div class="chat-message message-left">\
+                                        ${message[0].message}\
+                                    </div>\
+                                </div>\
+        `)
+        chatlist(message[0].sid)
+                    var msgSection = document.querySelector("#chatboxmsgdiv");
+                    msgSection.scrollTo(0, msgSection.scrollHeight);
+                }
+            });
+        });
     </script>
 </body>
 

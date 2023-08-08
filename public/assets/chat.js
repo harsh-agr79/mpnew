@@ -6,9 +6,9 @@ $(document).ready(function () {
 $("#message-inp").on("submit", (e) => {
     // console.log('Hello');
     e.preventDefault();
-    let ip_address = "127.0.0.1";
-    let socket_port = "3000";
-    let socket = io(ip_address + ":" + socket_port);
+    let ip_address = "socket.mypowerworld.com";
+    // let socket_port = "3000";
+    let socket = io(ip_address);
     // let message = $('#msgval').val();
     // console.log(chatInput);
     $.ajax({
@@ -71,15 +71,7 @@ function chatlist(id) {
     });
 }
 
-$(function () {
-    let ip_address = "127.0.0.1";
-    let socket_port = "3000";
-    let socket = io(ip_address + ":" + socket_port);
 
-    socket.on("sendMsgToClient", (message) => {
-        // console.log(message);
-    });
-});
 
 function editchannel(id) {
     $.ajax({

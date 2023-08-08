@@ -549,6 +549,9 @@ input:focus {
     max-width: 65%;
     padding: 10px;
     margin: 10px;
+    
+}
+.user-message-right span{
     color: var(--textcol);
 }
 .user-message-right{
@@ -559,5 +562,10 @@ input:focus {
 .user-message-left{
     border-radius:0 10px 10px 10px; 
     background: rgb(255, 195, 66);
+    color: black;
+    float: left;
+}
+.user-message-left span{
+    color: black;
 }
 </style>
