@@ -43,7 +43,7 @@ class PaymentController extends Controller
             $result['payid'] = $pay->paymentid;
         }
         else{
-            $result['date'] = date('Y-m-d');
+            $result['date'] = date('Y-m-d H:i:s');
             $result['name'] = '';
             $result['amount'] = '';
             $result['voucher'] = '';

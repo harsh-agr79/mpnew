@@ -25,7 +25,7 @@
                             date:
                         </div>
                         <div class="col s6">
-                            <input type="date" value="{{ $date }}" name="date"
+                            <input type="datetime-local" value="{{ $date }}" name="date"
                                 class="inp black-text browser-default" placeholder="Date" required>
                         </div>
                     </div>

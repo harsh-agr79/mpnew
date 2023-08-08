@@ -6,9 +6,9 @@ $(document).ready(function () {
 $("#message-inp").on("submit", (e) => {
     // console.log('Hello');
     e.preventDefault();
-    let ip_address = "socket.startuplair.com";
-    // let socket_port = "3000";
-    let socket = io(ip_address);
+    let ip_address = "192.168.1.208";
+    let socket_port = "3000";
+    let socket = io(ip_address+":"+socket_port);
     // let message = $('#msgval').val();
     // console.log(chatInput);
     $.ajax({

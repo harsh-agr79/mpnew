@@ -346,9 +346,9 @@
 
         })
         $(function() {
-            let ip_address = "socket.startuplair.com";
-            // let socket_port = "3000";
-            let socket = io(ip_address);
+            let ip_address = "192.168.1.208";
+            let socket_port = "3000";
+            let socket = io(ip_address+":"+socket_port);
 
             socket.on("sendMsgToClient", (message) => {
                 console.log(message);
