@@ -356,7 +356,7 @@
                     .channel == `{{ $channel }}`) {
                     $("#chatboxmsgdiv").append(`\
         <div class="col s12" style="margin:0, padding: 0;">\
-                                    <div class="chat-message message-left">\
+                                    <div class="chat-message message-left left">\
                                         ${message[0].message}\
                                     </div>\
                                 </div>\
