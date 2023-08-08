@@ -811,7 +811,7 @@ class MarketerController extends Controller
     public function addpay(Request $request, $id = ''){
         if($id !== ""){
         $cuslist = marketercuslist(session()->get('ADMIN_ID'));
-            $pay = DB::table('payments')->whereIn('name', $cuslist)->where('paymentid', $id)->first();
+            $pay = DB::table('payments')->where('paymentid', $id)->first();
             $result['date'] = $pay->date;
             $result['name'] = $pay->name;
             $result['amount'] = $pay->amount;
@@ -820,7 +820,7 @@ class MarketerController extends Controller
             $result['payid'] = $pay->paymentid;
         }
         else{
-            $result['date'] = date('Y-m-d');
+            $result['date'] = date('Y-m-d H:i:s');
             $result['name'] = '';
             $result['amount'] = '';
             $result['voucher'] = '';
