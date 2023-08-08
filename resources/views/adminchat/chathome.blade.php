@@ -180,8 +180,8 @@
             </div>
         </div>
     </main>
-    <div id="channelsList" class="modal">
-        <div class="modal-content">
+    <div id="channelsList" class="modal bg-content">
+        <div class="modal-content bg-content">
             <div class="center">
                 <h4>Channel's List</h4>
             </div>
@@ -218,8 +218,8 @@
             </table>
         </div>
     </div>
-    <div id="addchannel" class="modal">
-        <div class="modal-content">
+    <div id="addchannel" class="modal bg-content">
+        <div class="modal-content bg-content">
             <form method="POST" action="{{ route('addchannel') }}">
                 @csrf
                 <div class="row">
@@ -254,8 +254,8 @@
             </form>
         </div>
     </div>
-    <div id="editchannel" class="modal">
-        <div class="modal-content">
+    <div id="editchannel" class="modal bg-content">
+        <div class="modal-content bg-content">
             <form method="POST" action="{{ route('editchannel') }}">
                 @csrf
                 <input type="hidden" name="id" id="chid">
