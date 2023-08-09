@@ -1078,4 +1078,8 @@ class MarketerController extends Controller
         updateMainStatus($orderid);
         return redirect('marketer/detail/'.$orderid);
     }
+    public function deleteorder(Request $request, $id){
+        DB::table('orders')->where('orderid', $id)->delete();
+        return redirect('/home');
+    }
 }

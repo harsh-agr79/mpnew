@@ -214,6 +214,7 @@ Route::group(['middleware'=>'MarketerAuth'], function() {
     Route::post('marketer/addorder', [MarketerController::class, 'addorder'])->name('marketer.addorder');
     Route::post('marketer/editorder', [MarketerController::class, 'editorder_process'])->name('marketer.editorder');
     Route::get('marketer/editorder/{id}', [MarketerController::class, 'editorder']);
+    Route::get('marketer/deleteorder/{id}', [MarketerController::class, 'deleteorder']);
 
     Route::get('marketer/statement', [MarketerController::class, 'statement']);
     Route::get('marketer/balancesheet/{id}', [MarketerController::class, 'balancesheet']);
