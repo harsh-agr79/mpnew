@@ -12,7 +12,12 @@
 @extends($type.'/layout')
 
 @section('main')
-    <form enctype="multipart/form-data" action="{{ route($type.'.editorder') }}" method="post">
+<script type="text/javascript">
+    function preback() { window.history.forward(); }
+    setTimeout("preback()", 0);
+    window.onunload = function() {null};
+</script>
+    <form enctype="multipart/form-data" id="createform" action="{{ route($type.'.editorder') }}" method="post">
         @csrf
         <input type="hidden" name="orderid" value="{{ $order[0]->orderid }}">
         <div class="mp-card" style="margin-top: 20px;">
@@ -281,5 +286,8 @@
                 }
             }
         }
+        $('#createform').on('submit', function() {
+                    window.history.pushState(null, document.title, '/');
+                })
     </script>
 @endsection
