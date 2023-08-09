@@ -271,8 +271,8 @@
                 }
             searchFun();
         }
-        $('#createform').on('submit', function() {
-                    window.history.pushState(null, document.title, '/');
-                })
+        // $('#createform').on('submit', function() {
+        //             window.history.pushState(null, document.title, '/');
+        //         })
     </script>
 @endsection
