@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Image;
 
 class UserChatController extends Controller
 {
@@ -17,6 +18,21 @@ class UserChatController extends Controller
         $result['chat'] = DB::table('chat')->where('sid', session()->get('USER_ID'))->where('channel', $id)->orderBy('created_at', 'ASC')->get();
         $result['chan'] = DB::table('channels')->where('shortname', $id)->first();
         $result['channel'] = $id;
+        $ciad = DB::table('chat')->where('sid', session()->get('USER_ID'))->where('channel', $id)->whereIn('sendtype', ['admin', 'staff', 'marketer'])->orderBy('created_at', 'DESC')->first();
+        if($ciad == NULL){
+            $result['chatidad'] = '';
+        }
+        else{
+            $result['chatidad'] = $ciad->id;
+        }
+        $cius = DB::table('chat')->where('sid', session()->get('USER_ID'))->where('channel', $id)->where('seen', 'seen')->where('sendtype', 'user')->orderBy('created_at', 'DESC')->first();
+        if($cius == NULL){
+            $result['chatidus'] = '';
+        }
+        else{
+            $result['chatidus'] = $cius->id;
+        }
+       
         return view('customer/chatbox', $result);
     }
     public function addmsguser(Request $request){
@@ -28,6 +44,24 @@ class UserChatController extends Controller
         $message = $request->post('message');
         $time = time();
 
+        if($file = $request->file('img')){
+            // $file = $request->file('img');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = time().'chatmsg'.'.'.$ext;
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image_resize->save('chatimg/'.$image_name);
+
+            $image = 'chatimg/'.$image_name;
+            $msgtype = 'img';
+        }
+        else{
+            $image = NULL;
+            $msgtype = 'text';
+        }
+
         DB::table('chat')->insert([
             'sid'=>$sid,
             'sendtype'=>$sendtype,
@@ -35,17 +69,61 @@ class UserChatController extends Controller
             'sentname'=>$sentname,
             'channel'=>$channel,
             'message'=>$message,
+            'msgtype'=>$msgtype,
             'created_at'=>$time,
+            'image'=>$image,
         ]);
         $res = array();
+        $ch = DB::table('chat')->where([
+            'sid'=>$sid,
+            'sendtype'=>$sendtype,
+            'sentBy'=>$sentBy,
+            'sentname'=>$sentname,
+            'channel'=>$channel,
+            'message'=>$message,
+            'msgtype'=>$msgtype,
+            'created_at'=>$time,
+            'image'=>$image,
+        ])->first();
         $res[] =  [
+            'id'=>$ch->id,
             'sid'=>$sid,
             'sendtype'=>$sendtype,
             'sentBy'=>$sentBy,
             'channel'=>$channel,
             'sentname'=>$sentname,
             'message'=>$message,
+            'msgtype'=>$msgtype,
             'created_at'=>$time,
+            'image'=>$image,
+        ];
+        return response()->json($res);
+    }
+
+    public function seenupdate($id,$channel){
+        DB::table('chat')->where('sid', $id)->where('channel', $channel)->whereIn('sendtype', ['admin', 'staff', 'marketer'])->update([
+            'seen'=>'seen'
+        ]);
+        $ciad = DB::table('chat')->where('sid', session()->get('USER_ID'))->where('channel', $channel)->where('seen', 'seen')->whereIn('sendtype', ['admin', 'staff', 'marketer'])->orderBy('created_at', 'DESC')->first();
+        if($ciad == NULL){
+            $cad = 0;
+        }
+        else{
+            $cad = $ciad->id;
+        }
+        $cius = DB::table('chat')->where('sid', session()->get('USER_ID'))->where('channel', $channel)->where('sendtype', 'user')->orderBy('created_at', 'DESC')->first();
+        if($cius == NULL){
+            $cus = 0;
+        }
+        else{
+            $cus = $cius->id;
+        }
+
+        $res = [
+            'id'=>$id,
+            'channel'=>$channel,
+            'chatidad'=>$cad,
+            'chatidus'=>$cus,
         ];
         return response()->json($res);
     }

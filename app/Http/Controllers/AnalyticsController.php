@@ -1068,14 +1068,44 @@ class AnalyticsController extends Controller
                else{
                 $othnum = "0";
                }
+               if($data2->where('category','powerbank')->first() == NULL){
+                $pb = 0;
+               }
+               else{
+                $pb = $data2->where('category','powerbank')->first()->sum;
+               }
+               if($data2->where('category','charger')->first() == NULL){
+                $ch = 0;
+               }
+               else{
+                $ch = $data2->where('category','charger')->first()->sum;
+               }
+               if($data2->where('category','cable')->first() == NULL){
+                $ca = 0;
+               }
+               else{
+                $ca = $data2->where('category','cable')->first()->sum;
+               }
+               if($data2->where('category','earphone')->first() == NULL){
+                $ep = 0;
+               }
+               else{
+                $ep = $data2->where('category','earphone')->first()->sum;
+               }
+               if($data2->where('category','btitem')->first() == NULL){
+                $bt = 0;
+               }
+               else{
+                $bt = $data2->where('category','btitem')->first()->sum;
+               }
                 $res[] = [
                     'month'=>$item->nepmonth,
                     'year'=>$item->nepyear,
-                    'powerbank'=>$data2->where('category','powerbank')->first()->sum,
-                    'charger'=>$data2->where('category','charger')->first()->sum,
-                    'cable'=>$data2->where('category','cable')->first()->sum,
-                    'earphone'=>$data2->where('category','earphone')->first()->sum,
-                    'btitem'=>$data2->where('category','btitem')->first()->sum,
+                    'powerbank'=>$pb,
+                    'charger'=>$ch,
+                    'cable'=>$ca,
+                    'earphone'=>$ep,
+                    'btitem'=>$bt,
                     'others'=>$othnum,
                 ];
             }

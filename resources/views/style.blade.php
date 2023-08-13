@@ -402,6 +402,7 @@ input:focus {
 .chat-list-item{
     /* padding: 0 20px; */
     /* border-radius: 20px; */
+    margin-top: 5px;
     background: var(--bg-content);
     margin: 0;
     border-bottom: 1px solid rgb(233, 233, 233);
@@ -431,7 +432,7 @@ input:focus {
 }
 .chat-list-message{
     font-size: 12px;
-    width: 100px;
+    width: 180px;
     text-align: left;
     overflow: hidden;
 }
@@ -549,7 +550,7 @@ input:focus {
     max-width: 65%;
     padding: 10px;
     margin: 10px;
-    
+    word-wrap: break-word;
 }
 .user-message-right span{
     color: var(--textcol);
@@ -567,5 +568,8 @@ input:focus {
 }
 .user-message-left span{
     color: black;
+}
+.user-img-msg-bg{
+    background: rgb(255, 195, 66);
 }
 </style>

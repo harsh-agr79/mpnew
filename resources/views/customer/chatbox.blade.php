@@ -1,6 +1,38 @@
 @extends('customer/layout')
 
 @section('main')
+<style>
+    .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+</style>
+<span class="hide" id="url">{{url()->full()}}</span>
+<span class="hide" id="channel">{{$channel}}</span>
+<span class="hide" id="userid">{{$user->id}}</span>
+@php
+if ($chatidad >= $chatidus) {
+    $chatid = $chatidad;
+} else {
+    $chatid = $chatidus;
+}
+@endphp
     <div style="margin: 0; padding: 0;">
         <div class="row user-chat-header valign-wrapper" style="margin: 0">
             <div class="col s3">
@@ -14,39 +46,78 @@
         <div class="row user-chat-box" id="userchatbox" style="margin: 0; padding: 0;">
             @foreach ($chat as $item)
                 @if ($item->sendtype == 'user')
-                    <div class="col s12">
+                    @if ($item->msgtype == 'text')
+                    <div class="col s12" id="{{$item->id}}">
                         <div class="user-message-div user-message-right">
                             <span style="font-size: 12px;">
                                 {{ $item->message }}
+                            </span><br>
+                            <span class="right" style="font-size: 7px;">
+                                {{date('d-M H:i', $item->created_at)}}
                             </span>
                         </div>
                     </div>
+                    @else
+                    <div class="col s12" id="{{ $item->id }}" style="margin: 5px 0; padding: 0;">
+                        <div class="right bg-content">
+                            <img src="{{ asset($item->image) }}" class="materialboxed" height="150"
+                                alt="">
+                                <div style="font-size: 7px; padding: 3px; margin: 0; width: 100%">
+                                    <span class="right">{{date('d-M H:i', $item->created_at)}}</span>
+                                </div>
+                        </div>
+                    </div>
+                    @endif
+                   
                 @else
-                    <div class="col s12">
+                @if ($item->msgtype == 'text')
+                    <div class="col s12" id="{{$item->id}}">
                         <div class="user-message-div user-message-left">
                             <span style="font-size: 12px;">
                                 {{ $item->message }}
                             </span><br>
-                            <span style="font-size: 7px">{{ $item->sentname }}</span>
+                            <span style="font-size: 7px">
+                                <span class="left">{{ $item->sentname }}</span><span class="right">{{date('d-M H:i', $item->created_at)}}</span></span>
                         </div>
                     </div>
+                    @else
+                    <div class="col s12" id="{{ $item->id }}" style="margin: 5px 0; padding: 5px;">
+                        <div class="left">
+                            <img src="{{ asset($item->image) }}" class="materialboxed" height="150"
+                                alt="">
+                                <div class="user-img-msg-bg" style="font-size: 7px; padding-bottom: 10px; margin: 0; width: 100%">
+                                    <span class="left">{{ $item->sentname }} </span><span class="right"> {{date('d-M H:i', $item->created_at)}}</span>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    @endif
+                @endif
+                @if ($item->id == $chatid)
+                <div class="col s12" id="seenbox">
+                    <div class="right">
+                        <span style="font-size: 10px; margin-right: 20px;">seen</span>
+                    </div>
+                </div>
                 @endif
             @endforeach
+          
         </div>
         <div class="center" style="margin: 0;">
             <form id="sendmessage" class="user-chat-messageinp ">
                 <input type="hidden" name="userid" value="{{ $user->id }}">
                 <input type="hidden" name="channel" value="{{ $chan->shortname }}">
                 <div style="margin:0; padding: 0;">
-                    <a class="btn-flat">
+                    <span class="btn-flat btn-file">
                         <i class="material-symbols-outlined textcol" style="font-size: 30px;">
                             image
                         </i>
-                    </a>
+                        <input type="file" name="img" onchange="$('#sendmessage').submit()">
+                    </span>
                 </div>
                 <div style="margin:0; padding: 0; width: 70vw;">
                     <input type="text" class="browser-default msginp" id="msgval" name="message"
-                        placeholder="Type Message...">
+                        placeholder="Type Message..." autocomplete="off">
                 </div>
                 <div style="margin:0; padding: 0;">
                     <button class="btn-flat">
@@ -64,64 +135,6 @@
     </script>
     <script src="{{ asset('assets/cuschat.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            var msgSection = document.querySelector("#userchatbox");
-            msgSection.scrollTo(0, msgSection.scrollHeight);
-        });
-        $(function() {
-            let ip_address = "192.168.1.208";
-            let socket_port = "3000";
-            let socket = io(ip_address+":"+socket_port);
-            let type = ['admin', 'staff', 'marketer']
-
-            socket.on("sendMsgToClient", (message) => {
-                console.log(message);
-                if (message[0].sid == `{{ $user->id }}` && message[0].channel == `{{ $channel }}` && type.indexOf(message[0].sendtype) > -1)
-                    $('#userchatbox').append(`
-                <div class="col s12">\
-                        <div class="user-message-div user-message-left">\
-                            <span style="font-size: 12px;">\
-                              ${message[0].message} \
-                            </span><br>\
-                            <span style="font-size: 7px">${message[0].sentname}</span>\
-                        </div>\
-                    </div>\
-                `)
-                var msgSection = document.querySelector("#userchatbox");
-                msgSection.scrollTo(0, msgSection.scrollHeight);
-
-            });
-        });
-        $('#sendmessage').on('submit', function(e) {
-            e.preventDefault();
-            let ip_address = "192.168.1.208";
-            let socket_port = "3000";
-            let socket = io(ip_address+":"+socket_port);
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                url: "/addmsguser",
-                data: $("#sendmessage").serialize(),
-                type: "post",
-                success: function(response) {
-                    console.log(response)
-                    socket.emit("sendMsgToServer", response);
-                    $('#userchatbox').append(`
-                    <div class="col s12">\
-                        <div class="user-message-div user-message-right">\
-                            <span style="font-size: 12px;">\
-                              ${response[0].message} \
-                            </span><br>\
-                            <span style="font-size: 7px"></span>\
-                        </div>\
-                    </div>\
-                `)
-                    var msgSection = document.querySelector("#userchatbox");
-                    msgSection.scrollTo(0, msgSection.scrollHeight);
-                },
-            });
-            $("#msgval").val("");
-        })
+      
     </script>
 @endsection

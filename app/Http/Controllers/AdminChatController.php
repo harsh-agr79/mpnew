@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Image;
 
 class AdminChatController extends Controller
 {
@@ -15,6 +16,20 @@ class AdminChatController extends Controller
             $result['user'] = DB::table('customers')->where('id',$id)->first();
             $result['channels'] = DB::table('channels')->get();
             $result['channel'] = $id2;
+            $ciad = DB::table('chat')->where('sid', $id)->where('channel', $id2)->whereIn('sendtype', ['admin', 'staff', 'marketer'])->orderBy('created_at', 'DESC')->first();
+            if($ciad == NULL){
+                $result['chatidad'] = '';
+            }
+            else{
+                $result['chatidad'] = $ciad->id;
+            }
+            $cius = DB::table('chat')->where('sid', $id)->where('channel', $id2)->where('seen', 'seen')->where('sendtype', 'user')->orderBy('created_at', 'DESC')->first();
+            if($cius == NULL){
+                $result['chatidus'] = '';
+            }
+            else{
+                $result['chatidus'] = $cius->id;
+            }
 
             return view('adminchat/chathome', $result);
         }
@@ -31,6 +46,23 @@ class AdminChatController extends Controller
         $channel = $request->post('channel');
         $message = $request->post('message');
         $time = time();
+        if($file = $request->file('img')){
+            // $file = $request->file('img');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = time().'chatmsg'.'.'.$ext;
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image_resize->save('chatimg/'.$image_name);
+
+            $image = 'chatimg/'.$image_name;
+            $msgtype = 'img';
+        }
+        else{
+            $image = NULL;
+            $msgtype = 'text';
+        }
 
         DB::table('chat')->insert([
             'sid'=>$sid,
@@ -39,17 +71,33 @@ class AdminChatController extends Controller
             'sentname'=>$sentname,
             'channel'=>$channel,
             'message'=>$message,
+            'msgtype'=>$msgtype,
             'created_at'=>$time,
+            'image'=>$image,
         ]);
         $res = array();
+        $ch = DB::table('chat')->where([
+            'sid'=>$sid,
+            'sendtype'=>$sendtype,
+            'sentBy'=>$sentBy,
+            'sentname'=>$sentname,
+            'channel'=>$channel,
+            'message'=>$message,
+            'msgtype'=>$msgtype,
+            'created_at'=>$time,
+            'image'=>$image,
+        ])->first();
         $res[] =  [
+            'id'=>$ch->id,
             'sid'=>$sid,
             'sendtype'=>$sendtype,
             'sentBy'=>$sentBy,
             'channel'=>$channel,
             'sentname'=>$sentname,
             'message'=>$message,
+            'msgtype'=>$msgtype,
             'created_at'=>$time,
+            'image'=>$image,
         ];
         return response()->json($res);
     }
@@ -82,5 +130,32 @@ class AdminChatController extends Controller
         ]);
         // $url = $request->post('preurl');
         return redirect(url()->previous());
+    }
+    public function seenupdate($id,$channel){
+        DB::table('chat')->where('sid', $id)->where('channel', $channel)->where('sendtype','user')->update([
+            'seen'=>'seen'
+        ]);
+        $ciad = DB::table('chat')->where('sid', $id)->where('channel', $channel)->whereIn('sendtype', ['admin', 'staff', 'marketer'])->where('seen', 'seen')->orderBy('created_at', 'DESC')->first();
+            if($ciad == NULL){
+                $chatidad = 0;
+            }
+            else{
+                $chatidad  = $ciad->id;
+            }
+            $cius = DB::table('chat')->where('sid', $id)->where('channel', $channel)->where('sendtype', 'user')->orderBy('created_at', 'DESC')->first();
+            if($cius == NULL){
+                $chatidus = 0;
+            }
+            else{
+                $chatidus = $cius->id;
+            }
+
+        $res = [
+            'id'=>$id,
+            'channel'=>$channel,
+            'chatidad'=>$chatidad,
+            'chatidus'=>$chatidus,
+        ];
+        return response()->json($res);
     }
 }

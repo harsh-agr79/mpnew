@@ -20,7 +20,43 @@
         .newcon::placeholder {
             color: white;
         }
+
+        .bold {
+            font-weight: 600;
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
     </style>
+    @php
+        if ($chatidad >= $chatidus) {
+            $chatid = $chatidad;
+        } else {
+            $chatid = $chatidus;
+        }
+    @endphp
+    <span class="hide" id="url">{{ url()->full() }}</span>
+    <span class="hide" id="channel">{{ $channel }}</span>
+    <span class="hide" id="userid">{{ $user->id }}</span>
+    <span class="hide" id="userimg">{{ $user->profileimg }}</span>
     <nav>
         <div class="nav-wrapper bg">
             <a href="#" class="brand-logo center"><img src="{{ asset('assets/' . $admin->mode . '.png') }}"
@@ -58,9 +94,32 @@
                         } else {
                             $act = '';
                         }
+                        if ($item->seen != 'seen' && $item->sendtype == 'user') {
+                            $cls = 'bold';
+                            $txt = '';
+                            $setg = 'hide';
+                            $dep = 'z-depth-1';
+                        } elseif ($item->seen == 'seen' && $item->sendtype == 'user') {
+                            $cls = '';
+                            $txt = '';
+                            $setg = 'hide';
+                            $dep = '';
+                        } else {
+                            if ($item->seen != 'seen') {
+                                $cls = '';
+                                $txt = 'You:';
+                                $setg = 'hide';
+                                $dep = '';
+                            } else {
+                                $cls = '';
+                                $txt = 'You:';
+                                $setg = '';
+                                $dep = '';
+                            }
+                        }
                     @endphp
                     <a href="{{ url('chats/' . $item->sid . '/' . $item->channel) }}"
-                        class="row valign-wrapper chat-list-item textcol {{ $act }}">
+                        class="row valign-wrapper chat-list-item textcol {{$dep}} {{ $act }}">
                         <div class="col s3">
                             @if ($u->profileimg != null)
                                 <img src="{{ asset($u->profileimg) }}" class="chat-list-img">
@@ -69,10 +128,24 @@
                             @endif
 
                         </div>
-                        <div class="col s9">
-                            <span class="chat-list-username">{{ $u->name }}</span><span
-                                class="chat-list-channel">{{ $item->channel }}</span><br>
-                            <span class="chat-list-message">{{ $item->message }}</span>
+                        <div class="col s9" style="width: 100%">
+                            <div class="left-align">
+                                <span class="chat-list-username {{ $cls }}">{{ $u->name }}</span>
+                                <span class="chat-list-channel {{ $cls }}">{{ $item->channel }}</span>
+                            </div>
+                            <div>
+                                <div class="{{ $cls }} left chat-list-message">{{ $txt }}{{ $item->message }}</div>
+                                
+                                <div class="right {{$setg}}" style="margin-right: 10px;">
+                                    @if ($u->profileimg != null)
+                                        <img src="{{ asset($u->profileimg) }}" height="15"
+                                            style="border-radius: 50%" alt="">
+                                    @else
+                                        <img src="{{ asset('user.jpg') }}" height="15" style="border-radius: 50%"
+                                            alt="">
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </a>
                 @endforeach
@@ -98,39 +171,86 @@
                     <div class="col s12 chat-box-convo row" id="chatboxmsgdiv" style="margin:0, padding: 0;">
                         @foreach ($chat as $item)
                             @if ($admin->type == $item->sendtype)
-                                <div class="col s12" style="margin:0, padding: 0;">
-                                    <div class="chat-message message-right right">
-                                        {{ $item->message }}<br>
-                                        <span style="font-size: 7px; padding: 0; margin: 0;">
-                                            {{ $item->sentname }}
-                                        </span>
+                                @if ($item->msgtype == 'text')
+                                    <div class="col s12" id="{{ $item->id }}" style="margin:0, padding: 0;">
+                                        <div class="chat-message message-right right">
+                                            {{ $item->message }}<br>
+                                            <span style="font-size: 7px; padding: 0; margin: 0;">
+                                                <span class="left">{{ $item->sentname }}</span> <span
+                                                    class="right">{{ date('d-M H:i', $item->created_at) }}</span>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col s12" id="{{ $item->id }}" style="margin: 5px 0; padding: 0;">
+                                        <div class="right bg-content">
+                                            <img src="{{ asset($item->image) }}" class="materialboxed"
+                                                height="150" alt="">
+                                            <div style="font-size: 7px; padding: 3px; margin: 0; width: 100%">
+                                                <span class="left">{{ $item->sentname }}</span> <span
+                                                    class="right">{{ date('d-M H:i', $item->created_at) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @else
-                                <div class="col s12" style="margin:0, padding: 0;">
-                                    <div class="chat-message message-left left">
-                                        {{ $item->message }}
+                                @if ($item->msgtype == 'text')
+                                    <div class="col s12" id="{{ $item->id }}" style="margin:0, padding: 0;">
+                                        <div class="chat-message message-left left">
+                                            {{ $item->message }}<br>
+                                            <span style="font-size: 7px; padding: 0; margin: 0;">
+                                                <span class="left">{{ date('d-M H:i', $item->created_at) }}</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                @else
+                                    <div class="col s12" id="{{ $item->id }}" style="margin:5px 0; padding: 0;">
+                                        <div class="left ">
+                                            <img src="{{ asset($item->image) }}" class="materialboxed"
+                                                height="150" alt="">
+                                            <div class="user-img-msg-bg"
+                                                style="font-size: 7px; padding-bottom: 10px; width: 100%;">
+                                                <span class="left">{{ date('d-M H:i', $item->created_at) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                            @if ($item->id == $chatid)
+                                <div class="col s12" id="seenbox" style="margin:0, padding: 0;">
+                                    <div class="right">
+                                        @if ($user->profileimg != null)
+                                            <img src="{{ asset($user->profileimg) }}" height="20"
+                                                style="border-radius: 50%" alt="">
+                                        @else
+                                            <img src="{{ asset('user.jpg') }}" height="20"
+                                                style="border-radius: 50%" alt="">
+                                        @endif
                                     </div>
                                 </div>
                             @endif
                         @endforeach
 
+
                     </div>
                     <div class="col s12" style="margin:0, padding: 0;">
                         <div class="chat-box-messageinp row" style="margin:0, padding: 0;">
-                            <form id="message-inp">
+                            <form id="message-inp" enctype="multipart/form-data">
                                 <input type="hidden" name="sid" value="{{ $user->id }}">
                                 <input type="hidden" name="channel" value="{{ $channel }}">
                                 <div class=" col s1" style="margin:0, padding: 0;">
-                                    <a class="btn-flat">
+                                    <span class="btn-flat btn-file">
                                         <i class="material-symbols-outlined textcol" style="font-size: 30px;">
                                             image
                                         </i>
-                                    </a>
+                                        <input type="file" id="imginp" name="img"
+                                            onchange="$('#message-inp').submit()">
+                                    </span>
                                 </div>
                                 <div class="col s10" style="margin:0, padding: 0;">
-                                    <input type="text" class="browser-default msginp" id="msgval" name="message"
-                                        placeholder="Type Message...">
+                                    <input type="text" class="browser-default msginp" id="msgval"
+                                        name="message" placeholder="Type Message..." autocomplete="off">
                                 </div>
                                 <div class="col s1" style="margin:0, padding: 0;">
                                     <button class="btn-flat">
@@ -345,28 +465,6 @@
             // console.log(custdata);
 
         })
-        $(function() {
-            let ip_address = "192.168.1.208";
-            let socket_port = "3000";
-            let socket = io(ip_address+":"+socket_port);
-
-            socket.on("sendMsgToClient", (message) => {
-                console.log(message);
-                if (message[0].sendtype == 'user' && message[0].sid == `{{ $user->id }}` && message[0]
-                    .channel == `{{ $channel }}`) {
-                    $("#chatboxmsgdiv").append(`\
-        <div class="col s12" style="margin:0, padding: 0;">\
-                                    <div class="chat-message message-left left">\
-                                        ${message[0].message}\
-                                    </div>\
-                                </div>\
-        `)
-        chatlist(message[0].sid)
-                    var msgSection = document.querySelector("#chatboxmsgdiv");
-                    msgSection.scrollTo(0, msgSection.scrollHeight);
-                }
-            });
-        });
     </script>
 </body>
 
