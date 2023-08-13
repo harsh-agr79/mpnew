@@ -104,7 +104,21 @@ class AdminChatController extends Controller
 
     public function getchatlist(){
         $res =DB::table('chat')->join('customers', 'customers.id', '=', 'chat.sid')->orderBy('chat.created_at', 'DESC')->get()->unique('sid');
-        return response()->json($res);
+        $chr = array();
+        foreach($res as $item){
+            $unseen = count(DB::table('chat')->where('sid', $item->sid)->where('sendtype', 'user')->where('seen', NULL)->get());
+            $chr[] = [
+                'profileimg'=>$item->profileimg,
+                'sid'=>$item->sid,
+                'seen'=>$item->seen,
+                'name'=>$item->name,
+                'sendtype'=>$item->sendtype,
+                'channel'=>$item->channel,
+                'message'=>$item->message,
+                'unseen'=>$unseen
+            ];
+        }
+        return response()->json($chr);
     }
 
     public function addchannel(Request $request){
@@ -156,6 +170,21 @@ class AdminChatController extends Controller
             'chatidad'=>$chatidad,
             'chatidus'=>$chatidus,
         ];
+        return response()->json($res);
+    }
+    public function getuserchannel(Request $request, $id){
+        $channel = DB::table('channels')->get();
+        $res = array();
+        foreach($channel as $item){
+           $uns = DB::table('chat')->where('sid', $id)->where('sendtype', 'user')->where('channel', $item->shortname)->where('seen', NULL)->get();
+            $unseen = count($uns);
+            $res[] = [
+                'channel'=>$item->name,
+                'color'=>$item->color,
+                'shortname'=>$item->shortname,
+                'unseen'=>$unseen,
+            ];
+        }
         return response()->json($res);
     }
 }

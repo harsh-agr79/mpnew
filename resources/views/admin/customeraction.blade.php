@@ -16,6 +16,7 @@
             <table class="sortable">
                 <thead>
                     <th>SN</th>
+                    <th>DP</th>
                     <th>Name</th>
                     <th>Login</th>
                     <th>Edit</th>
@@ -25,6 +26,13 @@
                     @foreach ($data as $item)
                         <tr>
                             <td>{{$a = $a + 1}}</td>
+                            <td>
+                                @if ($item->profileimg == NULL)
+                                    <img src="{{asset('user.jpg')}}" style="height: 50; border-radius: 50%"  alt="">
+                                @else
+                                    <img src="{{asset($item->profileimg)}}" style="height: 50; border-radius: 50%"  alt="">
+                                @endif
+                            </td>
                             <td>{{ $item->name }}</td>
                             <td><a href="{{ url('directlogin/customer/' . $item->id) }}" class="btn-small amber textcol"><i
                                         class="material-symbols-outlined textcol">

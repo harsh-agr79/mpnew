@@ -16,6 +16,10 @@ elseif(session()->has('USER_LOGIN')){
     --bgunder: #0e0e0e;
     --bg-content: rgb(31, 31, 31);
     --td-hover: rgb(40, 40, 40);
+    --chat-list-col: rgb(46, 46, 46);
+    --chat-active: rgb(119, 93, 0);
+    --chat-unseen: rgb(18, 89, 0);
+    --chat-hover: rgb(74, 58, 0);
 }
 *{
     color: white;
@@ -37,6 +41,10 @@ elseif(session()->has('USER_LOGIN')){
     --bgunder: #f1f1f1;
     --bg-content: white;
     --td-hover: rgb(236, 236, 236);
+    --chat-list-col: rgb(215, 215, 215);
+    --chat-active: rgb(255, 247, 217);
+    --chat-unseen: #ffffff;
+    --chat-hover: rgb(255, 232, 148);
 }
 
 </style>
@@ -403,16 +411,19 @@ input:focus {
     /* padding: 0 20px; */
     /* border-radius: 20px; */
     margin-top: 5px;
-    background: var(--bg-content);
+    background: var(--chat-list-col);
     margin: 0;
     border-bottom: 1px solid rgb(233, 233, 233);
     transition: ease-in 0.25s;
 }
 .chat-active{
-    background: var(--td-hover);
+    background: var(--chat-active);
+}
+.chat-unseen{
+    background: var(--chat-unseen);
 }
 .chat-list-item:hover{
-    background: var(--td-hover);
+    background: var(--chat-hover);
 }
 .chat-list-img{
     height: 60px;

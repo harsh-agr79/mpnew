@@ -53,6 +53,11 @@
             $chatid = $chatidus;
         }
     @endphp
+     @php
+     $chan = DB::table('channels')
+         ->where('shortname', $channel)
+         ->first();
+ @endphp
     <span class="hide" id="url">{{ url()->full() }}</span>
     <span class="hide" id="channel">{{ $channel }}</span>
     <span class="hide" id="userid">{{ $user->id }}</span>
@@ -89,6 +94,12 @@
                         $u = DB::table('customers')
                             ->where('id', $item->sid)
                             ->first();
+                        $uns = DB::table('chat')
+                            ->where('sid', $item->sid)
+                            ->where('sendtype', 'user')
+                            ->where('seen', null)
+                            ->get();
+                        $unseen = count($uns);
                         if ($user->id == $item->sid) {
                             $act = 'chat-active';
                         } else {
@@ -98,7 +109,7 @@
                             $cls = 'bold';
                             $txt = '';
                             $setg = 'hide';
-                            $dep = 'z-depth-1';
+                            $dep = 'chat-unseen';
                         } elseif ($item->seen == 'seen' && $item->sendtype == 'user') {
                             $cls = '';
                             $txt = '';
@@ -117,9 +128,16 @@
                                 $dep = '';
                             }
                         }
+                        if ($unseen > 0 && $user->id == $item->sid) {
+                            $dep = '';
+                            $act = 'chat-active';
+                        } elseif ($unseen > 0 && $user->id != $item->sid) {
+                            $dep = 'chat-unseen';
+                            $act = '';
+                        }
                     @endphp
                     <a href="{{ url('chats/' . $item->sid . '/' . $item->channel) }}"
-                        class="row valign-wrapper chat-list-item textcol {{$dep}} {{ $act }}">
+                        class="row valign-wrapper chat-list-item textcol {{ $dep }} {{ $act }}">
                         <div class="col s3">
                             @if ($u->profileimg != null)
                                 <img src="{{ asset($u->profileimg) }}" class="chat-list-img">
@@ -134,9 +152,10 @@
                                 <span class="chat-list-channel {{ $cls }}">{{ $item->channel }}</span>
                             </div>
                             <div>
-                                <div class="{{ $cls }} left chat-list-message">{{ $txt }}{{ $item->message }}</div>
-                                
-                                <div class="right {{$setg}}" style="margin-right: 10px;">
+                                <div class="{{ $cls }} left chat-list-message">
+                                    {{ $txt }}{{ $item->message }}</div>
+
+                                <div class="right {{ $setg }}" style="margin-right: 10px;">
                                     @if ($u->profileimg != null)
                                         <img src="{{ asset($u->profileimg) }}" height="15"
                                             style="border-radius: 50%" alt="">
@@ -145,6 +164,15 @@
                                             alt="">
                                     @endif
                                 </div>
+                                @if ($unseen > 0)
+                                    <div class="right" style="margin-right: 10px;">
+                                        <div class="red white-text"
+                                            style="width:20px; height: 20px; font-size: 15px; border-radius: 50%; display:flex; align-items: center; justify-content: center;">
+                                            <div>{{ $unseen }}</div>
+                                        </div>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     </a>
@@ -166,6 +194,9 @@
                             <div class="chat-box-username">
                                 {{ $user->name }}
                             </div>
+                            <div style="background: {{ $chan->color }}; padding: 0 15px; border-radius: 20px; margin-left: 20%">
+                                <h6>{{ $chan->name }}</h6>
+                            </div>
                         </div>
                     </div>
                     <div class="col s12 chat-box-convo row" id="chatboxmsgdiv" style="margin:0, padding: 0;">
@@ -182,7 +213,8 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="col s12" id="{{ $item->id }}" style="margin: 5px 0; padding: 0;">
+                                    <div class="col s12" id="{{ $item->id }}"
+                                        style="margin: 5px 0; padding: 0;">
                                         <div class="right bg-content">
                                             <img src="{{ asset($item->image) }}" class="materialboxed"
                                                 height="150" alt="">
@@ -284,7 +316,7 @@
                             <h6>{{ $chan->name }}</h6>
                         </div>
                     </div>
-                    <div class="row center chat-box-channel-list">
+                    <div class="row center chat-box-channel-list" id="channel-list-div">
                         {{-- <div class="col s12 chat-box-channel">
                             <span class="channel-item">Channel 1 <span class="unseen-msg">4</span></span>
                         </div> --}}
@@ -292,7 +324,8 @@
                             <div class="col s12 chat-box-channel">
                                 <a class="channel-item textcol"
                                     href="{{ url('chats/' . $user->id . '/' . $item->shortname) }}"
-                                    style="background: {{ $item->color }}">{{ $item->name }}</a>
+                                    style="background: {{ $item->color }}">{{ $item->name }}
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -457,7 +490,7 @@
                     }
                     var custdata = Object.keys(datacust2);
                     if (custdata.indexOf(val) > -1) {
-                        window.open('/chats/' + custarray2[custdata.indexOf(val)].id + '/billing',
+                        window.open('/chats/' + custarray2[custdata.indexOf(val)].id + '/general',
                             "_self");
                     }
                 }

@@ -84,6 +84,7 @@ $("#message-inp").on("submit", (e) => {
             }
 
             chatlist(response[0].sid);
+            channelList(response[0].sid);
             var msgSection = document.querySelector("#chatboxmsgdiv");
             msgSection.scrollTo(0, msgSection.scrollHeight);
         },
@@ -93,11 +94,12 @@ $("#message-inp").on("submit", (e) => {
 });
 
 function chatlist(id) {
+    
     $.ajax({
         type: "get",
         url: "/getchatlist",
         success: function (response) {
-            // console.log(response);
+            console.log(response);
             $("#chatlist").html("");
             $.each(response, function (key, item) {
                 if (item.profileimg == null) {
@@ -114,7 +116,7 @@ function chatlist(id) {
                     cls = "bold";
                     txt = "";
                     setg = "hide";
-                    dep = 'z-depth-1';
+                    dep = 'chat-unseen';
                 } else if (item.seen == "seen" && item.sendtype == "user") {
                     cls = "";
                     txt = "";
@@ -133,6 +135,14 @@ function chatlist(id) {
                         dep = ''
                     }
                 }
+                if(item.unseen > 0 && id==item.sid){
+                    dep = '';
+                    act = 'chat-active'
+                }
+                else if(item.unseen > 0 && id!=item.sid){
+                    dep = 'chat-unseen';
+                    act = ''
+                }
                 $("#chatlist").append(` \
                 <a href="/chats/${item.sid}/${item.channel}" class="row valign-wrapper chat-list-item textcol ${dep} ${act}">\
                         <div class="col s3">\
@@ -149,6 +159,9 @@ function chatlist(id) {
                                         <img src="/${img}" height="15"
                                                     style="border-radius: 50%" alt="">
                                 </div>
+                                ${item.unseen > 0 ? `<div class="right valign-wrapper center" style="margin-right: 10px;">\
+                                        <div class="red white-text" style="width:22px; height: 22px; font-size: 15px; border-radius: 50%; display:flex; align-items: center; justify-content: center;"><div>${item.unseen}</div></div>\
+                                    </div>` : ``}
                             </div>\
                         </div>\
                     </a>\
@@ -212,15 +225,18 @@ $(function () {
             </div>\
         `);
             chatlist(message[0].sid);
+            channelList(message[0].sid);
             var msgSection = document.querySelector("#chatboxmsgdiv");
             msgSection.scrollTo(0, msgSection.scrollHeight);
         } else {
             chatlist($("#userid").text());
+            channelList($("#userid").text());
         }
     });
     socket.on("userSeenToAdmin", (message) => {
         seenupdate(message);
         chatlist($("#userid").text())
+        channelList($("#userid").text())
     });
 });
 
@@ -289,7 +305,30 @@ function seenup(id, channel) {
                 console.log(response);
                 socket.emit("adminSeenToServer", response);
                 chatlist(id);
+                channelList(id);
                 seenupdate(response);
+            },
+        });
+    }
+}
+
+function channelList(id) {
+    if (id == $("#userid").text()) {
+        $.ajax({
+            type: "get",
+            url: "/admin/chat/getchannels/"+id,
+            success: function (response) {
+                console.log(response);
+                $('#channel-list-div').html("");
+                $.each(response, function (key, item) {
+                    $('#channel-list-div').append(`  <div class="col s12 chat-box-channel">
+                    <a class="channel-item textcol"
+                        href="/chats/${id}/${item.shortname}"
+                        style="background: ${item.color}">${item.channel}
+                        ${item.unseen > 0 ? `<span class="red white-text center" style="margin-left: 15px; padding: 5px; border-radius: 20px; font-size: 10px;">${item.unseen}</span>` : ``}
+                    </a>
+                </div>`);
+                })
             },
         });
     }
