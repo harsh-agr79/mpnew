@@ -196,6 +196,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/getchatlist', [AdminChatController::class, 'getchatlist']);
     Route::get('/admin/chat/seenupdate/{id}/{id2}', [AdminChatController::class, 'seenupdate']);
     Route::get('/admin/chat/getchannels/{id}', [AdminChatController::class, 'getuserchannel']);
+    Route::get('/admin/m/chatlist', [AdminChatController::class, 'mchatlist']);
 
     Route::post('/addchannel', [AdminChatController::class, 'addchannel'])->name('addchannel');
     Route::post('/editchannel', [AdminChatController::class, 'editchannel'])->name('editchannel');

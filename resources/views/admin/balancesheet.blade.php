@@ -179,11 +179,11 @@
                                                 <a href="{{ url('/marketer/detail/' . $data[$i]['ent_id']) }}">
                                         @endif
                                     @elseif($data[$i]['type'] == 'payment')
-                                        <a href="{{ url('payment/addpayment/' . $data[$i]['id']) }}">
+                                        <a href="{{ url('/editpayment/' . $data[$i]['id']) }}">
                                         @elseif($data[$i]['type'] == 'Sales Return')
-                                            <a href="{{ url('srdet/' . $data[$i]['ent_id']) }}">
+                                            <a href="{{ url('slrdetail/' . $data[$i]['ent_id']) }}">
                                             @elseif($data[$i]['type'] == 'expense')
-                                                <a href="{{ url('expense/addexpense/' . $data[$i]['id']) }}">
+                                                <a href="{{ url('editexpense/' . $data[$i]['id']) }}">
                                     @endif
                                     {{ $data[$i]['ent_id'] }}</a>
                                 </td>

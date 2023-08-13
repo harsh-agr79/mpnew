@@ -187,4 +187,8 @@ class AdminChatController extends Controller
         }
         return response()->json($res);
     }
+
+    public function mchatlist(Request $request){
+        return view('adminchat/chatlist');
+    }
 }
