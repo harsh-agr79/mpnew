@@ -28,7 +28,7 @@
                             <td>{{$a = $a + 1}}</td>
                             <td>
                                 @if ($item->profileimg == NULL)
-                                    <img src="{{asset('user.jpg')}}" style="height: 50; border-radius: 50%"  alt="">
+                                    <img src="{{asset('user.jpg')}}" style="height: 50px; border-radius: 50%"  alt="">
                                 @else
                                     <img src="{{asset($item->profileimg)}}" style="height: 50; border-radius: 50%"  alt="">
                                 @endif
