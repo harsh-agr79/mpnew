@@ -6,7 +6,7 @@ $(document).ready(function () {
 });
 
 function getDateTime(date) {
-    var date = new Date(date * 1000).toString({
+    var date = new Date(date * 1000).toLocaleString({
         timeZone: "Asia/Kathmandu",
     });
     var date2 = new Date(date);
