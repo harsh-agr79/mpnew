@@ -1,6 +1,6 @@
 $(document).ready(function() {
     seenup($('#userid').text(), $('#channel').text())
-    chatlist()
+    // chatlist()
     var msgSection = document.querySelector("#userchatbox");
     msgSection.scrollTo(0, msgSection.scrollHeight);
 });
@@ -21,7 +21,7 @@ $(function(){
     socket.on("sendMsgToClient", (message) => {
         // console.log(message);
         if (message[0].sid == $('#userid').text() && message[0].channel == $('#channel').text() && type.indexOf(message[0].sendtype) > -1){
-            chatlist();
+            // chatlist();
             var d = getDateTime(message[0].created_at);
             if(message[0].msgtype == 'text'){
                 $('#userchatbox').append(`
@@ -112,7 +112,7 @@ $('#sendmessage').on('submit', function(e) {
         success: function(response) {
             // console.log(response)
             socket.emit("sendMsgToServer", response);
-            chatlist()
+            // chatlist()
             var d = getDateTime(response[0].created_at);
             if(response[0].msgtype == 'text'){
                 $('#userchatbox').append(`
@@ -156,7 +156,7 @@ function seenup(id, channel) {
             type: 'get',
             url: '/user/chat/seenupdate/'+id+'/'+channel,
             success: function(response) {
-                chatlist()
+                // chatlist()
                 socket.emit("userSeenToServer", response);
             }
         })
