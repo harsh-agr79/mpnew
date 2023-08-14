@@ -145,6 +145,7 @@ $('#sendmessage').on('submit', function(e) {
         },
     });
     $("#msgval").val("");
+    $("#imgval").val("");
 })
 
 function seenup(id, channel) {

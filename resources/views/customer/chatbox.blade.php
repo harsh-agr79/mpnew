@@ -112,7 +112,7 @@ if ($chatidad >= $chatidus) {
                         <i class="material-symbols-outlined textcol" style="font-size: 30px;">
                             image
                         </i>
-                        <input type="file" name="img" onchange="$('#sendmessage').submit()">
+                        <input type="file" name="img" id="imgval" onchange="$('#sendmessage').submit()">
                     </span>
                 </div>
                 <div style="margin:0; padding: 0; width: 70vw;">
