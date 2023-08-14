@@ -217,6 +217,46 @@
                 });
             });
         });
+        let swRegistration = null;
+            initializeApp()
+            askPermission()
+
+            function initializeApp() {
+                if ("serviceWorker" in navigator && "PushManager" in window) {
+                    console.log("Service Worker and Push is supported");
+
+                    //Register the service worker
+                    navigator.serviceWorker
+                        .register("/sw.js")
+                        .then(swReg => {
+                            console.log("Service Worker is registered", swReg);
+
+                            swRegistration = swReg;
+                        })
+                        .catch(error => {
+                            console.error("Service Worker Error", error);
+                        });
+                } else {
+                    console.warn("Push messaging is not supported");
+                    notificationButton.textContent = "Push Not Supported";
+                }
+            }
+
+            function askPermission() {
+                return new Promise(function(resolve, reject) {
+                    const permissionResult = Notification.requestPermission(function(result) {
+                        resolve(result);
+                    });
+
+                    if (permissionResult) {
+                        permissionResult.then(resolve, reject);
+                    }
+                }).then(function(permissionResult) {
+                    if (permissionResult !== 'granted') {
+                        throw new Error("We weren't granted permission.");
+                    }
+                });
+            }
         
         updatemsgcnt();
         $(function() {
@@ -226,9 +266,18 @@
                 let type = ['admin', 'staff', 'marketer']
 
                 socket.on("sendMsgToClient", (message) => {
+                    console.log(message)
                     updatemsgcnt();
                 })
             });
+            function notification(message) {
+                const options = {
+                    body: message,
+                    icon: "/assets/logoyellow.png",
+                    vibrate: [200, 100, 200]
+                };
+                swRegistration.showNotification("My Power: New Order", options);
+            }
             function updatemsgcnt(){
                 $.ajax({
                         url: "/user/msgcnt",
