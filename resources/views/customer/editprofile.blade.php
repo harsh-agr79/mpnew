@@ -50,7 +50,7 @@
                     <option value="" selected disabled>Select PAN/VAT</option>
                     @endif
                     <option value="PAN">PAN</option>
-                    <option value="PAN">VAT</option>
+                    <option value="VAT">VAT</option>
                 </select></div>
             </div>
             <div class="col s12 row">
