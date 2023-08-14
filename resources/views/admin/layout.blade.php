@@ -538,7 +538,7 @@
                     badge: "/assets/logoyellow.png",
                     sound: '/notification.wav',
                 };
-                swRegistration.showNotification(message[0].sentname+":"+message[0].channel, options);
+                swRegistration.showNotification(message[0].sentname+" : "+message[0].channel, options);
                 } 
             }
         </script>
