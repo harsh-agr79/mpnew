@@ -1,5 +1,6 @@
 $(document).ready(function() {
     seenup($('#userid').text(), $('#channel').text())
+    chatlist()
     var msgSection = document.querySelector("#userchatbox");
     msgSection.scrollTo(0, msgSection.scrollHeight);
 });
@@ -12,14 +13,15 @@ function getDateTime(date){
     return d;
 }
 $(function(){
-    let ip_address = "192.168.1.208";
-    let socket_port = "3000";
-    let socket = io(ip_address+":"+socket_port);
+    let ip_address = 'socket.startuplair.com';
+    // let socket_port = '3000';
+    let socket = io(ip_address);
     let type = ['admin', 'staff', 'marketer']
 
     socket.on("sendMsgToClient", (message) => {
         // console.log(message);
         if (message[0].sid == $('#userid').text() && message[0].channel == $('#channel').text() && type.indexOf(message[0].sendtype) > -1){
+            chatlist();
             var d = getDateTime(message[0].created_at);
             if(message[0].msgtype == 'text'){
                 $('#userchatbox').append(`
@@ -94,9 +96,9 @@ $(function(){
 });
 $('#sendmessage').on('submit', function(e) {
     e.preventDefault();
-    let ip_address = "192.168.1.208";
-    let socket_port = "3000";
-    let socket = io(ip_address+":"+socket_port);
+    let ip_address = 'socket.startuplair.com';
+    // let socket_port = '3000';
+    let socket = io(ip_address);
     let formData = new FormData($('#sendmessage')[0]);
     $.ajax({
         headers: {
@@ -110,6 +112,7 @@ $('#sendmessage').on('submit', function(e) {
         success: function(response) {
             // console.log(response)
             socket.emit("sendMsgToServer", response);
+            chatlist()
             var d = getDateTime(response[0].created_at);
             if(response[0].msgtype == 'text'){
                 $('#userchatbox').append(`
@@ -146,13 +149,14 @@ $('#sendmessage').on('submit', function(e) {
 
 function seenup(id, channel) {
     if($('#channel').text() ===  channel && id === $('#userid').text()){
-        let ip_address = "192.168.1.208";
-        let socket_port = "3000";
-        let socket = io(ip_address+":"+socket_port);
+        let ip_address = 'socket.startuplair.com';
+        // let socket_port = '3000';
+        let socket = io(ip_address);
         $.ajax({
             type: 'get',
             url: '/user/chat/seenupdate/'+id+'/'+channel,
             success: function(response) {
+                chatlist()
                 socket.emit("userSeenToServer", response);
             }
         })
@@ -170,4 +174,15 @@ function changeseenbar(id,sid, channel){
     </div>\
     `);
     }
+}
+
+function chatlist(){
+    console.log('chatlist')
+    $.ajax({
+        type: 'get',
+        url: '/user/getchatlist',
+        success: function(response) {
+            // console.log(response);
+        }
+    })
 }

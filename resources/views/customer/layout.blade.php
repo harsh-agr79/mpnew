@@ -91,14 +91,29 @@
                                 </div>
                             </div>
                         </li>
-                    </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
-                            class="material-icons textcol">menu</i></a>
+                    </ul> 
+                    <ul id="nav-mobile" class="left hide-on-large-only">
+                        <li>
+                            <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
+                                class="material-icons textcol">menu</i></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/user/chatlist')}}" class="left"><i class="material-symbols-outlined material-icons">
+                                perm_phone_msg
+                            </i></a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed bg" style="transform: translateX(-105%);">
-            <li><a href="{{ url('/') }}" class="logo-container textcol">{{ $user->user_id }}<i
-                        class="material-icons left textcol">spa</i></a></li>
+            <li><a href="{{ url('/user/editprofile') }}" class="logo-container textcol">{{ $user->user_id }} <span style="font-size: 10px;">(Edit Profile)</span>@if ($user->profileimg !== NULL)
+                <i class="valign-wrapper">
+                    <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
+                </i>
+                @else
+                <i class="material-icons textcol">face</i>
+                @endif</a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li class="bold"><a href="{{ url('/home') }}" class="textcol">Home<i

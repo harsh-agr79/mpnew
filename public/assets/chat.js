@@ -37,9 +37,12 @@ function getDateTime(date) {
 
 $("#message-inp").on("submit", (e) => {
     e.preventDefault();
-    let ip_address = "192.168.1.208";
-    let socket_port = "3000";
-    let socket = io(ip_address + ":" + socket_port);
+    // let ip_address = "192.168.1.208";
+    // let socket_port = "3000";
+    // let socket = io(ip_address + ":" + socket_port);
+    let ip_address = 'socket.startuplair.com';
+    // let socket_port = '3000';
+    let socket = io(ip_address);
     let formData = new FormData($("#message-inp")[0]);
     $.ajax({
         headers: {
@@ -99,8 +102,9 @@ function chatlist(id) {
         type: "get",
         url: "/getchatlist",
         success: function (response) {
-            console.log(response);
+            // console.log(response);
             $("#chatlist").html("");
+            $("#chatlist2").html("");
             $.each(response, function (key, item) {
                 if (item.profileimg == null) {
                     img = "user.jpg";
@@ -145,7 +149,7 @@ function chatlist(id) {
                 }
                 $("#chatlist").append(` \
                 <a href="/chats/${item.sid}/${item.channel}" class="row valign-wrapper chat-list-item textcol ${dep} ${act}">\
-                        <div class="col s3">\
+                        <div class="col s3 center">\
                             <img src="/${img}" class="chat-list-img">\
                         </div>\
                         <div class="col s9">\
@@ -159,22 +163,45 @@ function chatlist(id) {
                                         <img src="/${img}" height="15"
                                                     style="border-radius: 50%" alt="">
                                 </div>
-                                ${item.unseen > 0 ? `<div class="right valign-wrapper center" style="margin-right: 10px;">\
+                                ${item.unseen > 0 ? `<div class="right" style="margin-right: 10px;">\
                                         <div class="red white-text" style="width:22px; height: 22px; font-size: 15px; border-radius: 50%; display:flex; align-items: center; justify-content: center;"><div>${item.unseen}</div></div>\
                                     </div>` : ``}
                             </div>\
                         </div>\
                     </a>\
                     `);
+                    $("#chatlist2").append(` \
+                    <a href="/admin/m/chats/${item.sid}/${item.channel}" class="row valign-wrapper chat-list-item textcol ${dep} ${act}">\
+                            <div class="col s3">\
+                                <img src="/${img}" class="chat-list-img">\
+                            </div>\
+                            <div class="col s9">\
+                                <div class="left-align">
+                                    <span class="chat-list-username ${cls}">${item.name}</span>\
+                                    <span class="chat-list-channel ${cls}">${item.channel}</span>\
+                                </div>\
+                                <div>
+                                    <div class="chat-list-message left ${cls}">${txt}${item.message}</div>
+                                    <div class="right ${setg}" style = "margin-right: 10px;">
+                                            <img src="/${img}" height="15"
+                                                        style="border-radius: 50%" alt="">
+                                    </div>
+                                    ${item.unseen > 0 ? `<div class="right" style="margin-right: 10px;">\
+                                            <div class="red white-text" style="width:22px; height: 22px; font-size: 15px; border-radius: 50%; display:flex; align-items: center; justify-content: center;"><div>${item.unseen}</div></div>\
+                                        </div>` : ``}
+                                </div>\
+                            </div>\
+                        </a>\
+                        `);
             });
         },
     });
 }
 
 $(function () {
-    let ip_address = "192.168.1.208";
-    let socket_port = "3000";
-    let socket = io(ip_address + ":" + socket_port);
+    let ip_address = 'socket.startuplair.com';
+    // let socket_port = '3000';
+    let socket = io(ip_address);
 
     socket.on("sendMsgToClient", (message) => {
         // console.log(message);
@@ -295,14 +322,14 @@ function editchannel(id) {
 function seenup(id, channel) {
     // console.log(channel);
     if ($("#channel").text() == channel && id == $("#userid").text()) {
-        let ip_address = "192.168.1.208";
-        let socket_port = "3000";
-        let socket = io(ip_address + ":" + socket_port);
+        let ip_address = 'socket.startuplair.com';
+        // let socket_port = '3000';
+        let socket = io(ip_address);
         $.ajax({
             type: "get",
             url: "/admin/chat/seenupdate/" + id + "/" + channel,
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 socket.emit("adminSeenToServer", response);
                 chatlist(id);
                 channelList(id);
@@ -318,7 +345,7 @@ function channelList(id) {
             type: "get",
             url: "/admin/chat/getchannels/"+id,
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 $('#channel-list-div').html("");
                 $.each(response, function (key, item) {
                     $('#channel-list-div').append(`  <div class="col s12 chat-box-channel">

@@ -110,6 +110,7 @@ tr{
     border-radius: 10px;
 }
 
+
 span.field-icon {
     float: right;
     position: absolute;
@@ -583,4 +584,22 @@ input:focus {
 .user-img-msg-bg{
     background: rgb(255, 195, 66);
 }
+.bg-under{
+    background: var(--bgunder);
+}
+
+.mobile-chatbox-div {
+            height: 100vh;
+            overflow-y: scroll;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+            padding: 15vh 0 7vh 0;
+        }
+        .mobile-chatbox-div::-webkit-scrollbar{
+            display: none;
+        }
 </style>

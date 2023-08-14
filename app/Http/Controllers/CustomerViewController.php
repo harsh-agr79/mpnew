@@ -526,6 +526,6 @@ class CustomerViewController extends Controller
             'DOB'=>$dob,
         ]);
 
-        return redirect('/user/editprofile');
+        return redirect('/home');
     }
 }

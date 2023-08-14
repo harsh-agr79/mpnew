@@ -189,6 +189,29 @@ class AdminChatController extends Controller
     }
 
     public function mchatlist(Request $request){
-        return view('adminchat/chatlist');
+        $result['allchats'] = DB::table('chat')->orderBy('created_at', 'DESC')->get()->unique('sid');
+        return view('adminchat/chatlist', $result);
+    }
+    public function madminchat(Request $request,$id,$id2){
+        $result['chat'] = DB::table('chat')->where('sid', $id)->where('channel', $id2)->orderBy('created_at', 'ASC')->get();
+        $result['user'] = DB::table('customers')->where('id',$id)->first();
+        $result['channels'] = DB::table('channels')->get();
+        $result['channel'] = $id2;
+        $ciad = DB::table('chat')->where('sid', $id)->where('channel', $id2)->whereIn('sendtype', ['admin', 'staff', 'marketer'])->orderBy('created_at', 'DESC')->first();
+        if($ciad == NULL){
+            $result['chatidad'] = '';
+        }
+        else{
+            $result['chatidad'] = $ciad->id;
+        }
+        $cius = DB::table('chat')->where('sid', $id)->where('channel', $id2)->where('seen', 'seen')->where('sendtype', 'user')->orderBy('created_at', 'DESC')->first();
+        if($cius == NULL){
+            $result['chatidus'] = '';
+        }
+        else{
+            $result['chatidus'] = $cius->id;
+        }
+
+        return view('adminchat/chatbox', $result);
     }
 }

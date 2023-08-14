@@ -14,7 +14,7 @@
     <title>Admin</title>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="icon" href="{{ asset('/assets/light.png') }}">
-    <link rel="stylesheet" href="{{asset('/assets/'.$admin->mode.".css")}}">
+    <link rel="stylesheet" href="{{ asset('/assets/' . $admin->mode . '.css') }}">
     <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}">
     <link rel="shortcut icon" href="{{ asset('icons/favicon.ico') }}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-touch-icon.png') }}">
@@ -25,7 +25,8 @@
         rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
@@ -43,6 +44,9 @@
                 <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
                             src="{{ asset('assets/' . $admin->mode . '.png') }}" height="50" alt=""></a>
                     <ul id="nav-mobile" class="right">
+                        <li class="hide-on-med-and-down"><a href="{{url('/chats/3/general')}}"><i class="material-icons textcol">
+                            chat
+                        </i></a>
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger"><i class="material-icons textcol">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications bgunder" tabindex="0">
@@ -57,6 +61,7 @@
                                 </div>
                             </div>
                         </li>
+                        
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger"><i
                                     class="material-icons textcol">settings</i></a>
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
@@ -79,8 +84,19 @@
                                 <i class="material-icons textcol">arrow_back</i>
                             </a>
                         </li>
-                    </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
-                            class="material-icons textcol">menu</i></a>
+                    </ul>
+                    <ul id="nav-mobile" class="left hide-on-large-only">
+                        <li>
+                            <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
+                                class="material-icons textcol">menu</i></a>
+                        </li>
+                        <li>
+                            <a href="{{url('admin/m/chatlist')}}" class="left"><i class="material-icons textcol">
+                                chat
+                            </i></a>
+                        </li>
+                    </ul>
+                   
                 </div>
             </nav>
         </div>
@@ -134,9 +150,10 @@
                                         </li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('bulkprint', $perms))
-                                    <li class="cyan ligthen-3"><a href="{{ url('/bulkprintorders') }}"
-                                            class="black-text">Bulk Print<i class="material-icons black-text">print</i></a>
-                                    </li>
+                                        <li class="cyan ligthen-3"><a href="{{ url('/bulkprintorders') }}"
+                                                class="black-text">Bulk Print<i
+                                                    class="material-icons black-text">print</i></a>
+                                        </li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('createorder', $perms))
                                         <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
@@ -164,9 +181,10 @@
                                                     class="material-icons textcol">show_chart</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('productreport', $perms))
-                                    <li><a href="{{ url('/productreport') }}" class="textcol">Product Report<i class="material-symbols-outlined textcol">
-                                        query_stats
-                                    </i></a></li>
+                                        <li><a href="{{ url('/productreport') }}" class="textcol">Product Report<i
+                                                    class="material-symbols-outlined textcol">
+                                                    query_stats
+                                                </i></a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -250,9 +268,10 @@
                                                     class="material-icons textcol">people</i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin')
-                                    <li><a href="{{ url('/customeractions') }}" class="textcol">Customer Actions<i class="material-symbols-outlined textcol">
-                                        manage_accounts
-                                    </i></a></li>
+                                        <li><a href="{{ url('/customeractions') }}" class="textcol">Customer
+                                                Actions<i class="material-symbols-outlined textcol">
+                                                    manage_accounts
+                                                </i></a></li>
                                     @endif
                                     @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
                                         <li><a href="{{ url('/addcustomer') }}" class="textcol">Add Customer<i
@@ -314,8 +333,8 @@
                                     class="material-icons textcol">settings</i></a></li>
                     @endif
                     @if ($admin->type == 'admin')
-                    <li class="bold"><a href="{{ url('/trash') }}" class="textcol">Recycle Bin<i
-                                class="material-icons textcol">delete</i></a></li>
+                        <li class="bold"><a href="{{ url('/trash') }}" class="textcol">Recycle Bin<i
+                                    class="material-icons textcol">delete</i></a></li>
                     @endif
                 </ul>
             </li>
@@ -324,13 +343,18 @@
 
 
     </header>
-    @if($admin->type != 'marketer')
-                <div id="reload-btn" style="display: none;">
-                   <a href="{{url('/')}}" class="btn white black-text" style="border-radius: 20px; position: fixed; top: 10%; left: 50%;
-                   transform: translateX(-50%);"><i class="material-icons left">arrow_upward</i>New Orders</a> 
-                </div>
-        @endif
+    @if ($admin->type != 'marketer')
+        <div id="reload-btn" style="display: none;">
+            <a href="{{ url('/') }}" class="btn white black-text"
+                style="border-radius: 20px; position: fixed; top: 10%; left: 50%;
+                   transform: translateX(-50%);"><i
+                    class="material-icons left">arrow_upward</i>New Orders</a>
+        </div>
+    @endif
     <main>
+        <div>
+            @yield('nmmain')
+        </div>
         <div class="mp-container">
             @yield('main')
         </div>
@@ -405,91 +429,92 @@
         integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous">
     </script>
     @if ($admin->type != 'marketer')
-    <script>
-        //       if (!window.Notification) {
-        //     console.log('Browser does not support notifications.');
-        // } else {
-        //     // check if permission is already granted
-        //     if (Notification.permission === 'granted') {
-        //         // show notification here
-        //     } else {
-        //         // request permission from user
-        //         Notification.requestPermission().then(function(p) {
-        //            if(p === 'granted') {
-        //                // show notification here
-        //            } else {
-        //                console.log('User blocked notifications.');
-        //            }
-        //         }).catch(function(err) {
-        //             console.error(err);
-        //         });
-        //     }
-        // }
-        let swRegistration = null;
+        <script>
+            //       if (!window.Notification) {
+            //     console.log('Browser does not support notifications.');
+            // } else {
+            //     // check if permission is already granted
+            //     if (Notification.permission === 'granted') {
+            //         // show notification here
+            //     } else {
+            //         // request permission from user
+            //         Notification.requestPermission().then(function(p) {
+            //            if(p === 'granted') {
+            //                // show notification here
+            //            } else {
+            //                console.log('User blocked notifications.');
+            //            }
+            //         }).catch(function(err) {
+            //             console.error(err);
+            //         });
+            //     }
+            // }
+            let swRegistration = null;
             initializeApp()
             askPermission()
-    
-        function initializeApp() {
-            if ("serviceWorker" in navigator && "PushManager" in window) {
-                console.log("Service Worker and Push is supported");
-    
-                //Register the service worker
-                navigator.serviceWorker
-                    .register("/sw.js")
-                    .then(swReg => {
-                        console.log("Service Worker is registered", swReg);
-    
-                        swRegistration = swReg;
-                    })
-                    .catch(error => {
-                        console.error("Service Worker Error", error);
-                    });
-            } else {
-                console.warn("Push messaging is not supported");
-                notificationButton.textContent = "Push Not Supported";
+
+            function initializeApp() {
+                if ("serviceWorker" in navigator && "PushManager" in window) {
+                    console.log("Service Worker and Push is supported");
+
+                    //Register the service worker
+                    navigator.serviceWorker
+                        .register("/sw.js")
+                        .then(swReg => {
+                            console.log("Service Worker is registered", swReg);
+
+                            swRegistration = swReg;
+                        })
+                        .catch(error => {
+                            console.error("Service Worker Error", error);
+                        });
+                } else {
+                    console.warn("Push messaging is not supported");
+                    notificationButton.textContent = "Push Not Supported";
+                }
             }
-        }
-    
-        function askPermission() {
-            return new Promise(function(resolve, reject) {
-                const permissionResult = Notification.requestPermission(function(result) {
-                    resolve(result);
+
+            function askPermission() {
+                return new Promise(function(resolve, reject) {
+                    const permissionResult = Notification.requestPermission(function(result) {
+                        resolve(result);
+                    });
+
+                    if (permissionResult) {
+                        permissionResult.then(resolve, reject);
+                    }
+                }).then(function(permissionResult) {
+                    if (permissionResult !== 'granted') {
+                        throw new Error("We weren't granted permission.");
+                    }
                 });
-    
-                if (permissionResult) {
-                    permissionResult.then(resolve, reject);
-                }
-            }).then(function(permissionResult) {
-                if (permissionResult !== 'granted') {
-                    throw new Error("We weren't granted permission.");
-                }
-            });
-        }
-        $(function() {
-            let ip_address = 'socket.startuplair.com';
-            // let socket_port = '3000';
-            let socket = io(ip_address);
-    
-            socket.on('sendnotifToClient', (message) => {
-                // const title = "My power: New Order";
-                // const options = {
-                //     body: message,
-                //     icon: '/assets/logoyellow.png'
-                // };
-                // new Notification(title, options);
-                notification(message);
-                $('#reload-btn').show();
-            });
-        })
+            }
+            $(function() {
+                let ip_address = 'socket.startuplair.com';
+                // let socket_port = '3000';
+                let socket = io(ip_address);
+
+                socket.on('sendnotifToClient', (message) => {
+                    // const title = "My power: New Order";
+                    // const options = {
+                    //     body: message,
+                    //     icon: '/assets/logoyellow.png'
+                    // };
+                    // new Notification(title, options);
+                    notification(message);
+                    $('#reload-btn').show();
+                });
+            })
+
             function notification(message) {
                 const options = {
-                     body: message,
+                    body: message,
                     icon: "/assets/logoyellow.png",
                     vibrate: [200, 100, 200]
                 };
                 swRegistration.showNotification("My Power: New Order", options);
             }
-    </script>
+        </script>
     @endif
 
     <!-- Initialization script -->

@@ -127,4 +127,34 @@ class UserChatController extends Controller
         ];
         return response()->json($res);
     }
+    public function getchatlist(){
+        $cl = DB::table('chat')->where('sid', session()->get('USER_ID'))->orderBy('created_at', 'DESC')->get()->unique('channel');
+        $ncl = DB::table('channels')->whereNotIn('shortname', DB::table('chat')->where('sid', session()->get('USER_ID'))->groupBy('channel')->pluck('channel')->toArray())->get();
+        $chr = array();
+        foreach($cl as $item){
+            $chl = DB::table('channels')->where('shortname', $item->channel)->first();
+            $unseen = DB::table('chat')->where('channel', $item->channel)->where('sid', session()->get('USER_ID'))->whereIn('sendtype', ['admin', 'staff', 'marketer'])->where('seen', NULL)->get();
+            $chr[] = [
+                'shortname'=>$chl->shortname,
+                'color'=>$chl->color,
+                'name'=>$chl->name,
+                'message'=>$item->message,
+                'sendtype'=>$item->sendtype,
+                // 'seen'=>$item->seen,
+                'unseen'=>count($unseen),
+            ];
+        }
+        foreach($ncl as $item){
+            $chr[] = [
+                'shortname'=>$item->shortname,
+                'color'=>$item->color,
+                'name'=>$item->name,
+                'message'=>'',
+                'sendtype'=>'admin',
+                // 'seen'=>'seen',
+                'unseen'=>0,
+            ];
+        }
+       return response()->json($chr);
+    }
 }

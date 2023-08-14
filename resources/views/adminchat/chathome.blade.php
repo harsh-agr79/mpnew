@@ -138,7 +138,7 @@
                     @endphp
                     <a href="{{ url('chats/' . $item->sid . '/' . $item->channel) }}"
                         class="row valign-wrapper chat-list-item textcol {{ $dep }} {{ $act }}">
-                        <div class="col s3">
+                        <div class="col s3 center">
                             @if ($u->profileimg != null)
                                 <img src="{{ asset($u->profileimg) }}" class="chat-list-img">
                             @else
@@ -167,7 +167,7 @@
                                 @if ($unseen > 0)
                                     <div class="right" style="margin-right: 10px;">
                                         <div class="red white-text"
-                                            style="width:20px; height: 20px; font-size: 15px; border-radius: 50%; display:flex; align-items: center; justify-content: center;">
+                                            style="width:22px; height: 22px; font-size: 15px; border-radius: 50%; display:flex; align-items: center; justify-content: center;">
                                             <div>{{ $unseen }}</div>
                                         </div>
                                     </div>
@@ -263,8 +263,6 @@
                                 </div>
                             @endif
                         @endforeach
-
-
                     </div>
                     <div class="col s12" style="margin:0, padding: 0;">
                         <div class="chat-box-messageinp row" style="margin:0, padding: 0;">
