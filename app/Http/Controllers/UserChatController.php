@@ -43,6 +43,13 @@ class UserChatController extends Controller
         $channel = $request->post('channel');
         $message = $request->post('message');
         $time = time();
+        $user = DB::table('customers')->where('id', session()->get('USER_ID'))->first();
+        if($user->profileimg == NULL){
+            $pimg = 'user.jpg';
+        }
+        else{
+            $pimg = $user->profileimg;
+        }
 
         if($file = $request->file('img')){
             // $file = $request->file('img');
@@ -96,6 +103,7 @@ class UserChatController extends Controller
             'msgtype'=>$msgtype,
             'created_at'=>$time,
             'image'=>$image,
+            'profileimg'=> $pimg,
         ];
         return response()->json($res);
     }
