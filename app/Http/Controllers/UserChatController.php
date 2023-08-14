@@ -157,4 +157,8 @@ class UserChatController extends Controller
         }
        return response()->json($chr);
     }
+    public function getmsgcnt(){
+        $cnt = count(DB::table('chat')->where('sid', session()->get('USER_ID'))->whereIn('sendtype', ['admin', 'staff', 'marketer'])->where('seen', NULL)->get());
+        return response()->json($cnt);
+    }
 }

@@ -14,7 +14,7 @@
     <title>Admin</title>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="icon" href="{{ asset('/assets/light.png') }}">
-    <link rel="stylesheet" href="{{asset('/assets/'.$user->mode.".css")}}">
+    <link rel="stylesheet" href="{{ asset('/assets/' . $user->mode . '.css') }}">
     <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}">
     <link rel="shortcut icon" href="{{ asset('icons/favicon.ico') }}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-touch-icon.png') }}">
@@ -25,8 +25,11 @@
         rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
         body {
@@ -57,20 +60,20 @@
                                 </div>
                             </div>
                         </li>
-                       
+
                         <li>
                             <a onclick="history.back()">
                                 <i class="material-icons textcol">arrow_back</i>
                             </a>
                         </li>
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger">
-                            @if ($user->profileimg !== NULL)
-                            <i class="valign-wrapper">
-                                <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
-                            </i>
-                            @else
-                            <i class="material-icons textcol">face</i>
-                            @endif
+                                @if ($user->profileimg !== null)
+                                    <i class="valign-wrapper">
+                                        <img src="{{ asset($user->profileimg) }}" class="nav-dp circle" alt="">
+                                    </i>
+                                @else
+                                    <i class="material-icons textcol">face</i>
+                                @endif
                             </a>
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
                                 <div id="settings" class="col s12">
@@ -91,30 +94,37 @@
                                 </div>
                             </div>
                         </li>
-                    </ul> 
+                    </ul>
                     <ul id="nav-mobile" class="left hide-on-large-only">
                         <li>
                             <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
-                                class="material-icons textcol">menu</i></a>
+                                    class="material-icons textcol">menu</i></a>
                         </li>
                         <li>
-                            <a href="{{url('/user/chatlist')}}" class="left"><i class="material-symbols-outlined material-icons">
-                                perm_phone_msg
-                            </i></a>
-                        <div class="red white-text center valign-wrapper" style="position: absolute; top:15px; margin-left: 40px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;"><span class="center" id="msgcnt">{{$msgcnt}}</span></div>
+                            <a href="{{ url('/user/chatlist') }}" class="left"><i
+                                    class="material-symbols-outlined material-icons">
+                                    perm_phone_msg
+                                </i></a>
+                            <div class="red white-text center valign-wrapper"
+                                style="position: absolute; top:15px; margin-left: 40px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
+                                <span class="center" id="msgcnt">{{ $msgcnt }}</span>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed bg" style="transform: translateX(-105%);">
-            <li><a href="{{ url('/user/editprofile') }}" class="logo-container textcol">{{ $user->user_id }} <span style="font-size: 10px;">(Edit Profile)</span>@if ($user->profileimg !== NULL)
-                <i class="valign-wrapper">
-                    <img src="{{asset($user->profileimg)}}" class="nav-dp circle" alt="">
-                </i>
-                @else
-                <i class="material-icons textcol">face</i>
-                @endif</a></li>
+            <li><a href="{{ url('/user/editprofile') }}" class="logo-container textcol">{{ $user->user_id }} <span
+                        style="font-size: 10px;">(Edit Profile)</span>
+                    @if ($user->profileimg !== null)
+                        <i class="valign-wrapper">
+                            <img src="{{ asset($user->profileimg) }}" class="nav-dp circle" alt="">
+                        </i>
+                    @else
+                        <i class="material-icons textcol">face</i>
+                    @endif
+                </a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li class="bold"><a href="{{ url('/home') }}" class="textcol">Home<i
@@ -131,12 +141,13 @@
                                 class="material-icons textcol">multiline_chart</i></a></li>
                     <li class="bold"><a href="{{ url('/user/statement') }}" class="textcol">Statement<i
                                 class="material-icons textcol">web</i></a></li>
-                    @if(session()->has('ADMIN_DIRECT'))
-                    <li class="bold"><a href="{{ url('/admin/directlogin/goback/'.session()->get('ADMIN_ID')) }}" class="textcol">Back To Admin Panel<i class="material-symbols-outlined textcol">
-                        logout
-                    </i></a></li>
+                    @if (session()->has('ADMIN_DIRECT'))
+                        <li class="bold"><a
+                                href="{{ url('/admin/directlogin/goback/' . session()->get('ADMIN_ID')) }}"
+                                class="textcol">Back To Admin Panel<i class="material-symbols-outlined textcol">
+                                    logout
+                                </i></a></li>
                     @else
-                        
                     @endif
                 </ul>
             </li>
@@ -206,20 +217,42 @@
                 });
             });
         });
+        
+        updatemsgcnt();
+        $(function() {
+                let ip_address = 'socket.startuplair.com';
+                // let socket_port = '3000';
+                let socket = io(ip_address);
+                let type = ['admin', 'staff', 'marketer']
+
+                socket.on("sendMsgToClient", (message) => {
+                    updatemsgcnt();
+                })
+            });
+            function updatemsgcnt(){
+                $.ajax({
+                        url: "/user/msgcnt",
+                        type: 'get',
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    })
+            }
     </script>
 
     @if (time() - session()->get('USER_TIME') > 21600)
-    <script>
-          $(function() {
+        <script>
+            $(function() {
                 $.ajax({
                     url: "/user/timeupdate",
                     type: 'get',
                     success: function(response) {
-                        
+
                     }
                 })
             })
-    </script>
+           
+        </script>
     @endif
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
