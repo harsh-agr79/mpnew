@@ -41,7 +41,11 @@
         <div class="bg-content row valign-wrapper"
             style="margin: 0; padding: 0; position:fixed; right: 0; left: 0; z-index:1;">
             <div class="col s2" style="padding-top: 7px;">
-                <img src="{{ asset('user.jpg') }}" height="40" style="border-radius: 50%" alt="">
+                @if ($user->profileimg == NULL)
+                    <img src="{{ asset('user.jpg') }}" height="40" style="border-radius: 50%" alt="">
+                @else
+                    <img src="{{ asset($user->profileimg) }}" height="40" style="border-radius: 50%" alt="">
+                @endif
             </div>
             <div class="col s5">
                 <h6 style="font-weight: 600;">{{ $user->name }}</h6>
