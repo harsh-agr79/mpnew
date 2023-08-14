@@ -359,9 +359,10 @@ input:focus {
 }
 .chat-list-message{
     font-size: 12px;
-    width: 100px;
+    width: 180px;
     text-align: left;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .chat-box-messageinp{
     /* width: 100%; */

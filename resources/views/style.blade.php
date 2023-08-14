@@ -446,7 +446,8 @@ input:focus {
     font-size: 12px;
     width: 180px;
     text-align: left;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .chat-box-messageinp{
     /* width: 100%; */
