@@ -519,6 +519,27 @@
                 };
                 swRegistration.showNotification("My Power: New Order", options);
             }
+            $(function() {
+                let ip_address = 'socket.startuplair.com';
+                // let socket_port = '3000';
+                let socket = io(ip_address);
+                let type = ['admin', 'staff', 'marketer']
+
+                socket.on("sendMsgToClient", (message) => {
+                    notificationmsg(message);
+                })
+            });
+            function notificationmsg(message) {
+                if(message[0].sendtype == 'user'){
+                    const options = {
+                    body: message[0].message,
+                    icon: message[0].profileimg,
+                    badge: "/assets/logoyellow.png",
+                    sound: '/notification.wav',
+                };
+                swRegistration.showNotification(message[0].channel+": New Message", options);
+                } 
+            }
         </script>
     @endif
 
