@@ -1,6 +1,7 @@
 $(document).ready(function() {
     seenup($('#userid').text(), $('#channel').text())
     // chatlist()
+    updatemsgcnt()
     var msgSection = document.querySelector("#userchatbox");
     msgSection.scrollTo(0, msgSection.scrollHeight);
 });
@@ -52,6 +53,7 @@ $(function(){
             }
             
             seenup(message[0].sid, message[0].channel);
+            updatemsgcnt()
             $('#seenbox').remove();
             $(`#${message[0].id}`).after(`
             <div class="col s12" id="seenbox">\
@@ -112,6 +114,7 @@ $('#sendmessage').on('submit', function(e) {
         success: function(response) {
             // console.log(response)
             socket.emit("sendMsgToServer", response);
+            updatemsgcnt()
             // chatlist()
             var d = getDateTime(response[0].created_at);
             if(response[0].msgtype == 'text'){
@@ -159,6 +162,7 @@ function seenup(id, channel) {
             success: function(response) {
                 // chatlist()
                 socket.emit("userSeenToServer", response);
+                updatemsgcnt()
             }
         })
     }
@@ -166,6 +170,7 @@ function seenup(id, channel) {
 
 function changeseenbar(id,sid, channel){
     if($('#channel').text() ===  channel && sid === $('#userid').text()){
+        updatemsgcnt()
     $('#seenbox').remove();
     $(`#${id}`).after(`
     <div class="col s12" id="seenbox">\
