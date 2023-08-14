@@ -6,8 +6,8 @@ $(document).ready(function() {
 });
 
 function getDateTime(date){
-    var date = new Date(date*1000).toLocaleString({ timeZone: 'Asia/Kathmandu'});
-    var date2 = new Date(date);
+    var date3 = new Date(date*1000).toLocaleString({ timeZone: 'Asia/Kathmandu'});
+    var date2 = new Date(date3);
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var d = date2.getDate()+"-"+months[date2.getMonth()]+" "+date2.getHours()+":"+date2.getMinutes();
     return d;
