@@ -272,12 +272,14 @@
                 })
             });
             function notification(message) {
-                const options = {
+                if(message[0].sid == `{{$user->id}}` && message[0].sendtype != 'user'){
+                    const options = {
                     body: message[0].message,
                     icon: "/assets/logoyellow.png",
                     vibrate: [200, 100, 200]
                 };
                 swRegistration.showNotification(message[0].channel+": New Message", options);
+                } 
             }
             function updatemsgcnt(){
                 $.ajax({
