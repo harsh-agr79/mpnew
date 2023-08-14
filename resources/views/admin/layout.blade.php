@@ -510,6 +510,7 @@
                 const options = {
                     body: message,
                     icon: "/assets/logoyellow.png",
+                    badge: "/assets/logoyellow.png",
                     vibrate: [200, 100, 200]
                 };
                 swRegistration.showNotification("My Power: New Order", options);

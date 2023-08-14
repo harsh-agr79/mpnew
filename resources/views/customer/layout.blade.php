@@ -276,6 +276,7 @@
                     const options = {
                     body: message[0].message,
                     icon: "/assets/logoyellow.png",
+                    badge: "/assets/logoyellow.png",
                     vibrate: [200, 100, 200]
                 };
                 swRegistration.showNotification(message[0].channel+": New Message", options);
