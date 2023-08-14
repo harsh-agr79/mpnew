@@ -234,7 +234,7 @@
                         url: "/user/msgcnt",
                         type: 'get',
                         success: function(response) {
-                            console.log(response);
+                            $('#msgcnt').text(response)
                         }
                     })
             }
