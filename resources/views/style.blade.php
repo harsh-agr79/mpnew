@@ -445,6 +445,7 @@ input:focus {
 .chat-list-message{
     font-size: 12px;
     width: 180px;
+    height: 20px;
     text-align: left;
     overflow-x: hidden;
     overflow-y: hidden;
