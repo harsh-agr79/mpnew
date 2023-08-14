@@ -44,9 +44,10 @@
                 <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
                             src="{{ asset('assets/' . $admin->mode . '.png') }}" height="50" alt=""></a>
                     <ul id="nav-mobile" class="right">
-                        <li class="hide-on-med-and-down"><a href="{{url('/chats/3/general')}}"><i class="material-icons textcol">
-                            chat
-                        </i></a>
+                        <li class="hide-on-med-and-down"><a href="{{ url('/chats/3/general') }}"><i
+                                    class="material-icons textcol">
+                                    chat
+                                </i></a>
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger"><i class="material-icons textcol">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications bgunder" tabindex="0">
@@ -61,7 +62,7 @@
                                 </div>
                             </div>
                         </li>
-                        
+
                         <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger"><i
                                     class="material-icons textcol">settings</i></a>
                             <div id="chat-dropdown" class="dropdown-content dropdown-tabbed" tabindex="0">
@@ -88,15 +89,16 @@
                     <ul id="nav-mobile" class="left hide-on-large-only">
                         <li>
                             <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
-                                class="material-icons textcol">menu</i></a>
+                                    class="material-icons textcol">menu</i></a>
                         </li>
                         <li>
-                            <a href="{{url('admin/m/chatlist')}}" class="left"><i class="material-icons textcol">
-                                chat
-                            </i></a>
+                            <a href="{{ url('admin/m/chatlist') }}" class="left"><i
+                                    class="material-icons textcol">
+                                    chat
+                                </i></a>
                         </li>
                     </ul>
-                   
+
                 </div>
             </nav>
         </div>
@@ -511,7 +513,9 @@
                     body: message,
                     icon: "/assets/logoyellow.png",
                     badge: "/assets/logoyellow.png",
-                    vibrate: [200, 100, 200]
+                    vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170,
+                        40, 500,
+                    ]
                 };
                 swRegistration.showNotification("My Power: New Order", options);
             }
