@@ -277,7 +277,7 @@
                     body: message[0].message,
                     icon: "/assets/logoyellow.png",
                     badge: "/assets/logoyellow.png",
-                    vibrate: [5000],
+                    sound: '/notification.wav',
                 };
                 swRegistration.showNotification(message[0].channel+": New Message", options);
                 } 
