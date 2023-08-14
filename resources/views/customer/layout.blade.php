@@ -267,16 +267,17 @@
 
                 socket.on("sendMsgToClient", (message) => {
                     console.log(message)
+                    notification(message);
                     updatemsgcnt();
                 })
             });
             function notification(message) {
                 const options = {
-                    body: message,
+                    body: message[0].message,
                     icon: "/assets/logoyellow.png",
                     vibrate: [200, 100, 200]
                 };
-                swRegistration.showNotification("My Power: New Order", options);
+                swRegistration.showNotification(message[0].channel+": New Message", options);
             }
             function updatemsgcnt(){
                 $.ajax({
