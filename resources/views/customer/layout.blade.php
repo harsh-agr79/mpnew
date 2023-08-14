@@ -266,8 +266,8 @@
                 let type = ['admin', 'staff', 'marketer']
 
                 socket.on("sendMsgToClient", (message) => {
-                    console.log(message)
-                    // notification(message);
+                    // console.log(message)
+                    notification(message);
                     updatemsgcnt();
                 })
             });
