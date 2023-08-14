@@ -101,6 +101,7 @@
                             <a href="{{url('/user/chatlist')}}" class="left"><i class="material-symbols-outlined material-icons">
                                 perm_phone_msg
                             </i></a>
+                        <div class="red white-text center valign-wrapper" style="position: absolute; top:15px; margin-left: 40px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;"><span class="center" id="msgcnt">{{$msgcnt}}</span></div>
                         </li>
                     </ul>
                 </div>
