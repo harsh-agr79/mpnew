@@ -216,6 +216,7 @@ class AdminChatController extends Controller
     }
 
     public function mchatlist(Request $request){
+        $result['customer'] = DB::table('customers')->get();
         $result['allchats'] = DB::table('chat')->orderBy('created_at', 'DESC')->get()->unique('sid');
         return view('adminchat/chatlist', $result);
     }
