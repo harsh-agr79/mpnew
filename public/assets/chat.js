@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $(".materialboxed").materialbox();
     seenup($("#userid").text(), $("#channel").text());
+    updatemsgcnt()
     var msgSection = document.querySelector("#chatboxmsgdiv");
     msgSection.scrollTo(0, msgSection.scrollHeight);
 });
@@ -88,6 +89,7 @@ $("#message-inp").on("submit", (e) => {
 
             chatlist(response[0].sid);
             channelList(response[0].sid);
+            updatemsgcnt()
             var msgSection = document.querySelector("#chatboxmsgdiv");
             msgSection.scrollTo(0, msgSection.scrollHeight);
         },
@@ -237,6 +239,7 @@ $(function () {
             }
 
             seenup(message[0].sid, message[0].channel);
+            updatemsgcnt()
             var userimg = $("#userimg").text();
             $("#seenbox").remove();
             if (userimg === "") {
@@ -264,6 +267,7 @@ $(function () {
         seenupdate(message);
         chatlist($("#userid").text())
         channelList($("#userid").text())
+        updatemsgcnt()
     });
 });
 
@@ -334,6 +338,7 @@ function seenup(id, channel) {
                 chatlist(id);
                 channelList(id);
                 seenupdate(response);
+                updatemsgcnt()
             },
         });
     }
@@ -346,6 +351,7 @@ function channelList(id) {
             url: "/admin/chat/getchannels/"+id,
             success: function (response) {
                 // console.log(response);
+                updatemsgcnt()
                 $('#channel-list-div').html("");
                 $.each(response, function (key, item) {
                     $('#channel-list-div').append(`  <div class="col s12 chat-box-channel">
