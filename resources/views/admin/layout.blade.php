@@ -43,8 +43,19 @@
             <nav class="navbar topnv">
                 <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
                             src="{{ asset('assets/' . $admin->mode . '.png') }}" height="50" alt=""></a>
+                            @php
+                            $channels = DB::table('channels')->get();
+                            $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
+                            $chn = array();
+                            foreach($channels as $item){
+                                if(in_array($item->shortname, $perms)){
+                                    array_push($chn, $item->shortname);
+                                }
+                            }
+                            $chat = DB::table('chat')->whereIn('channel', $chn)->last();
+                        @endphp
                     <ul id="nav-mobile" class="right">
-                        <li class="hide-on-med-and-down"><a href="{{ url('/chats/3/general') }}"><i
+                        <li class="hide-on-med-and-down"><a href="{{ url('/chats/'.$chat->sid.'/'.$chat->channel) }}"><i
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
@@ -96,6 +107,7 @@
                             <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
                                     class="material-icons textcol">menu</i></a>
                         </li>
+                       
                         <li>
                             <a href="{{ url('admin/m/chatlist') }}" class="left"><i
                                     class="material-icons textcol">
