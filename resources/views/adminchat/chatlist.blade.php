@@ -2,10 +2,15 @@
 
 @section('main')
 <script type="text/javascript">
-  if(performance.navigation.type == 2){
-   location.reload(true);
-// console.log('hello');
-}
+    window.addEventListener("pageshow", function(event) {
+        var historyTraversal = event.persisted ||
+            (typeof window.performance != "undefined" &&
+                window.performance.navigation.type === 2);
+        if (historyTraversal) {
+            // Handle page restore.
+            window.location.reload();
+        }
+    });
 </script>
     <div style="margin-top: 10px;" id="chatlist2">
         @foreach ($allchats as $item)
