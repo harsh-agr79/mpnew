@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $(".materialboxed").materialbox();
     seenup($("#userid").text(), $("#channel").text());
+    chatlist(3);
     updatemsgcnt()
     var msgSection = document.querySelector("#chatboxmsgdiv");
     msgSection.scrollTo(0, msgSection.scrollHeight);
