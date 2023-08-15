@@ -31,7 +31,7 @@ class AdminAuth
                     $perms2 = ['dashboard', 'logout', 'admin/changemode', 'findcustomer', 'finditem', 'getref'. 'custupdate'];
                     $uri =  $url = request()->route()->uri;
                     if(in_array($uri, $perms) || in_array($uri, $perms2)){
-                        if($uri == 'chats/{id}/{id2}'){
+                        if($uri == 'chats/{id}/{id2}' || 'admin/m/chats/{id}/{id2}'){
                             $url = url()->current();
                             $channel = substr($url, strrpos($url, '/' )+1) ;
                             if(in_array($channel, $perms)){
