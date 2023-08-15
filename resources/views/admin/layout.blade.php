@@ -65,7 +65,7 @@
 
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down">
-                            @if ($admin->type == 'staff')
+                            @if ($admin->type == 'staff' && $chat != NULL)
                             <a
                             href="{{ url('/chats/' . $chat->sid . '/' . $chat->channel) }}"><i
                                 class="material-icons textcol">
