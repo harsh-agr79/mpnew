@@ -277,6 +277,7 @@ function seenupdate(message) {
         message.id == $("#userid").text() &&
         message.channel == $("#channel").text()
     ) {
+        updatemsgcnt()
         var userimg = $("#userimg").text();
         $("#seenbox").remove();
         if (userimg === "") {
@@ -365,4 +366,15 @@ function channelList(id) {
             },
         });
     }
+}
+
+function updatemsgcnt(){
+    $.ajax({
+            url: "/admin/msgcnt",
+            type: 'get',
+            success: function(response) {
+                $('#msgcnt').text(response)
+                $('#msgcnt2').text(response)
+            }
+        })
 }
