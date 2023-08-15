@@ -48,6 +48,11 @@
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
+                                <div class="red white-text center valign-wrapper"
+                                style="position: absolute; top:15px; margin-left: 30px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
+                                <span class="center" id="msgcnt">{{$msgcnt}}</span>
+                            </div>
+                        </li>
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger"><i class="material-icons textcol">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications bgunder" tabindex="0">
@@ -96,6 +101,9 @@
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
+                                <div class="red white-text center valign-wrapper"
+                                style="position: absolute; top:15px; margin-left: 30px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
+                                <span class="center" id="msgcnt2">{{$msgcnt}}</span>
                         </li>
                     </ul>
 
@@ -526,20 +534,32 @@
                 let type = ['admin', 'staff', 'marketer']
 
                 socket.on("sendMsgToClient", (message) => {
-                    console.log(message);
+                    // console.log(message);
                     notificationmsg(message);
+                    updatemsgcnt();
                 })
             });
+
             function notificationmsg(message) {
-                if(message[0].sendtype == 'user'){
+                if (message[0].sendtype == 'user') {
                     const options = {
-                    body: message[0].message,
-                    icon: message[0].profileimg,
-                    badge: "/assets/logoyellow.png",
-                    sound: '/notification.wav',
-                };
-                swRegistration.showNotification(message[0].sentname+" : "+message[0].channel, options);
-                } 
+                        body: message[0].message,
+                        icon: message[0].profileimg,
+                        badge: "/assets/logoyellow.png",
+                        sound: '/notification.wav',
+                    };
+                    swRegistration.showNotification(message[0].sentname + " : " + message[0].channel, options);
+                }
+            }
+            function updatemsgcnt(){
+                $.ajax({
+                        url: "/admin/msgcnt",
+                        type: 'get',
+                        success: function(response) {
+                            $('#msgcnt').text(response)
+                            $('#msgcnt2').text(response)
+                        }
+                    })
             }
         </script>
     @endif

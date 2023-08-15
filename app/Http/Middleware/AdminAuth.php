@@ -24,6 +24,7 @@ class AdminAuth
                 if(session()->get('ADMIN_TYPE') == 'admin'){   
                     view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
                     view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
+                    view()->share('msgcnt', count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get()));
                 }
                 else{
                     $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
@@ -32,6 +33,7 @@ class AdminAuth
                     if(in_array($uri, $perms) || in_array($uri, $perms2)){
                         view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
                         view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
+                        view()->share('msgcnt', count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get()));
                     }  
                     else{
                         $request->session()->flash('error','Access Denied');

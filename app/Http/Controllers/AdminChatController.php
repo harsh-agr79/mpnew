@@ -214,4 +214,9 @@ class AdminChatController extends Controller
 
         return view('adminchat/chatbox', $result);
     }
+
+    public function getmsgcnt(){
+        $cnt = count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get());
+        return response()->json($cnt);
+    }
 }
