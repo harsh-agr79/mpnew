@@ -74,6 +74,7 @@ document.addEventListener('keydown', event => {
 carousel()
   function carousel(){
     var caroItem = $('.mp-caro-item');
+    var next = 0;
     for (let i = 0; i < caroItem.length; i++) {
       if(!caroItem[i].classList.contains('hide')){
         var next = i + 1;
