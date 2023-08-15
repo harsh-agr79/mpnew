@@ -499,6 +499,28 @@
             // console.log(custdata);
 
         })
+        $('#search').on('change', function(e) {
+            e.preventDefault();
+            var val = $('#search').val();
+            var datacust2 = {};
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('findcustomer') !!}',
+                success: function(response2) {
+                    var custarray2 = response2;
+                    for (var i = 0; i < custarray2.length; i++) {
+                        datacust2[custarray2[i].name] = null;
+                    }
+                    var custdata = Object.keys(datacust2);
+                    if (custdata.indexOf(val) > -1) {
+                        window.open('/chats/' + custarray2[custdata.indexOf(val)].id + '/general',
+                            "_self");
+                    }
+                }
+            })
+            // console.log(custdata);
+
+        })
     </script>
 </body>
 
