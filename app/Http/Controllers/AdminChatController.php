@@ -187,7 +187,20 @@ class AdminChatController extends Controller
         return response()->json($res);
     }
     public function getuserchannel(Request $request, $id){
+    if(session()->get('ADMIN_TYPE') == 'staff'){
+        $channels = DB::table('channels')->get();
+        $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
+        $chn = array();
+        foreach($channels as $item){
+            if(in_array($item->shortname, $perms)){
+                array_push($chn, $item->shortname);
+            }
+        }
+        $channel = DB::table('channels')->whereIn('shortname', $chn)->get();
+    }
+    else{
         $channel = DB::table('channels')->get();
+    }
         $res = array();
         foreach($channel as $item){
            $uns = DB::table('chat')->where('sid', $id)->where('sendtype', 'user')->where('channel', $item->shortname)->where('seen', NULL)->get();
