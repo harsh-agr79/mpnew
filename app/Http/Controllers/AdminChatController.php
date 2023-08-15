@@ -103,7 +103,21 @@ class AdminChatController extends Controller
     }
 
     public function getchatlist(){
-        $res =DB::table('chat')->join('customers', 'customers.id', '=', 'chat.sid')->orderBy('chat.created_at', 'DESC')->get()->unique('sid');
+        if(session()->get('ADMIN_TYPE') == 'staff'){
+            $channels = DB::table('channel')->get();
+            $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
+            $chn = array();
+            foreach($channels as $item){
+                if(in_array($item->shortname, $perms)){
+                    array_push($chn, $item->shortname);
+                }
+            }
+        $res =DB::table('chat')->whereIn('channel', $chn)->join('customers', 'customers.id', '=', 'chat.sid')->orderBy('chat.created_at', 'DESC')->get()->unique('sid');
+        }
+        else{
+            $res =DB::table('chat')->join('customers', 'customers.id', '=', 'chat.sid')->orderBy('chat.created_at', 'DESC')->get()->unique('sid');
+        }
+      
         $chr = array();
         foreach($res as $item){
             $unseen = count(DB::table('chat')->where('sid', $item->sid)->where('sendtype', 'user')->where('seen', NULL)->get());
