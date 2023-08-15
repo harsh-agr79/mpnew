@@ -84,8 +84,6 @@ carousel()
       } 
     }
     $('.mp-caro-item').addClass('hide');
-    console.log(next);
-    var caroItem = $('.mp-caro-item');
     caroItem[next].classList.remove('hide');
     setTimeout(carousel, 5000);
   }
