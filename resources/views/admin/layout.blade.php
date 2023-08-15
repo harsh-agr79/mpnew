@@ -534,7 +534,7 @@
                 let type = ['admin', 'staff', 'marketer']
 
                 socket.on("sendMsgToClient", (message) => {
-                    // console.log(message);
+                    console.log(message);
                     notificationmsg(message);
                     updatemsgcnt();
                 })
