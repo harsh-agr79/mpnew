@@ -33,9 +33,14 @@ class AdminAuth
                     if(in_array($uri, $perms) || in_array($uri, $perms2)){
                         if($uri == 'chats/{id}/{id2}'){
                             $url = url()->current();
-                            $channel = explode($url, '/');
-                            print_r($channel[2]);
-                            view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+                            $channel = substr($url, strrpos($url, '/' )+1) ;
+                            if(in_array($channel, $perms)){
+                                view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+                            }
+                            else{
+                                $request->session()->flash('error','Access Denied');
+                                return redirect('/');
+                            }
                         }
                         else{
                             view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
