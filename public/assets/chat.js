@@ -175,7 +175,7 @@ function chatlist(id) {
                     </a>\
                     `);
                     $("#chatlist2").append(` \
-                    <a href="/admin/m/chats/${item.sid}/${item.channel}" class="row valign-wrapper chat-list-item textcol ${dep} ${act}">\
+                    <a href="/admin/m/chats/${item.sid}/${item.channel}" class="row valign-wrapper chat-list-item textcol ${dep}">\
                             <div class="col s3">\
                                 <img src="/${img}" class="chat-list-img">\
                             </div>\
