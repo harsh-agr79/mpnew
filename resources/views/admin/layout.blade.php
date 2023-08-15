@@ -52,7 +52,7 @@
                                     array_push($chn, $item->shortname);
                                 }
                             }
-                            $chat = DB::table('chat')->whereIn('channel', $chn)->orderBy('crated_at', 'DESC')->first();
+                            $chat = DB::table('chat')->whereIn('channel', $chn)->orderBy('created_at', 'DESC')->first();
                         @endphp
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down"><a href="{{ url('/chats/'.$chat->sid.'/'.$chat->channel) }}"><i
