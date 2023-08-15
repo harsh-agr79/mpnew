@@ -43,25 +43,46 @@
             <nav class="navbar topnv">
                 <div class="nav-wrapper"><a href="{{ url('/') }}" class="brand-logo grey-text text-darken-4"><img
                             src="{{ asset('assets/' . $admin->mode . '.png') }}" height="50" alt=""></a>
-                            @php
+                    @if ($admin->type == 'staff')
+                        @php
                             $channels = DB::table('channels')->get();
-                            $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
-                            $chn = array();
-                            foreach($channels as $item){
-                                if(in_array($item->shortname, $perms)){
+                            $perms = DB::table('permission')
+                                ->where('userid', session()->get('ADMIN_ID'))
+                                ->pluck('perm')
+                                ->toArray();
+                            $chn = [];
+                            foreach ($channels as $item) {
+                                if (in_array($item->shortname, $perms)) {
                                     array_push($chn, $item->shortname);
                                 }
                             }
-                            $chat = DB::table('chat')->whereIn('channel', $chn)->orderBy('created_at', 'DESC')->first();
+                            $chat = DB::table('chat')
+                                ->whereIn('channel', $chn)
+                                ->orderBy('created_at', 'DESC')
+                                ->first();
                         @endphp
+                    @endif
+
                     <ul id="nav-mobile" class="right">
-                        <li class="hide-on-med-and-down"><a href="{{ url('/chats/'.$chat->sid.'/'.$chat->channel) }}"><i
+                        <li class="hide-on-med-and-down">
+                            @if ($admin->type == 'staff')
+                            <a
+                            href="{{ url('/chats/' . $chat->sid . '/' . $chat->channel) }}"><i
+                                class="material-icons textcol">
+                                chat
+                            </i></a>
+                            @else{
+                                <a
+                                href="{{ url('/chats/3/general') }}"><i
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
+                            }
+                            @endif
+                            
                             <div class="red white-text center valign-wrapper"
                                 style="position: absolute; top:15px; margin-left: 30px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
-                                <span class="center" id="msgcnt">{{$msgcnt}}</span>
+                                <span class="center" id="msgcnt">{{ $msgcnt }}</span>
                             </div>
                         </li>
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
@@ -107,15 +128,15 @@
                             <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i
                                     class="material-icons textcol">menu</i></a>
                         </li>
-                       
+
                         <li>
                             <a href="{{ url('admin/m/chatlist') }}" class="left"><i
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
-                                <div class="red white-text center valign-wrapper"
+                            <div class="red white-text center valign-wrapper"
                                 style="position: absolute; top:15px; margin-left: 30px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
-                                <span class="center" id="msgcnt2">{{$msgcnt}}</span>
+                                <span class="center" id="msgcnt2">{{ $msgcnt }}</span>
                         </li>
                     </ul>
 
@@ -556,22 +577,23 @@
                 if (message[0].sendtype == 'user') {
                     const options = {
                         body: message[0].message,
-                        icon: "/"+message[0].profileimg,
+                        icon: "/" + message[0].profileimg,
                         badge: "/assets/logoyellow.png",
                         sound: '/notification.wav',
                     };
                     swRegistration.showNotification(message[0].sentname + " : " + message[0].channel, options);
                 }
             }
-            function updatemsgcnt(){
+
+            function updatemsgcnt() {
                 $.ajax({
-                        url: "/admin/msgcnt",
-                        type: 'get',
-                        success: function(response) {
-                            $('#msgcnt').text(response)
-                            $('#msgcnt2').text(response)
-                        }
-                    })
+                    url: "/admin/msgcnt",
+                    type: 'get',
+                    success: function(response) {
+                        $('#msgcnt').text(response)
+                        $('#msgcnt2').text(response)
+                    }
+                })
             }
         </script>
     @endif
