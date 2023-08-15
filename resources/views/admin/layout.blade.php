@@ -71,13 +71,12 @@
                                 class="material-icons textcol">
                                 chat
                             </i></a>
-                            @else{
+                            @else
                                 <a
                                 href="{{ url('/chats/3/general') }}"><i
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
-                            }
                             @endif
                             
                             <div class="red white-text center valign-wrapper"
