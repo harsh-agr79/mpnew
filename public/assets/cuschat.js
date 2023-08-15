@@ -148,6 +148,7 @@ $('#sendmessage').on('submit', function(e) {
         },
     });
     $("#msgval").val("");
+    $("#msgval").focus();
     $("#imgval").val("");
 })
 

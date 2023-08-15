@@ -95,6 +95,7 @@ $("#message-inp").on("submit", (e) => {
         },
     });
     $("#msgval").val("");
+    $("#msgval").focus();
     $("#imginp").val("");
 });
 
