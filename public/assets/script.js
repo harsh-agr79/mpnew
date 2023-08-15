@@ -95,7 +95,7 @@ carousel()
     for (let i = 0; i < caroItem.length; i++) {
       if(!caroItem[i].classList.contains('hide')){
         var next = i + 1;
-        if(next < caroItem.length){
+        if(next > caroItem.length-1){
           var next = 0;
         }
       }
@@ -111,7 +111,7 @@ carousel()
       if(!caroItem[i].classList.contains('hide')){
         var next = i - 1;
         if(next == -1){
-        var next = caroItem.length;
+        var next = caroItem.length-1;
         }
       }
     }
