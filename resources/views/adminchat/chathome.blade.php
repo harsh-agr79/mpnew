@@ -62,6 +62,9 @@
     <span class="hide" id="channel">{{ $channel }}</span>
     <span class="hide" id="userid">{{ $user->id }}</span>
     <span class="hide" id="userimg">{{ $user->profileimg }}</span>
+    {{-- @foreach ($chanauth as $item)
+        {{$item}}
+    @endforeach --}}
     <nav>
         <div class="nav-wrapper bg">
             <a href="#" class="brand-logo center"><img src="{{ asset('assets/' . $admin->mode . '.png') }}"

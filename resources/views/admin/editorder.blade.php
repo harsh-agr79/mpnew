@@ -5,7 +5,7 @@
     }
     else{
         $type = 'admin';
-        $url= '';
+        $url= '/';
    }
 @endphp
 

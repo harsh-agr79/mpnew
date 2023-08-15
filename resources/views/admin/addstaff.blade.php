@@ -387,6 +387,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="mp-card" style="margin-top: 5vh;">
+                    <div>
+                        <h6 class="center">Chat Permissions</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center">
+                            <label>
+                                <input type="checkbox" name="perm[]" value="chats/{id}/{id2}|addmsgadmin|getchatlist|admin/chat/seenupdate/{id}/{id2}|admin/chat/getchannels/{id}|admin/m/chatlist|admin/m/chats/{id}/{id2}|admin/msgcnt"
+                                    @if (in_array('chats/{id}/{id2}', $permission)) checked @endif />
+                                <span>Chats</span>
+                            </label>
+                        </div>
+                        @foreach ($channel as $item)
+                        <div class="col m6 s12">
+                            <label>
+                                <input type="checkbox" name="perm[]" value="{{$item->shortname}}"
+                                    @if (in_array($item->shortname, $permission)) checked @endif />
+                                <span>{{$item->name}}</span>
+                            </label>
+                        </div>
+                        @endforeach
+                       
+                    </div>
+                </div>
             </div>
         @endif
 

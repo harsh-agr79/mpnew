@@ -51,6 +51,7 @@ class AdminController extends Controller
 
            $result['permission'] = [];
         }
+        $result['channel'] = DB::table('channels')->get();
         return view('admin/addstaff', $result);
     }
 

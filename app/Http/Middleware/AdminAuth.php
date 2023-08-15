@@ -31,9 +31,18 @@ class AdminAuth
                     $perms2 = ['dashboard', 'logout', 'admin/changemode', 'findcustomer', 'finditem', 'getref'. 'custupdate'];
                     $uri =  $url = request()->route()->uri;
                     if(in_array($uri, $perms) || in_array($uri, $perms2)){
-                        view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
-                        view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
-                        view()->share('msgcnt', count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get()));
+                        if($uri == 'chats/{id}/{id2}'){
+                            $url = url()->current();
+                            $channel = explode($url, '/');
+                            print_r($channel[2]);
+                            view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+                        }
+                        else{
+                            view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+                            view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
+                            view()->share('msgcnt', count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get()));
+                        }
+                     
                     }  
                     else{
                         $request->session()->flash('error','Access Denied');
