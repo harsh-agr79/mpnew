@@ -544,7 +544,7 @@
                 if (message[0].sendtype == 'user') {
                     const options = {
                         body: message[0].message,
-                        icon: message[0].profileimg,
+                        icon: "/"+message[0].profileimg,
                         badge: "/assets/logoyellow.png",
                         sound: '/notification.wav',
                     };
