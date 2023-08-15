@@ -66,7 +66,7 @@
         </div>
         <div id="chatboxmsgdiv" class="row mobile-chatbox-div" style="">
             @foreach ($chat as $item)
-                @if ($admin->type == $item->sendtype)
+                @if ($item->sendtype != 'user')
                     @if ($item->msgtype == 'text')
                         <div class="col s12" id="{{ $item->id }}" style="margin:0; padding: 0;">
                             <div class="chat-message message-right right">
