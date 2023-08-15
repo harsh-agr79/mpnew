@@ -67,7 +67,7 @@
     @endforeach --}}
     <nav>
         <div class="nav-wrapper bg">
-            <a href="{{url('/dasboard')}}" class="brand-logo center"><img src="{{ asset('assets/' . $admin->mode . '.png') }}"
+            <a href="{{url('/dashboard')}}" class="brand-logo center"><img src="{{ asset('assets/' . $admin->mode . '.png') }}"
                     height="60" alt=""></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="#channelsList" class="modal-trigger">Channels</a></li>
