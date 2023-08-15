@@ -34,13 +34,17 @@ if ($chatidad >= $chatidus) {
 }
 @endphp
     <div style="margin: 0; padding: 0;">
-        <div class="row user-chat-header valign-wrapper" style="margin: 0">
-            <div class="col s3">
-                <div style="background: {{ $chan->color }}; height: 40px; width: 40px; border-radius: 50%;">
+        <div class="row user-chat-header valign-wrapper" style="margin: 0;">
+            <a class="col s2 valign-wrapper" href="{{url('/user/chatlist')}}" style="margin:0; padding: 0;">
+                <i class="material-icons textcol" style="font-size: 25px;">chevron_left</i>
+                <div style="background: {{ $chan->color }}; height: 30px; width: 30px; border-radius: 50%;">
                 </div>
+            </a>
+            <div class="col s5">
+                <h5 style="font-size: 15px;" class="left">{{ $chan->name }}</h5>
             </div>
-            <div class="col s9">
-                <h5 style="font-size: 20px;">{{ $chan->name }}</h5>
+            <div class="col s5" style="margin:0; padding: 0;">
+                <a href="{{url('/user/chatlist')}}"  class="textcol valign-wrapper amber z-depth-1" style="border-radius: 20px;"><i class="material-icons left textcol">chevron_left</i>Switch Channel</a>
             </div>
         </div>
         <div class="row user-chat-box" id="userchatbox" style="margin: 0; padding: 0;">
