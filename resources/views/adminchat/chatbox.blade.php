@@ -53,10 +53,14 @@
             <div class="col s5 left-align">
                 <a class='dropdown-trigger textcol center btn-flat' href='#' data-target='chanlist' style="background: {{ $chan->color }}; border-radius: 20px;" >
                     {{ $chan->shortname }}<i class="material-icons right">expand_more</i></a>
+                    <div class="red white-text center valign-wrapper"
+                    style="position: absolute; top:15px; margin-left: 105px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
+                    <span class="center" id="chanunmsg">0</span>
+                </div>
             </div>
             <ul id='chanlist' class='dropdown-content'>
                 @foreach ($channels as $item)
-                <li style="background: {{$item->color}};"><a href="{{url('/admin/m/chats/'.$user->id.'/'.$item->shortname)}}">{{$item->name}}</a></li>
+                <li style="background: {{$item->color}};"><a href="{{url('/admin/m/chats/'.$user->id.'/'.$item->shortname)}}">{{$item->name}} <span class="red" style="font-size: 12px; padding: 3px 4px; border-radius: 20px;">0</span></a></li>
                 @endforeach
               </ul>
         </div>

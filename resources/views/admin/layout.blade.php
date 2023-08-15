@@ -48,7 +48,7 @@
                                     class="material-icons textcol">
                                     chat
                                 </i></a>
-                                <div class="red white-text center valign-wrapper"
+                            <div class="red white-text center valign-wrapper"
                                 style="position: absolute; top:15px; margin-left: 30px; z-index:1; height: 15px; padding: 5px 3px; border-radius:50%; font-size: 10px;">
                                 <span class="center" id="msgcnt">{{$msgcnt}}</span>
                             </div>

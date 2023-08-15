@@ -354,6 +354,8 @@ function channelList(id) {
                 // console.log(response);
                 updatemsgcnt()
                 $('#channel-list-div').html("");
+                $('#chanlist').html("");
+                a = 0;
                 $.each(response, function (key, item) {
                     $('#channel-list-div').append(`  <div class="col s12 chat-box-channel">
                     <a class="channel-item textcol"
@@ -362,7 +364,12 @@ function channelList(id) {
                         ${item.unseen > 0 ? `<span class="red white-text center" style="margin-left: 15px; padding: 5px; border-radius: 20px; font-size: 10px;">${item.unseen}</span>` : ``}
                     </a>
                 </div>`);
+                $('#chanlist').append(`
+                    <li style="background: ${item.color}"><a href="/admin/m/chats/${id}/${item.shortname}">${item.channel} ${item.unseen > 0? `<span class="red" style="font-size: 12px; padding: 3px 4px; border-radius: 20px;">${item.unseen}</span>`: ``}</a></li>
+                `)
+                a  = a + item.unseen;
                 })
+                $('#chanunmsg').text(a);
             },
         });
     }
