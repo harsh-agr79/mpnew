@@ -36,6 +36,8 @@ class AdminAuth
                             $channel = substr($url, strrpos($url, '/' )+1) ;
                             if(in_array($channel, $perms)){
                                 view()->share('admin', DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first());
+                                view()->share('perms', DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray());
+                            view()->share('msgcnt', count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get()));
                             }
                             else{
                                 $request->session()->flash('error','Access Denied');
