@@ -43,7 +43,7 @@ if ($chatidad >= $chatidus) {
             <div class="col s5">
                 <h5 style="font-size: 15px;" class="left">{{ $chan->name }}</h5>
             </div>
-            <div class="col s5" style="margin:0; padding: 0;">
+            <div class="col s5" style="margin:0; padding: 10px;">
                 <a href="{{url('/user/chatlist')}}"  class="textcol valign-wrapper amber z-depth-1" style="border-radius: 20px;"><i class="material-icons left textcol">chevron_left</i>Switch Channel</a>
             </div>
         </div>
