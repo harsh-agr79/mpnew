@@ -207,7 +207,7 @@
                             @if ($item->sendtype != 'user')
                                 @if ($item->msgtype == 'text')
                                     <div class="col s12" id="{{ $item->id }}" style="margin:0, padding: 0;">
-                                        <div class="chat-message message-right right">
+                                        <div class="chat-message message-right right" oncontextmenu="coptions({{$item->sentBy}}, {{$admin->id}}, {{$item->id}});  return false;" >
                                             {{ $item->message }}<br>
                                             <span style="font-size: 7px; padding: 0; margin: 0;">
                                                 <span class="left">{{ $item->sentname }}</span> <span
@@ -445,6 +445,13 @@
             </form>
         </div>
     </div>
+    <div id="rightmenu" class="rmenu">
+        <ul>
+            <a id="delchat" onclick="deletechat();">
+                <li>Delete</li>
+            </a>
+        </ul>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
@@ -521,6 +528,56 @@
             // console.log(custdata);
 
         })
+        function coptions(id, id2, id3){
+            if(id == id2){
+                var rmenu = document.getElementById("rightmenu");
+                rmenu.style.display = 'block';
+                rmenu.style.top = mouseY(event) + 'px';
+                rmenu.style.left = mouseX(event) + 'px';
+                $('#delchat').attr('data-target', id3);
+            }
+        }
+
+        $(document).bind("click", function(event) {
+            var rmenu = document.getElementById("rightmenu");
+            rmenu.style.display = 'none';
+            // $('#delchat').removeAttr('data-target');
+        });
+
+        function mouseX(evt) {
+            if (evt.pageX) {
+                return evt.pageX;
+            } else if (evt.clientX) {
+                return evt.clientX + (document.documentElement.scrollLeft ?
+                    document.documentElement.scrollLeft :
+                    document.body.scrollLeft);
+            } else {
+                return null;
+            }
+        }
+
+        // Set Top Style Proparty
+        function mouseY(evt) {
+            if (evt.pageY) {
+                return evt.pageY;
+            } else if (evt.clientY) {
+                return evt.clientY + (document.documentElement.scrollTop ?
+                    document.documentElement.scrollTop :
+                    document.body.scrollTop);
+            } else {
+                return null;
+            }
+        }
+        function deletechat(){
+            var dt = $('#delchat').attr('data-target')
+            $.ajax({
+                type: 'get',
+                url: '/admin/deletechat/'+dt,
+                success: function(response) {
+                    $(`#${response}`).remove();
+                }
+            })
+        }
     </script>
 </body>
 

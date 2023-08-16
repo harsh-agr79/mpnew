@@ -247,4 +247,9 @@ class AdminChatController extends Controller
         $cnt = count(DB::table('chat')->where('sendtype', 'user')->where('seen', NULL)->get());
         return response()->json($cnt);
     }
+
+    public function deletechat($id){
+        DB::table('chat')->where('id', $id)->delete();
+        return response()->json($id);
+    }
 }
