@@ -26,7 +26,11 @@
              }
          }
      @endphp
- @endif
+     @else
+     @php
+        $chn = ['general']
+     @endphp
+    @endif
     <div class="mp-card" style="margin-top: 10px;">
         <div class="input-field">
             <select data-id="26" id="MySelct" serachname="myselectsearch" searchable="Select User" onchange="startnewchat();">
