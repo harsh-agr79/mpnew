@@ -155,6 +155,13 @@
 
         </div>
     </div>
+    <div id="rightmenu" class="rmenu">
+        <ul>
+            <a id="delchat" onclick="deletechat();">
+                <li>Delete</li>
+            </a>
+        </ul>
+    </div>
 
     <script src="{{ asset('assets/chat.js') }}"></script>
     <script>
