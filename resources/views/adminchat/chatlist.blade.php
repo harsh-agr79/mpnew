@@ -12,6 +12,21 @@
             }
         });
     </script>
+     @if ($admin->type == 'staff')
+     @php
+         $channels = DB::table('channels')->get();
+         $perms = DB::table('permission')
+             ->where('userid', session()->get('ADMIN_ID'))
+             ->pluck('perm')
+             ->toArray();
+         $chn = [];
+         foreach ($channels as $item) {
+             if (in_array($item->shortname, $perms)) {
+                 array_push($chn, $item->shortname);
+             }
+         }
+     @endphp
+ @endif
     <div class="mp-card" style="margin-top: 10px;">
         <div class="input-field">
             <select data-id="26" id="MySelct" serachname="myselectsearch" searchable="Select User" onchange="startnewchat();">
@@ -107,7 +122,7 @@
     <script>
       function startnewchat(){
         console.log($('#MySelct').val());
-        window.open(`/admin/m/chats/${$('#MySelct').val()}/general`, '_self');
+        window.open(`/admin/m/chats/${$('#MySelct').val()}/{{$chn[0]}}`, '_self');
       }
     </script>
 @endsection
