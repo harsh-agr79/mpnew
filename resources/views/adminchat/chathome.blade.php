@@ -218,7 +218,7 @@
                                 @else
                                     <div class="col s12" id="{{ $item->id }}"
                                         style="margin: 5px 0; padding: 0;">
-                                        <div class="right bg-content">
+                                        <div class="right bg-content" oncontextmenu="coptions({{$item->sentBy}}, {{$admin->id}}, {{$item->id}});  return false;">
                                             <img src="{{ asset($item->image) }}" class="materialboxed"
                                                 height="150" alt="">
                                             <div style="font-size: 7px; padding: 3px; margin: 0; width: 100%">
