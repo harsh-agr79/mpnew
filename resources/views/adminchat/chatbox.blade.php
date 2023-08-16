@@ -69,7 +69,7 @@
                 @if ($item->sendtype != 'user')
                     @if ($item->msgtype == 'text')
                         <div class="col s12" id="{{ $item->id }}" style="margin:0; padding: 0;">
-                            <div class="chat-message message-right right" oncontextmenu="coptions({{$item->sentBy}}, {{$admin->id}}, {{$item->id}});  return false;">
+                            <div class="chat-message message-right right" style=" user-select: none;" oncontextmenu="coptions({{$item->sentBy}}, {{$admin->id}}, {{$item->id}});  return false;">
                                 {{ $item->message }}<br>
                                 <span style="font-size: 7px; padding: 0; margin: 0;">
                                     <span class="left">{{ $item->sentname }}</span> <span
@@ -79,7 +79,7 @@
                         </div>
                     @else
                         <div class="col s12" id="{{ $item->id }}" style="margin: 5px 0; padding: 5px;">
-                            <div class="right bg-content" oncontextmenu="coptions({{$item->sentBy}}, {{$admin->id}}, {{$item->id}});  return false;">
+                            <div class="right bg-content" style=" user-select: none;" oncontextmenu="coptions({{$item->sentBy}}, {{$admin->id}}, {{$item->id}});  return false;">
                                 <img src="{{ asset($item->image) }}" class="materialboxed" height="150" alt="">
                                 <div style="font-size: 7px; padding: 3px; margin: 0; width: 100%">
                                     <span class="left">{{ $item->sentname }}</span> <span
