@@ -12,36 +12,37 @@
             }
         });
     </script>
-     @if ($admin->type == 'staff')
-     @php
-         $channels = DB::table('channels')->get();
-         $perms = DB::table('permission')
-             ->where('userid', session()->get('ADMIN_ID'))
-             ->pluck('perm')
-             ->toArray();
-         $chn = [];
-         foreach ($channels as $item) {
-             if (in_array($item->shortname, $perms)) {
-                 array_push($chn, $item->shortname);
-             }
-         }
-     @endphp
-     @else
-     @php
-        $chn = ['general']
-     @endphp
+    @if ($admin->type == 'staff')
+        @php
+            $channels = DB::table('channels')->get();
+            $perms = DB::table('permission')
+                ->where('userid', session()->get('ADMIN_ID'))
+                ->pluck('perm')
+                ->toArray();
+            $chn = [];
+            foreach ($channels as $item) {
+                if (in_array($item->shortname, $perms)) {
+                    array_push($chn, $item->shortname);
+                }
+            }
+        @endphp
+    @else
+        @php
+            $chn = ['general'];
+        @endphp
     @endif
     <div class="mp-card" style="margin-top: 10px;">
         <div class="input-field">
-            <select data-id="26" id="MySelct" serachname="myselectsearch" searchable="Select User" onchange="startnewchat();">
+            <select data-id="26" id="MySelct" serachname="myselectsearch" searchable="Select User"
+                onchange="startnewchat();">
                 <option value="" selected disabled>New Conversation</option>
-            @foreach ($customer as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
-            @endforeach
+                @foreach ($customer as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
             </select>
+        </div>
     </div>
-    </div>
-     
+
     <div style="margin-top: 10px;" id="chatlist2">
         @foreach ($allchats as $item)
             @php
@@ -124,9 +125,9 @@
     </div>
     <script src="{{ asset('assets/chat.js') }}"></script>
     <script>
-      function startnewchat(){
-        console.log($('#MySelct').val());
-        window.open(`/admin/m/chats/${$('#MySelct').val()}/{{$chn[0]}}`, '_self');
-      }
+        function startnewchat() {
+            console.log($('#MySelct').val());
+            window.open(`/admin/m/chats/${$('#MySelct').val()}/{{ $chn[0] }}`, '_self');
+        }
     </script>
 @endsection

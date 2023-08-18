@@ -21,6 +21,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerViewController;
 use App\Http\Controllers\AdminChatController;
 use App\Http\Controllers\UserChatController;
+use App\Http\Controllers\DamageController;
+use App\Http\Controllers\BatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +177,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('bulkprintorders', [OrderAdminController::class, 'bprintindex']);
     Route::post('bulkprint', [OrderAdminController::class, 'bulkprint'])->name('bulkprint');
 
+     //BATCH CRUD
+     Route::get('/batch', [BatchController::class, 'batch']);
+     Route::get('/addbatch', [BatchController::class, 'addbatch']);
+     Route::get('/editbatch/{id}', [BatchController::class, 'addbatch']);
+     Route::get('/deletebatch/{id}', [BatchController::class, 'delbatch']);
+     Route::post('/addbatch', [BatchController::class, 'addbatch_process'])->name('addbatch');
+
 
     //FOR SERVER SIDE BULK UPDATE
 
@@ -283,5 +292,8 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::get('/user/msgcnt', [UserChatController::class, 'getmsgcnt']);
 
     Route::get('/user/chat/seenupdate/{id}/{id2}', [UserChatController::class, 'seenupdate']);
+    
+
+    Route::get('/user/damageticket', [DamageController::class, 'userticket']);
 });
 

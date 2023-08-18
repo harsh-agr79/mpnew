@@ -357,6 +357,19 @@
                             </div>
                         </li>
                     @endif
+                    @if ($admin->type == 'admin' || in_array('batch',$perms))
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Damage<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="{{ url('/batch') }}" class="textcol">Batch<i
+                                                class="material-icons textcol">
+                                                    batch_prediction
+                                                    </i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                     @if ($admin->type == 'admin')
                         <li class="bold"><a class="collapsible-header textcol" tabindex="0">Staff<i
                                     class="material-icons chevron textcol">chevron_left</i></a>

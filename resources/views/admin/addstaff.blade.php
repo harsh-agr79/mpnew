@@ -382,6 +382,14 @@
                                 <span>Front Settings</span>
                             </label>
                         </div>
+                        <div class="col m6 s12">
+                            <label>
+                                <input type="checkbox" name="perm[]"
+                                    value="batch|addbatch|editbatch/{id}|deletebatch/{id}"
+                                    @if (in_array('batch', $permission)) checked @endif />
+                                <span>Damage</span>
+                            </label>
+                        </div>
                         <div class="col s12">
                             <hr>
                         </div>
