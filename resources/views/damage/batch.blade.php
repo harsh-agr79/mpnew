@@ -10,7 +10,7 @@
             <h5>Batch List</h5>
         </div>
         <div class="mp-card" style="margin-top: 20px;">
-            <table>
+            <table class="sortable">
                 <thead>
                     <th>Batch</th>
                     <th>Product</th>
