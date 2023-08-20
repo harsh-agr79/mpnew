@@ -37,7 +37,7 @@
                     <div class="file-field input-field">
                         <div class="btn amber darken-1 black-text">
                             <span>File</span>
-                            <input id="image" type="file" name="image" required>
+                            <input id="image" type="file" name="image">
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" placeholder="Upload a photo" type="text">
