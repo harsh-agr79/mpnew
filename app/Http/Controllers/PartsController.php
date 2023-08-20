@@ -52,7 +52,13 @@ class PartsController extends Controller
         $image = 'partsimage/'.$image_name;
     }
     else{
-        $image = $request->post('oldimage');
+       
+        if($request->post('oldimage') == NULL){
+            $image = '';
+        }
+        else{
+            $image = $request->post('oldimage');
+        }
     }
        if($id > 0){
         if($file = $request->file('image')) {
