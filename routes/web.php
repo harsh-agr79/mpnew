@@ -23,6 +23,7 @@ use App\Http\Controllers\AdminChatController;
 use App\Http\Controllers\UserChatController;
 use App\Http\Controllers\DamageController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\ProblemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -183,6 +184,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::get('/editbatch/{id}', [BatchController::class, 'addbatch']);
      Route::get('/deletebatch/{id}', [BatchController::class, 'delbatch']);
      Route::post('/addbatch', [BatchController::class, 'addbatch_process'])->name('addbatch');
+
+     //Problem CRUD
+     Route::get('/problem', [ProblemController::class, 'problem']);
+     Route::get('/addproblem', [ProblemController::class, 'addproblem']);
+     Route::get('/editproblem/{id}', [ProblemController::class, 'addproblem']);
+     Route::get('/deleteproblem/{id}', [ProblemController::class, 'delproblem']);
+     Route::post('/addproblem', [ProblemController::class, 'addproblem_process'])->name('addproblem');
 
 
     //FOR SERVER SIDE BULK UPDATE
