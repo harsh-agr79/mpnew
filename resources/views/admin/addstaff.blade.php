@@ -385,7 +385,7 @@
                         <div class="col m6 s12">
                             <label>
                                 <input type="checkbox" name="perm[]"
-                                    value="batch|addbatch|editbatch/{id}|deletebatch/{id}|problem|addproblem|editproblem/{id}|deleteproblem/{id}"
+                                    value="batch|addbatch|editbatch/{id}|deletebatch/{id}|problem|addproblem|editproblem/{id}|deleteproblem/{id}|part|addpart|editpart/{id}|deletepart/{id}"
                                     @if (in_array('batch', $permission)) checked @endif />
                                 <span>Damage</span>
                             </label>

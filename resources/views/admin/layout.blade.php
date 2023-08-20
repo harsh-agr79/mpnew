@@ -367,6 +367,10 @@
                                                 class="material-icons material-symbols-outlined textcol">
                                                 destruction
                                             </i></a></li>
+                                    <li><a href="{{ url('/part') }}" class="textcol">Parts<i
+                                                class="material-icons material-symbols-outlined textcol">
+                                                widgets
+                                            </i></a></li>
                                 </ul>
                             </div>
                         </li>

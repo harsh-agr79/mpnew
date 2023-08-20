@@ -24,6 +24,7 @@ use App\Http\Controllers\UserChatController;
 use App\Http\Controllers\DamageController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\PartsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -191,6 +192,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::get('/editproblem/{id}', [ProblemController::class, 'addproblem']);
      Route::get('/deleteproblem/{id}', [ProblemController::class, 'delproblem']);
      Route::post('/addproblem', [ProblemController::class, 'addproblem_process'])->name('addproblem');
+
+      //Parts CRUD
+      Route::get('/part', [PartsController::class, 'part']);
+      Route::get('/addpart', [PartsController::class, 'addpart']);
+      Route::get('/editpart/{id}', [PartsController::class, 'addpart']);
+      Route::get('/deletepart/{id}', [PartsController::class, 'delpart']);
+      Route::post('/addpart', [PartsController::class, 'addpart_process'])->name('addpart');
 
 
     //FOR SERVER SIDE BULK UPDATE
