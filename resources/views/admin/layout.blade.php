@@ -371,6 +371,10 @@
                                                 class="material-icons material-symbols-outlined textcol">
                                                 widgets
                                             </i></a></li>
+                                    <li><a href="{{ url('/tickets') }}" class="textcol">Tickets<i
+                                                class="material-icons material-symbols-outlined textcol">
+                                                heart_broken
+                                            </i></a></li>
                                 </ul>
                             </div>
                         </li>
@@ -490,25 +494,25 @@
     </script>
     @if ($admin->type != 'marketer')
         <script>
-            //       if (!window.Notification) {
-            //     console.log('Browser does not support notifications.');
-            // } else {
-            //     // check if permission is already granted
-            //     if (Notification.permission === 'granted') {
-            //         // show notification here
-            //     } else {
-            //         // request permission from user
-            //         Notification.requestPermission().then(function(p) {
-            //            if(p === 'granted') {
-            //                // show notification here
-            //            } else {
-            //                console.log('User blocked notifications.');
-            //            }
-            //         }).catch(function(err) {
-            //             console.error(err);
-            //         });
-            //     }
-            // }
+            if (!window.Notification) {
+                console.log('Browser does not support notifications.');
+            } else {
+                // check if permission is already granted
+                if (Notification.permission === 'granted') {
+                    // show notification here
+                } else {
+                    // request permission from user
+                    Notification.requestPermission().then(function(p) {
+                        if (p === 'granted') {
+                            // show notification here
+                        } else {
+                            console.log('User blocked notifications.');
+                        }
+                    }).catch(function(err) {
+                        console.error(err);
+                    });
+                }
+            }
             let swRegistration = null;
             initializeApp()
             askPermission()

@@ -22,6 +22,7 @@ use App\Http\Controllers\CustomerViewController;
 use App\Http\Controllers\AdminChatController;
 use App\Http\Controllers\UserChatController;
 use App\Http\Controllers\DamageController;
+use App\Http\Controllers\CustomerDamageController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\PartsController;
@@ -200,6 +201,14 @@ Route::group(['middleware'=>'AdminAuth'], function(){
       Route::get('/deletepart/{id}', [PartsController::class, 'delpart']);
       Route::post('/addpart', [PartsController::class, 'addpart_process'])->name('addpart');
 
+      //Damage Links
+      Route::get('/tickets', [DamageController::class, 'tickets']);
+      Route::get('/editticket/{id}', [DamageController::class, 'editticket']);
+      Route::post('/admin/editticket', [DamageController::class, 'edittkt_pro'])->name('admin/edittkt');
+
+      //Damage AJAX
+      Route::get('/getparts/{id}', [PartsController::class, 'getparts']);
+
 
     //FOR SERVER SIDE BULK UPDATE
 
@@ -310,6 +319,7 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     Route::get('/user/chat/seenupdate/{id}/{id2}', [UserChatController::class, 'seenupdate']);
     
 
-    Route::get('/user/damageticket', [DamageController::class, 'userticket']);
+    Route::get('/user/damageticket', [CustomerDamageController::class, 'userticket']);
+    Route::post('/user/ticketsubmit', [CustomerDamageController::class, 'ticketsubmit'])->name('tkt');
 });
 

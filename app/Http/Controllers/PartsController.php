@@ -87,4 +87,19 @@ class PartsController extends Controller
         }
         return redirect('/part');
     }
+    public function getparts($prod){
+       $parts = DB::table('parts')->get();
+       $res = array();
+       foreach($parts as $item){
+        $items = explode("|", $item->product);
+        foreach($items as $i){
+            if($i == $prod){
+                $res[] = [
+                    'name'=>$item->name
+                ];
+            }
+        }
+       }
+       return response()->json($res);
+    }
 }

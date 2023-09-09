@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <form enctype="multipart/form-data" class="mp-container" id="rform" action="{{ route('user.addorder') }}" method="post">
+    <form enctype="multipart/form-data" class="mp-container" id="rform" action="{{ route('tkt') }}" method="post">
         @csrf
         <input type="hidden" name="date" value="{{ date('Y-m-d H:i:s') }}" required>
         <input type="hidden" name="name" value="{{ $user->name }}" required>
@@ -75,7 +75,7 @@
                 <a class="btn red modal-close">
                     Edit
                 </a>
-                <button class="btn amber sub-btn" type="submit" name="submit" onclick="changebtn()">
+                <button class="btn amber sub-btn" type="submit" onclick="changebtn()">
                     Confirm
                 </button>
             </div>
