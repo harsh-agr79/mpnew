@@ -33,6 +33,8 @@ class DamageController extends Controller
         $pop = $request->post('pop', []);
         $adremarks = $request->post('adremarks', []); 
         $category = $request->post('category', []); 
+        $wproof = $request->post('warrantyproof', []); 
+        $batch = $request->post('batch', []); 
 
         DB::table('damage')->where('invoiceid', $invoice)->delete();
 
@@ -55,6 +57,8 @@ class DamageController extends Controller
                     'warranty'=>$warranty[$i],
                     'category'=>$category[$i],
                     'pop'=>implode("|", $pop[$i]),
+                    'warrantyproof'=>$wproof[$i],
+                    'batch'=>$batch[$i],
                 ]);
             }
         }

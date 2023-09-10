@@ -158,8 +158,44 @@
                                         @else
                                             <option class="black-text" value="" selected>Select warranty</option>
                                         @endif
-                                        <option value="In warranty">In warranty</option>
-                                        <option value="Out of warranty">Out of warranty</option>
+                                        <option value="Under warranty">Under warranty</option>
+                                        <option value="warranty Expired">warranty Expired</option>
+                                        <option value="Item not under warranty">Item not under warranty</option>
+                                        <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
+                                    </select>
+                                </div>
+                                <div class="col s3">
+                                    <select class="browser-default selectinp black-text" name="warrantyproof[]">
+                                        @if ($item2->warrantyproof != null)
+                                            <option selected value="{{ $item2->warrantyproof }}">{{ $item2->warrantyproof }}
+                                            </option>
+                                            <option class="black-text" value="">Select warranty proof</option>
+                                        @else
+                                            <option class="black-text" value="" selected>Select warranty proof</option>
+                                        @endif
+                                        <option value="warranty card">warranty card</option>
+                                        <option value="purchase bill">purchase bill</option>
+                                        <option value="Marked with Marker">Marked with Marker</option>
+                                        <option value="Online purchase proof">Online purchase proof</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col s3">
+                                    @php
+                                        $batch = DB::table('batch')
+                                            ->where('product', $item2->item)
+                                            ->get();
+                                    @endphp
+                                    <select class="browser-default selectinp black-text" name="batch[]">
+                                        @if ($item2->batch != null)
+                                            <option selected value="{{ $item2->batch }}">{{ $item2->batch }}</option>
+                                            <option class="black-text" value="">Select Batch</option>
+                                        @else
+                                            <option class="black-text" value="" selected>Select Batch</option>
+                                        @endif
+                                        @foreach ($batch as $item3)
+                                            <option value="{{ $item3->batch }}">{{ $item3->batch }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col s3">
@@ -192,11 +228,8 @@
                                             <option class="black-text" value="" selected>Select Solution
                                             </option>
                                         @endif
-                                        <option value="repaired(same product)">repaired(same product)</option>
-                                        <option value="repaired(replaced with new parts)">repaired(replaced with new parts)
-                                        </option>
-                                        <option value="repaired(replaced with used parts)">repaired(replaced with used
-                                            parts)
+                                        <option value="repaired(same product)">repaired</option>
+                                        <option value="repaired(fixed new parts)">repaired(fixed new parts)
                                         </option>
                                         <option value="Replaced with new item">Replaced with new item</option>
                                         <option value="Replaced with new other item">Replaced with new other item</option>
@@ -214,7 +247,7 @@
                                         @if ($item2->pop == null)
                                             <input type="hidden" class="pop" name="pop[{{$s}}][]">
                                         @else
-                                            @if ($item2->solution == 'repaired(replaced with new parts)' || $item->solution == 'repaired(replaced with used parts)')
+                                            @if ($item2->solution == 'repaired(fixed new parts)')
                                                
                                                 <select id="MySelct" class="{{$item2->produni_id}}dynpart pop"
                                                 searchname="myselectsearch" name="pop[{{$s}}][]" searchable="Select Parts" multiple>
@@ -326,7 +359,7 @@
         }
 
         function changedyn(sel, item, prodid) {
-            if (sel.value === 'repaired(replaced with new parts)' || sel.value === 'repaired(replaced with used parts)') {
+            if (sel.value === 'repaired(fixed new parts)'   ) {
                 var a = $(sel).closest('.mp-card');
                 $(a).find(`.${prodid}dyn`).html('');
                 let qty = $('.detail-card');
