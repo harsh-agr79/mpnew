@@ -2,10 +2,13 @@
 
 @section('main')
     <div>
+        <div class="right" style="margin-bottom: 10px;">
+            <a href="{{url('admin/addticket')}}" class="btn amber">Add ticket</a>
+        </div>
         <div class="center">
             <h5>Damage Tickets</h5>
         </div>
-        <div class="mp-card">
+        <div class="mp-card" style="margin-top: 20px;">
             <ul class="collapsible">
                 @foreach ($data as $item)
                     <li>
