@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="col s2 center" style="margin:0; padding: 5px;">
-                        <a class="btn amber modal-trigger" href="#cart"><i class="material-icons">shopping_cart</i>
+                        <a class="btn amber modal-trigger" href="#cart"><i class="material-icons">production_quantity_limits</i>
                         </a>
                     </div>
                     <div class='input-field col s8' style="margin:0; padding: 5px;">
