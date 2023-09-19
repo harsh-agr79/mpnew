@@ -27,26 +27,26 @@
 
                                     <div>
                                         <label>
-                                            <input type="checkbox" />
-                                            <span>Picked Up</span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}sendbycus" onclick="updatemap('{{$item->invoiceid}}', 'sendbycus')"/>
+                                            <span>Send By customer : <span id="{{$item->invoiceid}}sendbycuslbl"></span></span>
                                         </label>
                                     </div>
                                     <div>
                                         <label>
-                                            <input type="checkbox" />
-                                            <span>Recieved By Us</span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}recbycomp" onclick="updatemap('{{$item->invoiceid}}', 'recbycomp')"/>
+                                            <span>Recieved By Company : <span id="{{$item->invoiceid}}recbycomplbl"></span></span>
                                         </label>
                                     </div>
                                     <div>
                                         <label>
-                                            <input type="checkbox" />
-                                            <span>Sent By Us</span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}sendbackbycomp" onclick="updatemap('{{$item->invoiceid}}', 'sendbackbycomp')"/>
+                                            <span>Sent Back by comp : <span id="{{$item->invoiceid}}sendbackbycomplbl"></span></span>
                                         </label>
                                     </div>
                                     <div>
                                         <label>
-                                            <input type="checkbox" />
-                                            <span>Recieved By Customer</span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}recbycus" onclick="updatemap('{{$item->invoiceid}}', 'recbycus')"/>
+                                            <span>Recieved By Customer : <span id="{{$item->invoiceid}}recbycuslbl"></span></span>
                                         </label>
                                     </div>
                                 </div>
@@ -56,4 +56,15 @@
             </ul>
         </div>
     </div>
+    <script>
+        function updatemap(invoice, stat){
+            $.ajax({
+                    type: 'get',
+                    url: '/updatemap/'+invoice+"/"+stat,
+                    success: function(response) {
+                       $(`#${response.invoiceid+response.stat}lbl`).text(response.date)
+                    }
+                })
+        }
+    </script>
 @endsection

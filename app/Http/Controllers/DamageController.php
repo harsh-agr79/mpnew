@@ -145,4 +145,27 @@ class DamageController extends Controller
 
         return redirect('/tickets');
     }
+    public function updatemap($invoiceid, $stat){
+        $date = date('Y-m-d H:i:s');
+        $inv = DB::table('damage')->where('invoiceid', $invoiceid)->first();
+        if($inv->$stat == NULL){
+            $d = $date;
+            DB::table('damage')->where('invoiceid', $invoiceid)->update([
+                $stat=>$date
+            ]);
+        }
+        else{
+            $d = NULL;
+            DB::table('damage')->where('invoiceid', $invoiceid)->update([
+                $stat=>NULL
+            ]);
+        }
+        $res = [
+            'date'=>$d,
+            'invoiceid'=>$invoiceid,
+            'stat'=>$stat
+        ];
+        
+        return response()->json($res);
+    }
 }

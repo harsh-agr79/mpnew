@@ -55,14 +55,42 @@
                             </div>
                             <div class="col s3">
                                 <select class="browser-default selectinp black-text" name="warranty[]">
-                                    @if ($item->warranty != null)
-                                        <option selected value="{{ $item->warranty }}">{{ $item->warranty }}</option>
-                                        <option class="black-text" value="">Select warranty</option>
-                                    @else
+                                  
                                         <option class="black-text" value="" selected>Select warranty</option>
+                                   <option value="Under warranty">Under warranty</option>
+                                    <option value="warranty Expired">warranty Expired</option>
+                                    <option value="Item not under warranty">Item not under warranty</option>
+                                    <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
+                                </select>
+                            </div>
+                            <div class="col s3">
+                                <select class="browser-default selectinp black-text" name="warrantyproof[]">
+                                    
+                                        <option class="black-text" value="" selected>Select warranty proof</option>
+                                
+                                    <option value="warranty card">warranty card</option>
+                                    <option value="purchase bill">purchase bill</option>
+                                    <option value="Marked with Marker">Marked with Marker</option>
+                                    <option value="Online purchase proof">Online purchase proof</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col s3">
+                                @php
+                                    $batch = DB::table('batch')
+                                        ->where('product', $item->item)
+                                        ->get();
+                                @endphp
+                                <select class="browser-default selectinp black-text" name="batch[]">
+                                    @if ($item->batch != null)
+                                        <option selected value="{{ $item->batch }}">{{ $item->batch }}</option>
+                                        <option class="black-text" value="">Select Batch</option>
+                                    @else
+                                        <option class="black-text" value="" selected>Select Batch</option>
                                     @endif
-                                    <option value="In warranty">In warranty</option>
-                                    <option value="Out of warranty">Out of warranty</option>
+                                    @foreach ($batch as $item3)
+                                        <option value="{{ $item3->batch }}">{{ $item3->batch }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col s3">
@@ -93,10 +121,8 @@
                                     @else
                                         <option class="black-text" value="" selected>Select Solution</option>
                                     @endif
-                                    <option value="repaired(same product)">repaired(same product)</option>
-                                    <option value="repaired(replaced with new parts)">repaired(replaced with new parts)
-                                    </option>
-                                    <option value="repaired(replaced with used parts)">repaired(replaced with used parts)
+                                    <option value="repaired(same product)">repaired</option>
+                                    <option value="repaired(fixed new parts)">repaired(fixed new parts)
                                     </option>
                                     <option value="Replaced with new item">Replaced with new item</option>
                                     <option value="Replaced with new other item">Replaced with new other item</option>

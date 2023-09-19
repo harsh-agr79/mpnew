@@ -207,6 +207,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
       Route::post('/admin/editticket', [DamageController::class, 'edittkt_pro'])->name('admin/edittkt');
       Route::get('/admin/addticket', [DamageController::class, 'addtkt']);
       Route::post('/addtkt', [DamageController::class, 'addtkt_pro'])->name('admin.addtkt');
+      Route::get('/updatemap/{id}/{id2}', [DamageController::class, 'updatemap']);
 
       //Damage AJAX
       Route::get('/getparts/{id}', [PartsController::class, 'getparts']);
