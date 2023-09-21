@@ -48,6 +48,12 @@
                 <a href="{{ url('user/savedorders') }}" class="home-btn">Saved Orders<i class="material-icons">save</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
+                <a href="{{ url('user/damageticket') }}" class="home-btn">Create a damage ticket<i class="material-icons">confirmation_number</i></a>
+            </div>
+            <div class="col s12" style="margin-top: 10px;">
+                <a href="{{ url('user/tickets') }}" class="home-btn">View Tickets<i class="material-icons">confirmation_number</i></a>
+            </div>
+            <div class="col s12" style="margin-top: 10px;">
                 <a href="{{ url('user/analytics') }}" class="home-btn">Analytics<i class="material-icons">equalizer</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
