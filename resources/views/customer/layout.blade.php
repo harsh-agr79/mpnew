@@ -131,10 +131,10 @@
                                 class="material-icons textcol">home</i></a></li>
                     <li class="bold"><a href="{{ url('/user/createorder') }}" class="textcol">Create Order<i
                                 class="material-icons textcol">add</i></a></li>
-                    <li class="bold"><a href="{{ url('/user/damageticket') }}" class="textcol">Create Damage Ticket<i
+                    {{-- <li class="bold"><a href="{{ url('/user/damageticket') }}" class="textcol">Create Damage Ticket<i
                                     class="material-icons textcol">confirmation_number</i></a></li>
                     <li class="bold"><a href="{{ url('/user/tickets') }}" class="textcol">View Tickets<i
-                                        class="material-icons textcol">confirmation_number</i></a></li>
+                                        class="material-icons textcol">confirmation_number</i></a></li> --}}
                     <li class="bold"><a href="{{ url('/user/oldorders') }}" class="textcol">Old Orders<i
                                 class="material-icons textcol">shopping_basket</i></a></li>
                     <li class="bold"><a href="{{ url('/user/savedorders') }}" class="textcol">Saved Orders<i
