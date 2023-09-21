@@ -27,26 +27,46 @@
 
                                     <div>
                                         <label>
-                                            <input type="checkbox" id="{{$item->invoiceid}}sendbycus" onclick="updatemap('{{$item->invoiceid}}', 'sendbycus')"/>
-                                            <span>Send By customer : <span id="{{$item->invoiceid}}sendbycuslbl"></span></span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}sendbycus" @if ($item->sendbycus != NULL)
+                                                checked
+                                            @endif onclick="updatemap('{{$item->invoiceid}}', 'sendbycus')"/>
+                                            <span>Send By customer : <span id="{{$item->invoiceid}}sendbycuslbl">
+                                                @if ($item->sendbycus != NULL)
+                                                {{$item->sendbycus}}
+                                            @endif</span></span>
                                         </label>
                                     </div>
                                     <div>
                                         <label>
-                                            <input type="checkbox" id="{{$item->invoiceid}}recbycomp" onclick="updatemap('{{$item->invoiceid}}', 'recbycomp')"/>
-                                            <span>Recieved By Company : <span id="{{$item->invoiceid}}recbycomplbl"></span></span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}recbycomp" @if ($item->recbycomp != NULL)
+                                            checked
+                                        @endif onclick="updatemap('{{$item->invoiceid}}', 'recbycomp')"/>
+                                            <span>Recieved By Company : <span id="{{$item->invoiceid}}recbycomplbl">
+                                                @if ($item->recbycomp != NULL)
+                                                {{$item->recbycomp}}
+                                            @endif</span></span>
                                         </label>
                                     </div>
                                     <div>
                                         <label>
-                                            <input type="checkbox" id="{{$item->invoiceid}}sendbackbycomp" onclick="updatemap('{{$item->invoiceid}}', 'sendbackbycomp')"/>
-                                            <span>Sent Back by comp : <span id="{{$item->invoiceid}}sendbackbycomplbl"></span></span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}sendbackbycomp" @if ($item->sendbackbycomp != NULL)
+                                            checked
+                                        @endif onclick="updatemap('{{$item->invoiceid}}', 'sendbackbycomp')"/>
+                                            <span>Sent Back by comp : <span id="{{$item->invoiceid}}sendbackbycomplbl">
+                                                @if ($item->sendbackbycomp != NULL)
+                                                {{$item->sendbackbycomp}}
+                                            @endif</span></span>
                                         </label>
                                     </div>
                                     <div>
                                         <label>
-                                            <input type="checkbox" id="{{$item->invoiceid}}recbycus" onclick="updatemap('{{$item->invoiceid}}', 'recbycus')"/>
-                                            <span>Recieved By Customer : <span id="{{$item->invoiceid}}recbycuslbl"></span></span>
+                                            <input type="checkbox" id="{{$item->invoiceid}}recbycus" @if ($item->recbycus != NULL)
+                                            checked
+                                        @endif onclick="updatemap('{{$item->invoiceid}}', 'recbycus')"/>
+                                            <span>Recieved By Customer : <span id="{{$item->invoiceid}}recbycuslbl">
+                                                @if ($item->recbycus != NULL)
+                                                {{$item->recbycus}}
+                                            @endif</span></span>
                                         </label>
                                     </div>
                                 </div>
