@@ -33,26 +33,36 @@
                             </div>
                                 <div>
                                     <label>
-                                        <input type="checkbox" onclick="statuschange('{{$item->invoiceid}}', 'sendbycus')"/>
-                                        <span>Sent By Me: <span id="{{$item->invoiceid}}sendbycuslbl"></span></span>
+                                        <input type="checkbox"
+                                        @if ($item->sendbycus != NULL)
+                                                checked
+                                            @endif
+                                        onclick="statuschange('{{$item->invoiceid}}', 'sendbycus')"/>
+                                        <span>Sent By Me: <span id="{{$item->invoiceid}}sendbycuslbl">{{$item->sendbycus}}</span></span>
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <input type="checkbox" disabled />
-                                        <span>Recieved By the Company</span>
+                                        <input type="checkbox" @if ($item->recbycomp != NULL)
+                                        checked
+                                    @endif disabled />
+                                        <span>Recieved By the Company : {{$item->recbycomp}}</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <input type="checkbox" disabled />
-                                        <span>Sent By The Company</span>
+                                        <input type="checkbox" @if ($item->sendbackbycomp != NULL)
+                                        checked
+                                    @endif disabled />
+                                        <span>Sent By The Company : {{$item->sendbackbycomp}}</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <input type="checkbox" onclick="statuschange('{{$item->invoiceid}}', 'recbycus')"/>
-                                        <span>Recieved By Me <span id="{{$item->invoiceid}}recbycuslbl"></span></span>
+                                        <input type="checkbox" @if ($item->recbycus != NULL)
+                                        checked
+                                    @endif onclick="statuschange('{{$item->invoiceid}}', 'recbycus')"/>
+                                        <span>Recieved By Me <span id="{{$item->invoiceid}}recbycuslbl">{{$item->recbycus}}</span></span>
                                     </label>
                                 </div>
                             </span></div>
