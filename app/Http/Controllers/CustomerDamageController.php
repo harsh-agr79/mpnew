@@ -31,6 +31,8 @@ class CustomerDamageController extends Controller
                     'name'=>$name,
                     'cusuni_id'=>$user->cusuni_id,
                     'item'=>$item[$i],
+                    'mainstatus'=>'pending',
+                    'instatus'=>'pending',
                     'produni_id'=>$prodid[$i],
                     'quantity'=>$quantity[$i],
                     'cusremarks'=>$detail[$i],
@@ -39,7 +41,7 @@ class CustomerDamageController extends Controller
             }
        }
 
-       return redirect('/user/damageticket');
+       return redirect('/user/tickets');
     }
 
     public function tickets(){
@@ -50,5 +52,68 @@ class CustomerDamageController extends Controller
     public function ticketdetail($invoice){
         $result['data'] = DB::table('damage')->where('invoiceid', $invoice)->groupBy('item')->get();
         return view('customer/ticketdetail', $result);
+    }
+    public function editticket(Request $request, $invoice){
+        $result['inv'] = DB::table('damage')->where('invoiceid', $invoice)->get();
+        $result['data'] = DB::table('products')->where('hide', NULL)->whereNotIn('name', DB::table('damage')->where('invoiceid', $invoice)->pluck('item')->toArray())->orderBy('category', 'DESC')->orderBy('ordernum', 'ASC')->get();
+        return view('customer/editticket', $result);
+    }
+
+    public function editticketsubmit(Request $request){
+        $invoice = $request->post('invoice');
+        DB::table('damage')->where('invoiceid',$invoice)->delete();
+        $name = $request->post('name');
+        $user = DB::table('customers')->where('name', $name)->first();
+        $date = $request->post('date');
+        $item = $request->post('item', []);
+        $price = $request->post('price', []);
+        $prodid = $request->post('prodid', []);
+        $category = $request->post('category', []);
+        $quantity = $request->post('quantity', []);
+        $detail = $request->post('detail', []);
+ 
+        for ($i=0; $i < count($item); $i++) { 
+             if($quantity[$i] > 0){
+                 DB::table('damage')->insert([
+                     'date'=>$date,
+                     'invoiceid'=>$invoice,
+                     'name'=>$name,
+                     'cusuni_id'=>$user->cusuni_id,
+                     'item'=>$item[$i],
+                     'mainstatus'=>'pending',
+                    'instatus'=>'pending',
+                     'produni_id'=>$prodid[$i],
+                     'quantity'=>$quantity[$i],
+                     'cusremarks'=>$detail[$i],
+                     'category'=>$category[$i]
+                 ]);
+             }
+        }
+ 
+        return redirect('/user/tickets');
+    }
+
+    public function changestat($invoiceid,$stat){
+        $date = date('Y-m-d H:i:s');
+        $inv = DB::table('damage')->where('invoiceid', $invoiceid)->first();
+        if($inv->$stat == NULL){
+            $d = $date;
+            DB::table('damage')->where('invoiceid', $invoiceid)->update([
+                $stat=>$date
+            ]);
+        }
+        else{
+            $d = NULL;
+            DB::table('damage')->where('invoiceid', $invoiceid)->update([
+                $stat=>NULL
+            ]);
+        }
+        $res = [
+            'date'=>$d,
+            'invoiceid'=>$invoiceid,
+            'stat'=>$stat
+        ];
+        
+        return response()->json($res); 
     }
 }

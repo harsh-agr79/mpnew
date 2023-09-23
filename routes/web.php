@@ -323,8 +323,11 @@ Route::group(['middleware'=>'CustomerAuth'], function() {
     
 
     Route::get('/user/damageticket', [CustomerDamageController::class, 'userticket']);
+    Route::get('/user/editticket/{id}', [CustomerDamageController::class, 'editticket']);
     Route::post('/user/ticketsubmit', [CustomerDamageController::class, 'ticketsubmit'])->name('tkt');
+    Route::post('/user/editticketsubmit', [CustomerDamageController::class, 'editticketsubmit'])->name('edittkt');
     Route::get('/user/tickets', [CustomerDamageController::class, 'tickets']);
     Route::get('/user/ticket/{id}', [CustomerDamageController::class, 'ticketdetail']);
+    Route::get('/user/updatestat/{id}/{id2}', [CustomerDamageController::class, 'changestat']);
 });
 
