@@ -13,6 +13,10 @@
             <input type="hidden" name="date" value="{{ $data[0]->date }}">
             <input type="hidden" name="name" value="{{ $data[0]->name }}">
             <input type="hidden" name="cusid" value="{{ $data[0]->cusuni_id }}">
+            <input type="hidden" name="sendbycus" value="{{ $data[0]->sendbycus }}">
+            <input type="hidden" name="recbycomp" value="{{ $data[0]->recbycomp }}">
+            <input type="hidden" name="sendbackbycomp" value="{{ $data[0]->sendbackbycomp }}">
+            <input type="hidden" name="recbycus" value="{{ $data[0]->recbycus }}">
             @php
                 $s = 0;
             @endphp
@@ -37,7 +41,6 @@
                                     <option value="pending" selected>pending</option>
                                 @endif
                                 <option value="in progress">in progress</option>
-                                <option value="partial completed">partial completed</option>
                                 <option value="completed">completed</option>
                             </select>
                         </div>

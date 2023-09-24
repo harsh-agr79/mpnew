@@ -282,7 +282,7 @@ function ticketstat($invoice){
     elseif($pc > 0 && $pc < $tcnt){
         DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
     }
-    elseif($ip > 0 && $ip < $tcnt){
+    elseif($ip > 0 && $ip <= $tcnt){
         DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
     }
     else{

@@ -122,7 +122,6 @@ class DamageController extends Controller
         $cnt = array_count_values($check);
 
         // print_r($cnt);
-
         DB::table('damage')->where('invoiceid', $invoice)->delete();
 
         for ($i=0; $i < count($dqty); $i++) { 
@@ -147,7 +146,11 @@ class DamageController extends Controller
                         'pop'=>implode("|", $pop[$i]),
                         'warrantyproof'=>$wproof[$i],
                         'batch'=>$batch[$i],
-                        'instatus'=>$stat[$i]
+                        'instatus'=>$stat[$i],
+                        'sendbycus'=>$request->post('sendbycus'),
+                        'recbycomp'=>$request->post('recbycomp'),
+                        'sendbackbycomp'=>$request->post('sendbackbycomp'),
+                        'recbycus'=>$request->post('recbycus'),
                     ]);
                 } 
             }
@@ -164,12 +167,24 @@ class DamageController extends Controller
             DB::table('damage')->where('invoiceid', $invoiceid)->update([
                 $stat=>$date
             ]);
+            if($stat == 'recbycomp'){
+                DB::table('damage')->where('invoiceid', $invoiceid)->update([
+                    'instatus'=>'in progress',
+                    'mainstatus'=>'in progress'
+                ]); 
+            }
         }
         else{
             $d = NULL;
             DB::table('damage')->where('invoiceid', $invoiceid)->update([
                 $stat=>NULL
             ]);
+            if($stat == 'recbycomp'){
+                DB::table('damage')->where('invoiceid', $invoiceid)->update([
+                    'instatus'=>'pending',
+                    'mainstatus'=>'pending'
+                ]); 
+            }
         }
         $res = [
             'date'=>$d,
