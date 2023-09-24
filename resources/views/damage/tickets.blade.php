@@ -15,7 +15,7 @@
                         <div class="collapsible-header row">
                             <div class="col s2">{{ $item->date }}</div>
                             <div class="col s3">{{ $item->name }}</div>
-                            <div class="col s3">Status</div>
+                            <div class="col s3">{{$item->mainstatus}}</div>
                             <div class="col s3">{{ $item->invoiceid }}</div>
                         </div>
                         <div class="collapsible-body"><span>

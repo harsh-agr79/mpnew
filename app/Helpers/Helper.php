@@ -251,3 +251,41 @@ function auto_version($file) {
     $mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $file);
     return preg_replace('{\\.([^./]+)$}', ".$mtime.\$1", $file);
   }
+function ticketstat($invoice){
+    $ticket = DB::table('damage')->where('invoiceid', $invoice)->groupBy('item')->pluck('instatus')->toArray();
+    // $cnt =  array_count_values($ticket);
+    $tcnt = count($ticket);
+    $c = 0;
+    $pc = 0;
+    $ip = 0;
+    $p = 0;
+    foreach($ticket as $item){
+        if($item == 'completed'){
+            $c = $c + 1;
+        }
+        if($item == 'partial completed'){
+            $pc = $pc + 1;
+        }
+        if($item == 'in progress'){
+            $ip = $ip + 1;
+        }
+        if($item == 'pending'){
+            $p = $p + 1;
+        }
+    }
+    if($c == $tcnt){
+        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'completed']);
+    }
+    elseif($c > 0 && $c < $tcnt){
+        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'partial completed']);
+    }
+    elseif($pc > 0 && $pc < $tcnt){
+        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
+    }
+    elseif($ip > 0 && $ip < $tcnt){
+        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
+    }
+    else{
+        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'pending']);
+    }
+}

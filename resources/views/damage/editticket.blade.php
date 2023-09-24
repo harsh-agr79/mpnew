@@ -25,8 +25,21 @@
                         <div class="col s3">
                             Quantity: <span id="{{ $item->produni_id }}mnqty">{{ $item->quantity }}</span>
                         </div>
-                        <div class="col s6">
+                        <div class="col s3">
                             Customer remarks: {{ $item->cusremarks }}
+                        </div>
+                        <div class="col s3">
+                            <select class="browser-default selectinp black-text" id="{{$item->produni_id}}statsel" onchange="changeprodstat('{{$item->produni_id}}')">
+                                @if ($item->instatus != NULL)
+                                    <option value="{{$item->instatus}}" selected>{{$item->instatus}}</option>
+                                    <option value="pending">pending</option>
+                                @else
+                                    <option value="pending" selected>pending</option>
+                                @endif
+                                <option value="in progress">in progress</option>
+                                <option value="partial completed">partial completed</option>
+                                <option value="completed">completed</option>
+                            </select>
                         </div>
                         <br>
                         <div class="row mp-card z-depth-1 detail-card" id="{{ $item->produni_id }}"
@@ -36,6 +49,8 @@
                             <input type="hidden" name="category[]" value="{{ $item->category }}">
                             <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
                             <input type="hidden" name="cusremarks[]" value="{{ $item->cusremarks }}">
+                            <input type="hidden" name="stat[]" class="{{$item->produni_id}}statinp" value="{{$item->instatus}}">
+                            <input type="hidden" class="{{$item->produni_id}}check" name="check[]" value="dup">
                             <div class="col s3">
                                 <input type="text" class="inp browser-default {{ $item->produni_id }}qty"
                                     onkeyup="apndfunc('{{ $item->produni_id }}')" name="dqty[]" placeholder="quantity">
@@ -148,14 +163,20 @@
                                 ->where('invoiceid', $item->invoiceid)
                                 ->where('item', $item->item)
                                 ->get();
+                            $a = 0;
                         @endphp
                         @foreach ($prod as $item2)
-                            <div class="row mp-card z-depth-1 detail-card {{ $item2->produni_id }}sub" style="margin-top: 15px;">
+                        @php
+                            $a = $a + $item2->grpqty;
+                        @endphp
+                            <div class="row mp-card z-depth-1 detail-card {{ $item2->produni_id }}sub" style="margin-top: 30px;">
                                 <input type="hidden" name="prod[]" value="{{ $item2->item }}">
                                 <input type="hidden" name="prodid[]" value="{{ $item2->produni_id }}">
                                 <input type="hidden" name="category[]" value="{{ $item2->category }}">
                                 <input type="hidden" name="quantity[]" value="{{ $item2->quantity }}">
                                 <input type="hidden" name="cusremarks[]" value="{{ $item2->cusremarks }}">
+                                <input type="hidden" name="stat[]" class="{{$item->produni_id}}statinp" value="{{$item2->instatus}}">
+                                <input type="hidden" name="check[]" value="{{$item->produni_id}}">
                                 <div class="col s3">
                                     <input type="text" class="inp browser-default {{ $item2->produni_id }}qty"
                                         onkeyup="apndfunc('{{ $item2->produni_id }}')" name="dqty[]"
@@ -341,6 +362,124 @@
                                 </div>
                             </div>
                         @endforeach
+                        @if ($a < $item->quantity && $a > 0)
+                        <div class="row mp-card z-depth-1 detail-card {{ $item->produni_id }}sub"
+                            style="margin-top: 15px;">
+                            <input type="hidden" name="prod[]" value="{{ $item->item }}">
+                            <input type="hidden" name="prodid[]" value="{{ $item->produni_id }}">
+                            <input type="hidden" name="category[]" value="{{ $item->category }}">
+                            <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
+                            <input type="hidden" name="cusremarks[]" value="{{ $item->cusremarks }}">
+                            <input type="hidden" name="stat[]" class="{{$item->produni_id}}statinp" value="{{$item->instatus}}">
+                            <input type="hidden" name="check[]" value="{{$item->produni_id}}">
+                            <div class="col s3">
+                                <input type="text" class="inp browser-default {{ $item->produni_id }}qty"
+                                    onkeyup="apndfunc('{{ $item->produni_id }}')" name="dqty[]" placeholder="quantity">
+                            </div>
+                            <div class="col s3">
+                                <select class="browser-default selectinp black-text" name="condition[]">
+                                    @if ($item->condition != null)
+                                        <option selected value="{{ $item->condition }}">{{ $item->condition }}</option>
+                                        <option class="black-text" value="">Select Condition</option>
+                                    @else
+                                        <option class="black-text" value="" selected>Select Condition
+                                        </option>
+                                    @endif
+                                    <option value="New">New</option>
+                                    <option value="Old">Old</option>
+                                </select>
+                            </div>
+                            <div class="col s3">
+                                <select class="browser-default selectinp black-text" name="warranty[]">
+                                  
+                                        <option class="black-text" value="" selected>Select warranty</option>
+                                   <option value="Under warranty">Under warranty</option>
+                                    <option value="warranty Expired">warranty Expired</option>
+                                    <option value="Item not under warranty">Item not under warranty</option>
+                                    <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
+                                </select>
+                            </div>
+                            <div class="col s3">
+                                <select class="browser-default selectinp black-text" name="warrantyproof[]">
+                                    
+                                        <option class="black-text" value="" selected>Select warranty proof</option>
+                                
+                                    <option value="warranty card">warranty card</option>
+                                    <option value="purchase bill">purchase bill</option>
+                                    <option value="Marked with Marker">Marked with Marker</option>
+                                    <option value="Online purchase proof">Online purchase proof</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col s3">
+                                @php
+                                    $batch = DB::table('batch')
+                                        ->where('product', $item->item)
+                                        ->get();
+                                @endphp
+                                <select class="browser-default selectinp black-text" name="batch[]">
+                                    @if ($item->batch != null)
+                                        <option selected value="{{ $item->batch }}">{{ $item->batch }}</option>
+                                        <option class="black-text" value="">Select Batch</option>
+                                    @else
+                                        <option class="black-text" value="" selected>Select Batch</option>
+                                    @endif
+                                    @foreach ($batch as $item3)
+                                        <option value="{{ $item3->batch }}">{{ $item3->batch }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col s3">
+                                @php
+                                    $problems = DB::table('problem')
+                                        ->where('category', $item->category)
+                                        ->get();
+                                @endphp
+                                <select class="browser-default selectinp black-text" name="problem[]">
+                                    @if ($item->problem != null)
+                                        <option selected value="{{ $item->problem }}">{{ $item->problem }}</option>
+                                        <option class="black-text" value="">Select Problem</option>
+                                    @else
+                                        <option class="black-text" value="" selected>Select Problem</option>
+                                    @endif
+                                    @foreach ($problems as $item2)
+                                        <option value="{{ $item2->problem }}">{{ $item2->problem }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col s3">
+                                <select class="browser-default selectinp black-text"
+                                    onchange="changedyn(this, '{{ $item->item }}', '{{ $item->produni_id }}')"
+                                    name="solution[]">
+                                    @if ($item->solution != null)
+                                        <option selected value="{{ $item->solution }}">{{ $item->solution }}</option>
+                                        <option class="black-text" value="">Select Solution</option>
+                                    @else
+                                        <option class="black-text" value="" selected>Select Solution</option>
+                                    @endif
+                                    <option value="repaired(same product)">repaired</option>
+                                    <option value="repaired(fixed new parts)">repaired(fixed new parts)
+                                    </option>
+                                    <option value="Replaced with new item">Replaced with new item</option>
+                                    <option value="Replaced with new other item">Replaced with new other item</option>
+                                    <option value="Return in same condition(Warranty Void)">Return in same
+                                        condition(Warranty
+                                        Void)</option>
+                                    <option value="Return in same condition(No problem)">Return in same condition(No
+                                        problem)
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col s3">
+                                <div class="{{ $item->produni_id }}dyn input-field">
+                                    <input type="hidden" class="pop" name="pop[]" value="">
+                                </div>
+                            </div>
+                            <div class="col s6">
+                                <textarea type="text" placeholder="remarks" name="adremarks[]" class="browser-default inp"></textarea>
+                            </div>
+                        </div>
+                        @endif
                         <div id="{{ $item->produni_id }}cont">
                         </div>
                     </div>
@@ -374,9 +513,11 @@
             }
             let qty = $(`.${prodid}qty`);
             if (b >= 2 || qty.length <= 1) {
-                $(`#${prodid}`).clone().addClass(`detail-card`).addClass(`${prodid}cln`).addClass(`${prodid}sub`).show().appendTo(`#${prodid}cont`);
+               var cln = $(`#${prodid}`).clone().addClass(`detail-card`).addClass(`${prodid}cln`).addClass(`${prodid}sub`).show().appendTo(`#${prodid}cont`);
+               cln.find(`.${prodid}check`).val(prodid)
             } else if (a < parseInt(mqty) && a !== 0) {
-                $(`#${prodid}`).clone().addClass(`detail-card`).addClass(`${prodid}cln`).addClass(`${prodid}sub`).show().appendTo(`#${prodid}cont`);
+                var cln = $(`#${prodid}`).clone().addClass(`detail-card`).addClass(`${prodid}cln`).addClass(`${prodid}sub`).show().appendTo(`#${prodid}cont`);
+                cln.find(`.${prodid}check`).val(prodid)
             } else if (a === 0) {
                 $(`.${prodid}cln`).remove();
             }
@@ -454,6 +595,10 @@
                 var inp = $(qty[i]).find('.pop');
                 $(inp).attr('name', `pop[${i}][]`)
             }
+        }
+        function changeprodstat(prod){
+            var x = $(`#${prod}statsel`).val();
+            $(`.${prod}statinp`).val(x);
         }
     </script>
 @endsection

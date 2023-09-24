@@ -21,7 +21,7 @@ class DamageController extends Controller
     }
     public function addtkt_pro(Request $request){
         $name = $request->post('name');
-        $date = $request->post('date');
+        $date = date('Y-m-d H:i:s');
         $customer = DB::table('customers')->where('name', $name)->first();
         $invoiceid=$customer->id.time()."dmg";
         // $time = date('H:i:s');
@@ -77,6 +77,7 @@ class DamageController extends Controller
                     'item'=>$item[$i],
                     'produni_id'=>$prodid[$i],
                     'category'=>$category[$i],
+                    'instatus'=>'pending',
                     // 'price'=>$price[$i],
                     'date'=>$date,
                     'quantity'=>$quantity[$i],
@@ -93,6 +94,7 @@ class DamageController extends Controller
             }
         }
 
+        ticketstat($invoiceid);
         return redirect('/tickets');
     }
     public function edittkt_pro(Request $request){
@@ -115,34 +117,43 @@ class DamageController extends Controller
         $category = $request->post('category', []); 
         $wproof = $request->post('warrantyproof', []); 
         $batch = $request->post('batch', []); 
+        $stat = $request->post('stat', []);
+        $check = $request->post('check', []);
+        $cnt = array_count_values($check);
+
+        // print_r($cnt);
 
         DB::table('damage')->where('invoiceid', $invoice)->delete();
 
         for ($i=0; $i < count($dqty); $i++) { 
-            if ($dqty[$i] > 0) {
-                DB::table('damage')->insert([
-                    'date'=>$date,
-                    'invoiceid'=>$invoice,
-                    'name'=>$name,
-                    'cusuni_id'=>$cusuni_id,
-                    'item'=>$item[$i],
-                    'produni_id'=>$prodid[$i],
-                    'quantity'=>$quantity[$i],
-                    'grpqty'=>$dqty[$i],
-                    'cusremarks'=>$cusremarks[$i],
-                    'adremarks'=>$adremarks[$i],
-                    'problem'=>$problem[$i],
-                    'solution'=>$solution[$i],
-                    'condition'=>$condition[$i],
-                    'warranty'=>$warranty[$i],
-                    'category'=>$category[$i],
-                    'pop'=>implode("|", $pop[$i]),
-                    'warrantyproof'=>$wproof[$i],
-                    'batch'=>$batch[$i],
-                ]);
+            if ($check[$i] != 'dup') {
+                if($cnt[$prodid[$i]] == 1 || $dqty[$i] > 0){
+                    DB::table('damage')->insert([
+                        'date'=>$date,
+                        'invoiceid'=>$invoice,
+                        'name'=>$name,
+                        'cusuni_id'=>$cusuni_id,
+                        'item'=>$item[$i],
+                        'produni_id'=>$prodid[$i],
+                        'quantity'=>$quantity[$i],
+                        'grpqty'=>$dqty[$i],
+                        'cusremarks'=>$cusremarks[$i],
+                        'adremarks'=>$adremarks[$i],
+                        'problem'=>$problem[$i],
+                        'solution'=>$solution[$i],
+                        'condition'=>$condition[$i],
+                        'warranty'=>$warranty[$i],
+                        'category'=>$category[$i],
+                        'pop'=>implode("|", $pop[$i]),
+                        'warrantyproof'=>$wproof[$i],
+                        'batch'=>$batch[$i],
+                        'instatus'=>$stat[$i]
+                    ]);
+                } 
             }
         }
 
+        ticketstat($invoice);
         return redirect('/tickets');
     }
     public function updatemap($invoiceid, $stat){
