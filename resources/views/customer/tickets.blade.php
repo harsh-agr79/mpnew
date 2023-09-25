@@ -28,7 +28,11 @@
                             <div class="right">
                                 <div class="right">
                                     <a href="{{url('/user/ticket/'.$item->invoiceid)}}" class="btn amber">View Details</a>
-                                    <a href="{{url('/user/editticket/'.$item->invoiceid)}}" class="btn amber">Edit</a>
+                                    <a href="{{url('/user/editticket/'.$item->invoiceid)}}" class="btn amber editbtn{{$item->invoiceid}}" 
+                                        @if($item->sendbycus != NULL)
+                                        disabled
+                                        @endif
+                                        >Edit</a>
                                 </div>
                             </div>
                                 <div>
@@ -37,6 +41,9 @@
                                         @if ($item->sendbycus != NULL)
                                                 checked
                                             @endif
+                                        @if($item->recbycomp != NULL)
+                                            disabled
+                                        @endif
                                         onclick="statuschange('{{$item->invoiceid}}', 'sendbycus')"/>
                                         <span>Sent By Me: <span id="{{$item->invoiceid}}sendbycuslbl">{{$item->sendbycus}}</span></span>
                                     </label>
@@ -61,7 +68,11 @@
                                     <label>
                                         <input type="checkbox" @if ($item->recbycus != NULL)
                                         checked
-                                    @endif onclick="statuschange('{{$item->invoiceid}}', 'recbycus')"/>
+                                    @endif 
+                                    @if($item->sendbackbycomp == NULL)
+                                    disabled
+                                    @endif
+                                    onclick="statuschange('{{$item->invoiceid}}', 'recbycus')"/>
                                         <span>Recieved By Me <span id="{{$item->invoiceid}}recbycuslbl">{{$item->recbycus}}</span></span>
                                     </label>
                                 </div>
@@ -81,6 +92,12 @@
                     url: '/user/updatestat/'+invoice+"/"+stat,
                     success: function(response) {
                        $(`#${response.invoiceid+response.stat}lbl`).text(response.date)
+                       if(response.date == null){
+                        $(`.editbtn${response.invoiceid}`).removeAttr('disabled')
+                       }
+                       else{
+                        $(`.editbtn${response.invoiceid}`).attr('disabled', true)
+                       }
                     // console.log(response);
                     }
                 })
