@@ -40,7 +40,6 @@
                                 @else
                                     <option value="pending" selected>pending</option>
                                 @endif
-                                <option value="in progress">in progress</option>
                                 <option value="completed">completed</option>
                             </select>
                         </div>

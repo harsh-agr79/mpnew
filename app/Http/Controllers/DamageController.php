@@ -162,14 +162,17 @@ class DamageController extends Controller
     public function updatemap($invoiceid, $stat){
         $date = date('Y-m-d H:i:s');
         $inv = DB::table('damage')->where('invoiceid', $invoiceid)->first();
+        $s = NULL;
         if($inv->$stat == NULL){
             $d = $date;
             DB::table('damage')->where('invoiceid', $invoiceid)->update([
                 $stat=>$date
             ]);
+           
             if($stat == 'recbycomp'){
+                $s = 'in progress';
                 DB::table('damage')->where('invoiceid', $invoiceid)->update([
-                    'instatus'=>'in progress',
+                    // 'instatus'=>'in progress',
                     'mainstatus'=>'in progress'
                 ]); 
             }
@@ -179,9 +182,11 @@ class DamageController extends Controller
             DB::table('damage')->where('invoiceid', $invoiceid)->update([
                 $stat=>NULL
             ]);
+           
             if($stat == 'recbycomp'){
+                $s = 'pending';
                 DB::table('damage')->where('invoiceid', $invoiceid)->update([
-                    'instatus'=>'pending',
+                    // 'instatus'=>'pending',
                     'mainstatus'=>'pending'
                 ]); 
             }
@@ -189,7 +194,8 @@ class DamageController extends Controller
         $res = [
             'date'=>$d,
             'invoiceid'=>$invoiceid,
-            'stat'=>$stat
+            'stat'=>$stat,
+            'mainstat'=>$s
         ];
         
         return response()->json($res);

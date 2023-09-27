@@ -279,13 +279,13 @@ function ticketstat($invoice){
     elseif($c > 0 && $c < $tcnt){
         DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'partial completed']);
     }
-    elseif($pc > 0 && $pc < $tcnt){
-        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
-    }
-    elseif($ip > 0 && $ip <= $tcnt){
-        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
-    }
     else{
-        DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'pending']);
+        $stat = DB::table('damage')->where('invoiceid', $invoice)->groupBy('invoiceid')->first();
+        if($stat->recbycus != NULL || $stat->sendbackbycomp != NULL || $stat->recbycomp != NULL){
+            DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'in progress']);
+        }
+        else{
+            DB::table('damage')->where('invoiceid', $invoice)->update(['mainstatus'=>'pending']);
+        }
     }
 }
