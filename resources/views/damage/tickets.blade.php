@@ -23,6 +23,8 @@
                                     <a href="{{ url('/ticket/' . $item->invoiceid) }}" class="btn amber">View Details</a>
                                     <a href="{{ url('/editticket/' . $item->invoiceid) }}" class="btn amber">Edit
                                         Details</a>
+                                    <a href="{{ url('/deleteticket/' . $item->invoiceid) }}" class="btn red">Delete
+                                            </a>
                                 </div>
                                 <div>
 

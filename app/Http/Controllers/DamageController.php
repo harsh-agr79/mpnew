@@ -200,4 +200,26 @@ class DamageController extends Controller
         
         return response()->json($res);
     }
+
+    public function deleteticket($invoice){
+        DB::table('damage')->where('invoiceid', $invoice)->delete();
+        return redirect('/tickets');
+    }
+    public function getitdetails($item, $inv){
+        $chk = DB::table('damage')->where('item', $item)->where('invoiceid',$inv)->get();
+        if(count($chk)>0){
+            $res = 'Already Exists';
+        }
+        else{
+            $prod = DB::table('products')->where('name', $item)->first();
+            $batch = DB::table('batch')->where('product', $item)->pluck('batch')->toArray();
+            $problem = DB::table('problem')->where('category', $prod->category)->pluck('problem')->toArray();
+            $res = [
+                'prod'=>$prod,
+                'batch'=>$batch,
+                'problem'=>$problem
+            ];
+        }
+        return response()->json($res);
+    }
 }

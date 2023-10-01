@@ -116,4 +116,8 @@ class CustomerDamageController extends Controller
         
         return response()->json($res); 
     }
+    public function deleteticket($invoice){
+        DB::table('damage')->where('invoiceid', $invoice)->delete();
+        return redirect('/user/tickets');
+    }
 }

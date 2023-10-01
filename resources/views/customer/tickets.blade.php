@@ -33,6 +33,11 @@
                                         disabled
                                         @endif
                                         >Edit</a>
+                                    <a href="{{url('/user/deleteticket/'.$item->invoiceid)}}" class="btn red editbtn{{$item->invoiceid}}" 
+                                            @if($item->sendbycus != NULL)
+                                            disabled
+                                            @endif
+                                            >Delete</a>
                                 </div>
                             </div>
                                 <div>
