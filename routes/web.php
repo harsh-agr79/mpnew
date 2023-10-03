@@ -214,6 +214,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
       //Damage AJAX
       Route::get('/getparts/{id}', [PartsController::class, 'getparts']);
       Route::get('/getitdetails/{id}/{id2}', [DamageController::class, 'getitdetails']);
+      Route::post('/ticket/changedate', [DamageController::class, 'changedate']);
 
 
     //FOR SERVER SIDE BULK UPDATE

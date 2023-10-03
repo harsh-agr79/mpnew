@@ -226,4 +226,20 @@ class DamageController extends Controller
         $result['data'] = DB::table('damage')->where('invoiceid', $invoice)->groupBy('item')->get();
         return view('damage/ticketdetail', $result);
     }
+    public function changedate(Request $request){
+        $inv = $request->post('inv');
+        $stat = $request->post('stat');
+        $date = $request->post('date');
+
+        DB::table('damage')->where('invoiceid', $inv)->update([
+            $stat=>$date
+        ]);
+        $res = [
+            'inv'=>$inv,
+            'stat'=>$stat,
+            'date'=>date('Y-m-d H:i:s', strtotime($date))
+        ];
+        
+        return response()->json($res);
+    }
 }
