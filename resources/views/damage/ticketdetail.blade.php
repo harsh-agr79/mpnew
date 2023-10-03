@@ -1,7 +1,7 @@
-@extends('customer/layout')
+@extends('admin/layout')
 
 @section('main')
-    <div class="mp-container">
+    <div>
         <div class="center mp-card" style="font-size: 15px; margin-top: 10px;">
             <div>Name: {{ $data[0]->name }}</div>
             <div>Date: {{ $data[0]->date }}</div>

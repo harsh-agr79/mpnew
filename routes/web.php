@@ -203,6 +203,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
       //Damage Links
       Route::get('/tickets', [DamageController::class, 'tickets']);
+      Route::get('/ticket/{id}', [DamageController::class, 'ticketdetail']);
       Route::get('/editticket/{id}', [DamageController::class, 'editticket']);
       Route::get('/deleteticket/{id}', [DamageController::class, 'deleteticket']);
       Route::post('/admin/editticket', [DamageController::class, 'edittkt_pro'])->name('admin/edittkt');

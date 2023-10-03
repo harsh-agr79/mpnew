@@ -289,3 +289,17 @@ function ticketstat($invoice){
         }
     }
 }
+
+function tktcolor($invoice){
+    $stat = DB::table("damage")->where('invoiceid', $invoice)->first()->mainstatus;
+    if($stat == 'completed'){
+        $res = 'green';
+    }
+    if($stat == 'partial completed' || $stat == 'in progress'){
+        $res = 'amber darken-1';
+    }
+    if($stat == 'pending'){
+        $res = 'blue';
+    }
+    return $res;
+}

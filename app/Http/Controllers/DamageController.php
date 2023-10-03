@@ -222,4 +222,8 @@ class DamageController extends Controller
         }
         return response()->json($res);
     }
+    public function ticketdetail($invoice){
+        $result['data'] = DB::table('damage')->where('invoiceid', $invoice)->groupBy('item')->get();
+        return view('damage/ticketdetail', $result);
+    }
 }

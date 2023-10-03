@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class CustomerDamageController extends Controller
 {
     public function userticket(Request $request){
-        $result['data'] = DB::table('products')->where('hide', '!=', 'on')->orWhereNull('hide')->orderBy('category', 'DESC')->orderBy('ordernum', 'ASC')->get();
+        $result['data'] = DB::table('products')->orderBy('category', 'DESC')->orderBy('ordernum', 'ASC')->get();
         return view('damage/userticket', $result);
     }
 

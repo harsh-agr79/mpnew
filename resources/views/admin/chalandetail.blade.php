@@ -30,6 +30,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div>
+                Remarks: {{$data[0]->remarks}}
+            </div>
         </div>
     </div>
 @endsection
