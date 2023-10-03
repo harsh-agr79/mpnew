@@ -11,6 +11,9 @@
                 @foreach ($data as $item)
                     <li>
                         <div class="collapsible-header row">
+                            <div class="col s1">
+                                <div style="height: 20px; width: 10px;" class="{{ tktcolor($item->invoiceid) }}"></div>
+                            </div>
                             <div class="col s3">
                                 {{ $item->date }}
                             </div>
@@ -20,7 +23,7 @@
                             <div class="col s3">
                                 {{ $item->mainstatus }}
                             </div>
-                            <div class="col s3">
+                            <div class="col s2">
                                 Details
                             </div>
                         </div>
