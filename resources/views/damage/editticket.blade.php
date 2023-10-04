@@ -63,7 +63,7 @@
                                 value="{{ $item->instatus }}">
                             <input type="hidden" class="{{ $item->produni_id }}check" name="check[]" value="dup">
                             <div class="col s3">
-                                <input type="text" class="inp browser-default {{ $item->produni_id }}qty"
+                                <input type="number" class="inp browser-default {{ $item->produni_id }}qty"
                                     onkeyup="apndfunc('{{ $item->produni_id }}')" name="dqty[]" placeholder="quantity">
                             </div>
                             <div class="col s3">
@@ -191,7 +191,7 @@
                                     value="{{ $item2->instatus }}">
                                 <input type="hidden" name="check[]" value="{{ $item->produni_id }}">
                                 <div class="col s3">
-                                    <input type="text" class="inp browser-default {{ $item2->produni_id }}qty"
+                                    <input type="number" class="inp browser-default {{ $item2->produni_id }}qty"
                                         onkeyup="apndfunc('{{ $item2->produni_id }}')" name="dqty[]"
                                         placeholder="quantity" value="{{ $item2->grpqty }}">
                                 </div>
@@ -390,7 +390,7 @@
                                     value="{{ $item->instatus }}">
                                 <input type="hidden" name="check[]" value="{{ $item->produni_id }}">
                                 <div class="col s3">
-                                    <input type="text" class="inp browser-default {{ $item->produni_id }}qty"
+                                    <input type="number" class="inp browser-default {{ $item->produni_id }}qty"
                                         onkeyup="apndfunc('{{ $item->produni_id }}')" name="dqty[]"
                                         placeholder="quantity">
                                 </div>
@@ -738,7 +738,7 @@
                                 value="pending">
                             <input type="hidden" class="${response.prod.produni_id}check" name="check[]" value="dup">
                             <div class="col s3">
-                                <input type="text" class="inp browser-default ${response.prod.produni_id}qty"
+                                <input type="number" class="inp browser-default ${response.prod.produni_id}qty"
                                     onkeyup="apndfunc('${response.prod.produni_id}')" name="dqty[]" placeholder="quantity">
                             </div>
                             <div class="col s3">
