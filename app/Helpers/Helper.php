@@ -292,6 +292,7 @@ function ticketstat($invoice){
 
 function tktcolor($invoice){
     $stat = DB::table("damage")->where('invoiceid', $invoice)->first()->mainstatus;
+    $res = '';
     if($stat == 'completed'){
         $res = 'green';
     }
