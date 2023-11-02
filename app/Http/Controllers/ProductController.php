@@ -147,12 +147,37 @@ class ProductController extends Controller
                     'item'=>$changed,
                     'produni_id'=>$idchanged
                 ]);
+                DB::table('batch')->where('product',$initial)->update([
+                    'product'=>$changed,
+                    'produni_id'=>$idchanged
+                ]);
+                DB::table('damage')->where('item',$initial)->update([
+                    'item'=>$changed,
+                    'produni_id'=>$idchanged
+                ]);
                 DB::table('orders')->where('produni_id',$idinitial)->update([
                     'produni_id'=>$idchanged
                 ]);
                 DB::table('salesreturns')->where('produni_id',$idinitial)->update([
                     'produni_id'=>$idchanged
                 ]);
+                DB::table('batch')->where('produni_id',$idinitial)->update([
+                    'produni_id'=>$idchanged
+                ]);
+                DB::table('damage')->where('produni_id',$idinitial)->update([
+                    'produni_id'=>$idchanged
+                ]);
+                $parts = DB::table('parts')->get();
+                foreach($parts as $item){
+                    $ar = explode('|',$item->product);
+                    if(in_array($initial, $ar)){
+                        $key = array_search($initial, $ar);
+                        $ar[$key] = $changed;
+                        DB::table('parts')->where('id', $item->id)->update([
+                            'product'=>implode('|', $ar)
+                        ]);
+                    }
+                }
             }
             DB::table('products')->where('id', $request->post('id'))->update([
                 'name'=>$request->post('name'),
