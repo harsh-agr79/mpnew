@@ -881,7 +881,7 @@
                                 </div>
                                 <div class="col s3">
                                     <select class="browser-default selectinp black-text"
-                                        onchange="changedyn(this, '{{ $item->item }}', '{{ $item->produni_id }}')"
+                                        onchange="changedyn(this, '${response.prod.name}', '${response.prod.produni_id}')"
                                         name="solution[]">
                                        
                                             <option class="black-text" value="" selected>Select Solution</option>
