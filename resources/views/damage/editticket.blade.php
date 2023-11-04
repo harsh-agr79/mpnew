@@ -67,7 +67,7 @@
                                     onkeyup="apndfunc('{{ $item->produni_id }}')" name="dqty[]" placeholder="quantity">
                             </div>
                             <div class="col s3">
-                                <select class="browser-default selectinp black-text" name="condition[]">
+                                <select class="browser-default selectinp black-text" name="condition[]" onchange="wardy(this)">
                                     @if ($item->condition != null)
                                         <option selected value="{{ $item->condition }}">{{ $item->condition }}</option>
                                         <option class="black-text" value="">Select Condition</option>
@@ -79,8 +79,8 @@
                                     <option value="Old">Old</option>
                                 </select>
                             </div>
-                            <div class="col s3">
-                                <select class="browser-default selectinp black-text" name="warranty[]">
+                            <div class="col s3 warranty" style="display: none;">
+                                <select class="browser-default selectinp black-text" name="warranty[]" onchange="proofdy(this)">
 
                                     <option class="black-text" value="" selected>Select warranty</option>
                                     <option value="Under warranty">Under warranty</option>
@@ -89,7 +89,7 @@
                                     <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
                                 </select>
                             </div>
-                            <div class="col s3">
+                            <div class="col s3 proof" style="display: none;">
                                 <select class="browser-default selectinp black-text" name="warrantyproof[]">
 
                                     <option class="black-text" value="" selected>Select warranty proof</option>
@@ -196,7 +196,7 @@
                                         placeholder="quantity" value="{{ $item2->grpqty }}">
                                 </div>
                                 <div class="col s3">
-                                    <select class="browser-default selectinp black-text" name="condition[]">
+                                    <select class="browser-default selectinp black-text" name="condition[]" onchange="wardy(this)">
                                         @if ($item2->condition != null)
                                             <option selected value="{{ $item2->condition }}">{{ $item2->condition }}
                                             </option>
@@ -209,8 +209,11 @@
                                         <option value="Old">Old</option>
                                     </select>
                                 </div>
-                                <div class="col s3">
-                                    <select class="browser-default selectinp black-text" name="warranty[]">
+                                
+                                <div class="col s3 warranty" @if ($item->condition != 'Old')
+                                    style="display: none;"
+                                @endif>
+                                    <select class="browser-default selectinp black-text" name="warranty[]" onchange="proofdy(this)">
                                         @if ($item2->warranty != null)
                                             <option selected value="{{ $item2->warranty }}">{{ $item2->warranty }}
                                             </option>
@@ -224,7 +227,9 @@
                                         <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
                                     </select>
                                 </div>
-                                <div class="col s3">
+                                <div class="col s3 proof"  @if ($item->warranty != 'Under warranty')
+                                    style="display: none;"
+                                @endif>
                                     <select class="browser-default selectinp black-text" name="warrantyproof[]">
                                         @if ($item2->warrantyproof != null)
                                             <option selected value="{{ $item2->warrantyproof }}">
@@ -395,7 +400,7 @@
                                         placeholder="quantity">
                                 </div>
                                 <div class="col s3">
-                                    <select class="browser-default selectinp black-text" name="condition[]">
+                                    <select class="browser-default selectinp black-text" name="condition[]" onchange="wardy(this)">
                                         @if ($item->condition != null)
                                             <option selected value="{{ $item->condition }}">{{ $item->condition }}
                                             </option>
@@ -408,8 +413,8 @@
                                         <option value="Old">Old</option>
                                     </select>
                                 </div>
-                                <div class="col s3">
-                                    <select class="browser-default selectinp black-text" name="warranty[]">
+                                <div class="col s3 warranty" style="display: none;">
+                                    <select class="browser-default selectinp black-text" name="warranty[]" onchange="proofdy(this)">
 
                                         <option class="black-text" value="" selected>Select warranty</option>
                                         <option value="Under warranty">Under warranty</option>
@@ -418,7 +423,7 @@
                                         <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
                                     </select>
                                 </div>
-                                <div class="col s3">
+                                <div class="col s3 proof" style="display: none;">
                                     <select class="browser-default selectinp black-text" name="warrantyproof[]">
 
                                         <option class="black-text" value="" selected>Select warranty proof</option>
@@ -742,15 +747,15 @@
                                     onkeyup="apndfunc('${response.prod.produni_id}')" name="dqty[]" placeholder="quantity">
                             </div>
                             <div class="col s3">
-                                <select class="browser-default selectinp black-text" name="condition[]">
+                                <select class="browser-default selectinp black-text" name="condition[]" onchange="wardy(this)">
                                     <option class="black-text" value="" selected>Select Condition
                                         </option>
                                     <option value="New">New</option>
                                     <option value="Old">Old</option>
                                 </select>
                             </div>
-                            <div class="col s3">
-                                <select class="browser-default selectinp black-text" name="warranty[]">
+                            <div class="col s3 warranty" style="display: none;">
+                                <select class="browser-default selectinp black-text" name="warranty[]" onchange="proofdy(this)">
 
                                     <option class="black-text" value="" selected>Select warranty</option>
                                     <option value="Under warranty">Under warranty</option>
@@ -759,7 +764,7 @@
                                     <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
                                 </select>
                             </div>
-                            <div class="col s3">
+                            <div class="col s3 proof" style="display: none;">
                                 <select class="browser-default selectinp black-text" name="warrantyproof[]">
 
                                     <option class="black-text" value="" selected>Select warranty proof</option>
@@ -832,7 +837,7 @@
                                         placeholder="quantity">
                                 </div>
                                 <div class="col s3">
-                                    <select class="browser-default selectinp black-text" name="condition[]">
+                                    <select class="browser-default selectinp black-text" name="condition[]" onchange="wardy(this)">
                                         
                                             <option class="black-text" value="" selected>Select Condition
                                             </option>
@@ -841,8 +846,8 @@
                                         <option value="Old">Old</option>
                                     </select>
                                 </div>
-                                <div class="col s3">
-                                    <select class="browser-default selectinp black-text" name="warranty[]">
+                                <div class="col s3 warranty" style="display: none;">
+                                    <select class="browser-default selectinp black-text" name="warranty[]" onchange="proofdy(this)">
 
                                         <option class="black-text" value="" selected>Select warranty</option>
                                         <option value="Under warranty">Under warranty</option>
@@ -851,7 +856,7 @@
                                         <option value="Warranty Info missing(RCP)">Warranty Info missing(RCP)</option>
                                     </select>
                                 </div>
-                                <div class="col s3">
+                                <div class="col s3 proof" style="display: none;">
                                     <select class="browser-default selectinp black-text" name="warrantyproof[]">
 
                                         <option class="black-text" value="" selected>Select warranty proof</option>
@@ -918,6 +923,28 @@
                         changeindex()
                     }
                 })
+            }
+        }
+        function wardy(sel){
+            var card = sel.closest('.mp-card')
+            var war = card.querySelector(".warranty")
+            // console.log(war);
+            if(sel.value == 'Old'){
+               war.style.display = "block";
+            }
+            else{
+                war.style.display = "none";
+            }
+        }
+        function proofdy(sel){
+            var card = sel.closest('.mp-card')
+            var proof = card.querySelector(".proof")
+            // console.log(war);
+            if(sel.value == 'Under warranty'){
+               proof.style.display = "block";
+            }
+            else{
+                proof.style.display = "none";
             }
         }
     </script>
