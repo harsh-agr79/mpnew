@@ -21,21 +21,21 @@
                     <li class="dmg-inv">
                         <div class="collapsible-header row">
                             <div class="col s1">
-                                <div style="height: 20px; width: 15px;" class="{{ tktcolor($item->invoiceid) }} center">
+                                <div style="height: 20px; width: 15px;" class="{{ tktcolor($item->invoiceid) }} center dmg-inf">
                                 @php
-                                    $no = 1;
+                                    $no = "stat1";
                                     if($item->sendbycus != NULL)
                                     {
-                                        $no = 1;
+                                        $no = "stat1";
                                     }
                                     if ($item->recbycomp != NULL) {
-                                        $no = 2;
+                                        $no = "stat2";
                                     }
                                     if($item->sendbackbycomp != NULL){
-                                        $no = 3;
+                                        $no = "stat3";
                                     }
                                     if ($item->recbycus != NULL) {
-                                        $no = 4;
+                                        $no = "stat4";
                                     }
                                 @endphp
                                 {{$no}}
