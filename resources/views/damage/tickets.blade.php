@@ -21,29 +21,29 @@
                     <li class="dmg-inv">
                         <div class="collapsible-header row">
                             <div class="col s1">
-                                <div style="height: 20px; width: 15px;" class="{{ tktcolor($item->invoiceid) }} center dmg-inf">
-                                @php
-                                    $no = "stat1";
-                                    if($item->sendbycus != NULL)
-                                    {
-                                        $no = "stat1";
-                                    }
-                                    if ($item->recbycomp != NULL) {
-                                        $no = "stat2";
-                                    }
-                                    if($item->sendbackbycomp != NULL){
-                                        $no = "stat3";
-                                    }
-                                    if ($item->recbycus != NULL) {
-                                        $no = "stat4";
-                                    }
-                                @endphp
-                                {{$no}}
+                                <div style="height: 20px; width: 10px;" class="{{ tktcolor($item->invoiceid) }} center"> 
                                 </div>
                             </div>
+                            <div class="col s1 dmg-inf">@php
+                                $no = "stat1";
+                                if($item->sendbycus != NULL)
+                                {
+                                    $no = "stat1";
+                                }
+                                if ($item->recbycomp != NULL) {
+                                    $no = "stat2";
+                                }
+                                if($item->sendbackbycomp != NULL){
+                                    $no = "stat3";
+                                }
+                                if ($item->recbycus != NULL) {
+                                    $no = "stat4";
+                                }
+                            @endphp
+                            {{$no}}</div>
                             <div class="col s2 dmg-inf">{{ $item->date }}</div>
                             <div class="col s3 dmg-inf">{{ $item->name }}</div>
-                            <div class="col s3 dmg-inf"><span id="{{ $item->invoiceid }}mainstat">{{ $item->mainstatus }}</span>
+                            <div class="col s2 dmg-inf"><span id="{{ $item->invoiceid }}mainstat">{{ $item->mainstatus }}</span>
                             </div>
                             <div class="col s3 dmg-inf">{{ $item->invoiceid }}</div>
                         </div>
