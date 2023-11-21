@@ -375,6 +375,10 @@
                                                 class="material-icons material-symbols-outlined textcol">
                                                 heart_broken
                                             </i></a></li>
+                                    <li><a href="{{ url('/damage/analytics') }}" class="textcol">Analytics<i
+                                                class="material-icons material-symbols-outlined textcol">
+                                                chart_data
+                                            </i></a></li>
                                 </ul>
                             </div>
                         </li>

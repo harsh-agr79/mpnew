@@ -48,4 +48,8 @@ class ProblemController extends Controller
         DB::table('problem')->where('id', $id)->delete();
         return redirect('/problem');
     }
+    public function getproblem($cat){
+        $res =   DB::table('problem')->where('category', $cat)->get();
+        return response()->json($res);
+    }
 }

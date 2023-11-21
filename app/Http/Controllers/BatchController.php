@@ -51,4 +51,8 @@ class BatchController extends Controller
         DB::table('batch')->where('id', $id)->delete();
         return redirect('/batch');
     }
+    public function getbatch($prod){
+        $res = DB::table('batch')->where('product', $prod)->get();
+        return response()->json($res);
+    }
 }

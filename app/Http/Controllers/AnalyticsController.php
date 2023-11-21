@@ -1123,4 +1123,39 @@ class AnalyticsController extends Controller
 
         return view('admin/productreport', $result);
     }
+    public function damage(Request $request){
+        return view('damage/analytics');
+    }
+    
+    public function damagedata(Request $request){
+        $product = $request->post("product");
+        $batch = $request->post("batch");
+        $category = $request->post("category");
+        $name = $request->post('name');
+        $problem = $request->post('problem');
+        $solution = $request->post('solution');
+
+        $query = DB::table('damage');
+        if($product != NULL){
+            $query = $query->where('item', $product);
+        }
+        if($batch != NULL){
+            $query = $query->where('batch', $batch);
+        }
+        if($category != NULL){
+            $query = $query->where('category', $category);
+        }
+        if($name != NULL){
+            $query = $query->where('name', $name);
+        }
+        if($problem != NULL){
+            $query = $query->where('problem', $problem);
+        }
+        if($solution != NULL){
+            $query = $query->where('solution', $solution);
+        }
+        $query = $query->orderBy('date', 'DESC')->get();
+        $res = $query;
+        return response()->json($res);
+    }
 }

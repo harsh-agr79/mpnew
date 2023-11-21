@@ -210,12 +210,15 @@ Route::group(['middleware'=>'AdminAuth'], function(){
       Route::get('/admin/addticket', [DamageController::class, 'addtkt']);
       Route::post('/addtkt', [DamageController::class, 'addtkt_pro'])->name('admin.addtkt');
       Route::get('/updatemap/{id}/{id2}', [DamageController::class, 'updatemap']);
+      Route::get('damage/analytics', [AnalyticsController::class, 'damage']);
 
       //Damage AJAX
       Route::get('/getparts/{id}', [PartsController::class, 'getparts']);
       Route::get('/getitdetails/{id}/{id2}', [DamageController::class, 'getitdetails']);
       Route::post('/ticket/changedate', [DamageController::class, 'changedate']);
-
+      Route::get('/getbatch/{id}', [BatchController::class, 'getbatch']);
+      Route::get('/getproblem/{id}', [ProblemController::class, 'getproblem']);
+      Route::post('/getdata/damage/analytics', [AnalyticsController::class, 'damagedata']);
 
     //FOR SERVER SIDE BULK UPDATE
 
