@@ -1134,28 +1134,33 @@ class AnalyticsController extends Controller
         $name = $request->post('name');
         $problem = $request->post('problem');
         $solution = $request->post('solution');
-
-        $query = DB::table('damage');
-        if($product != NULL){
-            $query = $query->where('item', $product);
+        if($product == NULL && $batch == NULL && $category == NULL && $name == NULL && $problem == NULL && $solution == NULL){
+            $res = "";
         }
-        if($batch != NULL){
-            $query = $query->where('batch', $batch);
+        else{
+            $query = DB::table('damage');
+            if($product != NULL){
+                $query = $query->where('item', $product);
+            }
+            if($batch != NULL){
+                $query = $query->where('batch', $batch);
+            }
+            if($category != NULL){
+                $query = $query->where('category', $category);
+            }
+            if($name != NULL){
+                $query = $query->where('name', $name);
+            }
+            if($problem != NULL){
+                $query = $query->where('problem', $problem);
+            }
+            if($solution != NULL){
+                $query = $query->where('solution', $solution);
+            }
+            $query = $query->orderBy('date', 'DESC')->get();
+            $res = $query;
         }
-        if($category != NULL){
-            $query = $query->where('category', $category);
-        }
-        if($name != NULL){
-            $query = $query->where('name', $name);
-        }
-        if($problem != NULL){
-            $query = $query->where('problem', $problem);
-        }
-        if($solution != NULL){
-            $query = $query->where('solution', $solution);
-        }
-        $query = $query->orderBy('date', 'DESC')->get();
-        $res = $query;
+       
         return response()->json($res);
     }
 }
