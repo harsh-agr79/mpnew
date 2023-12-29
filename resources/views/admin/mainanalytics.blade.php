@@ -172,10 +172,14 @@
             var type = `{{ $admin->type }}`;
             // console.log(type);
             if (type === 'marketer') {
-                window.open('/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                var url = '/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
+                url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
+                window.open(url,
                     "_self");
             } else {
-                window.open('/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product,
+                var url = '/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
+                url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
+                window.open(url,
                     "_self");
             }
 
