@@ -120,7 +120,7 @@ class OrderAdminController extends Controller
            $result['date']= $request->get('date');
         }
         if($request->get('date2')){
-            $query = $query->where('created_at', '<=', $request->get('date'))->groupBy('orderid');
+            $query = $query->where('created_at', '<=', $request->get('date2'))->groupBy('orderid');
             $result['date2']= $request->get('date2');
          }
          if($request->get('status') && $request->get('product') == ''){
