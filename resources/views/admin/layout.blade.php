@@ -46,20 +46,14 @@
                     @if ($admin->type == 'staff')
                         @php
                             $channels = DB::table('channels')->get();
-                            $perms = DB::table('permission')
-                                ->where('userid', session()->get('ADMIN_ID'))
-                                ->pluck('perm')
-                                ->toArray();
+                            $perms = DB::table('permission')->where('userid', session()->get('ADMIN_ID'))->pluck('perm')->toArray();
                             $chn = [];
                             foreach ($channels as $item) {
                                 if (in_array($item->shortname, $perms)) {
                                     array_push($chn, $item->shortname);
                                 }
                             }
-                            $chat = DB::table('chat')
-                                ->whereIn('channel', $chn)
-                                ->orderBy('created_at', 'DESC')
-                                ->first();
+                            $chat = DB::table('chat')->whereIn('channel', $chn)->orderBy('created_at', 'DESC')->first();
                         @endphp
                     @endif
 
@@ -403,6 +397,10 @@
                     @if ($admin->type == 'admin')
                         <li class="bold"><a href="{{ url('/trash') }}" class="textcol">Recycle Bin<i
                                     class="material-icons textcol">delete</i></a></li>
+                    @endif
+                    @if ($admin->type == 'admin')
+                        <li class="bold"><a href="{{ url('/sitesettings') }}" class="textcol">Settings<i
+                                    class="material-icons textcol">settings</i></a></li>
                     @endif
                 </ul>
             </li>

@@ -17,8 +17,12 @@ class CustomerAuth
     public function handle(Request $request, Closure $next): Response
     {
         if($request->session()->has('USER_LOGIN')){
-            view()->share('user', DB::table('customers')->where('id', session()->get('USER_ID'))->first());
-            view()->share('msgcnt', count(DB::table('chat')->where('sid', session()->get('USER_ID'))->whereIn('sendtype', ['admin', 'staff', 'marketer'])->where('seen', NULL)->get()));
+            if (DB::table('customers')->where('id', session()->get('USER_ID'))->first()->disabled == 'on') {
+                return redirect('/err');
+            } else {
+                view()->share('user', DB::table('customers')->where('id', session()->get('USER_ID'))->first());
+                view()->share('msgcnt', count(DB::table('chat')->where('sid', session()->get('USER_ID'))->whereIn('sendtype', ['admin', 'staff', 'marketer'])->where('seen', NULL)->get()));
+            } 
         }
         else{
             $request->session()->flash('error','Access Denied');

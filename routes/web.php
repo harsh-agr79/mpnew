@@ -26,6 +26,7 @@ use App\Http\Controllers\CustomerDamageController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\PartsController;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ use App\Http\Controllers\PartsController;
 
 Route::get('/',[LoginController::class, 'login']);
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
+
+Route::get('/err', [SiteController::class, 'error']);
 // Route::get('update', [FixController::class, 'encryptpass']);
 
    //LOGOUT FUNCTION
@@ -250,6 +253,10 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/getchannel/{id}', [AdminChatController::class, 'getchannel']);
 
     Route::get('/directlogin/customer/{id}',[ LoginController::class, 'changeLogin']);
+
+    Route::get('/sitesettings',[SiteController::class,'index']);
+    Route::get('/disable',[SiteController::class,'disable']);
+    Route::get('/enable',[SiteController::class,'enable']);
 });
 
 
