@@ -20,14 +20,11 @@ class ProductController extends Controller
 
     public function index(Request $request){
         $result['data'] = DB::table('products')->where('deleted', NULL)->orderBy('category', 'ASC')->orderBy('ordernum', 'ASC')->get();
-        $result['cat'] = DB::table('products')->where('deleted', NULL)->groupBy('category')->orderBy('category', 'ASC')->get();
-        $result['pb'] = DB::table('products')->orderBy('ordernum','ASC')->where('category','powerbank')->where('deleted', NULL)->get();
-        $result['ch'] = DB::table('products')->orderBy('ordernum','ASC')->where('category', 'charger')->where('deleted', NULL)->get();
-        $result['ca'] = DB::table('products')->orderBy('ordernum','ASC')->where('category', 'cable')->where('deleted', NULL)->get();
-        $result['ep'] = DB::table('products')->orderBy('ordernum','ASC')->where('category', 'earphone')->where('deleted', NULL)->get();
-        $result['bt'] = DB::table('products')->orderBy('ordernum','ASC')->where('category', 'btitem')->where('deleted', NULL)->get();
-        $result['oth'] = DB::table('products')->orderBy('ordernum','ASC')->where('category', 'others')->where('deleted', NULL)->get();
-
+        $cats = DB::table("categories")->get();
+        foreach($cats as $item){
+            $result['data2'][$item->category] = DB::table('products')->orderBy('ordernum','ASC')->where('category',$item->category)->where('deleted', NULL)->get();
+        }
+        $result['cat'] = DB::table("categories")->get();
         return view('admin/product', $result);
     }
 

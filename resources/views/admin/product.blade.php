@@ -4,8 +4,8 @@
     <div class="mp-card" style="margin-top: 20px;">
         <div class="row">
             <div class='input-field col s6'>
-                <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
-                    type='search' name='search' id='search' />
+                <input class='validate browser-default inp search black-text z-depth-1' onkeyup="searchFun()"
+                    autocomplete="off" type='search' name='search' id='search' />
                 <span class="field-icon" id="close-search"><span class="material-icons" id="cs-icon">search</span></span>
             </div>
             <div class="input-field col s6">
@@ -22,18 +22,10 @@
     <div class="nav-content bg" style="margin-top: 20px; border-radius: 10px;">
         <ul class="tabs tabs-transparent center">
             <li class="tab"><a class="textcol" href="#all">ALL</a></li>
-            <li class="tab"><a class="textcol @if (session('category') == 'powerbank') active @endif"
-                    href="#pb">Powerbank</a></li>
-            <li class="tab"><a class="textcol @if (session('category') == 'charger') active @endif" href="#ch">Charger</a>
-            </li>
-            <li class="tab"><a class="textcol @if (session('category') == 'cable') active @endif" href="#ca">Cable</a>
-            </li>
-            <li class="tab"><a class="textcol @if (session('category') == 'btitem') active @endif"
-                    href="#bt">Bluetooth</a></li>
-            <li class="tab"><a class="textcol @if (session('category') == 'earphone') active @endif"
-                    href="#ep">Earphone</a></li>
-            <li class="tab"><a class="textcol @if (session('category') == 'others') active @endif" href="#oth">Others</a>
-            </li>
+            @foreach ($cat as $item)
+                <li class="tab"><a class="textcol @if (session('category') == $item->category) active @endif"
+                        href="#{{ $item->id }}cat">{{ $item->category }}</a></li>
+            @endforeach
         </ul>
     </div>
 
@@ -70,101 +62,81 @@
                             <td>{{ $item->category }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->produni_id }}</td>
-                            <td class="stock" style="display: none;">@if ($item->stock == 'on')
-                                Out of Stock
-                            @else
-                                In Stock                                
-                            @endif</td>
-                            <td class="hidden" style="display: none">@if ($item->hide == 'on')
-                                Hidden
-                            @else                           
-                            @endif</td>
+                            <td class="stock" style="display: none;">
+                                @if ($item->stock == 'on')
+                                    Out of Stock
+                                @else
+                                    In Stock
+                                @endif
+                            </td>
+                            <td class="hidden" style="display: none">
+                                @if ($item->hide == 'on')
+                                    Hidden
+                                @else
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
         @foreach ($cat as $item)
-            @php
-                if ($item->category == 'powerbank') {
-                    $id = 'pb';
-                    $prod = $pb;
-                }
-                if ($item->category == 'charger') {
-                    $id = 'ch';
-                    $prod = $ch;
-                }
-                if ($item->category == 'cable') {
-                    $id = 'ca';
-                    $prod = $ca;
-                }
-                if ($item->category == 'earphone') {
-                    $id = 'ep';
-                    $prod = $ep;
-                }
-                if ($item->category == 'btitem') {
-                    $id = 'bt';
-                    $prod = $bt;
-                }
-                if ($item->category == 'others') {
-                    $id = 'oth';
-                    $prod = $oth;
-                }
-            @endphp
-            <div class="mp-card" id="{{ $id }}">
+            <div class="mp-card" id="{{ $item->id }}cat">
                 @if ($admin->type == 'admin' || in_array('arrangeprod', $perms))
-                <form action="{{ route('arrange.prod') }}" method="POST">
-                    @csrf
-                    @endif
-                    <table>
-                        <thead>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Unique Id</th>
-                            <th class="stock" style="display: none;">Stock</th>
-                            <th class="hidden" style="display: none;">Hide</th>
-                        </thead>
-                        <tbody @if ($admin->type == 'admin' || in_array('arrangeprod', $perms))
-                            class="row_position"
-                        @endif>
-                            @foreach ($prod as $item)
-                                <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
-                                    @php
-                                        if ($item->hide == 'on') {
-                                            $clr = 'black';
-                                        } elseif ($item->stock == '') {
-                                            $clr = 'green darken-2';
-                                        } elseif ($item->stock == 'on') {
-                                            $clr = 'red darken-2';
-                                        } else {
-                                            $clr = '';
-                                        }
-                                    @endphp
-                                    <td>
-                                        <div class="{{ $clr }}" style="height: 35px; width:10px;"></div>
-                                    </td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->category }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>{{ $item->produni_id }}</td>
-                                    <td class="stock" style="display: none;">@if ($item->stock == 'on')
+                    <form action="{{ route('arrange.prod') }}" method="POST">
+                        @csrf
+                @endif
+                <table>
+                    <thead>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Unique Id</th>
+                        <th class="stock" style="display: none;">Stock</th>
+                        <th class="hidden" style="display: none;">Hide</th>
+                    </thead>
+                    <tbody @if ($admin->type == 'admin' || in_array('arrangeprod', $perms)) class="row_position" @endif>
+                        @foreach ($data2[$item->category] as $item)
+                            <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                                @php
+                                    if ($item->hide == 'on') {
+                                        $clr = 'black';
+                                    } elseif ($item->stock == '') {
+                                        $clr = 'green darken-2';
+                                    } elseif ($item->stock == 'on') {
+                                        $clr = 'red darken-2';
+                                    } else {
+                                        $clr = '';
+                                    }
+                                @endphp
+                                <td>
+                                    <div class="{{ $clr }}" style="height: 35px; width:10px;"></div>
+                                </td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->category }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->produni_id }}</td>
+                                <td class="stock" style="display: none;">
+                                    @if ($item->stock == 'on')
                                         Out of Stock
                                     @else
-                                        In Stock                                
-                                    @endif</td>
-                                    <td class="hidden" style="display: none">@if ($item->hide == 'on')
+                                        In Stock
+                                    @endif
+                                </td>
+                                <td class="hidden" style="display: none">
+                                    @if ($item->hide == 'on')
                                         Hidden
-                                    @else                           
-                                    @endif</td>
-                                    <input type="hidden" name="id[]" value="{{ $item->id }}">
-                                    <input type="hidden" name="category" value="{{ $item->category }}">
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @if ($admin->type == 'admin' || in_array('arrangeprod', $perms))
+                                    @else
+                                    @endif
+                                </td>
+                                <input type="hidden" name="id[]" value="{{ $item->id }}">
+                                <input type="hidden" name="category" value="{{ $item->category }}">
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @if ($admin->type == 'admin' || in_array('arrangeprod', $perms))
                     <div class="fixed-action-btn">
                         <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})"
                             style="border-radius: 10px;">
@@ -172,7 +144,7 @@
                             <i class="left material-icons">send</i>
                         </button>
                     </div>
-                </form>
+                    </form>
                 @endif
             </div>
         @endforeach
@@ -184,9 +156,9 @@
                 <li>Edit</li>
             </a>
             @if ($admin->type == 'admin')
-            <a id="rmdeletelink">
-                <li class="border-top">Delete</li>
-            </a>
+                <a id="rmdeletelink">
+                    <li class="border-top">Delete</li>
+                </a>
             @endif
         </ul>
     </div>
@@ -290,7 +262,7 @@
         }
     </script>
     <script>
-        function fieldsfilter(){
+        function fieldsfilter() {
             $('.stock').hide();
             $('.hidden').hide();
             var clsnames = '';
