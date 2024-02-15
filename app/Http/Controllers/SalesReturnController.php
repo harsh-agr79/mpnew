@@ -58,7 +58,8 @@ class SalesReturnController extends Controller
                     'item'=>$item[$i],
                     'cusuni_id'=>$customer->cusuni_id,
                     'produni_id'=>$prodid[$i],
-                    'category'=>$category[$i],
+                    'category'=>DB::table("categories")->where('id', $category[$i])->first()->category,
+                    'category_id'=>$category[$i],
                     'price'=>$price[$i],
                     'quantity'=>$quantity[$i],
                 ]);
@@ -119,6 +120,7 @@ class SalesReturnController extends Controller
                         'cusuni_id'=>$customer->cusuni_id,
                         'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
                         'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                        'category_id'=>DB::table('products')->where('name', $item[$i])->first()->category_id,
                         'price'=>$price[$i],
                         'quantity'=>$quantity[$i],
                     ]);
@@ -133,6 +135,7 @@ class SalesReturnController extends Controller
                         'cusuni_id'=>$customer->cusuni_id,
                         'produni_id'=>DB::table('products')->where('name', $item[$i])->first()->produni_id,
                         'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                        'category_id'=>DB::table('products')->where('name', $item[$i])->first()->category_id,
                         'price'=>$price[$i],
                         'quantity'=>$quantity[$i],
                     ]);

@@ -49,6 +49,7 @@ class ProductController extends Controller
 
             $result['name']=$arr['0']->name;
             $result['category']=$arr['0']->category;
+            $result['category_id']=$arr['0']->category_id;
             $result['stock']=$arr['0']->stock;
             if($arr['0']->stock=="on"){
                 $result['stock_selected']="checked";
@@ -74,6 +75,7 @@ class ProductController extends Controller
         else{
             $result['name']='';
             $result['category']='';
+            $result['category_id']='';
             $result['stock']='';
             $result['stock_selected']='';
             $result['hide_selected']='';
@@ -86,6 +88,7 @@ class ProductController extends Controller
             $result['img2']='';
             $result['id']=0;
         }
+        $result['categories'] = DB::table("categories")->get();
         return view('admin/addproduct', $result);
     }
     public function addprod_process(Request $request){
@@ -182,7 +185,8 @@ class ProductController extends Controller
             DB::table('products')->where('id', $request->post('id'))->update([
                 'name'=>$request->post('name'),
                 'price'=>$request->post('price'),
-                'category'=>$request->post('category'),
+                'category'=>DB::table('categories')->where('id', $request->post('category'))->first()->category,
+                'category_id'=>$request->post('category'),
                 'subcat'=>implode('|',$request->post('subcat', [])),
                 'produni_id'=>$request->post('uniqueid'),
                 'details'=>$request->post('details'),
@@ -196,7 +200,8 @@ class ProductController extends Controller
             DB::table('products')->insert([
                 'name'=>$request->post('name'),
                 'price'=>$request->post('price'),
-                'category'=>$request->post('category'),
+                'category'=>DB::table('categories')->where('id', $request->post('category'))->first()->category,
+                'category_id'=>$request->post('category'),
                 'subcat'=>implode('|',$request->post('subcat', [])),
                 'produni_id'=>$request->post('uniqueid'),
                 'details'=>$request->post('details'),
@@ -206,6 +211,18 @@ class ProductController extends Controller
                 'img2'=>$image_name2,
             ]);
         }
+        DB::table('orders')->where('produni_id', $request->post('uniqueid'))->update([
+            'category'=>DB::table('categories')->where('id', $request->post('category'))->first()->category,
+            'category_id'=>$request->post('category'),
+        ]);
+        DB::table('salesreturns')->where('produni_id', $request->post('uniqueid'))->update([
+            'category'=>DB::table('categories')->where('id', $request->post('category'))->first()->category,
+            'category_id'=>$request->post('category'),
+        ]);
+        DB::table('damage')->where('produni_id', $request->post('uniqueid'))->update([
+            'category'=>DB::table('categories')->where('id', $request->post('category'))->first()->category,
+            'category_id'=>$request->post('category'),
+        ]);
         $request->session()->flash('category', $request->post('category'));
         return redirect('products');
     }

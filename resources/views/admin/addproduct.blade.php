@@ -36,16 +36,13 @@
                             <div class="col s6">
                                 <select name="category" class="browser-default selectinp" value="{{$category}}" onchange="subcate()" id="category" required>
                                     @if ($category > 0)
-                                        <option value="{{ $category }}" selected>{{ $category }}</option>
+                                        <option value="{{ $category_id }}" selected>{{ $category }}</option>
                                     @else
                                         <option value="" disabled selected>Choose your option</option>
                                     @endif
-                                    <option value="powerbank">powerbank</option>
-                                    <option value="charger">charger</option>
-                                    <option value="cable">cable</option>
-                                    <option value="btitem">Bluetooth Item</option>
-                                    <option value="earphone">earphones</option>
-                                    <option value="others">others</option>
+                                    @foreach($categories as $cats)
+                                        <option value="{{$cats->id}}">{{$cats->category}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

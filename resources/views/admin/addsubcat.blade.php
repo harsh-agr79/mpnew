@@ -16,16 +16,13 @@
                 <div class="col s12 m6">
                     <select name="category" class="browser-default selectinp" required>
                         @if ($parent > 0)
-                            <option value="{{ $parent }}" selected>{{ $parent }}</option>
+                            <option value="{{ $category_id }}" selected>{{ $parent }}</option>
                         @else
                             <option value="" disabled selected>Choose your option</option>
                         @endif
-                        <option value="powerbank">powerbank</option>
-                        <option value="charger">charger</option>
-                        <option value="cable">cable</option>
-                        <option value="btitem">Bluetooth Item</option>
-                        <option value="earphone">earphones</option>
-                        <option value="others">others</option>
+                        @foreach ($categories as $cats)
+                            <option value="{{ $cats->id }}">{{ $cats->category }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <input type="hidden" name="id" value="{{ $id }}">

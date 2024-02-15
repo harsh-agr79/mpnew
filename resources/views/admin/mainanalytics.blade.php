@@ -60,7 +60,7 @@
                             <div class="col s4">{{ money($item->samt - $item->damt) }}</div>
                         </div>
                         <div class="collapsible-body"><span>
-                                @php
+                                {{-- @php
                                     if ($item->category == 'powerbank') {
                                         $prod = $datapowerbank;
                                         $prod2 = $data2powerbank;
@@ -86,7 +86,7 @@
                                         $prod2 = $data2others;
                                     }
                                     
-                                @endphp
+                                @endphp --}}
                                 <div>
                                     @php
                                         $subcates = DB::table('subcategory')
@@ -119,7 +119,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($prod as $item2)
+                                        @foreach ($data[$item->category] as $item2)
                                             @php
                                                 $sbc = '';
                                                 $sc = '';
@@ -134,7 +134,7 @@
                                                 <td>{{ money($item2->samt - $item2->damt) }}</td>
                                             </tr>
                                         @endforeach
-                                        @foreach ($prod2 as $item2)
+                                        @foreach ($data2[$item->category] as $item2)
                                             @php
                                                 $sbc = '';
                                                 $sc = '';

@@ -51,7 +51,7 @@
                                 <input type="hidden" name="item[]" value="{{ $item->name }}">
                                 <input type="hidden" name="price[]" value="{{ $item->price }}">
                                 <input type="hidden" name="prodid[]" value="{{ $item->produni_id }}">
-                                <input type="hidden" name="category[]" value="{{ $item->category }}">
+                                <input type="hidden" name="category[]" value="{{ $item->category_id }}">
                             </tr>
                         @endforeach
                     </tbody>

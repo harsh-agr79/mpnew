@@ -27,6 +27,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\PartsController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +146,14 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('deleteprod/{id}', [ProductController::class, 'deleteprod']);
     Route::post('arrangeprod', [ProductController::class, 'arrangeprod'])->name('arrange.prod');
 
+    //category
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::get('/category/getdata/{id}', [CategoryController::class, 'getcategory']);
+    Route::get('/category/getcatdata', [CategoryController::class, 'getcategorydata']);
+    Route::post('/category/editcat', [CategoryController::class, 'editcategory']);
+    Route::post('/category/addcat', [CategoryController::class, 'addcategory']);
+    Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
+
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
     Route::get('/staff', [AdminController::class, 'staff']);
@@ -257,6 +266,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/sitesettings',[SiteController::class,'index']);
     Route::get('/disable',[SiteController::class,'disable']);
     Route::get('/enable',[SiteController::class,'enable']);
+
+    Route::get("/updatecategory", [CategoryController::class, 'bulkupdate']);
 });
 
 

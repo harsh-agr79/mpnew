@@ -20,14 +20,16 @@ class SubcategoryController extends Controller
 
             $result['subcategory']=$arr['0']->subcategory;
             $result['parent']=$arr['0']->parent;
+            $result['category_id']=$arr['0']->category_id;
             $result['id']=$id;
         }
         else{
             $result['subcategory']='';
             $result['parent']='';
+            $result['category_id']='';
             $result['id']='';
         }
-
+        $result['categories'] = DB::table("categories")->get();
         return view('admin/addsubcat', $result);
     }
     public function addsubcat_process(Request $request){
@@ -38,7 +40,8 @@ class SubcategoryController extends Controller
         if($id > 0 ){
          DB::table('subcategory')->where('id', $id)->update([
              'subcategory'=>$subcategory,
-             'parent'=> $parent,
+             'parent'=>DB::table('categories')->where('id', $parent)->first()->category,
+             'category_id'=>$parent,
             ]);
              $products = DB::table('products')->get();
              foreach($products as $prod){
@@ -57,7 +60,8 @@ class SubcategoryController extends Controller
         else{
          DB::table('subcategory')->insert([
              'subcategory'=>$subcategory,
-             'parent'=> $parent,
+             'parent'=>DB::table('categories')->where('id', $parent)->first()->category,
+             'category_id'=>$parent,
             ]);
         }
         return redirect('subcategory');  
