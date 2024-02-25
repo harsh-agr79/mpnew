@@ -1034,6 +1034,7 @@ class AnalyticsController extends Controller
             $res = array();
     
             foreach($data as $item){
+                $category = DB::table("categories")->get();
                 $data2 = DB::table('orders')
                 ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved'])
                 ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
@@ -1049,65 +1050,78 @@ class AnalyticsController extends Controller
                 ->orderBy('created_at','desc')
                 ->orderBy('category','desc')
                 ->get();
-               $oth =  DB::table('orders')
-               ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved', 'category'=>'others'])
-               ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
-               ->where('nepmonth', $item->nepmonth)
-                ->where('nepyear',$item->nepyear)
-                ->where(function ($query) use ($request){
-                    if($request->get('name')){
-                        $query->where('orders.name', $request->get('name'));
-                    }
-                })
-               ->selectRaw('*, SUM(approvedquantity) as sum')
-               ->get();
+            //    $oth =  DB::table('orders')
+            //    ->where(['deleted'=>NULL, 'save'=>NULL, 'status'=>'approved', 'category'=>'others'])
+            //    ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-2'])
+            //    ->where('nepmonth', $item->nepmonth)
+            //     ->where('nepyear',$item->nepyear)
+            //     ->where(function ($query) use ($request){
+            //         if($request->get('name')){
+            //             $query->where('orders.name', $request->get('name'));
+            //         }
+            //     })
+            //    ->selectRaw('*, SUM(approvedquantity) as sum')
+            //    ->get();
     
-               if($oth[0]->sum != NULL){
-                $othnum = $oth[0]->sum;
-               }
-               else{
-                $othnum = "0";
-               }
-               if($data2->where('category','powerbank')->first() == NULL){
-                $pb = 0;
-               }
-               else{
-                $pb = $data2->where('category','powerbank')->first()->sum;
-               }
-               if($data2->where('category','charger')->first() == NULL){
-                $ch = 0;
-               }
-               else{
-                $ch = $data2->where('category','charger')->first()->sum;
-               }
-               if($data2->where('category','cable')->first() == NULL){
-                $ca = 0;
-               }
-               else{
-                $ca = $data2->where('category','cable')->first()->sum;
-               }
-               if($data2->where('category','earphone')->first() == NULL){
-                $ep = 0;
-               }
-               else{
-                $ep = $data2->where('category','earphone')->first()->sum;
-               }
-               if($data2->where('category','btitem')->first() == NULL){
-                $bt = 0;
-               }
-               else{
-                $bt = $data2->where('category','btitem')->first()->sum;
-               }
-                $res[] = [
-                    'month'=>$item->nepmonth,
-                    'year'=>$item->nepyear,
-                    'powerbank'=>$pb,
-                    'charger'=>$ch,
-                    'cable'=>$ca,
-                    'earphone'=>$ep,
-                    'btitem'=>$bt,
-                    'others'=>$othnum,
-                ];
+            //    if($oth[0]->sum != NULL){
+            //     $othnum = $oth[0]->sum;
+            //    }
+            //    else{
+            //     $othnum = "0";
+            //    }
+            //    if($data2->where('category','powerbank')->first() == NULL){
+            //     $pb = 0;
+            //    }
+            //    else{
+            //     $pb = $data2->where('category','powerbank')->first()->sum;
+            //    }
+            //    if($data2->where('category','charger')->first() == NULL){
+            //     $ch = 0;
+            //    }
+            //    else{
+            //     $ch = $data2->where('category','charger')->first()->sum;
+            //    }
+            //    if($data2->where('category','cable')->first() == NULL){
+            //     $ca = 0;
+            //    }
+            //    else{
+            //     $ca = $data2->where('category','cable')->first()->sum;
+            //    }
+            //    if($data2->where('category','earphone')->first() == NULL){
+            //     $ep = 0;
+            //    }
+            //    else{
+            //     $ep = $data2->where('category','earphone')->first()->sum;
+            //    }
+            //    if($data2->where('category','btitem')->first() == NULL){
+            //     $bt = 0;
+            //    }
+            //    else{
+            //     $bt = $data2->where('category','btitem')->first()->sum;
+            //    }
+                // $res[] = [
+                //     'month'=>$item->nepmonth,
+                //     'year'=>$item->nepyear,
+                //     'powerbank'=>$pb,
+                //     'charger'=>$ch,
+                //     'cable'=>$ca,
+                //     'earphone'=>$ep,
+                //     'btitem'=>$bt,
+                //     'others'=>$othnum,
+                // ];
+                $dat = [];
+                foreach($category as $cat){
+                    if($data2->where('category',$cat->category)->first() == NULL){
+                        $su = 0;
+                    }
+                    else{
+                     $su = $data2->where('category',$cat->category)->first()->sum;
+                    }
+                    $dat[$cat->category] = $su;
+                }
+                $dat['month'] = $item->nepmonth;
+                $dat['year'] = $item->nepyear;
+                $res[] = $dat;
             }
         $result['data'] = collect($res);
         $result['sort'] = 'normal';

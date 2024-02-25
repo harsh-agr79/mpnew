@@ -127,12 +127,15 @@ pointer-events: all!important;
                 <table class="sortable">
                     <thead>
                         <th>Date/Category</th>
-                        <th>Powerbank</th>
+                        @foreach ($categories as $cats)
+                            <th>{{$cats->category}}</th>
+                        @endforeach
+                        {{-- <th>Powerbank</th>
                         <th>Charger</th>
                         <th>Cable</th>
                         <th>Earphone</th>
                         <th>Btitem</th>
-                        <th>Others</th>
+                        <th>Others</th> --}}
                     </thead>
                     <tbody>
                         @for ($i = 0; $i < count($data); $i++)
@@ -142,12 +145,15 @@ pointer-events: all!important;
                             <tr>
                                 <td sorttable_customkey="{{ $i }}" style="font-weight: 600">
                                     {{ $months[$data[$i]['month']] }}-{{ $data[$i]['year'] }}</td>
-                                <td>{{ $data[$i]['powerbank'] }}</td>
+                                @foreach ($categories as $cats)
+                                    <td>{{$data[$i][$cats->category]}}</td>
+                                @endforeach
+                                {{-- <td>{{ $data[$i]['powerbank'] }}</td>
                                 <td>{{ $data[$i]['charger'] }}</td>
                                 <td>{{ $data[$i]['cable'] }}</td>
                                 <td>{{ $data[$i]['earphone'] }}</td>
                                 <td>{{ $data[$i]['btitem'] }}</td>
-                                <td>{{ $data[$i]['others'] }}</td>
+                                <td>{{ $data[$i]['others'] }}</td> --}}
                             </tr>
                         @endfor
                     </tbody>
