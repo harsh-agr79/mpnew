@@ -79,6 +79,10 @@ class CategoryController extends Controller
                 'category'=>$item->category,
                 'category_id'=>$item->category_id
             ]);
+            DB::table("damage")->where("produni_id", $item->produni_id)->update([
+                'category'=>$item->category,
+                'category_id'=>$item->category_id
+            ]);
         }
         }
 }
