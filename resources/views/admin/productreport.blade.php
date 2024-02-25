@@ -140,7 +140,12 @@ pointer-events: all!important;
                     <tbody>
                         @for ($i = 0; $i < count($data); $i++)
                             @php
-                                $chartdata[] = [$data[$i]['month'] . '-' . $data[$i]['year'], intval($data[$i]['powerbank']), intval($data[$i]['charger']), intval($data[$i]['cable']), intval($data[$i]['earphone']), intval($data[$i]['btitem']), intval($data[$i]['others'])];
+                                $dat = [];
+                                $dat[0] = $data[$i]['month'] . '-' . $data[$i]['year'];
+                                foreach ($categories as $cat) {
+                                    $dat[] = intval($data[$i][$cat->category]);
+                                }
+                                $chartdata[] = $dat;
                             @endphp
                             <tr>
                                 <td sorttable_customkey="{{ $i }}" style="font-weight: 600">
@@ -171,15 +176,20 @@ pointer-events: all!important;
                 function drawChart() {
                     var chartdata = @json($chartdata);
                     console.log(chartdata);
+                    var cats = @json($categories);
+                    console.log(cats);
 
                     var data = new google.visualization.DataTable();
                     data.addColumn('string', 'Date');
-                    data.addColumn('number', 'Powerbank');
-                    data.addColumn('number', 'Charger');
-                    data.addColumn('number', 'Cable');
-                    data.addColumn('number', 'Earphone');
-                    data.addColumn('number', 'BTitem');
-                    data.addColumn('number', 'Others');
+                    for (let i = 0; i < cats.length; i++) {
+                        data.addColumn('number', cats[i]['category'])
+                    }
+                    // data.addColumn('number', 'Powerbank');
+                    // data.addColumn('number', 'Charger');
+                    // data.addColumn('number', 'Cable');
+                    // data.addColumn('number', 'Earphone');
+                    // data.addColumn('number', 'BTitem');
+                    // data.addColumn('number', 'Others');
 
                     data.addRows(chartdata);
 
