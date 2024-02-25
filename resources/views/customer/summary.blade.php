@@ -343,7 +343,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data[$item->category] as $item2)
+                                    @foreach ($catdata[$item->category] as $item2)
                                         @php
                                             $sbc = '';
                                             $sc = '';
@@ -358,7 +358,7 @@
                                             <td>{{ money($item2->samt - $item2->damt) }}</td>
                                         </tr>
                                     @endforeach
-                                    @foreach ($data2[$item->category] as $item2)
+                                    @foreach ($catdata2[$item->category] as $item2)
                                         @php
                                             $sbc = '';
                                             $sc = '';
