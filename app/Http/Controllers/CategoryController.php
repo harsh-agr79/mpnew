@@ -77,7 +77,7 @@ class CategoryController extends Controller
         foreach ($products as $item) {
             DB::table("orders")->where("produni_id", $item->produni_id)->update([
                 'category'=>$item->category,
-                'category_id'->$item->category_id
+                'category_id'=>$item->category_id
             ]);
         }
         }
