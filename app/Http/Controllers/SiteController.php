@@ -34,7 +34,7 @@ class SiteController extends Controller
             $chk = DB::table("admins")->where('id',$request->session()->get('ADMIN_ID'))->first()->disabled;
         }
         elseif(session()->has('USER_LOGIN')){
-            $chk = DB::table("admins")->where('id',$request->session()->get('ADMIN_ID'))->first()->disabled;
+            $chk = DB::table("customers")->where('id',$request->session()->get('USER_ID'))->first()->disabled;
         }
         if($chk == "on"){
             return view('/errorload');

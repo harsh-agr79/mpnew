@@ -286,7 +286,7 @@ input:focus {
 .prod-container{
     margin-left: 20vw;
     margin-right: 20vw;
-    height: 65vh; 
+    height: 75vh; 
     overflow-y: scroll; 
     margin-top: 10px;
 }
