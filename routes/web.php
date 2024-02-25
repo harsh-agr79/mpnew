@@ -152,7 +152,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/category/getcatdata', [CategoryController::class, 'getcategorydata']);
     Route::post('/category/editcat', [CategoryController::class, 'editcategory']);
     Route::post('/category/addcat', [CategoryController::class, 'addcategory']);
-    Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
+    // Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
 
 
     //STAFF PAGES AND CRUD(Not allowed to staff)
@@ -267,7 +267,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/disable',[SiteController::class,'disable']);
     Route::get('/enable',[SiteController::class,'enable']);
 
-    Route::get("/updatecategory", [CategoryController::class, 'bulkupdate']);
+    // Route::get("/updatecategory", [CategoryController::class, 'bulkupdate']);
 });
 
 
