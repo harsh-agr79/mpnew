@@ -1120,7 +1120,7 @@ class AnalyticsController extends Controller
         else{
             $result['name'] = '';
         }
-
+        $result['categories'] = DB::table("categories")->get();
         return view('admin/productreport', $result);
     }
     public function damage(Request $request){

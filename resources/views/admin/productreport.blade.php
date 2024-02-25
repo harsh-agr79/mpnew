@@ -90,12 +90,9 @@ pointer-events: all!important;
                         @else
                             <option value="" selected>Select Category</option>
                         @endif
-                        <option value="powerbank">Powerbank</option>
-                        <option value="charger">Charger</option>
-                        <option value="cable">Cable</option>
-                        <option value="earphone">earphone</option>
-                        <option value="btitem">btitem</option>
-                        <option value="others">others</option>
+                        @foreach($categories as $cats)
+                            <option value="{{$cats->category}}">{{$cats->category}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class=" input-field col s12 m4 l4" style="padding: 3px; margin: 0;">
