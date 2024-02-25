@@ -51,26 +51,34 @@ class CategoryController extends Controller
             return response()->json("Category Deleted!", 200);
     }
     public function bulkupdate(){
-        $cats = DB::table('categories')->get();
-        foreach ($cats as $item) {
-            DB::table('orders')->where('category', $item->category)->update([
-                'category_id'=>$item->id
+        // $cats = DB::table('categories')->get();
+        // foreach ($cats as $item) {
+        //     DB::table('orders')->where('category', $item->category)->update([
+        //         'category_id'=>$item->id
+        //     ]);
+        //     DB::table('products')->where('category', $item->category)->update([
+        //         'category_id'=>$item->id
+        //     ]);
+        //     DB::table('problem')->where('category', $item->category)->update([
+        //         'category_id'=>$item->id
+        //     ]);
+        //     DB::table('salesreturns')->where('category', $item->category)->update([
+        //         'category_id'=>$item->id
+        //     ]);
+        //     DB::table('damage')->where('category', $item->category)->update([
+        //         'category_id'=>$item->id
+        //     ]);
+        //     DB::table('subcategory')->where('parent', $item->category)->update([
+        //         'category_id'=>$item->id
+        //     ]);
+        //     }
+
+        $products = DB::table("products")->get();
+        foreach ($products as $item) {
+            DB::table("orders")->where("produni_id", $item->produni_id)->update([
+                'category'=>$item->category,
+                'category_id'->$item->category_id
             ]);
-            DB::table('products')->where('category', $item->category)->update([
-                'category_id'=>$item->id
-            ]);
-            DB::table('problem')->where('category', $item->category)->update([
-                'category_id'=>$item->id
-            ]);
-            DB::table('salesreturns')->where('category', $item->category)->update([
-                'category_id'=>$item->id
-            ]);
-            DB::table('damage')->where('category', $item->category)->update([
-                'category_id'=>$item->id
-            ]);
-            DB::table('subcategory')->where('parent', $item->category)->update([
-                'category_id'=>$item->id
-            ]);
-            }
+        }
         }
 }

@@ -267,7 +267,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/disable',[SiteController::class,'disable']);
     Route::get('/enable',[SiteController::class,'enable']);
 
-    // Route::get("/updatecategory", [CategoryController::class, 'bulkupdate']);
+    Route::get("/updatecategory", [CategoryController::class, 'bulkupdate']);
 });
 
 
