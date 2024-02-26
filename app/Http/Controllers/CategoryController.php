@@ -27,9 +27,24 @@ class CategoryController extends Controller
         DB::table('categories')->where('id', $id)->update([
             'category'=>$category,
         ]);
-        // DB::table('products')->where('category_id', $id)->update([
-        //     'category'=>$category
-        // ]);
+        DB::table('products')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('orders')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('salesreturns')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('damage')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('problem')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('subcategory')->where('category_id', $id)->update([
+            'parent'=>$category
+        ]);
         return response()->json($request->post(), 200);
     }
     public function getcategorydata(){
