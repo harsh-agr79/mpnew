@@ -148,9 +148,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //category
     Route::get('/category', [CategoryController::class, 'index']);
-    Route::get('/category/getdata/{id}', [CategoryController::class, 'getcategory']);
+    // Route::get('/category/getdata/{id}', [CategoryController::class, 'getcategory']);
     Route::get('/category/getcatdata', [CategoryController::class, 'getcategorydata']);
-    Route::post('/category/editcat', [CategoryController::class, 'editcategory']);
+    // Route::post('/category/editcat', [CategoryController::class, 'editcategory']);
     Route::post('/category/addcat', [CategoryController::class, 'addcategory']);
     // Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
 
