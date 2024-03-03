@@ -42,10 +42,12 @@
                 </div>
             </form>
         </div>
+        @if ($admin->type != 'staff')
         <div class="amber center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
             <h5 class="black-text" style="font-weight: 600;">Total Sales:
                 {{ money($totalsales[0]->samt - $totalsales[0]->damt) }}</h5>
-        </div>
+        </div>  
+        @endif
         <div class="mp-card" style="margin-top: 10px;">
             <ul class="collapsible">
                 @foreach ($catsales as $item)
