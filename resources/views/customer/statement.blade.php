@@ -302,6 +302,10 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td>Balance</td>
+                        <td>{{$bal[1]}}</td>
+                    </tr>
+                    <tr>
                         <td>Above 30 days</td>
                         <td>{{ $cus->thirdays }}</td>
                     </tr>
