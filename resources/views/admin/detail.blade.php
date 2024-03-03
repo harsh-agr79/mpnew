@@ -147,8 +147,8 @@
                         @endforeach
                         <tr>
                             <td></td>
-                            <td>{{$q}}</td>
-                            <td>{{$aq}}</td>
+                            <td class="center">{{$q}}</td>
+                            <td class="center">{{$aq}}</td>
                             <td></td>
                             <td style="font-weight: 700">Total</td>
                             <td style="font-weight: 700">{{ $total }}</td>
