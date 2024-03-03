@@ -16,6 +16,8 @@
         } else {
             $dis = 'disabled';
         }
+        $q=0;
+        $aq=0;
     @endphp
     <div>
         <div class="right center">
@@ -91,6 +93,10 @@
                     <tbody>
 
                         @foreach ($data as $item)
+                        @php
+                            $q = $q + $item->quantity;
+                            $aq = $aq + $item->approvedquantity;   
+                        @endphp                        
                             <input type="hidden" value="{{ $item->id }}" name="id[]">
                             <input type="hidden" value="{{ $item->quantity }}" name="quantity[]">
                             <tr>
@@ -141,8 +147,8 @@
                         @endforeach
                         <tr>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$q}}</td>
+                            <td>{{$aq}}</td>
                             <td></td>
                             <td style="font-weight: 700">Total</td>
                             <td style="font-weight: 700">{{ $total }}</td>
