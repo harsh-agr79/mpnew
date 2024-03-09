@@ -36,7 +36,8 @@ class CustomerDamageController extends Controller
                     'produni_id'=>$prodid[$i],
                     'quantity'=>$quantity[$i],
                     'cusremarks'=>$detail[$i],
-                    'category'=>$category[$i]
+                    'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                    'category_id'=>DB::table('products')->where('name', $item[$i])->first()->category_id
                 ]);
             }
        }
@@ -85,7 +86,8 @@ class CustomerDamageController extends Controller
                      'produni_id'=>$prodid[$i],
                      'quantity'=>$quantity[$i],
                      'cusremarks'=>$detail[$i],
-                     'category'=>$category[$i]
+                     'category'=>DB::table('products')->where('name', $item[$i])->first()->category,
+                    'category_id'=>DB::table('products')->where('name', $item[$i])->first()->category_id,
                  ]);
              }
         }
