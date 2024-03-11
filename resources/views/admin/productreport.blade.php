@@ -167,7 +167,7 @@ pointer-events: all!important;
                             </tr>
                         @endfor
                         <tr>
-                            <td style="font-weight: 600;">Averge</td>
+                            <td style="font-weight: 600;">Average</td>
                             @foreach ($categories as $cats)
                                 <td>{{intval($avg[$cats->category]/count($data))}}</td>
                             @endforeach
