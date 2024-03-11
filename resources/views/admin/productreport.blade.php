@@ -119,6 +119,7 @@ pointer-events: all!important;
         </div>
         @php
             $chartdata = [];
+            $avg = [];
             $a = 0;
             $months = ['first', 'Baisakh', 'Jeth', 'Asar', 'Shrawan', 'Bhadra', 'Asoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
         @endphp
@@ -128,6 +129,9 @@ pointer-events: all!important;
                     <thead>
                         <th>Date/Category</th>
                         @foreach ($categories as $cats)
+                        @php
+                            $avg[$cats->category] = 0;
+                        @endphp
                             <th>{{$cats->category}}</th>
                         @endforeach
                         {{-- <th>Powerbank</th>
@@ -144,8 +148,9 @@ pointer-events: all!important;
                                 $dat[0] = $data[$i]['month'] . '-' . $data[$i]['year'];
                                 foreach ($categories as $cat) {
                                     $dat[] = intval($data[$i][$cat->category]);
+                                    $avg[$cat->category] = $avg[$cat->category] + intval($data[$i][$cat->category]);
                                 }
-                                $chartdata[] = $dat;
+                                $chartdata[] = $dat; 
                             @endphp
                             <tr>
                                 <td sorttable_customkey="{{ $i }}" style="font-weight: 600">
@@ -161,6 +166,12 @@ pointer-events: all!important;
                                 <td>{{ $data[$i]['others'] }}</td> --}}
                             </tr>
                         @endfor
+                        <tr>
+                            <td style="font-weight: 600;">Averge</td>
+                            @foreach ($categories as $cats)
+                                <td>{{intval($avg[$cats->category]/count($data))}}</td>
+                            @endforeach
+                        </tr>
                     </tbody>
                 </table>
             </div>
