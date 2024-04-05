@@ -94,6 +94,15 @@
                                     class="browser-default inp black-text" autocomplete="off" style="resize: vertical;" value="{{$details}}">{{$details}}</textarea>
                             </div>
                         </div>
+                        <div class="col s12 row">
+                            <div class="col s6">
+                                Offer:
+                            </div>
+                            <div class="col s6">
+                                <input type="text" name="offer" value="{{$offer}}" placeholder="Offer"
+                                    class="browser-default inp black-text" autocomplete="off" >
+                            </div>
+                        </div>
                         <div class="col s6">
                             <label>
                                 <input type="checkbox" name="stock" {{$stock_selected}}/>

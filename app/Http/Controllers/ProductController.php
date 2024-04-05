@@ -63,6 +63,7 @@ class ProductController extends Controller
             $result['price']=$arr['0']->price;
             $result['ordernum']=$arr['0']->ordernum;
             $result['details']=$arr['0']->details;
+            $result['offer']=$arr['0']->offer;
             $result['subcat']=$arr['0']->subcat;
             $result['unique_id']=$arr['0']->produni_id;
             $result['img']=$arr['0']->img;
@@ -79,6 +80,7 @@ class ProductController extends Controller
             $result['ordernum']='';
             $result['price']='';
             $result['details']='';
+            $result['offer']='';
             $result['subcat']='';
             $result['unique_id']='';
             $result['img']='';
@@ -187,6 +189,7 @@ class ProductController extends Controller
                 'subcat'=>implode('|',$request->post('subcat', [])),
                 'produni_id'=>$request->post('uniqueid'),
                 'details'=>$request->post('details'),
+                'offer'=>$request->post('offer'),
                 'stock'=>$request->post('stock'),
                 'hide'=>$request->post('hide'),
                 'img'=>$image_name,
@@ -202,6 +205,7 @@ class ProductController extends Controller
                 'subcat'=>implode('|',$request->post('subcat', [])),
                 'produni_id'=>$request->post('uniqueid'),
                 'details'=>$request->post('details'),
+                'offer'=>$request->post('offer'),
                 'stock'=>$request->post('stock'),
                 'hide'=>$request->post('hide'),
                 'img'=> $image_name,
