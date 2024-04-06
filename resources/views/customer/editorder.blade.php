@@ -128,6 +128,11 @@
                     <div class="col s12" style=" margin: 0; padding: 0;">
                         <span class="prod-title">{{ $item->item }}</span>
                     </div>
+                    @if ($item->offer != NULL)
+                    <div class="col s12">
+                        <span class="amber darken-1 black-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>
+                    </div>
+                    @endif
                     <div class="col s12 row" style="padding: 0;  margin: 0;">
                         <span class="prod-det col s6">{{ $item->category }} </span>
                         <span class="prod-det col s6">
@@ -167,6 +172,11 @@
                     <div class="col s12" style=" margin: 0; padding: 0;">
                         <span class="prod-title">{{ $item->name }}</span>
                     </div>
+                    @if ($item->offer != NULL)
+                    <div class="col s12">
+                        <span class="amber darken-1 black-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>
+                    </div>
+                    @endif
                     <div class="col s12 row" style="padding: 0;  margin: 0;">
                         <span class="prod-det col s6">{{ $item->category }} </span>
                         <span class="prod-det col s6">
