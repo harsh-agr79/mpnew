@@ -327,7 +327,7 @@
                                         <li><a href="{{ url('/category') }}" class="textcol">Category<i
                                                     class="material-icons textcol">category</i></a></li>
                                     @endif --}}
-                                    @if ($admin->type == 'admin' || in_array('addcustomer', $perms))
+                                    @if ($admin->type == 'admin' || in_array('addproduct', $perms))
                                         <li><a href="{{ url('/addproduct') }}" class="textcol">Add Product<i
                                                     class="material-icons textcol">add</i></a></li>
                                     @endif
