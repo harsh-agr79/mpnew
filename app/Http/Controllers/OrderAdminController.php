@@ -13,7 +13,7 @@ class OrderAdminController extends Controller
     public function details(Request $request, $orderid){
         $result['data'] = DB::table('orders')->where('orderid', $orderid) 
         ->join('products', 'orders.produni_id', '=', 'products.produni_id')
-        ->selectRaw('orders.*, products.stock')
+        ->selectRaw('orders.*, products.stock, products.offer')
         ->get();
 
         return view('admin/detail', $result);

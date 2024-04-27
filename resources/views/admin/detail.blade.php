@@ -101,8 +101,8 @@
                             <input type="hidden" value="{{ $item->quantity }}" name="quantity[]">
                             <tr>
                                 <td
-                                    @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
-                                    {{ $item->item }}</td>
+                                    ><span @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
+                                    {{ $item->item }} </span> @if ($item->offer != NULL)<span class="amber darken-1" style="padding: 2px; border-radius: 3px;">{{$item->offer}}</span>@endif</td>
                                 <td class="center">{{ $item->quantity }}</td>
                                 <td class="center">
                                     <span class="amber lighten-2 black-text" style="padding: 10px;"
