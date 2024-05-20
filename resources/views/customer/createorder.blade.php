@@ -140,7 +140,7 @@
                     </div>
                     @if ($item->offer != NULL)
                     <div class="col s12">
-                        <span class="amber darken-1 black-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>
+                        <span class="red lighten-1 black-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>
                     </div>
                     @endif
                   
