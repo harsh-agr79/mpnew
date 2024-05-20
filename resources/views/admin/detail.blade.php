@@ -102,7 +102,7 @@
                             <tr>
                                 <td
                                     ><span @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
-                                    {{ $item->item }} </span> @if ($item->offer != NULL)<br><span class="amber darken-1" style="padding: 2px; border-radius: 3px; font-size: 7px;">{{$item->offer}}</span>@endif</td>
+                                    {{ $item->item }} </span> @if ($item->offer != NULL)<br><span class="red white-text" style="padding: 2px; border-radius: 3px; font-size: 7px;">{{$item->offer}}</span>@endif</td>
                                 <td class="center">{{ $item->quantity }}</td>
                                 <td class="center">
                                     <span class="amber lighten-2 black-text" style="padding: 10px;"
