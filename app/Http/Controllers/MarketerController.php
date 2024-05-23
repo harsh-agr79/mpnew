@@ -960,7 +960,7 @@ class MarketerController extends Controller
     public function editorder(Request $request, $orderid){
         $result['order'] = DB::table('orders')->where('orderid', $orderid)
         ->join('products', 'products.produni_id', '=', 'orders.produni_id')
-        ->selectRaw('orders.*, products.img, products.hide, products.stock, products.subcat')
+        ->selectRaw('orders.*, products.img, products.hide, prouducts.offer, products.stock, products.subcat')
         ->get();
         $result['data'] = DB::table('products')
         ->whereNotIn('name', DB::table('orders')->where('orderid', $orderid)->pluck('item')->toArray())
