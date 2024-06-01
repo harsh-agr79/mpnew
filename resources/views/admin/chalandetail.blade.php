@@ -32,6 +32,8 @@
             </table>
             <div>
                 Remarks: {{$data[0]->remarks}}
+                <br>
+                Customer Remarks: {{$data[0]->userremarks}}
             </div>
         </div>
     </div>
