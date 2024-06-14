@@ -58,6 +58,7 @@
                     @endif
 
                     <ul id="nav-mobile" class="right">
+                        <li class="hide-on-med-and-down">{{ getNepaliDate(date('Y-m-d')) }}</li>
                         <li class="hide-on-med-and-down">
                             @if ($admin->type == 'staff' && $chat != null)
                                 <a href="{{ url('/chats/' . $chat->sid . '/' . $chat->channel) }}"><i
