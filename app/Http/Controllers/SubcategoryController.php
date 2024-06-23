@@ -72,7 +72,7 @@ class SubcategoryController extends Controller
         return redirect('subcategory');
     }
     public function getsubcat(Request $request, $parent){
-        $subcat = DB::table('subcategory')->where('parent', $parent)->get();
+        $subcat = DB::table('subcategory')->where('category_id', $parent)->get();
         return response()->json($subcat);
     }
 }
